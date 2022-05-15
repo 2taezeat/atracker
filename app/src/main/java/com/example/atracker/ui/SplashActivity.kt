@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.core.content.ContextCompat
-import com.example.atracker.R
-import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.databinding.ActivitySplashBinding
+import com.example.atracker.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 

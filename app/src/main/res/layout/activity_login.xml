@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.LoginActivity">
+        tools:context=".ui.login.LoginActivity">
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,6 +17,21 @@
             app:layout_constraintStart_toStartOf="parent"
             >
         </TextView>
+
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginButton"
+            android:text="@string/login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+
+        </Button>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
