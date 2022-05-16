@@ -46,7 +46,7 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
         private var homeProgressOnclickListener : HomeProgressOnclickListener? = null
 
         init {
-
+            homeProgressItemBinding.homeProgressItemMainCL.setOnClickListener(this)
             this.homeProgressOnclickListener = homeProgressOnclickListener
         }
 
@@ -60,7 +60,7 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
 
 
         override fun onClick(view: View?) {
-            this.homeProgressOnclickListener?.onClickContainerView(view = view!!, position = bindingAdapterPosition, viewTag = view.tag.toString())
+            this.homeProgressOnclickListener?.onClickContainerView( view = view!!, position = bindingAdapterPosition, viewTag = "tmp" )
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
@@ -76,6 +77,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_navigation_community_to_navigation_home_detail)
     }
 }

@@ -29,6 +29,12 @@
             app:popUpTo="@id/navigation_home" />
 
 
+        <action
+            android:id="@+id/action_navigation_community_to_navigation_home_detail"
+            app:destination="@id/navigation_home_detail"
+            app:popUpTo="@id/navigation_home" />
+
+
 
     </fragment>
 
@@ -57,6 +63,13 @@
         tools:layout="@layout/fragment_my_page_display">
     </fragment>
 
+
+    <fragment
+        android:id="@+id/navigation_home_detail"
+        android:name="com.example.atracker.ui.home.HomeDetailFragment"
+        android:label="@string/title_home_detail"
+        tools:layout="@layout/fragment_home_detail">
+    </fragment>
 
 
 
