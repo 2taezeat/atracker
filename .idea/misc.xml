@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/fragment_blog_display.xml" value="0.16538461538461538" />
         <entry key="app/src/main/res/layout/fragment_calendar_display.xml" value="0.16538461538461538" />
         <entry key="app/src/main/res/layout/fragment_dashboard_display.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.16538461538461538" />
       </map>
     </option>
