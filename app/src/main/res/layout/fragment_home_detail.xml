@@ -1,14 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeDetailFragment">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".ui.home.HomeDisplayFragment">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeDetailMyPageIV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_baseline_add_circle_outline_24"
+            >
+        </ImageView>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeDetailNotificationIV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/homeDetailMyPageIV"
+            android:src="@drawable/ic_baseline_add_circle_outline_24"
+            >
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="우리인행"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailMyPageIV"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="30sp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/homeDetailCompanyTitleTV"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인턴"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailMyPageIV"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toEndOf="@+id/homeDetailCompanyTitleTV"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/homeDetailJobTypeTV"
+            >
+        </TextView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailCompanyTitleTV"
+            app:layout_constraintVertical_bias="0.6"
+            android:background="@drawable/home_progress_grey"
+            android:layout_marginTop="16dp"
+            android:id="@+id/homeDetailProgressView"
+            >
+        </View>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailProgressView"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/homeDetailDateTV"
+            android:text="2022.05.16"
+            >
+        </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/grey_progress"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailDateTV"
+            >
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</layout>
