@@ -103,11 +103,7 @@
                 >
 
             </androidx.recyclerview.widget.RecyclerView>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
