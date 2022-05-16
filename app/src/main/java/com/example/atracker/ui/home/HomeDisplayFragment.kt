@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
 import com.example.atracker.ui.MainActivity
 
@@ -48,6 +50,14 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
             it.setHasFixedSize(false)
             it.adapter = homeProgressAdapter
+        }
+
+        binding.homeNotificationIV.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_navigation_community_to_navigation_notification_display)
+        }
+
+        binding.homeMyPageIV.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_navigation_community_to_navigation_my_page_display)
         }
 
 

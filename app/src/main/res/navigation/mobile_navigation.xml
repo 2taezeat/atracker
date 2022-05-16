@@ -15,7 +15,24 @@
         android:id="@+id/navigation_home"
         android:name="com.example.atracker.ui.home.HomeDisplayFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home_display" />
+        tools:layout="@layout/fragment_home_display">
+
+
+        <action
+            android:id="@+id/action_navigation_community_to_navigation_notification_display"
+            app:destination="@id/navigation_notification_display"
+            app:popUpTo="@id/navigation_home" />
+
+        <action
+            android:id="@+id/action_navigation_community_to_navigation_my_page_display"
+            app:destination="@id/navigation_my_page_display"
+            app:popUpTo="@id/navigation_home" />
+
+
+
+    </fragment>
+
+
 
 
     <fragment
@@ -24,6 +41,21 @@
         android:label="@string/title_calendar"
         tools:layout="@layout/fragment_calendar_display" />
 
+
+    <fragment
+        android:id="@+id/navigation_notification_display"
+        android:name="com.example.atracker.ui.NotificationDisplayFragment"
+        android:label="@string/title_notification"
+        tools:layout="@layout/fragment_notification_display">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_my_page_display"
+        android:name="com.example.atracker.ui.MyPageDisplayFragment"
+        android:label="@string/title_my_page"
+        tools:layout="@layout/fragment_my_page_display">
+    </fragment>
 
 
 
