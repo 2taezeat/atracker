@@ -9,6 +9,8 @@ import com.example.atracker.databinding.ActivityLoginBinding
 import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.databinding.ActivitySplashBinding
 import com.example.atracker.ui.MainActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,6 +21,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+
+
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
         binding.loginButton.setOnClickListener {
             startMain()

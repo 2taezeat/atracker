@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+
 }
+
 
 android {
     compileSdk 32
@@ -51,7 +54,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
+    implementation platform('com.google.firebase:firebase-bom:30.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
 
 }

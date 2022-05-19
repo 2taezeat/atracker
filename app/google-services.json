@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "683196079012",
+    "project_id": "atracker-1652928904648",
+    "storage_bucket": "atracker-1652928904648.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683196079012:android:104c01a7246dc3712a7f31",
+        "android_client_info": {
+          "package_name": "com.example.atracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683196079012-74rjnrcef5u8sa8qom2ji3hifjm8lt4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.atracker",
+            "certificate_hash": "f116525157fb7accd046085751ea5f9560c2bfdb"
+          }
+        },
+        {
+          "client_id": "683196079012-692ppsecp3hp9ep7j5gad9fa14d4agvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL59yomhzFQF_PvDSkINGrtcDUT3jZB8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683196079012-692ppsecp3hp9ep7j5gad9fa14d4agvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
