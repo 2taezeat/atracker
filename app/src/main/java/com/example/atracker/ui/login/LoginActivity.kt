@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivityLoginBinding
 import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.databinding.ActivitySplashBinding
 import com.example.atracker.ui.MainActivity
+import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -80,6 +82,9 @@ class LoginActivity : AppCompatActivity() {
                     val user = firebaseAuth?.currentUser
                     Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                     startMain()
+
+                    val email = user?.email
+
                 } else {
                     Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
@@ -89,11 +94,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun startMain() {
         val intent = Intent(this, MainActivity::class.java)
         ContextCompat.startActivity(this, intent, null)
         finish()
     }
+
+
+    private fun signOut() {
+
+    }
+
+
+
+
 }

@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard_display.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.33205128205128204" />
+        <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.5" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.16538461538461538" />
