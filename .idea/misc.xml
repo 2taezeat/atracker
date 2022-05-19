@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/home_progress_grey.xml" value="0.28717948717948716" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16354166666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/fragment_blog_display.xml" value="0.16538461538461538" />
