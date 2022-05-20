@@ -36,6 +36,18 @@
 
 
 
+        <action
+            android:id="@+id/action_navigation_community_to_navigation_home_add"
+            app:destination="@id/navigation_home_add"
+            app:popUpTo="@id/navigation_home" />
+
+
+
+<!--        <action-->
+<!--            android:id="@+id/action_navigation_home_to_navigation_calendar"-->
+<!--            app:destination="@id/navigation_calendar" />-->
+
+
     </fragment>
 
 
@@ -71,6 +83,14 @@
         tools:layout="@layout/fragment_home_detail">
     </fragment>
 
+
+<!--    지원 현황 추가-->
+    <fragment
+        android:id="@+id/navigation_home_add"
+        android:name="com.example.atracker.ui.home.HomeAddFragment"
+        android:label="@string/title_home_add"
+        tools:layout="@layout/fragment_home_add">
+    </fragment>
 
 
 

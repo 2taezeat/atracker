@@ -286,6 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/homeAddProgressIV"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_baseline_add_circle_outline_24"
                 android:layout_marginEnd="20dp"
