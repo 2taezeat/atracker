@@ -19,25 +19,25 @@
 
 
         <action
-            android:id="@+id/action_navigation_community_to_navigation_notification_display"
+            android:id="@+id/action_navigation_home_to_navigation_notification_display"
             app:destination="@id/navigation_notification_display"
             app:popUpTo="@id/navigation_home" />
 
         <action
-            android:id="@+id/action_navigation_community_to_navigation_my_page_display"
+            android:id="@+id/action_navigation_home_to_navigation_my_page_display"
             app:destination="@id/navigation_my_page_display"
             app:popUpTo="@id/navigation_home" />
 
 
         <action
-            android:id="@+id/action_navigation_community_to_navigation_home_detail"
+            android:id="@+id/action_navigation_home_to_navigation_home_detail"
             app:destination="@id/navigation_home_detail"
             app:popUpTo="@id/navigation_home" />
 
 
 
         <action
-            android:id="@+id/action_navigation_community_to_navigation_home_add"
+            android:id="@+id/action_navigation_home_to_navigation_home_add"
             app:destination="@id/navigation_home_add"
             app:popUpTo="@id/navigation_home" />
 
@@ -81,6 +81,13 @@
         android:name="com.example.atracker.ui.home.HomeDetailFragment"
         android:label="@string/title_home_detail"
         tools:layout="@layout/fragment_home_detail">
+
+        <action
+            android:id="@+id/action_navigation_home_detail_to_navigation_home_write"
+            app:destination="@id/navigation_home_write"
+            app:popUpTo="@id/navigation_home_detail" />
+
+
     </fragment>
 
 
@@ -90,6 +97,14 @@
         android:name="com.example.atracker.ui.home.HomeAddFragment"
         android:label="@string/title_home_add"
         tools:layout="@layout/fragment_home_add">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_home_write"
+        android:name="com.example.atracker.ui.home.HomeWriteFragment"
+        android:label="@string/title_home_write"
+        tools:layout="@layout/fragment_home_write">
     </fragment>
 
 

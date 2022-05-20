@@ -59,21 +59,19 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         }
 
         binding.homeNotificationIV.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_navigation_community_to_navigation_notification_display)
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_notification_display)
         }
 
         binding.homeMyPageIV.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_navigation_community_to_navigation_my_page_display)
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_my_page_display)
         }
 
         binding.homeAddProgressIV.setOnClickListener{view ->
-            view.findNavController().navigate(R.id.action_navigation_community_to_navigation_home_add)
-
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_home_add)
         }
 
 
         homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
-
 
         homeMyCurrentStateTotalCircleView.max = 100
 
@@ -107,6 +105,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
-        findNavController().navigate(R.id.action_navigation_community_to_navigation_home_detail)
+        findNavController().navigate(R.id.action_navigation_home_to_navigation_home_detail)
     }
 }
