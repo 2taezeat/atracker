@@ -32,7 +32,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     }
 
 
-    private lateinit var tmp1 : ProgressBar
+    private lateinit var homeMyCurrentStateTotalCircleView : ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +50,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //            textView.text = it
 //        })
 
-        tmp1 = binding.homeMyCurrentStateTotalCircleViewTmp
+        homeMyCurrentStateTotalCircleView = binding.homeMyCurrentStateTotalCircleView
 
         binding.homeProgressRV.also{
             it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
@@ -69,8 +69,11 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
 
+
+        homeMyCurrentStateTotalCircleView.max = 100
+
         setProgressTo(60)
-        setSecondaryProgressTo(30)
+        setSecondaryProgressTo(40)
 
 
         return root
@@ -78,13 +81,17 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
 
     fun setProgressTo(progress: Int){
-        //progress_tv.text = "$progress%"
-        tmp1.progress = progress
+        homeMyCurrentStateTotalCircleView.progress = progress
     }
 
     fun setSecondaryProgressTo(progress: Int){
-        tmp1.secondaryProgress = progress
+        homeMyCurrentStateTotalCircleView.secondaryProgress = progress
     }
+
+
+//    fun setSecondaryProgressTo(progress: Int){
+//        homeMyCurrentStateTotalCircleView.secondaryProgress = progress
+//    }
 
 
 

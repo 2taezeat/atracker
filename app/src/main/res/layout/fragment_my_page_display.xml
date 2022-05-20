@@ -25,8 +25,35 @@
             android:text="@string/logout"
             android:id="@+id/myPageLogoutButton"
             >
-
         </Button>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="100dp"
+            android:text="@string/nickname_edit"
+            android:id="@+id/myPageNickNameEditButton"
+            >
+        </Button>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="200dp"
+            android:text="@string/mytitle_edit"
+            android:id="@+id/myPageMyTitleEditButton"
+            >
+        </Button>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

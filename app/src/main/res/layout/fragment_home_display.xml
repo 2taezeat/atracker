@@ -77,7 +77,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.15"
             android:layout_marginTop="20dp"
             android:id="@+id/homeMyCurrentStateCL"
             app:layout_constraintTop_toBottomOf="@+id/homeApplyTV"
@@ -86,27 +87,16 @@
             android:background="@drawable/edge_grey"
             >
 
-            <View
+            <ProgressBar
+                android:id="@+id/homeMyCurrentStateTotalCircleView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/edge_grey_circle"
-                android:id="@+id/homeMyCurrentStateTotalCircleView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                >
-            </View>
-
-
-            <ProgressBar
-                android:id="@+id/homeMyCurrentStateTotalCircleViewTmp"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
                 android:indeterminateOnly="false"
-                android:progressDrawable="@drawable/tmp1"
+                android:progressDrawable="@drawable/pb_circular_determinative"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
 
             <TextView
@@ -270,21 +260,50 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.65"
             android:layout_marginTop="40dp"
             android:id="@+id/homeProgressCL"
-            app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCL"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/edge_grey"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/progress"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="20dp"
+                >
+            </TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_baseline_add_circle_outline_24"
+                android:layout_marginEnd="20dp"
+                >
+
+
+            </ImageView>
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/homeProgressRV"
+                android:layout_marginTop="30dp"
                 >
-
             </androidx.recyclerview.widget.RecyclerView>
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

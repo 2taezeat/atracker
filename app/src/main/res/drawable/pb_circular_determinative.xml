@@ -20,11 +20,12 @@
 
             <shape android:shape="ring"
                 android:thicknessRatio="20">
+                <solid android:color="@color/teal_200"/>
 
-                <gradient android:type="sweep"
-                    android:startColor="@color/purple_200"
-                    android:centerColor="@color/purple_500"
-                    android:endColor="@color/purple_700" />
+<!--                <gradient android:type="sweep"-->
+<!--                    android:startColor="@color/teal_200"-->
+<!--                    android:centerColor="@color/purple_500"-->
+<!--                    android:endColor="@color/purple_700" />-->
 
             </shape>
         </rotate>
@@ -41,6 +42,21 @@
             </shape>
         </rotate>
     </item>
+
+
+
+<!--    <item-->
+<!--        android:id="@+id/thirdProgress">-->
+<!--        <rotate android:toDegrees="270"-->
+<!--            android:fromDegrees="270">-->
+
+<!--            <shape android:thicknessRatio="20"-->
+<!--                android:shape="ring">-->
+<!--                <solid android:color="@android:color/black"/>-->
+<!--            </shape>-->
+<!--        </rotate>-->
+<!--    </item>-->
+
 
 
 </layer-list>
