@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,6 +31,9 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         HomeProgressAdapter(this)
     }
 
+
+    private lateinit var tmp1 : ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +50,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //            textView.text = it
 //        })
 
+        tmp1 = binding.homeMyCurrentStateTotalCircleViewTmp
 
         binding.homeProgressRV.also{
             it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
@@ -64,8 +69,21 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
 
+        setProgressTo(60)
+        setSecondaryProgressTo(30)
+
 
         return root
+    }
+
+
+    fun setProgressTo(progress: Int){
+        //progress_tv.text = "$progress%"
+        tmp1.progress = progress
+    }
+
+    fun setSecondaryProgressTo(progress: Int){
+        tmp1.secondaryProgress = progress
     }
 
 

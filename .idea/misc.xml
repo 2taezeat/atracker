@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/circle_type_1.xml" value="0.28034188034188035" />
+        <entry key="app/src/main/res/drawable/edge_grey.xml" value="0.28034188034188035" />
+        <entry key="app/src/main/res/drawable/edge_grey_circle.xml" value="0.28034188034188035" />
         <entry key="app/src/main/res/drawable/home_progress_grey.xml" value="0.28717948717948716" />
+        <entry key="app/src/main/res/drawable/tmp.xml" value="0.16111111111111112" />
+        <entry key="app/src/main/res/drawable/tmp2.xml" value="0.16111111111111112" />
+        <entry key="app/src/main/res/drawable/tmp3.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
