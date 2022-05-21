@@ -44,19 +44,4 @@
     </item>
 
 
-
-<!--    <item-->
-<!--        android:id="@+id/thirdProgress">-->
-<!--        <rotate android:toDegrees="270"-->
-<!--            android:fromDegrees="270">-->
-
-<!--            <shape android:thicknessRatio="20"-->
-<!--                android:shape="ring">-->
-<!--                <solid android:color="@android:color/black"/>-->
-<!--            </shape>-->
-<!--        </rotate>-->
-<!--    </item>-->
-
-
-
 </layer-list>

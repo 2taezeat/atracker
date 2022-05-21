@@ -6,27 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDetailBinding
-import com.example.atracker.databinding.FragmentHomeDisplayBinding
-import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
 
     companion object {
         @JvmStatic
@@ -41,6 +30,13 @@ class HomeDetailFragment : Fragment() {
 
     private var _binding: FragmentHomeDetailBinding? = null
     private val binding get() = _binding!!
+    private val parentActivity by lazy {
+        activity as MainActivity
+    }
+
+    private val lazyContext by lazy {
+        requireContext()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,10 +57,50 @@ class HomeDetailFragment : Fragment() {
         _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.homeDetailWriteIV.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_navigation_home_detail_to_navigation_home_write)
+            view.findNavController().navigate(com.example.atracker.R.id.action_navigation_home_detail_to_navigation_home_write)
         }
+
+        binding.homeDetailProgressView.secondaryProgress = 3
+        binding.homeDetailProgressView.max = 5
+        val bgProgress = ProgressDrawable( lazyContext,5,3)
+        binding.homeDetailProgressView.setProgressDrawable(bgProgress)
+
+
+        //binding.homeDetailProgressView.progressiveStart()
+
+//        seekbar = binding.homeDetailProgressView
+//        seekbar.thumb.mutate().alpha = 0
+//        initDataToSeekbar()
 
         return root
     }
+
+//    private fun initDataToSeekbar() {
+//        val progressItemList = ArrayList<ProgressItem>()
+//        // red span
+//        var mProgressItem = ProgressItem()
+//        mProgressItem.progressItemPercentage = 10.toFloat()
+//        Log.d("test123", mProgressItem.progressItemPercentage.toString() + "")
+//        mProgressItem.color = com.example.atracker.R.color.teal_200
+//        progressItemList.add(mProgressItem)
+//        // blue span
+//        mProgressItem = ProgressItem()
+//        mProgressItem.progressItemPercentage = 20.toFloat()
+//        mProgressItem.color = com.example.atracker.R.color.purple_200
+//        progressItemList.add(mProgressItem)
+//        // green span
+//        mProgressItem = ProgressItem()
+//        mProgressItem.progressItemPercentage = 30.toFloat()
+//        mProgressItem.color = com.example.atracker.R.color.purple_700
+//        progressItemList.add(mProgressItem)
+//
+//        //white span
+//        mProgressItem = ProgressItem()
+//        mProgressItem.progressItemPercentage = 20.toFloat()
+//        mProgressItem.color = com.example.atracker.R.color.white
+//        progressItemList.add(mProgressItem)
+//        //seekbar.initData(progressItemList)
+//        seekbar.invalidate()
+//    }
 
 }
