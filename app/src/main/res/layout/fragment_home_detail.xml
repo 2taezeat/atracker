@@ -75,7 +75,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="10dp"
-            android:background="@color/grey_progress"
+            android:background="@drawable/edge_grey_progress_bar"
             app:layout_constraintWidth_percent="0.9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
