@@ -61,47 +61,15 @@ class HomeDetailFragment : Fragment() {
             view.findNavController().navigate(com.example.atracker.R.id.action_navigation_home_detail_to_navigation_home_write)
         }
 
-        binding.homeDetailProgressView.secondaryProgress = 5
+        binding.homeDetailProgressView.secondaryProgress = 1
         binding.homeDetailProgressView.max = 6
-        val bgProgress = ProgressDrawable( lazyContext,6,5)
+
+        val bgProgress = ProgressDrawable( lazyContext,6,1, true)
         binding.homeDetailProgressView.setProgressDrawable(bgProgress)
 
-
-        //binding.homeDetailProgressView.progressiveStart()
-
-//        seekbar = binding.homeDetailProgressView
-//        seekbar.thumb.mutate().alpha = 0
-//        initDataToSeekbar()
 
         return root
     }
 
 //    private fun initDataToSeekbar() {
-//        val progressItemList = ArrayList<ProgressItem>()
-//        // red span
-//        var mProgressItem = ProgressItem()
-//        mProgressItem.progressItemPercentage = 10.toFloat()
-//        Log.d("test123", mProgressItem.progressItemPercentage.toString() + "")
-//        mProgressItem.color = com.example.atracker.R.color.teal_200
-//        progressItemList.add(mProgressItem)
-//        // blue span
-//        mProgressItem = ProgressItem()
-//        mProgressItem.progressItemPercentage = 20.toFloat()
-//        mProgressItem.color = com.example.atracker.R.color.purple_200
-//        progressItemList.add(mProgressItem)
-//        // green span
-//        mProgressItem = ProgressItem()
-//        mProgressItem.progressItemPercentage = 30.toFloat()
-//        mProgressItem.color = com.example.atracker.R.color.purple_700
-//        progressItemList.add(mProgressItem)
-//
-//        //white span
-//        mProgressItem = ProgressItem()
-//        mProgressItem.progressItemPercentage = 20.toFloat()
-//        mProgressItem.color = com.example.atracker.R.color.white
-//        progressItemList.add(mProgressItem)
-//        //seekbar.initData(progressItemList)
-//        seekbar.invalidate()
-//    }
-
 }

@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import com.example.atracker.R
 
 
-internal class ProgressDrawable(val context: Context, private val numSegments : Int, private val progressInt : Int) : Drawable() {
+internal class ProgressDrawable(val context: Context, private val numSegments : Int, private val progressInt : Int, private val success : Boolean) : Drawable() {
     private val mPaint = Paint()
     private val mSegment = RectF()
 
@@ -22,8 +22,10 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
     private val mForeground3 = ContextCompat.getColor(context, R.color.progress_color_3)
     private val mForeground4 = ContextCompat.getColor(context, R.color.progress_color_4)
     private val mForeground5 = ContextCompat.getColor(context, R.color.progress_color_5)
+    private val mForeground6 = ContextCompat.getColor(context, R.color.progress_color_6)
+    private val mForeground7 = ContextCompat.getColor(context, R.color.progress_color_7)
 
-    private val mForegroundColorList = arrayListOf<Int>(mBackground, mForeground1, mForeground2, mForeground3, mForeground4, mForeground5 )
+    private val mForegroundColorList = arrayListOf<Int>(mBackground, mForeground1, mForeground2, mForeground3, mForeground4, mForeground5, mForeground6, mForeground7 )
 
     companion object {
     }
@@ -53,34 +55,39 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
             mPaint.color = mForegroundColorList[i]
             if (i == 1) {
                 if (i == progressInt) {
-
-                } else {
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
 
                     mSegment.offset(mSegment.width() / 9, 0f)
                     mSegmentMiniCircle.offset(mSegment.width() / 9, 0f)
 
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - (mSegment.width() / 9 * 2), mSegment.bottom, mPaint)
                     canvas.drawRect(mSegment,mPaint)
-//                    mSegment.offset(mSegment.width() / 9, 0f)
-//                    mSegmentMiniCircle.offset(mSegment.width() / 9, 0f)
+                    mSegmentMiniCircle.offset(mSegment.width() - mSegment.width() / 9, 0f)
+                    canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
 
-                    //canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
-
-                    mSegment.offset(mSegment.width(), 0f)
+                } else {
+                    canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
+                    mSegment.offset(mSegment.width() / 9, 0f)
+                    mSegmentMiniCircle.offset(mSegment.width() / 9, 0f)
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - mSegment.width() / 9, mSegment.bottom, mPaint)
+                    mSegment.offset(mSegment.width() - mSegment.width() / 9, 0f)
                 }
 
 
             } else if (i == progressInt) {
-                //canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
-                //mSegment.offset(mSegment.width() / 9, 0f)
-                canvas.drawRect(mSegment,mPaint)
-                mSegment.offset(mSegment.width(), 0f)
-                mSegmentMiniCircle.offset(mSegment.width(), 0f)
-                mSegmentMiniCircle.offset(mSegment.width() - mSegment.width() / 9 , 0f)
-                canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
-
-                //mSegment.offset(mSegment.width(), 0f)
-
+                if (progressInt == numSegments) {
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - mSegment.width() / 9, mSegment.bottom, mPaint)
+                    mSegment.offset(mSegment.width(), 0f)
+                    mSegmentMiniCircle.offset(mSegment.width(), 0f)
+                    mSegmentMiniCircle.offset(mSegment.width() - (mSegment.width() / 9) * 2.6.toFloat() , 0f)
+                    canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
+                } else {
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - mSegment.width() / 9, mSegment.bottom, mPaint)
+                    mSegment.offset(mSegment.width(), 0f)
+                    mSegmentMiniCircle.offset(mSegment.width(), 0f)
+                    mSegmentMiniCircle.offset(mSegment.width() - (mSegment.width() / 9) * 3 , 0f)
+                    canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
+                }
             } else {
                 canvas.drawRect(mSegment,mPaint)
                 mSegment.offset(mSegment.width(), 0f)
