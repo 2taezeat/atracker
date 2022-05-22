@@ -1,39 +1,60 @@
 package com.example.atracker.ui.home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.atracker.Utils.ProgressDrawable
 import com.example.atracker.databinding.HomeProgressItemBinding
 import com.example.atracker.model.dto.HomeProgressItem
 
-class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListener) : androidx.recyclerview.widget.ListAdapter<HomeProgressItem, RecyclerView.ViewHolder>(JobContentDiffCallback()){
+class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListener) :
+    androidx.recyclerview.widget.ListAdapter<HomeProgressItem, RecyclerView.ViewHolder>(
+        JobContentDiffCallback()) {
+
+    var context: Context? = null
+
 
     class JobContentDiffCallback : DiffUtil.ItemCallback<HomeProgressItem>() {
-        override fun areItemsTheSame(oldItem: HomeProgressItem, newItem: HomeProgressItem): Boolean {
+        override fun areItemsTheSame(
+            oldItem: HomeProgressItem,
+            newItem: HomeProgressItem,
+        ): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun areContentsTheSame(oldItem: HomeProgressItem, newItem: HomeProgressItem): Boolean {
+        override fun areContentsTheSame(
+            oldItem: HomeProgressItem,
+            newItem: HomeProgressItem,
+        ): Boolean {
             return oldItem == newItem
         }
     }
 
-    private var homeProgressOnclickListener : HomeProgressOnclickListener? = null
+    private var homeProgressOnclickListener: HomeProgressOnclickListener? = null
 
     init {
         this.homeProgressOnclickListener = homeProgressOnclickListener
     }
 
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): homeProgressViewHolder {
-        return homeProgressViewHolder( HomeProgressItemBinding.inflate(
+        val viewHolder = homeProgressViewHolder(HomeProgressItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-            ), this.homeProgressOnclickListener!!
-        )
+        ), this.homeProgressOnclickListener!!)
+        context = parent.context
+
+        return viewHolder
+
+
+//        return homeProgressViewHolder( HomeProgressItemBinding.inflate(
+//            LayoutInflater.from(parent.context), parent, false
+//            ), this.homeProgressOnclickListener!!
+//        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -42,8 +63,11 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
         holder.bind(homeProgressItem)
     }
 
-    class homeProgressViewHolder(val homeProgressItemBinding: HomeProgressItemBinding, homeProgressOnclickListener: HomeProgressOnclickListener) : RecyclerView.ViewHolder(homeProgressItemBinding.root), View.OnClickListener {
-        private var homeProgressOnclickListener : HomeProgressOnclickListener? = null
+    inner class homeProgressViewHolder(
+        val homeProgressItemBinding: HomeProgressItemBinding,
+        homeProgressOnclickListener: HomeProgressOnclickListener,
+    ) : RecyclerView.ViewHolder(homeProgressItemBinding.root), View.OnClickListener {
+        private var homeProgressOnclickListener: HomeProgressOnclickListener? = null
 
         init {
             homeProgressItemBinding.homeProgressItemMainCL.setOnClickListener(this)
@@ -51,7 +75,16 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
         }
 
 
-        fun bind(homeProgressItem : HomeProgressItem) {
+        fun bind(homeProgressItem: HomeProgressItem) {
+
+
+            val bgProgress = ProgressDrawable(context = context!!,
+                homeProgressItem.totalProgress,
+                homeProgressItem.myProgress,
+                homeProgressItem.success)
+
+            homeProgressItemBinding.homeMainProgressBar.progressDrawable = bgProgress
+
 
             homeProgressItemBinding.homeProgressCompanyTitleTV.text = homeProgressItem.companyTitle
             homeProgressItemBinding.homeProgressjobTypeTV.text = homeProgressItem.jobType
@@ -60,7 +93,9 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
 
 
         override fun onClick(view: View?) {
-            this.homeProgressOnclickListener?.onClickContainerView( view = view!!, position = bindingAdapterPosition, viewTag = "tmp" )
+            this.homeProgressOnclickListener?.onClickContainerView(view = view!!,
+                position = bindingAdapterPosition,
+                viewTag = "tmp")
         }
     }
 }

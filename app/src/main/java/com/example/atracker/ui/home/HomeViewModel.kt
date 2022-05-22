@@ -15,14 +15,14 @@ class HomeViewModel : ViewModel() {
 
     private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
         value = arrayListOf(
-            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "1", jobType = "asd", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "2", jobType = "asd", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "3", jobType = "asd", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "4", jobType = "asd", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "5", jobType = "asd", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "6", jobType = "asd", myProgress = 0, totalProgress = 0),
-            HomeProgressItem(companyTitle = "7", jobType = "asd", myProgress = 0, totalProgress = 0),
+            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 1, totalProgress = 6, true),
+            HomeProgressItem(companyTitle = "1", jobType = "asd", myProgress = 2, totalProgress = 3, true),
+            HomeProgressItem(companyTitle = "2", jobType = "asd", myProgress = 3, totalProgress = 6, true),
+            HomeProgressItem(companyTitle = "3", jobType = "asd", myProgress = 4, totalProgress = 5, true),
+            HomeProgressItem(companyTitle = "4", jobType = "asd", myProgress = 1, totalProgress = 4, true),
+            HomeProgressItem(companyTitle = "5", jobType = "asd", myProgress = 1, totalProgress = 7, true),
+            HomeProgressItem(companyTitle = "6", jobType = "asd", myProgress = 2, totalProgress = 7, true),
+            HomeProgressItem(companyTitle = "7", jobType = "asd", myProgress = 6, totalProgress = 6, true),
 
 
             )

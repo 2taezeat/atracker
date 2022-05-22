@@ -65,7 +65,7 @@ class HomeDetailFragment : Fragment() {
         binding.homeDetailProgressView.max = 6
 
         val bgProgress = ProgressDrawable( lazyContext,6,1, true)
-        binding.homeDetailProgressView.setProgressDrawable(bgProgress)
+        binding.homeDetailProgressView.progressDrawable = bgProgress
 
 
         return root

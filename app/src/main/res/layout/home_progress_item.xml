@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homeProgressItemMainCL"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="80dp">
 
 
     <TextView
@@ -35,21 +35,23 @@
 
     </TextView>
 
-
-    <View
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="10dp"
+        android:background="@drawable/edge_grey_progress_bar"
         app:layout_constraintWidth_percent="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.6"
-        android:background="@drawable/home_progress_grey"
+        android:layout_marginTop="16dp"
+        android:id="@+id/homeMainProgressBar"
+        android:secondaryProgress="3"
+        android:max="4"
         >
-
-    </View>
-
+    </ProgressBar>
 
 
 

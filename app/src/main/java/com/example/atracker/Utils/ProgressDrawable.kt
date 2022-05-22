@@ -12,20 +12,19 @@ import com.example.atracker.R
 internal class ProgressDrawable(val context: Context, private val numSegments : Int, private val progressInt : Int, private val success : Boolean) : Drawable() {
     private val mPaint = Paint()
     private val mSegment = RectF()
-
     private val mSegmentMiniCircle = RectF()
-
-    private val rectPath = Path()
     private val mBackground = ContextCompat.getColor(context, R.color.grey_progress)
-    private val mForeground1 = ContextCompat.getColor(context, R.color.progress_color_1)
-    private val mForeground2 = ContextCompat.getColor(context, R.color.progress_color_2)
-    private val mForeground3 = ContextCompat.getColor(context, R.color.progress_color_3)
-    private val mForeground4 = ContextCompat.getColor(context, R.color.progress_color_4)
-    private val mForeground5 = ContextCompat.getColor(context, R.color.progress_color_5)
-    private val mForeground6 = ContextCompat.getColor(context, R.color.progress_color_6)
-    private val mForeground7 = ContextCompat.getColor(context, R.color.progress_color_7)
+    private val mForegroundSuccess1 = ContextCompat.getColor(context, R.color.progress_color_1)
+    private val mForegroundSuccess2 = ContextCompat.getColor(context, R.color.progress_color_2)
+    private val mForegroundSuccess3 = ContextCompat.getColor(context, R.color.progress_color_3)
+    private val mForegroundSuccess4 = ContextCompat.getColor(context, R.color.progress_color_4)
+    private val mForegroundSuccess5 = ContextCompat.getColor(context, R.color.progress_color_5)
+    private val mForegroundSuccess6 = ContextCompat.getColor(context, R.color.progress_color_6)
+    private val mForegroundSuccess7 = ContextCompat.getColor(context, R.color.progress_color_7)
 
-    private val mForegroundColorList = arrayListOf<Int>(mBackground, mForeground1, mForeground2, mForeground3, mForeground4, mForeground5, mForeground6, mForeground7 )
+    //private val mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess6, mForegroundSuccess7 )
+
+    var mForegroundColorList : ArrayList<Int>? = null
 
     companion object {
     }
@@ -33,6 +32,25 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
     override fun onLevelChange(level: Int): Boolean {
         invalidateSelf()
         return true
+    }
+
+    override fun setAlpha(alpha: Int) {}
+    override fun setColorFilter(cf: ColorFilter?) {}
+    override fun getOpacity(): Int {
+        return PixelFormat.TRANSLUCENT
+    }
+    init {
+       // val mForegroundColorList : ArrayList<Int>
+        when (numSegments) {
+            1 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess7 )
+            2 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess7 )
+            3 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess4, mForegroundSuccess7 )
+            4 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess3, mForegroundSuccess5, mForegroundSuccess7 )
+            5 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
+            6 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
+            7 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess6, mForegroundSuccess7 )
+
+        }
     }
 
 
@@ -52,7 +70,7 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
 
 
         for (i in 1 until progressInt + 1) {
-            mPaint.color = mForegroundColorList[i]
+            mPaint.color = mForegroundColorList!![i]
             if (i == 1) {
                 if (i == progressInt) {
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
@@ -117,38 +135,5 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
 //        }
 
 
-    }
-
-    override fun setAlpha(alpha: Int) {}
-    override fun setColorFilter(cf: ColorFilter?) {}
-    override fun getOpacity(): Int {
-        return PixelFormat.TRANSLUCENT
-    }
-
-
-    fun typeCalculate(current: Int): ProgressBarType {
-        when (current) {
-            1 -> { // 처음
-                if (current <= progressInt) { // 성공
-                    return ProgressBarType.PROGRESS_TYPE0
-                } else { // 실패
-                    return ProgressBarType.PROGRESS_TYPE1
-                }
-            }
-            numSegments -> { // 마지막
-                if (current <= progressInt) { // 성공
-                    return ProgressBarType.PROGRESS_TYPE4
-                } else { // 실패
-                    return ProgressBarType.PROGRESS_TYPE5
-                }
-            }
-            else -> { // 중간에 끼인것들
-                if (current <= progressInt) { // 성공
-                    return ProgressBarType.PROGRESS_TYPE2
-                } else { // 실패
-                    return ProgressBarType.PROGRESS_TYPE3
-                }
-            }
-        }
     }
 }
