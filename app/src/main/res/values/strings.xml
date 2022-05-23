@@ -17,5 +17,7 @@
     <string name="progress">Progress</string>
     <string name="nickname_edit">닉네임 수정</string>
     <string name="mytitle_edit">내 직무 수정</string>
+    <string name="progress_select">단계 선택</string>
+    <string name="type_select">타입</string>
 
 </resources>

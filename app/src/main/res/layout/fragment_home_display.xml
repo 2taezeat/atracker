@@ -11,6 +11,7 @@
         android:fillViewport="true"
         android:scrollbars="none"
         tools:context=".ui.home.HomeDisplayFragment"
+        android:background="@color/background_grey_1"
         >
 
     <androidx.constraintlayout.widget.ConstraintLayout

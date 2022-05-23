@@ -22,8 +22,6 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
     private val mForegroundSuccess6 = ContextCompat.getColor(context, R.color.progress_color_6)
     private val mForegroundSuccess7 = ContextCompat.getColor(context, R.color.progress_color_7)
 
-    //private val mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess6, mForegroundSuccess7 )
-
     var mForegroundColorList : ArrayList<Int>? = null
 
     companion object {
@@ -40,7 +38,6 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
         return PixelFormat.TRANSLUCENT
     }
     init {
-       // val mForegroundColorList : ArrayList<Int>
         when (numSegments) {
             1 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess7 )
             2 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess7 )
@@ -49,7 +46,6 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
             5 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
             6 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
             7 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess6, mForegroundSuccess7 )
-
         }
     }
 
@@ -68,6 +64,10 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
         mSegmentMiniCircle.top = mSegment.top
         mSegmentMiniCircle.bottom = mSegment.bottom
 
+        val miniOffset = mSegment.width() / (numSegments + 4)
+        Log.d("test123", "${level}, ${miniOffset}")
+
+
 
         for (i in 1 until progressInt + 1) {
             mPaint.color = mForegroundColorList!![i]
@@ -75,35 +75,35 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
                 if (i == progressInt) {
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
 
-                    mSegment.offset(mSegment.width() / 9, 0f)
-                    mSegmentMiniCircle.offset(mSegment.width() / 9, 0f)
+                    mSegment.offset(miniOffset, 0f)
+                    mSegmentMiniCircle.offset(miniOffset, 0f)
 
-                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - (mSegment.width() / 9 * 2), mSegment.bottom, mPaint)
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - (miniOffset * 2), mSegment.bottom, mPaint)
                     canvas.drawRect(mSegment,mPaint)
-                    mSegmentMiniCircle.offset(mSegment.width() - mSegment.width() / 9, 0f)
+                    mSegmentMiniCircle.offset(mSegment.width() - miniOffset, 0f)
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
 
                 } else {
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
-                    mSegment.offset(mSegment.width() / 9, 0f)
-                    mSegmentMiniCircle.offset(mSegment.width() / 9, 0f)
-                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - mSegment.width() / 9, mSegment.bottom, mPaint)
-                    mSegment.offset(mSegment.width() - mSegment.width() / 9, 0f)
+                    mSegment.offset(miniOffset, 0f)
+                    mSegmentMiniCircle.offset(miniOffset, 0f)
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - miniOffset, mSegment.bottom, mPaint)
+                    mSegment.offset(mSegment.width() - miniOffset, 0f)
                 }
 
 
             } else if (i == progressInt) {
                 if (progressInt == numSegments) {
-                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - mSegment.width() / 9, mSegment.bottom, mPaint)
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - miniOffset, mSegment.bottom, mPaint)
                     mSegment.offset(mSegment.width(), 0f)
                     mSegmentMiniCircle.offset(mSegment.width(), 0f)
-                    mSegmentMiniCircle.offset(mSegment.width() - (mSegment.width() / 9) * 2.6.toFloat() , 0f)
-                    canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
+                    mSegmentMiniCircle.offset(mSegment.width() - (miniOffset)  , 0f)
+                    canvas.drawRoundRect(mSegmentMiniCircle.left - (miniOffset) - 30  , mSegmentMiniCircle.top, mSegmentMiniCircle.right - (miniOffset) - (20 / numSegments + 10) , mSegmentMiniCircle.bottom,50f,50f, mPaint)
                 } else {
-                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - mSegment.width() / 9, mSegment.bottom, mPaint)
+                    canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - miniOffset, mSegment.bottom, mPaint)
                     mSegment.offset(mSegment.width(), 0f)
                     mSegmentMiniCircle.offset(mSegment.width(), 0f)
-                    mSegmentMiniCircle.offset(mSegment.width() - (mSegment.width() / 9) * 3 , 0f)
+                    mSegmentMiniCircle.offset(mSegment.width() - (miniOffset) * 3 , 0f)
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
                 }
             } else {
