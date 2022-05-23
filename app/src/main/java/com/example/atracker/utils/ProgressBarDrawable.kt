@@ -4,8 +4,10 @@ import android.content.Context
 import android.graphics.*
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.atracker.R
+import kotlin.math.min
 
 
 internal class ProgressBarDrawable(val context: Context, private val numSegments : Int, private val progressInt : Int, private val success : Boolean) : Drawable() {
@@ -53,8 +55,8 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
         val b = bounds
         val segmentWidth = (b.width() - (numSegments - 1)).toFloat() / numSegments
         mSegment[0f, 0f, segmentWidth] = b.height().toFloat()
-        mSegmentMiniCircle.left = mSegment.left
-        mSegmentMiniCircle.right = mSegment.right / 5
+        mSegmentMiniCircle.left = mSegment.left / (numSegments )
+        mSegmentMiniCircle.right = mSegment.right / (5 )
         mSegmentMiniCircle.top = mSegment.top
         mSegmentMiniCircle.bottom = mSegment.bottom
 
@@ -64,6 +66,7 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
 
         for (i in 1 until progressInt + 1) {
             mPaint.color = mForegroundColorList!![i]
+            Log.d("test123", "${miniOffset}")
             if (i == 1) {
                 if (i == progressInt) {
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)
@@ -88,10 +91,16 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
             } else if (i == progressInt) {
                 if (progressInt == numSegments) {
                     canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - miniOffset, mSegment.bottom, mPaint)
+                        //Log.d("test456", "${miniOffset}, ${mSegment.width()}")
                     mSegment.offset(mSegment.width(), 0f)
                     mSegmentMiniCircle.offset(mSegment.width(), 0f)
-                    mSegmentMiniCircle.offset(mSegment.width() - (miniOffset)  , 0f)
-                    canvas.drawRoundRect(mSegmentMiniCircle.left - (miniOffset) - 30  , mSegmentMiniCircle.top, mSegmentMiniCircle.right - (miniOffset) - (20 / numSegments + 10) , mSegmentMiniCircle.bottom,50f,50f, mPaint)
+                    mSegmentMiniCircle.offset(mSegment.width() - (miniOffset * 3.0f)  , 0f)
+
+                    Log.d("test456", "${mSegment.left}, ${mSegment.right}")
+
+
+                    canvas.drawRoundRect(mSegmentMiniCircle.left - (miniOffset * 1.2f) - numSegments  , mSegmentMiniCircle.top, mSegment.left + numSegments, mSegmentMiniCircle.bottom,50f,50f, mPaint)
+                    //canvas.drawRoundRect(mSegmentMiniCircle.left - miniOffset * 1.4f  , mSegmentMiniCircle.top, mSegmentMiniCircle.right - miniOffset * 1.4f , mSegmentMiniCircle.bottom,50f,50f, mPaint)
                 } else {
                     canvas.drawRect(mSegment.left, mSegment.top, mSegment.right - miniOffset, mSegment.bottom, mPaint)
                     mSegment.offset(mSegment.width(), 0f)

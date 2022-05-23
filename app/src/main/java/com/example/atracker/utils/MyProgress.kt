@@ -106,13 +106,13 @@ internal class MyProgress : View {
         mPrimaryPaint = Paint()
         mPrimaryPaint!!.isAntiAlias = true
         mPrimaryPaint!!.style = Paint.Style.STROKE
-        mPrimaryPaint!!.strokeWidth = mStrokeWidth.toFloat()
+        mPrimaryPaint!!.strokeWidth = mStrokeWidth.toFloat() + 0.6f
         mPrimaryPaint!!.color = mPrimaryProgressColor
 
         mSecondaryPaint = Paint()
         mSecondaryPaint!!.isAntiAlias = true
         mSecondaryPaint!!.style = Paint.Style.STROKE
-        mSecondaryPaint!!.strokeWidth = mStrokeWidth.toFloat()
+        mSecondaryPaint!!.strokeWidth = mStrokeWidth.toFloat() + 0.4f
         mSecondaryPaint!!.color = mSecondaryProgressColor
 
 
@@ -210,11 +210,6 @@ internal class MyProgress : View {
         invalidate()
     }
 
-//    fun setSecondaryProgress(mSecondaryProgress: Int) {
-//        secondaryProgress = mSecondaryProgress
-//        invalidate()
-//    }
-
     var secondaryProgress: Int
         get() = mSecondaryProgress
         set(mSecondaryProgress) {
@@ -275,16 +270,7 @@ internal class MyProgress : View {
         }
 
 
-
-
-
     ////////////////////////////////////////////////
-
-//    fun setThirdProgress(mThirdProgress: Int) {
-//        thirdProgress = mThirdProgress
-//        invalidate()
-//    }
-
 
     var thirdProgressColor: Int
         get() = mThirdProgressColor

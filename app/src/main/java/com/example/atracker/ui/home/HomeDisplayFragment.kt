@@ -1,9 +1,11 @@
 package com.example.atracker.ui.home
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -72,9 +74,17 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         }
 
 
+        binding.homeDisplayScrollTopButton.setOnClickListener {
+            binding.homeDisplayNestedSV.smoothScrollTo(0,0)
+
+        }
+
+
         homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
 
         setProgress(30, 20, 10)
+
+
 
         return root
     }
@@ -86,6 +96,13 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         homeMyCurrentStateTotalCircleView.thirdProgress = progress1 + progress2 + progress3
     }
 
+
+//    fun ScrollView.smoothScrollToView(view: View) {
+//        val y = computeDistanceToView(view)
+//        ObjectAnimator.ofInt(this, "scrollY", y).apply {
+//            duration = 1000L // 스크롤이 지속되는 시간을 설정한다. (1000 밀리초 == 1초)
+//        }.start()
+//    }
 
 
 

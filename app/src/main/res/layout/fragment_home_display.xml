@@ -5,322 +5,352 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        tools:context=".ui.home.HomeDisplayFragment"
-        android:background="@color/background_grey_1"
-        >
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/homeMyPageIV"
-            app:layout_constraintTop_toTopOf="parent"
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             >
-        </ImageView>
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/homeNotificationIV"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/homeMyPageIV"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/homeDisplayNestedSV"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            tools:context=".ui.home.HomeDisplayFragment"
+            android:background="@color/background_grey_1"
             >
-        </ImageView>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/homeMyTitleTV"
-            android:text="신입 UX/UI 디자이너"
-            >
-        </TextView>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
-            android:id="@+id/homeMyNickNameTV"
-            android:text="제시카"
-            >
-        </TextView>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
-            app:layout_constraintStart_toEndOf="@+id/homeMyNickNameTV"
-            android:text="@string/님의"
-            >
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeMyNickNameTV"
-            android:text="@string/지원현황입니다"
-            android:id="@+id/homeApplyTV"
-            >
-        </TextView>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/homeMyCurrentStateCL"
-            app:layout_constraintTop_toBottomOf="@+id/homeApplyTV"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/edge_grey"
+            android:layout_height="match_parent"
             >
 
-
-            <com.example.atracker.utils.MyProgress
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/homeMyCurrentStateTotalCircleView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="20dp"
-                android:padding="4dp"
-                >
-
-
-            </com.example.atracker.utils.MyProgress>
-
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeMyCurrentStateTotalPassRate"
-                android:text="@string/pass_rate"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.2"
-                android:layout_marginStart="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                >
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTotalPassRate"
-                android:layout_marginTop="4dp"
-                android:id="@+id/homeMyCurrentStateTotalPassRateTV"
-                app:layout_constraintVertical_bias="0.2"
-                android:layout_marginStart="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="59%"
-                android:textSize="24sp"
-                >
-            </TextView>
-
-
-
-
-            <View
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:id="@+id/homeMyCurrentStateCircleView1"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTotalCircleView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.33"
-                android:background="@drawable/circle_type_1"
-                android:layout_marginStart="24dp"
-                >
-            </View>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="서류"
-                android:id="@+id/homeMyCurrentStateTV1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.3"
-                android:layout_marginStart="8dp"
-                >
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeMyCurrentStatePercentTV1"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTotalCircleView"
-                android:layout_marginStart="22dp"
-                app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView1"
-                android:layout_marginTop="10dp"
-                tools:text="82.5%"
-                android:textSize="24sp"
-                >
-            </TextView>
-
-
-            <View
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:id="@+id/homeMyCurrentStateCircleView2"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.33"
-                android:background="@drawable/circle_type_1"
-                android:layout_marginStart="34dp"
-                >
-            </View>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="1차 면접"
-                android:id="@+id/homeMyCurrentStateTV2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.3"
-                android:layout_marginStart="8dp"
-                >
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeMyCurrentStatePercentTV2"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV1"
-                android:layout_marginStart="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView2"
-                android:layout_marginTop="10dp"
-                tools:text="82.5%"
-                android:textSize="24sp"
-                >
-            </TextView>
-
-
-
-
-            <View
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:id="@+id/homeMyCurrentStateCircleView3"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.33"
-                android:background="@drawable/circle_type_1"
-                android:layout_marginStart="34dp"
-                >
-            </View>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="2차 면접"
-                android:id="@+id/homeMyCurrentStateTV3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView3"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.3"
-                android:layout_marginStart="8dp"
-                >
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeMyCurrentStatePercentTV3"
-                app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV2"
-                android:layout_marginStart="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView3"
-                android:layout_marginTop="10dp"
-                tools:text="82.5%"
-                android:textSize="24sp"
-                >
-            </TextView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintHeight_percent="0.65"
-            android:layout_marginTop="40dp"
-            android:id="@+id/homeProgressCL"
-            app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCL"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/edge_grey"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@string/progress"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="20dp"
-                >
-            </TextView>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/homeMyPageIV"
                 app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/homeAddProgressIV"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_baseline_add_circle_outline_24"
-                android:layout_marginEnd="20dp"
                 >
-
-
             </ImageView>
 
 
-            <androidx.recyclerview.widget.RecyclerView
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/homeNotificationIV"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/homeMyPageIV"
+                android:src="@drawable/ic_baseline_add_circle_outline_24"
+                >
+            </ImageView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/homeMyTitleTV"
+                android:text="신입 UX/UI 디자이너"
+                >
+            </TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
+                android:id="@+id/homeMyNickNameTV"
+                android:text="제시카"
+                >
+            </TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
+                app:layout_constraintStart_toEndOf="@+id/homeMyNickNameTV"
+                android:text="@string/님의"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeMyNickNameTV"
+                android:text="@string/지원현황입니다"
+                android:id="@+id/homeApplyTV"
+                >
+            </TextView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/homeMyCurrentStateCL"
+                app:layout_constraintTop_toBottomOf="@+id/homeApplyTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/edge_grey"
+                >
+
+
+                <com.example.atracker.utils.MyProgress
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/homeMyCurrentStateTotalCircleView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:padding="4dp"
+                    >
+
+
+                </com.example.atracker.utils.MyProgress>
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeMyCurrentStateTotalPassRate"
+                    android:text="@string/pass_rate"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.2"
+                    android:layout_marginStart="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTotalPassRate"
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/homeMyCurrentStateTotalPassRateTV"
+                    app:layout_constraintVertical_bias="0.2"
+                    android:layout_marginStart="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="59%"
+                    android:textSize="24sp"
+                    >
+                </TextView>
+
+
+
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:id="@+id/homeMyCurrentStateCircleView1"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTotalCircleView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.33"
+                    android:background="@drawable/circle_type_1"
+                    android:layout_marginStart="24dp"
+                    >
+                </View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="서류"
+                    android:id="@+id/homeMyCurrentStateTV1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.3"
+                    android:layout_marginStart="8dp"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeMyCurrentStatePercentTV1"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTotalCircleView"
+                    android:layout_marginStart="22dp"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView1"
+                    android:layout_marginTop="10dp"
+                    tools:text="82.5%"
+                    android:textSize="24sp"
+                    >
+                </TextView>
+
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:id="@+id/homeMyCurrentStateCircleView2"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.33"
+                    android:background="@drawable/circle_type_1"
+                    android:layout_marginStart="34dp"
+                    >
+                </View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="1차 면접"
+                    android:id="@+id/homeMyCurrentStateTV2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.3"
+                    android:layout_marginStart="8dp"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeMyCurrentStatePercentTV2"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV1"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView2"
+                    android:layout_marginTop="10dp"
+                    tools:text="82.5%"
+                    android:textSize="24sp"
+                    >
+                </TextView>
+
+
+
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:id="@+id/homeMyCurrentStateCircleView3"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.33"
+                    android:background="@drawable/circle_type_1"
+                    android:layout_marginStart="34dp"
+                    >
+                </View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="2차 면접"
+                    android:id="@+id/homeMyCurrentStateTV3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.3"
+                    android:layout_marginStart="8dp"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeMyCurrentStatePercentTV3"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV2"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView3"
+                    android:layout_marginTop="10dp"
+                    tools:text="82.5%"
+                    android:textSize="24sp"
+                    >
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/homeProgressRV"
-                android:layout_marginTop="30dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_goneMarginTop="10dp"
-                android:nestedScrollingEnabled="false"
+                app:layout_constraintHeight_percent="0.65"
+                android:layout_marginTop="40dp"
+                android:id="@+id/homeProgressCL"
+                app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCL"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/edge_grey"
                 >
-            </androidx.recyclerview.widget.RecyclerView>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/progress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="20dp"
+                    >
+                </TextView>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/homeAddProgressIV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_baseline_add_circle_outline_24"
+                    android:layout_marginEnd="20dp"
+                    >
+
+
+                </ImageView>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeProgressRV"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginTop="10dp"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="100dp"
+                    >
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/homeDisplayScrollTopButton"
+                    >
+                </Button>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
 
 
 </layout>
