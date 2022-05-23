@@ -62,6 +62,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/homeWriteProgressSelectHorizontalSV"
                     app:layout_constraintTop_toBottomOf="@+id/homeWriteProgressSelectTV"
+                    android:scrollbars="none"
                     >
 
                     <com.google.android.material.chip.ChipGroup
@@ -230,27 +231,25 @@
                     >
                 </TextView>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/homeWritePlusButton"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="plus"
-                    >
-
-
-                </Button>
-
-
-
 
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/homeWritePlusButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="plus"
+            >
+
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

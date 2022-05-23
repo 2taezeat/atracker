@@ -74,33 +74,19 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
 
-        //homeMyCurrentStateTotalCircleView.max = 100
-        homeMyCurrentStateTotalCircleView.progress = 30
-        homeMyCurrentStateTotalCircleView.secondaryProgress = 30 + 20
-        homeMyCurrentStateTotalCircleView.thirdProgress = 30 + 20 + 10
-
-
-        //setProgressTo(60)
-        //setSecondaryProgressTo(40)
-
-
+        setProgress(30, 20, 10)
 
         return root
     }
 
 
-//    fun setProgressTo(progress: Int){
-//        homeMyCurrentStateTotalCircleView.progress = progress
-//    }
-//
-//    fun setSecondaryProgressTo(progress: Int){
-//        homeMyCurrentStateTotalCircleView.secondaryProgress = progress
-//    }
+    fun setProgress(progress1: Int, progress2: Int, progress3: Int){
+        homeMyCurrentStateTotalCircleView.progress = progress1
+        homeMyCurrentStateTotalCircleView.secondaryProgress = progress1 + progress2
+        homeMyCurrentStateTotalCircleView.thirdProgress = progress1 + progress2 + progress3
+    }
 
 
-//    fun setSecondaryProgressTo(progress: Int){
-//        homeMyCurrentStateTotalCircleView.secondaryProgress = progress
-//    }
 
 
 
