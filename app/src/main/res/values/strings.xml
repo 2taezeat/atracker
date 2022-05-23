@@ -19,5 +19,8 @@
     <string name="mytitle_edit">내 직무 수정</string>
     <string name="progress_select">단계 선택</string>
     <string name="type_select">타입</string>
+    <string name="please_write_question">질문을 작성하세요</string>
+    <string name="please_write_answer">대답을 작성하세요</string>
+    <string name="please_write_review">후기 및 반성</string>
 
 </resources>
