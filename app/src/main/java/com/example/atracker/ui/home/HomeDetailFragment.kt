@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import com.example.atracker.Utils.ProgressDrawable
+import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
 
@@ -64,7 +64,7 @@ class HomeDetailFragment : Fragment() {
         binding.homeDetailProgressView.secondaryProgress = 1
         binding.homeDetailProgressView.max = 6
 
-        val bgProgress = ProgressDrawable( lazyContext,6,1, true)
+        val bgProgress = ProgressBarDrawable( lazyContext,6,1, true)
         binding.homeDetailProgressView.progressDrawable = bgProgress
 
 

@@ -1,15 +1,14 @@
-package com.example.atracker.Utils
+package com.example.atracker.utils
 
 import android.content.Context
 import android.graphics.*
 
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.atracker.R
 
 
-internal class ProgressDrawable(val context: Context, private val numSegments : Int, private val progressInt : Int, private val success : Boolean) : Drawable() {
+internal class ProgressBarDrawable(val context: Context, private val numSegments : Int, private val progressInt : Int, private val success : Boolean) : Drawable() {
     private val mPaint = Paint()
     private val mSegment = RectF()
     private val mSegmentMiniCircle = RectF()
@@ -51,12 +50,7 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
 
 
     override fun draw(canvas: Canvas) {
-        Log.d("test123level", "${level}, ${bounds}")
-        val level = level / 10000f
         val b = bounds
-
-        val gapWidth = b.height() / 2f
-
         val segmentWidth = (b.width() - (numSegments - 1)).toFloat() / numSegments
         mSegment[0f, 0f, segmentWidth] = b.height().toFloat()
         mSegmentMiniCircle.left = mSegment.left
@@ -65,7 +59,6 @@ internal class ProgressDrawable(val context: Context, private val numSegments : 
         mSegmentMiniCircle.bottom = mSegment.bottom
 
         val miniOffset = mSegment.width() / (numSegments + 4)
-        Log.d("test123", "${level}, ${miniOffset}")
 
 
 

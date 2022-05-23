@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -31,8 +28,12 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         HomeProgressAdapter(this)
     }
 
+    private val lazyContext by lazy {
+        requireContext()
+    }
 
-    private lateinit var homeMyCurrentStateTotalCircleView : ProgressBar
+
+    private lateinit var homeMyCurrentStateTotalCircleView : com.example.atracker.utils.MyProgress
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,23 +74,28 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
 
-        homeMyCurrentStateTotalCircleView.max = 100
+        //homeMyCurrentStateTotalCircleView.max = 100
+        homeMyCurrentStateTotalCircleView.progress = 30
+        homeMyCurrentStateTotalCircleView.secondaryProgress = 30 + 20
+        homeMyCurrentStateTotalCircleView.thirdProgress = 30 + 20 + 10
 
-        setProgressTo(60)
-        setSecondaryProgressTo(40)
+
+        //setProgressTo(60)
+        //setSecondaryProgressTo(40)
+
 
 
         return root
     }
 
 
-    fun setProgressTo(progress: Int){
-        homeMyCurrentStateTotalCircleView.progress = progress
-    }
-
-    fun setSecondaryProgressTo(progress: Int){
-        homeMyCurrentStateTotalCircleView.secondaryProgress = progress
-    }
+//    fun setProgressTo(progress: Int){
+//        homeMyCurrentStateTotalCircleView.progress = progress
+//    }
+//
+//    fun setSecondaryProgressTo(progress: Int){
+//        homeMyCurrentStateTotalCircleView.secondaryProgress = progress
+//    }
 
 
 //    fun setSecondaryProgressTo(progress: Int){

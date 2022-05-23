@@ -70,6 +70,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:chipSpacingHorizontal="14dp"
+                        app:singleSelection="true"
                         >
 
                         <com.google.android.material.chip.Chip

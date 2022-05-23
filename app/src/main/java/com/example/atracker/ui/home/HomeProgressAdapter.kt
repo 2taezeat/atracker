@@ -4,11 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.atracker.Utils.ProgressDrawable
+import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.HomeProgressItemBinding
 import com.example.atracker.model.dto.HomeProgressItem
 
@@ -78,7 +76,7 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
         fun bind(homeProgressItem: HomeProgressItem) {
 
 
-            val bgProgress = ProgressDrawable(context = context!!,
+            val bgProgress = ProgressBarDrawable(context = context!!,
                 homeProgressItem.totalProgress,
                 homeProgressItem.myProgress,
                 homeProgressItem.success)

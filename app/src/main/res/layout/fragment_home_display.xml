@@ -94,16 +94,22 @@
             android:background="@drawable/edge_grey"
             >
 
-            <ProgressBar
+
+            <com.example.atracker.utils.MyProgress
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:id="@+id/homeMyCurrentStateTotalCircleView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:indeterminateOnly="false"
-                android:progressDrawable="@drawable/pb_circular_determinative"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                android:layout_marginStart="20dp"
+                android:padding="4dp"
+                >
+
+
+            </com.example.atracker.utils.MyProgress>
+
+
 
 
             <TextView
