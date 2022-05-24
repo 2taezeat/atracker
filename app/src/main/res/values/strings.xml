@@ -24,4 +24,16 @@
     <string name="please_write_review">후기 및 반성</string>
     <string name="scroll_top">맨 위로</string>
 
+
+<!--    -->
+    <string name="example_3_input_dialog_title">Enter event title</string>
+    <string name="example_3_empty_input_text">Text is empty</string>
+    <string name="example_3_dialog_delete_confirmation">Delete this event?</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+
+
+
+
 </resources>
