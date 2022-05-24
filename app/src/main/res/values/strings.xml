@@ -22,5 +22,6 @@
     <string name="please_write_question">질문을 작성하세요</string>
     <string name="please_write_answer">대답을 작성하세요</string>
     <string name="please_write_review">후기 및 반성</string>
+    <string name="scroll_top">맨 위로</string>
 
 </resources>

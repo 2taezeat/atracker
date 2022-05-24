@@ -10,6 +10,8 @@
         <entry key="app/src/main/res/drawable/edge_grey_circle.xml" value="0.28034188034188035" />
         <entry key="app/src/main/res/drawable/edge_grey_home_write.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/edge_grey_progress_bar.xml" value="0.19316239316239317" />
+        <entry key="app/src/main/res/drawable/example_3_selected_bg.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/example_3_today_bg.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/drawable/home_progress_grey.xml" value="0.28717948717948716" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.3658119658119658" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23034188034188033" />
@@ -21,12 +23,15 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
+        <entry key="app/src/main/res/layout/calendar_day_legend.xml" value="0.16248955722639932" />
+        <entry key="app/src/main/res/layout/example_3_calendar_day.xml" value="0.16248955722639932" />
+        <entry key="app/src/main/res/layout/example_3_event_item_view.xml" value="0.16248955722639932" />
         <entry key="app/src/main/res/layout/fragment_blog_display.xml" value="0.16538461538461538" />
         <entry key="app/src/main/res/layout/fragment_calendar_display.xml" value="0.16538461538461538" />
         <entry key="app/src/main/res/layout/fragment_dashboard_display.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_add.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.11" />
-        <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.33248986077390547" />
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
