@@ -41,11 +41,51 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/homeWriteNestedSV"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/homeWriteMainCL"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/homeWriteLL"
+                    android:orientation="vertical"
+                    android:paddingBottom="60dp"
+                    >
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/homeWritePlusButton1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="plus1"
+                    >
+
+                </Button>
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/homeWritePlusButton2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="plus2"
+                    >
+
+                </Button>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -156,22 +196,14 @@
                 </HorizontalScrollView>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/homeWriteTypeSelectTV"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/type_select"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteProgressSelectHorizontalSV"
-                    app:layout_constraintStart_toStartOf="parent"
-                    >
-                </TextView>
+
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/homeWriteTypeSelectChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectTV"
+                    app:singleSelection="true"
+                    app:layout_constraintTop_toBottomOf="@+id/homeWriteProgressSelectHorizontalSV"
                     app:layout_constraintStart_toStartOf="parent"
                     app:chipSpacingHorizontal="14dp">
 
@@ -193,63 +225,67 @@
                         >
                     </com.google.android.material.chip.Chip>
 
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:id="@+id/homeWriteTypeSelect3"
+                        android:text="ALL"
+                        >
+                    </com.google.android.material.chip.Chip>
+
                 </com.google.android.material.chip.ChipGroup>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/homeWriteQuestionTV"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"
-                    android:hint="@string/please_write_question"
-                    android:background="@drawable/edge_grey_home_write"
-                    >
-                </TextView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/homeWriteAnswerTV"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteQuestionTV"
-                    android:hint="@string/please_write_answer"
-                    android:background="@drawable/edge_grey_home_write"
-                    >
-                </TextView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/homeWriteReviewTV"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteAnswerTV"
-                    android:hint="@string/please_write_review"
-                    android:background="@drawable/edge_grey_home_write"
-                    >
-                </TextView>
 
+
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:id="@+id/homeWriteQuestionTV"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"-->
+<!--                    android:hint="@string/please_write_question"-->
+<!--                    android:background="@drawable/edge_grey_home_write"-->
+<!--                    >-->
+<!--                </TextView>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:id="@+id/homeWriteAnswerTV"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteQuestionTV"-->
+<!--                    android:hint="@string/please_write_answer"-->
+<!--                    android:background="@drawable/edge_grey_home_write"-->
+<!--                    >-->
+<!--                </TextView>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:id="@+id/homeWriteReviewTV"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteAnswerTV"-->
+<!--                    android:hint="@string/please_write_review"-->
+<!--                    android:background="@drawable/edge_grey_home_write"-->
+<!--                    >-->
+<!--                </TextView>-->
 
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
         </androidx.core.widget.NestedScrollView>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/homeWritePlusButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="plus"
-            >
 
-        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

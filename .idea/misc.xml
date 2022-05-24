@@ -36,10 +36,13 @@
         <entry key="app/src/main/res/layout/fragment_home_add.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.11" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.33248986077390547" />
-        <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.2777777777777778" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/layout2.xml" value="0.19903926482873852" />
+        <entry key="app/src/main/res/layout/layout3.xml" value="0.40726495726495726" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.45" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.16538461538461538" />
       </map>
     </option>
