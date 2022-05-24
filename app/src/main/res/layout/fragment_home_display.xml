@@ -18,6 +18,7 @@
             android:src="@drawable/ic_baseline_add_circle_outline_24"
             android:layout_marginBottom="12dp"
             android:layout_marginEnd="28dp"
+            android:id="@+id/homeAddProgressFAB"
             >
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
@@ -301,40 +302,17 @@
                 android:background="@drawable/edge_grey"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/progress"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginStart="20dp"
-                    >
-                </TextView>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/homeAddProgressIV"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_baseline_add_circle_outline_24"
-                    android:layout_marginEnd="20dp"
-                    >
-
-
-                </ImageView>
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/homeProgressRV"
-                    android:layout_marginTop="30dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_goneMarginTop="10dp"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="100dp"
+                    android:paddingBottom="80dp"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -345,8 +323,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:id="@+id/homeDisplayScrollTopButton"
                     android:text="@string/scroll_top"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="10dp"
                     >
                 </TextView>
 

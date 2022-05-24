@@ -69,7 +69,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             view.findNavController().navigate(R.id.action_navigation_home_to_navigation_my_page_display)
         }
 
-        binding.homeAddProgressIV.setOnClickListener{view ->
+        binding.homeAddProgressFAB.setOnClickListener{view ->
             view.findNavController().navigate(R.id.action_navigation_home_to_navigation_home_add)
         }
 

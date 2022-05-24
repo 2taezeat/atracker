@@ -111,10 +111,10 @@ class CalendarDisplayFragment : Fragment() {
         _binding = FragmentCalendarDisplayBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        calendarViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textNotifications
+//        calendarViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 
@@ -189,7 +189,8 @@ class CalendarDisplayFragment : Fragment() {
                         }
                     }
                 } else {
-                    textView.makeInVisible()
+                    //textView.makeInVisible()
+                    textView.setTextColorRes(R.color.grey_progress)
                     dotView.makeInVisible()
                 }
             }

@@ -13,8 +13,8 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
 
     companion object{
         const val TAG = "AlertDialogFragment"
-        fun instance(alertDialogListener: AlertDialogListener): AlertDialogFragment {
-            return AlertDialogFragment(alertDialogListener)
+        fun instance(alertDialogListener: AlertDialogListener, alertType : AlertType): AlertDialogFragment {
+            return AlertDialogFragment(alertDialogListener, alertType)
         }
     }
 
