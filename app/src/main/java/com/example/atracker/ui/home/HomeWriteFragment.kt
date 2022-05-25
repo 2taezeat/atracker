@@ -6,14 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.atracker.R
-import com.example.atracker.databinding.FragmentHomeDisplayBinding
+import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
-
-
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import android.R
+
+import com.google.android.material.tabs.TabLayout
+
+
+
+
+
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +49,8 @@ class HomeWriteFragment : Fragment() {
             }
     }
 
+    private lateinit var homeWriteTabLayout : TabLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,6 +67,9 @@ class HomeWriteFragment : Fragment() {
         _binding = FragmentHomeWriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        homeWriteTabLayout = binding.homeWriteTabLayout
+
+        addTabItem()
 
         binding.homeWritePlusButton1.setOnClickListener{
             val secondlayoout = this.layoutInflater.inflate(com.example.atracker.R.layout.layout2, null) as ConstraintLayout // inflating view from xml
@@ -87,15 +97,29 @@ class HomeWriteFragment : Fragment() {
             thridlayoout.id = View.generateViewId()
 
 
+            val name = thridlayoout.findViewById(com.example.atracker.R.id.homeWriteQuestionTV) as TextView
+
+
+
             Log.d("test123_3", "${thridlayoout.id}")
+            name.id = View.generateViewId()
+            Log.d("test123_4", "${name.id}")
+
 
             binding.homeWriteLL.addView(thridlayoout)
-
         }
 
 
         return root
 
     }
+
+    fun addTabItem() {
+        homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText("TAB-3"))
+    }
+
+
+
+
 
 }
