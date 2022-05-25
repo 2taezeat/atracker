@@ -11,20 +11,10 @@ import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.R
+import androidx.navigation.findNavController
 
 import com.google.android.material.tabs.TabLayout
 
-
-
-
-
-
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class HomeWriteFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -42,10 +32,6 @@ class HomeWriteFragment : Fragment() {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeWriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
             }
     }
 
@@ -54,8 +40,7 @@ class HomeWriteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -71,6 +56,14 @@ class HomeWriteFragment : Fragment() {
 
         addTabItem()
 
+        binding.homeWriteBackButton.setOnClickListener { view ->
+            val navController = view.findNavController()
+            navController.popBackStack()
+        }
+
+
+
+
         binding.homeWritePlusButton1.setOnClickListener{
             val secondlayoout = this.layoutInflater.inflate(com.example.atracker.R.layout.layout2, null) as ConstraintLayout // inflating view from xml
             var params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
@@ -82,8 +75,12 @@ class HomeWriteFragment : Fragment() {
             secondlayoout.id = View.generateViewId()
             Log.d("test123_2", "${secondlayoout.id}")
 
-            binding.homeWriteLL.addView(secondlayoout)
+            val tmp = secondlayoout.findViewById<TextView>(com.example.atracker.R.id.homeWriteQuestionTV)
+            tmp.tag = "asd"
 
+
+
+            binding.homeWriteLL.addView(secondlayoout)
         }
 
         binding.homeWritePlusButton2.setOnClickListener{

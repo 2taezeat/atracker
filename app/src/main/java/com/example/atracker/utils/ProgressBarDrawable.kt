@@ -66,7 +66,6 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
 
         for (i in 1 until progressInt + 1) {
             mPaint.color = mForegroundColorList!![i]
-            Log.d("test123", "${miniOffset}")
             if (i == 1) {
                 if (i == progressInt) {
                     canvas.drawRoundRect(mSegmentMiniCircle,50f,50f, mPaint)

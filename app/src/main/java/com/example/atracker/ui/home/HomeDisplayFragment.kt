@@ -2,15 +2,19 @@ package com.example.atracker.ui.home
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
 import com.example.atracker.ui.MainActivity
@@ -40,7 +44,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -53,7 +57,31 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //            textView.text = it
 //        })
 
+
+        if (homeViewModel.homeProgressArrayList.value?.size == 0) {
+            binding.homeDisplayPleaseWriteTV.visibility = View.VISIBLE
+            var params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                500 // This will define text view height
+            )
+            //binding.homeProgressCL.layoutParams = params
+
+        }
+
         homeMyCurrentStateTotalCircleView = binding.homeMyCurrentStateTotalCircleView
+
+        binding.homeDisplayNestedSV.setOnScrollChangeListener{ v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            val bottomDetector: Int = view!!.bottom - (binding.homeDisplayNestedSV.height + binding.homeDisplayNestedSV.scrollY)
+            Log.d("homeDisplayNestedSV", "${bottomDetector}, ${binding.homeDisplayNestedSV.getHeight()}")
+            if (bottomDetector == 0) {
+                binding.homeDisplayScrollTopButton.visibility = View.INVISIBLE
+            } else {
+                binding.homeDisplayScrollTopButton.visibility = View.VISIBLE
+            }
+        }
+
+
+
 
         binding.homeProgressRV.also{
             it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
@@ -76,7 +104,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         binding.homeDisplayScrollTopButton.setOnClickListener {
             binding.homeDisplayNestedSV.smoothScrollTo(0,0)
-
         }
 
 
