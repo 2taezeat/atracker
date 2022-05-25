@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
@@ -39,6 +41,11 @@ class HomeDetailFragment : Fragment() {
         requireContext()
     }
 
+    private val homeViewModel: HomeViewModel by activityViewModels()
+
+
+    private val args : HomeDetailFragmentArgs by navArgs()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +71,14 @@ class HomeDetailFragment : Fragment() {
         binding.homeDetailProgressView.secondaryProgress = 1
         binding.homeDetailProgressView.max = 6
 
-        val bgProgress = ProgressBarDrawable( lazyContext,2,2, true)
+
+        val homeProgress = homeViewModel.homeProgressArrayList.value!![args.progressIndex]
+
+
+
+
+
+        val bgProgress = ProgressBarDrawable( lazyContext,homeProgress.totalProgress,homeProgress.myProgress, true)
         binding.homeDetailProgressView.progressDrawable = bgProgress
 
 

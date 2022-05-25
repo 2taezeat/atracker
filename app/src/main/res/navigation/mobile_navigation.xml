@@ -32,7 +32,15 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_home_detail"
             app:destination="@id/navigation_home_detail"
-            app:popUpTo="@id/navigation_home" />
+            app:popUpTo="@id/navigation_home" >
+
+            <argument
+                android:name="progressIndex"
+                app:argType="integer"
+                android:defaultValue="0"
+                />
+
+        </action>
 
 
 
@@ -86,6 +94,13 @@
             android:id="@+id/action_navigation_home_detail_to_navigation_home_write"
             app:destination="@id/navigation_home_write"
             app:popUpTo="@id/navigation_home_detail" />
+
+
+        <argument
+            android:name="progressIndex"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
 
 
     </fragment>

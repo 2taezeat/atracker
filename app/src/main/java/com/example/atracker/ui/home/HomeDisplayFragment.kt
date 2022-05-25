@@ -10,6 +10,7 @@ import android.widget.ScrollView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -21,7 +22,7 @@ import com.example.atracker.ui.MainActivity
 
 class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
-    private lateinit var homeViewModel: HomeViewModel
+//    private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeDisplayBinding? = null
     private val parentActivity by lazy {
         activity as MainActivity
@@ -41,13 +42,16 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
     private lateinit var homeMyCurrentStateTotalCircleView : com.example.atracker.utils.MyProgress
 
+    private val homeViewModel: HomeViewModel by activityViewModels()
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+//        homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeDisplayBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -141,6 +145,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
-        findNavController().navigate(R.id.action_navigation_home_to_navigation_home_detail)
+        val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(position)
+        findNavController().navigate(action)
     }
 }
