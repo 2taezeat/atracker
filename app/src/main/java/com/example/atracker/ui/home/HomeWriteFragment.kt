@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import android.R
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -66,45 +65,45 @@ class HomeWriteFragment : Fragment() {
 
 
         binding.homeWritePlusButton1.setOnClickListener{
-            val secondlayoout = this.layoutInflater.inflate(com.example.atracker.R.layout.layout2, null) as ConstraintLayout // inflating view from xml
+            val homeWriteQnaLayout = this.layoutInflater.inflate(com.example.atracker.R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
             var params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                 500 // This will define text view height
             )
             params.setMargins(10,10,10,10)
-            secondlayoout.layoutParams = params
-            secondlayoout.id = View.generateViewId()
-            Log.d("test123_2", "${secondlayoout.id}")
+            homeWriteQnaLayout.layoutParams = params
+            homeWriteQnaLayout.id = View.generateViewId()
+//            Log.d("test123_2", "${homeWriteQnaLayout.id}")
+//
+//            val tmp = homeWriteQnaLayout.findViewById<TextView>(com.example.atracker.R.id.homeWriteQuestionTV)
+//            tmp.tag = "asd"
 
-            val tmp = secondlayoout.findViewById<TextView>(com.example.atracker.R.id.homeWriteQuestionTV)
-            tmp.tag = "asd"
 
 
-
-            binding.homeWriteLL.addView(secondlayoout)
+            binding.homeWriteLL.addView(homeWriteQnaLayout)
         }
 
         binding.homeWritePlusButton2.setOnClickListener{
-            val thridlayoout = this.layoutInflater.inflate(com.example.atracker.R.layout.layout3, null) as ConstraintLayout // inflating view from xml
+            val homeWriteReviewLayout = this.layoutInflater.inflate(com.example.atracker.R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
             var params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                500 // This will define text view height
+                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
             params.setMargins(10,10,10,10)
-            thridlayoout.layoutParams = params
-            thridlayoout.id = View.generateViewId()
+            homeWriteReviewLayout.layoutParams = params
+            homeWriteReviewLayout.id = View.generateViewId()
 
 
-            val name = thridlayoout.findViewById(com.example.atracker.R.id.homeWriteQuestionTV) as TextView
+//            val name = thridlayoout.findViewById(com.example.atracker.R.id.homeWriteQuestionTV) as TextView
+//
+//
+//
+//            Log.d("test123_3", "${thridlayoout.id}")
+//            name.id = View.generateViewId()
+//            Log.d("test123_4", "${name.id}")
 
 
-
-            Log.d("test123_3", "${thridlayoout.id}")
-            name.id = View.generateViewId()
-            Log.d("test123_4", "${name.id}")
-
-
-            binding.homeWriteLL.addView(thridlayoout)
+            binding.homeWriteLL.addView(homeWriteReviewLayout)
         }
 
 
