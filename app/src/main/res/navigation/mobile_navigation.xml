@@ -93,7 +93,15 @@
         <action
             android:id="@+id/action_navigation_home_detail_to_navigation_home_write"
             app:destination="@id/navigation_home_write"
-            app:popUpTo="@id/navigation_home_detail" />
+            app:popUpTo="@id/navigation_home_detail" >
+            <argument
+                android:name="progressIndex"
+                app:argType="integer"
+                android:defaultValue="0"
+                />
+
+
+        </action>
 
 
         <argument
@@ -120,6 +128,14 @@
         android:name="com.example.atracker.ui.home.HomeWriteFragment"
         android:label="@string/title_home_write"
         tools:layout="@layout/fragment_home_write">
+
+        <argument
+            android:name="progressIndex"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+
+
     </fragment>
 
 

@@ -64,15 +64,20 @@ class HomeDetailFragment : Fragment() {
 
         _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val homeProgress = homeViewModel.homeProgressArrayList.value!![args.progressIndex]
+
+
+
         binding.homeDetailWriteIV.setOnClickListener { view ->
-            view.findNavController().navigate(com.example.atracker.R.id.action_navigation_home_detail_to_navigation_home_write)
+            val action = HomeDetailFragmentDirections.actionNavigationHomeDetailToNavigationHomeWrite(args.progressIndex)
+
+            view.findNavController().navigate(action)
         }
 
         binding.homeDetailProgressView.secondaryProgress = 1
         binding.homeDetailProgressView.max = 6
 
-
-        val homeProgress = homeViewModel.homeProgressArrayList.value!![args.progressIndex]
 
 
 

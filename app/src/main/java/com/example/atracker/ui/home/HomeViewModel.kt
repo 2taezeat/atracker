@@ -28,4 +28,16 @@ class HomeViewModel : ViewModel() {
 
     val homeProgressArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList
 
+
+    private val _homeWriteProgressSelectArrayList = MutableLiveData<ArrayList<ArrayList<String>>>().apply {
+        value = arrayListOf(
+            arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접",  "6차 면접", ),
+            arrayListOf("1차 면접", "2차 면접", "3차 면접" ),
+            arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접" )
+        )
+    }
+
+    val homeWriteProgressSelectArrayList : LiveData<ArrayList<ArrayList<String>>> = _homeWriteProgressSelectArrayList
+
+
 }

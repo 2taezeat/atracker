@@ -11,15 +11,14 @@ import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.R
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 
 import com.google.android.material.tabs.TabLayout
 
 
 class HomeWriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     private var _binding: FragmentHomeWriteBinding? = null
     private val binding get() = _binding!!
@@ -36,11 +35,13 @@ class HomeWriteFragment : Fragment() {
     }
 
     private lateinit var homeWriteTabLayout : TabLayout
+    private val args : HomeWriteFragmentArgs by navArgs()
+    private val homeViewModel: HomeViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
@@ -54,7 +55,7 @@ class HomeWriteFragment : Fragment() {
 
         homeWriteTabLayout = binding.homeWriteTabLayout
 
-        addTabItem()
+        addTabItem(args.progressIndex)
 
         binding.homeWriteBackButton.setOnClickListener { view ->
             val navController = view.findNavController()
@@ -111,8 +112,14 @@ class HomeWriteFragment : Fragment() {
 
     }
 
-    fun addTabItem() {
-        homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText("TAB-3"))
+    fun addTabItem(progressIndex: Int) {
+        val homeWriteProgressSelectStringList = homeViewModel.homeWriteProgressSelectArrayList.value!![progressIndex]
+
+        for (progressName in homeWriteProgressSelectStringList) {
+            homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName))
+        }
+
+
     }
 
 
