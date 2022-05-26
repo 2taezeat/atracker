@@ -44,6 +44,7 @@
     <string name="review_and_reflect">후기 및 반성</string>
     <string name="plus_qna">+ 질의응답</string>
     <string name="plus_review">+ 후기</string>
+    <string name="percent">%</string>
 
 
 </resources>

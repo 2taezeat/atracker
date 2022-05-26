@@ -73,11 +73,12 @@ internal class MyProgress : View {
         try {
             mDrawText = a.getBoolean(com.example.atracker.R.styleable.MyProgress_showProgressText, false)
             mBackgroundColor =
-                a.getColor(com.example.atracker.R.styleable.MyProgress_backgroundColor,             resources.getColor(R.color.darker_gray))
+                a.getColor(com.example.atracker.R.styleable.MyProgress_backgroundColor,             resources.getColor(
+                    com.example.atracker.R.color.background_gray))
             mPrimaryProgressColor =
-                a.getColor(com.example.atracker.R.styleable.MyProgress_progressColor,            resources.getColor(R.color.holo_red_dark))
+                a.getColor(com.example.atracker.R.styleable.MyProgress_progressColor,            resources.getColor(com.example.atracker.R.color.progress_color_2))
             mSecondaryProgressColor =
-                a.getColor(com.example.atracker.R.styleable.MyProgress_secondaryProgressColor, resources.getColor(R.color.holo_blue_bright))
+                a.getColor(com.example.atracker.R.styleable.MyProgress_secondaryProgressColor, resources.getColor(com.example.atracker.R.color.progress_color_4))
             mProgress = a.getInt(com.example.atracker.R.styleable.MyProgress_progress, 0)
             mSecondaryProgress = a.getInt(com.example.atracker.R.styleable.MyProgress_secondaryProgress, 0)
             mStrokeWidth = a.getDimensionPixelSize(com.example.atracker.R.styleable.MyProgress_strokeWidth, 10)
@@ -88,7 +89,7 @@ internal class MyProgress : View {
             isSecondaryCapVisible = a.getBoolean(com.example.atracker.R.styleable.MyProgress_secondaryCapVisibility, true)
 
 
-            mThirdProgressColor = a.getColor(com.example.atracker.R.styleable.MyProgress_thirdProgressColor, resources.getColor(R.color.holo_green_light))
+            mThirdProgressColor = a.getColor(com.example.atracker.R.styleable.MyProgress_thirdProgressColor, resources.getColor(com.example.atracker.R.color.progress_color_7))
             mThirdProgress = a.getInt(com.example.atracker.R.styleable.MyProgress_thirdProgress, 0)
             mThirdCapSize = a.getInt(com.example.atracker.R.styleable.MyProgress_thirdCapSize, 10)
             isThirdCapVisible = a.getBoolean(com.example.atracker.R.styleable.MyProgress_thirdCapVisibility, true)

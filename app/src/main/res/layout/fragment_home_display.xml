@@ -37,7 +37,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/test"
             >
@@ -67,23 +67,27 @@
 
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/homeMyPageIV"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/ic_baseline_add_circle_outline_24"
+                app:layout_constraintEnd_toStartOf="@+id/homeNotificationIV"
+                android:src="@drawable/ic_mypage_icon_raw"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="17dp"
                 >
             </ImageView>
 
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/homeNotificationIV"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/homeMyPageIV"
-                android:src="@drawable/ic_baseline_add_circle_outline_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_notification_icon_raw"
+                android:layout_marginEnd="14dp"
                 >
             </ImageView>
 
@@ -95,6 +99,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/homeMyTitleTV"
                 android:text="신입 UX/UI 디자이너"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/atracker_grey_1"
                 >
             </TextView>
 
@@ -104,8 +112,12 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
+                android:layout_marginTop="4dp"
                 android:id="@+id/homeMyNickNameTV"
                 android:text="제시카"
+                android:textSize="28sp"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/progress_color_7"
                 >
             </TextView>
 
@@ -115,7 +127,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
                 app:layout_constraintStart_toEndOf="@+id/homeMyNickNameTV"
+                android:layout_marginTop="4dp"
                 android:text="@string/님의"
+                android:textSize="28sp"
+                android:textColor="@color/atracker_white"
                 >
             </TextView>
 
@@ -126,13 +141,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/homeMyNickNameTV"
                 android:text="@string/지원현황입니다"
                 android:id="@+id/homeApplyTV"
+                android:textSize="28sp"
+                android:textColor="@color/atracker_white"
+                android:layout_marginStart="12dp"
+
                 >
             </TextView>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="90dp"
                 android:layout_marginTop="20dp"
                 android:id="@+id/homeMyCurrentStateCL"
                 app:layout_constraintTop_toBottomOf="@+id/homeApplyTV"
@@ -143,13 +162,13 @@
 
 
                 <com.example.atracker.utils.MyProgress
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:id="@+id/homeMyCurrentStateTotalCircleView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:padding="4dp"
                     >
 
@@ -165,10 +184,12 @@
                     android:id="@+id/homeMyCurrentStateTotalPassRate"
                     android:text="@string/pass_rate"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="27dp"
                     app:layout_constraintVertical_bias="0.2"
                     android:layout_marginStart="30dp"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="12sp"
+                    android:textColor="@color/atracker_grey_1"
                     >
                 </TextView>
 
@@ -176,14 +197,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTotalPassRate"
-                    android:layout_marginTop="4dp"
                     android:id="@+id/homeMyCurrentStateTotalPassRateTV"
                     app:layout_constraintVertical_bias="0.2"
                     android:layout_marginStart="30dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="59%"
-                    android:textSize="24sp"
+                    tools:text="59"
+                    android:textSize="20sp"
+                    android:textColor="@color/atracker_white"
                     >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTotalPassRateTV"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTotalPassRate"
+                    android:text="@string/percent"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/atracker_white"
+                    >
+
+
                 </TextView>
 
 
@@ -211,7 +246,9 @@
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.3"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/atracker_grey_1"
                     >
                 </TextView>
 
@@ -251,7 +288,9 @@
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.3"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/atracker_grey_1"
                     >
                 </TextView>
 
@@ -280,7 +319,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.33"
                     android:background="@drawable/circle_type_1"
-                    android:layout_marginStart="34dp"
+                    android:layout_marginStart="21dp"
                     >
                 </View>
 
@@ -293,7 +332,9 @@
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.3"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/atracker_grey_1"
                     >
                 </TextView>
 
@@ -344,25 +385,27 @@
                     android:id="@+id/homeProgressRV"
                     app:layout_constraintTop_toTopOf="parent"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="80dp"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/homeDisplayScrollTopButton"
-                    android:text="@string/scroll_top"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginBottom="10dp"
-                    android:visibility="invisible"
-                    >
-                </TextView>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/homeDisplayScrollTopButton"
+                android:text="@string/scroll_top"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="10dp"
+                android:visibility="invisible"
+                android:paddingTop="10dp"
+                >
+            </TextView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
