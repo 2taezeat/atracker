@@ -12,7 +12,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:id="@+id/homeWriteHeaderCL"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,9 +24,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_baseline_add_circle_outline_24"
                 android:id="@+id/homeWriteBackButton"
+                app:layout_constraintBottom_toTopOf="@+id/homeWriteTabLayout"
                 android:layout_marginStart="10dp"
                 >
 
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/homeWriteTabLayout"
                 android:text="우리 은행 인턴"
                 android:textSize="20sp"
                  />
@@ -50,12 +50,25 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/homeWriteTabLayout"
                 android:text="@string/save_korean"
                 android:layout_marginEnd="10dp"
                 android:id="@+id/homeWriteSaveTV"
                 >
             </TextView>
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/homeWriteTabLayout"
+                app:tabMode="scrollable"
+                app:tabGravity="fill"
+                >
+
+            </com.google.android.material.tabs.TabLayout>
+
 
 
 
@@ -93,40 +106,29 @@
 
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="165dp"
+                    android:layout_height="46dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:id="@+id/homeWritePlusButton1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="plus1"
+                    android:text="@string/plus_qna"
+                    android:layout_marginStart="16dp"
                     >
 
                 </Button>
 
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="165dp"
+                    android:layout_height="46dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/homeWritePlusButton2"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="plus2"
+                    android:text="@string/plus_review"
+                    android:layout_marginEnd="16dp"
                     >
 
                 </Button>
-
-
-
-                <com.google.android.material.tabs.TabLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/homeWriteTabLayout"
-                    app:tabMode="scrollable"
-                    app:tabGravity="fill"
-                    >
-
-                </com.google.android.material.tabs.TabLayout>
 
 
 
@@ -236,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTabLayout"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:chipSpacingHorizontal="14dp">
 

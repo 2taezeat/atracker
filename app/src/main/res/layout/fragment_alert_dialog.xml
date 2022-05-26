@@ -15,17 +15,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:padding="10dp"
             >
 
             <View
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/circle_type_alert_dialog"
                 android:id="@+id/alertDialogView"
+                android:layout_marginTop="20dp"
                 >
             </View>
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@+id/alertDialogView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -70,48 +70,58 @@
                 />
 
 
+            <TextView
+                android:id="@+id/alertDialogTV3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/alertDialogTV1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+
 
 
             <TextView
                 android:id="@+id/alertDialogButton1"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
                 android:text="OK"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:padding="2dp"
                 android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
+                android:layout_marginBottom="20dp"
                 />
 
 
 
             <TextView
                 android:id="@+id/alertDialogButton2"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:padding="2dp"
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="CANCEL"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.7"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
                 />
 
 
 
             <TextView
                 android:id="@+id/alertDialogButton3"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -121,6 +131,8 @@
                 android:text="중간"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

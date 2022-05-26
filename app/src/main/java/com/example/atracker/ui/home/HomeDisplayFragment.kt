@@ -18,7 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
+import com.example.atracker.ui.AlertDialogFragment
+import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.utils.AlertType
 
 class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
@@ -84,6 +87,11 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             }
         }
 
+        binding.test.setOnClickListener {
+            showAlert()
+
+        }
+
 
 
 
@@ -147,5 +155,22 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
         val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(position)
         findNavController().navigate(action)
+    }
+
+    fun showAlert(){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onOkClick() {
+//                    mainViewModel.clickCommentDelete()
+                }
+
+                override fun onCancelClick() {
+
+                }
+
+            },
+            AlertType.TYPE4
+        )
+        alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 }
