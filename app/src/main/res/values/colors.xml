@@ -8,7 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_grey_1">#292C3F</color>
-
     <color name="background_grey_2">#343B54</color>
 
 
@@ -22,8 +21,6 @@
     <color name="progress_color_6">#6DE6F4</color>
     <color name="progress_color_7">#7EFCDD</color>
 
-
-
     <color name="example_3_black">#D9000000</color>
     <color name="example_3_white">#D9FFFFFF</color>
     <color name="example_3_blue">#1973E8</color>
@@ -32,7 +29,15 @@
     <color name="example_3_statusbar_color">#455A64</color>
 
 
-    <color name="background_gray">#1F2129</color>
+    <color name="background_gray">#1F2128</color>
+    <color name="background_light_gray">#282A34</color>
+    <color name="atracker_white">#F5F5F5</color>
+    <color name="atracker_grey_1">#B9BFD1</color>
+
+
+    <color name="atracker_grey_7">#42475B</color>
+
+
 
 
 </resources>

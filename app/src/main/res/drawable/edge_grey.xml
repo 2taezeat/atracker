@@ -3,11 +3,11 @@
 
     <stroke
         android:width="2sp"
-        android:color="@color/grey_progress"
+        android:color="@color/background_light_gray"
         />
 
     <solid
-        android:color="@color/background_grey_2"
+        android:color="@color/background_light_gray"
         />
 
     <corners

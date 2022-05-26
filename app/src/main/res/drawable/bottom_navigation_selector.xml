@@ -6,10 +6,5 @@
         android:drawable="@drawable/bottom_navigation_item_background"
         />
 
-    <item
-        andro
-        >
-
-    </item>
 
 </selector>

@@ -14,7 +14,7 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
     private val mPaint = Paint()
     private val mSegment = RectF()
     private val mSegmentMiniCircle = RectF()
-    private val mBackground = ContextCompat.getColor(context, R.color.grey_progress)
+    private val mBackground = ContextCompat.getColor(context, R.color.background_gray)
     private val mForegroundSuccess1 = ContextCompat.getColor(context, R.color.progress_color_1)
     private val mForegroundSuccess2 = ContextCompat.getColor(context, R.color.progress_color_2)
     private val mForegroundSuccess3 = ContextCompat.getColor(context, R.color.progress_color_3)

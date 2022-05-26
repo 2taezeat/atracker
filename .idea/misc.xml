@@ -20,13 +20,15 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.3658119658119658" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23034188034188033" />
         <entry key="app/src/main/res/drawable/ic_home_icon_raw.xml" value="0.17592592592592593" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1675925925925926" />
         <entry key="app/src/main/res/drawable/pb_circular_determinative.xml" value="0.3658119658119658" />
         <entry key="app/src/main/res/drawable/tmp.xml" value="0.16111111111111112" />
         <entry key="app/src/main/res/drawable/tmp1.xml" value="0.3658119658119658" />
         <entry key="app/src/main/res/drawable/tmp2.xml" value="0.16111111111111112" />
         <entry key="app/src/main/res/drawable/tmp3.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3789279112754159" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/calendar_day_legend.xml" value="0.16248955722639932" />
         <entry key="app/src/main/res/layout/example_3_calendar_day.xml" value="0.16248955722639932" />
@@ -38,11 +40,11 @@
         <entry key="app/src/main/res/layout/fragment_dashboard_display.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_add.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.11" />
-        <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.36049382716049383" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
-        <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.75" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.21626617375231053" />
         <entry key="app/src/main/res/layout/home_write_review_layout.xml" value="0.18654434250764526" />
         <entry key="app/src/main/res/layout/layout2.xml" value="0.19903926482873852" />
