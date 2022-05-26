@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -59,6 +60,12 @@ class HomeWriteFragment : Fragment() {
         binding.homeWriteBackButton.setOnClickListener { view ->
             val navController = view.findNavController()
             navController.popBackStack()
+        }
+
+        binding.homeWriteTypeSelect1.setOnClickListener {
+            binding.homeWriteWholeCL.invalidate()
+            binding.homeWriteNestedSV.visibility = View.GONE
+            binding.homeWriteNestedSV.visibility = View.VISIBLE
         }
 
 
@@ -111,15 +118,14 @@ class HomeWriteFragment : Fragment() {
 
     }
 
-    fun addTabItem(progressIndex: Int) {
+    private fun addTabItem(progressIndex: Int) {
         val homeWriteProgressSelectStringList = homeViewModel.homeWriteProgressSelectArrayList.value!![progressIndex]
 
         for (progressName in homeWriteProgressSelectStringList) {
             homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName))
         }
-
-
     }
+
 
 
 

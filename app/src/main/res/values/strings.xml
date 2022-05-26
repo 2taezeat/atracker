@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">atracker</string>
-    <string name="title_home">지원 현황</string>
+    <string name="title_home">홈</string>
     <string name="title_blog">블로그</string>
+    <string name="title_search">탐색</string>
+
     <string name="title_home_detail">홈 세부사항</string>
     <string name="title_notification">알림</string>
     <string name="title_calendar">일정</string>

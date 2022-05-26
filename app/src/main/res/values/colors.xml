@@ -32,4 +32,7 @@
     <color name="example_3_statusbar_color">#455A64</color>
 
 
+    <color name="background_gray">#1F2129</color>
+
+
 </resources>
