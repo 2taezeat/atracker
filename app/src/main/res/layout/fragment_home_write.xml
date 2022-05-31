@@ -106,7 +106,7 @@
                 </LinearLayout>
 
 
-                <Button
+                <TextView
                     android:layout_width="165dp"
                     android:layout_height="46dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,12 +114,16 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="@string/plus_qna"
                     android:layout_marginStart="16dp"
+                    android:background="@drawable/button_round"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:textColor="@color/atracker_white"
                     >
 
-                </Button>
+                </TextView>
 
 
-                <Button
+                <TextView
                     android:layout_width="165dp"
                     android:layout_height="46dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,9 +131,13 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="@string/plus_review"
                     android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_round"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:textColor="@color/atracker_white"
                     >
 
-                </Button>
+                </TextView>
 
 
 
@@ -241,32 +249,35 @@
                     app:singleSelection="true"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:chipSpacingHorizontal="14dp">
+                    app:chipSpacingHorizontal="8dp">
 
                     <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="66dp"
+                        android:layout_height="42dp"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:id="@+id/homeWriteTypeSelect1"
-                        android:text="ALL"
+                        android:text="@string/waiting"
+                        android:textAlignment="center"
                         >
                     </com.google.android.material.chip.Chip>
 
                     <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="66dp"
+                        android:layout_height="42dp"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:id="@+id/homeWriteTypeSelect2"
-                        android:text="ALL"
+                        android:text="@string/not_passing"
+                        android:textAlignment="center"
                         >
                     </com.google.android.material.chip.Chip>
 
                     <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="66dp"
+                        android:layout_height="42dp"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:id="@+id/homeWriteTypeSelect3"
-                        android:text="ALL"
+                        android:text="@string/passing"
+                        android:textAlignment="center"
                         >
                     </com.google.android.material.chip.Chip>
 

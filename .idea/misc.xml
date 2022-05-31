@@ -7,6 +7,7 @@
         <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar_indicator_material.xml" value="0.3658119658119658" />
         <entry key="app/src/main/res/drawable/bottom_navigation_item_background.xml" value="0.1111111111111111" />
         <entry key="app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.1111111111111111" />
+        <entry key="app/src/main/res/drawable/button_round.xml" value="0.46962025316455697" />
         <entry key="app/src/main/res/drawable/circle_type_1.xml" value="0.28034188034188035" />
         <entry key="app/src/main/res/drawable/circle_type_alert_dialog.xml" value="0.3457264957264957" />
         <entry key="app/src/main/res/drawable/dialog_radius.xml" value="0.3457264957264957" />
@@ -41,7 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_home_add.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.11" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.531784005468216" />
-        <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.36049382716049383" />
+        <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.75" />

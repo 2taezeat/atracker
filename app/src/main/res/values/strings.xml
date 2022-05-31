@@ -42,9 +42,15 @@
     <string name="a">A.</string>
     <string name="answer">답변</string>
     <string name="review_and_reflect">후기 및 반성</string>
-    <string name="plus_qna">+ 질의응답</string>
-    <string name="plus_review">+ 후기</string>
+
+    <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">질의응답</font></string>
+    <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">후기</font></string>
+
+
     <string name="percent">%</string>
+    <string name="waiting">대기중</string>
+    <string name="not_passing">불합격</string>
+    <string name="passing">합격</string>
 
 
 </resources>
