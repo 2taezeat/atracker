@@ -19,7 +19,7 @@
     <color name="progress_color_4">#58A7F8</color>
     <color name="progress_color_5">#61D0FA</color>
     <color name="progress_color_6">#6DE6F4</color>
-    <color name="progress_color_7">#7EFCDD</color>
+    <color name="progress_color_7">#7EFBDC</color>
 
     <color name="example_3_black">#D9000000</color>
     <color name="example_3_white">#D9FFFFFF</color>
@@ -33,6 +33,8 @@
     <color name="background_light_gray">#282A34</color>
     <color name="atracker_white">#F5F5F5</color>
     <color name="atracker_grey_1">#B9BFD1</color>
+
+    <color name="atracker_grey_3">#979CAF</color>
 
 
     <color name="atracker_grey_7">#42475B</color>
