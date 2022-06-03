@@ -165,13 +165,13 @@
 
 
                 <com.example.atracker.utils.MyProgress
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:id="@+id/homeMyCurrentStateTotalCircleView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:padding="4dp"
                     >
 
@@ -204,7 +204,7 @@
                     app:layout_constraintVertical_bias="0.2"
                     android:layout_marginStart="30dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="59"
+                    android:text="59"
                     android:textSize="20sp"
                     android:textColor="@color/atracker_white"
                     >
@@ -236,14 +236,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.33"
                     android:background="@drawable/circle_type_1"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="16dp"
                     >
                 </View>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="서류"
+                    android:text="서류"
                     android:id="@+id/homeMyCurrentStateTV1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView1"
@@ -259,12 +259,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/homeMyCurrentStatePercentTV1"
-                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTotalCircleView"
-                    android:layout_marginStart="22dp"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView1"
+                    android:layout_marginStart="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView1"
-                    android:layout_marginTop="10dp"
-                    tools:text="82.5%"
+                    android:layout_marginTop="4dp"
+                    android:text="75"
+                    android:textColor="@color/atracker_white"
+                    tools:text="82"
                     android:textSize="24sp"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/percent"
+                    android:textSize="14sp"
+                    android:textColor="@color/atracker_white"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStatePercentTV1"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTV1"
+                    android:layout_marginTop="10dp"
                     >
                 </TextView>
 
@@ -273,19 +287,20 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:id="@+id/homeMyCurrentStateCircleView2"
-                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.52"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.33"
                     android:background="@drawable/circle_type_1"
-                    android:layout_marginStart="34dp"
                     >
                 </View>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="1차 면접"
+                    android:text="1차 면접"
                     android:id="@+id/homeMyCurrentStateTV2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView2"
@@ -301,23 +316,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/homeMyCurrentStatePercentTV2"
-                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV1"
-                    android:layout_marginStart="32dp"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView2"
+                    android:layout_marginStart="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView2"
-                    android:layout_marginTop="10dp"
-                    tools:text="82.5%"
+                    android:layout_marginTop="4dp"
+                    android:text="50"
                     android:textSize="24sp"
+                    android:textColor="@color/atracker_white"
                     >
                 </TextView>
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/percent"
+                    android:textSize="14sp"
+                    android:textColor="@color/atracker_white"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStatePercentTV2"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTV2"
+                    android:layout_marginTop="10dp"
+                    >
+                </TextView>
 
 
                 <View
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:id="@+id/homeMyCurrentStateCircleView3"
-                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.78"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.33"
@@ -329,7 +358,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="2차 면접"
+                    android:text="2차 면접"
                     android:id="@+id/homeMyCurrentStateTV3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView3"
@@ -345,12 +374,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/homeMyCurrentStatePercentTV3"
-                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateTV2"
-                    android:layout_marginStart="32dp"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView3"
+                    android:layout_marginStart="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView3"
-                    android:layout_marginTop="10dp"
-                    tools:text="82.5%"
+                    android:layout_marginTop="4dp"
+                    android:text="25"
                     android:textSize="24sp"
+                    android:textColor="@color/atracker_white"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/percent"
+                    android:textSize="14sp"
+                    android:textColor="@color/atracker_white"
+                    app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStatePercentTV3"
+                    app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTV3"
+                    android:layout_marginTop="10dp"
                     >
                 </TextView>
 
