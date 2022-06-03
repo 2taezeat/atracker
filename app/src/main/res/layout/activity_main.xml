@@ -4,26 +4,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
+
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_gray"
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
-            android:elevation="100dp"
             android:background="@color/background_gray"
             app:itemBackground="@drawable/bottom_navigation_selector"
             app:itemIconTint="@drawable/navigation_view_colored"
             app:itemTextColor="@drawable/navigation_view_colored"
+            app:itemIconSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/bottom_nav_menu"
+            style="@style/BottomNavigationView"
+            android:translationZ="10dp"
+            android:elevation="80dp"
+            app:elevation="80dp"
+            android:layout_marginTop="-10dp"
             />
+
+
 
         <fragment
             android:id="@+id/nav_host_fragment_activity_main"
@@ -31,11 +42,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
+            android:background="@color/background_gray"
             app:layout_constraintBottom_toTopOf="@id/nav_view"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/mobile_navigation" />
+            app:navGraph="@navigation/mobile_navigation"
+
+            />
 
 
 

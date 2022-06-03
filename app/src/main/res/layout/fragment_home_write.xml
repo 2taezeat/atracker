@@ -79,17 +79,18 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/homeWriteHeaderCL"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:id="@+id/homeWriteNestedSV"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/homeWriteMainCL"
                 >
 
@@ -113,13 +114,12 @@
                     android:id="@+id/homeWritePlusButton1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="@string/plus_qna"
-                    android:layout_marginStart="16dp"
                     android:background="@drawable/button_round"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:textColor="@color/atracker_white"
+                    android:layout_marginStart="2dp"
                     >
-
                 </TextView>
 
 
@@ -130,15 +130,13 @@
                     android:id="@+id/homeWritePlusButton2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="@string/plus_review"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/button_round"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:textColor="@color/atracker_white"
+                    android:layout_marginEnd="2dp"
                     >
-
                 </TextView>
-
 
 
 <!--                <HorizontalScrollView-->
@@ -248,6 +246,7 @@
                     android:layout_height="wrap_content"
                     app:singleSelection="true"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:chipSpacingHorizontal="8dp">
 

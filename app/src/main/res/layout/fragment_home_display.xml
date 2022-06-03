@@ -26,11 +26,12 @@
             android:layout_marginBottom="12dp"
             android:layout_marginEnd="20dp"
             android:id="@+id/homeAddProgressFAB"
-            android:elevation="100dp"
             app:borderWidth="0dp"
             app:fabSize="mini"
             app:tint="@color/progress_color_7"
             app:maxImageSize="14dp"
+            android:elevation="8dp"
+            app:elevation="8dp"
             >
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
@@ -386,6 +387,7 @@
                     android:id="@+id/homeProgressRV"
                     app:layout_constraintTop_toTopOf="parent"
                     android:nestedScrollingEnabled="false"
+                    android:paddingBottom="36dp"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -400,11 +402,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/homeDisplayScrollTopButton"
                 android:text="@string/scroll_top"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginBottom="10dp"
                 android:visibility="invisible"
                 android:paddingTop="10dp"
+                android:textColor="@color/atracker_white"
+
                 >
             </TextView>
 

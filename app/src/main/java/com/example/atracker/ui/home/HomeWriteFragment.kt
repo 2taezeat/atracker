@@ -75,7 +75,7 @@ class HomeWriteFragment : Fragment() {
             val homeWriteQnaLayout = this.layoutInflater.inflate(com.example.atracker.R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
             var params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                500 // This will define text view height
+                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
             params.setMargins(10,10,10,10)
             homeWriteQnaLayout.layoutParams = params
@@ -96,7 +96,7 @@ class HomeWriteFragment : Fragment() {
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                 ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
-            params.setMargins(10,10,10,10)
+            params.setMargins(0,10,0,10)
             homeWriteReviewLayout.layoutParams = params
             homeWriteReviewLayout.id = View.generateViewId()
 
