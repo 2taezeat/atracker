@@ -1,5 +1,6 @@
 package com.example.atracker.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,10 +11,12 @@ import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.atracker.R
 
 import com.google.android.material.tabs.TabLayout
 
@@ -22,6 +25,9 @@ class HomeWriteFragment : Fragment() {
 
     private var _binding: FragmentHomeWriteBinding? = null
     private val binding get() = _binding!!
+    private val lazyContext by lazy {
+        requireContext()
+    }
 
     private val parentActivity by lazy {
         activity as MainActivity
@@ -62,11 +68,48 @@ class HomeWriteFragment : Fragment() {
             navController.popBackStack()
         }
 
+//        binding.homeWriteTypeSelect1.setOnClickListener {
+//            binding.homeWriteWholeCL.invalidate()
+//            binding.homeWriteNestedSV.visibility = View.GONE
+//            binding.homeWriteNestedSV.visibility = View.VISIBLE
+//        }
+
+
         binding.homeWriteTypeSelect1.setOnClickListener {
-            binding.homeWriteWholeCL.invalidate()
-            binding.homeWriteNestedSV.visibility = View.GONE
-            binding.homeWriteNestedSV.visibility = View.VISIBLE
+            if (binding.homeWriteTypeSelect1.isChecked) {
+                binding.homeWriteTypeSelect1.chipStrokeWidth = 4f
+                binding.homeWriteTypeSelect1.chipStrokeColor = resources.getColorStateList(R.color.atracker_white)
+                binding.homeWriteTypeSelect2.chipStrokeWidth = 0f
+                binding.homeWriteTypeSelect3.chipStrokeWidth = 0f
+            } else {
+                binding.homeWriteTypeSelect1.chipStrokeWidth = 0f
+            }
         }
+
+
+        binding.homeWriteTypeSelect2.setOnClickListener {
+            if (binding.homeWriteTypeSelect2.isChecked) {
+                binding.homeWriteTypeSelect2.chipStrokeWidth = 4f
+                binding.homeWriteTypeSelect2.chipStrokeColor = resources.getColorStateList(R.color.atracker_white)
+                binding.homeWriteTypeSelect1.chipStrokeWidth = 0f
+                binding.homeWriteTypeSelect3.chipStrokeWidth = 0f
+            } else {
+                binding.homeWriteTypeSelect2.chipStrokeWidth = 0f
+            }
+        }
+
+
+        binding.homeWriteTypeSelect3.setOnClickListener {
+            if (binding.homeWriteTypeSelect3.isChecked) {
+                binding.homeWriteTypeSelect3.chipStrokeWidth = 4f
+                binding.homeWriteTypeSelect3.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
+                binding.homeWriteTypeSelect1.chipStrokeWidth = 0f
+                binding.homeWriteTypeSelect2.chipStrokeWidth = 0f
+            } else {
+                binding.homeWriteTypeSelect3.chipStrokeWidth = 0f
+            }
+        }
+
 
 
 
@@ -77,7 +120,7 @@ class HomeWriteFragment : Fragment() {
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                 ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
-            params.setMargins(10,10,10,10)
+            params.setMargins(0,20,0,10)
             homeWriteQnaLayout.layoutParams = params
             homeWriteQnaLayout.id = View.generateViewId()
 //            Log.d("test123_2", "${homeWriteQnaLayout.id}")
@@ -96,7 +139,7 @@ class HomeWriteFragment : Fragment() {
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                 ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
-            params.setMargins(0,10,0,10)
+            params.setMargins(0,20,0,10)
             homeWriteReviewLayout.layoutParams = params
             homeWriteReviewLayout.id = View.generateViewId()
 
