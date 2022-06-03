@@ -29,9 +29,8 @@
             app:menu="@menu/bottom_nav_menu"
             style="@style/BottomNavigationView"
             android:translationZ="10dp"
-            android:elevation="80dp"
-            app:elevation="80dp"
-            android:layout_marginTop="-10dp"
+            android:elevation="8dp"
+            app:elevation="8dp"
             />
 
 
