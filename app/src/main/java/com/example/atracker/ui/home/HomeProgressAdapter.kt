@@ -12,12 +12,12 @@ import com.example.atracker.model.dto.HomeProgressItem
 
 class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListener) :
     androidx.recyclerview.widget.ListAdapter<HomeProgressItem, RecyclerView.ViewHolder>(
-        JobContentDiffCallback()) {
+        HomeProgressDiffCallback()) {
 
     var context: Context? = null
 
 
-    class JobContentDiffCallback : DiffUtil.ItemCallback<HomeProgressItem>() {
+    class HomeProgressDiffCallback : DiffUtil.ItemCallback<HomeProgressItem>() {
         override fun areItemsTheSame(
             oldItem: HomeProgressItem,
             newItem: HomeProgressItem,
@@ -40,8 +40,8 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): homeProgressViewHolder {
-        val viewHolder = homeProgressViewHolder(HomeProgressItemBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeProgressViewHolder {
+        val viewHolder = HomeProgressViewHolder(HomeProgressItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         ), this.homeProgressOnclickListener!!)
         context = parent.context
@@ -49,19 +49,19 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
         return viewHolder
 
 
-//        return homeProgressViewHolder( HomeProgressItemBinding.inflate(
+//        return HomeProgressViewHolder( HomeProgressItemBinding.inflate(
 //            LayoutInflater.from(parent.context), parent, false
 //            ), this.homeProgressOnclickListener!!
 //        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder as homeProgressViewHolder
+        holder as HomeProgressViewHolder
         val homeProgressItem = getItem(position) as HomeProgressItem
         holder.bind(homeProgressItem)
     }
 
-    inner class homeProgressViewHolder(
+    inner class HomeProgressViewHolder(
         val homeProgressItemBinding: HomeProgressItemBinding,
         homeProgressOnclickListener: HomeProgressOnclickListener,
     ) : RecyclerView.ViewHolder(homeProgressItemBinding.root), View.OnClickListener {

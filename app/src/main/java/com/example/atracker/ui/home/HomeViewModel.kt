@@ -3,6 +3,7 @@ package com.example.atracker.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.atracker.model.dto.HomeDetailItem
 import com.example.atracker.model.dto.HomeProgressItem
 
 class HomeViewModel : ViewModel() {
@@ -38,6 +39,20 @@ class HomeViewModel : ViewModel() {
     }
 
     val homeWriteProgressSelectArrayList : LiveData<ArrayList<ArrayList<String>>> = _homeWriteProgressSelectArrayList
+
+
+    private val _homeDetailContents = MutableLiveData<ArrayList<HomeDetailItem>>().apply {
+        value = arrayListOf(
+            HomeDetailItem(progressType = "00", itemType = "totalReview", totalReviewBody = "hello_0", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = "11", itemType = "totalReview", totalReviewBody = "hello_1", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = "22", itemType = "totalReview", totalReviewBody = "hello_2", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = "33", itemType = "totalReview", totalReviewBody = "hello_3", questionBody = null, answerBody = null)
+
+
+        )
+    }
+
+    val homeDetailContents : LiveData<ArrayList<HomeDetailItem>> = _homeDetailContents
 
 
 }

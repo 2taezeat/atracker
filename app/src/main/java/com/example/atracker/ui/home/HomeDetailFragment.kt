@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
@@ -42,9 +43,11 @@ class HomeDetailFragment : Fragment() {
     }
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-
-
     private val args : HomeDetailFragmentArgs by navArgs()
+
+    private val homeDetailAdapter by lazy {
+        HomeDetailAdapter()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +82,20 @@ class HomeDetailFragment : Fragment() {
         binding.homeDetailProgressView.max = 6
 
 
+        binding.homeDetailBackButton.setOnClickListener { view ->
+            val navController = view.findNavController()
+            navController.popBackStack()
+        }
 
+
+        homeDetailAdapter.submitList(homeViewModel.homeDetailContents.value)
+
+
+        binding.homeDetailRV.also{
+            it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
+            it.setHasFixedSize(false)
+            it.adapter = homeDetailAdapter
+        }
 
 
 

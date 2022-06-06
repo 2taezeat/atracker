@@ -3,7 +3,7 @@
     <item android:state_checked="true"
         android:color="@color/atracker_white" />
     <item android:state_checked="false"
-        android:color="@color/atracker_grey_3" />
+        android:color="@color/atracker_gray_3" />
 
 
 </selector>

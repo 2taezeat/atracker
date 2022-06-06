@@ -82,7 +82,7 @@
                 app:tabGravity="fill"
                 android:background="@color/background_gray"
                 app:tabTextAppearance="@style/tab_text"
-                app:tabTextColor="@color/atracker_grey_3"
+                app:tabTextColor="@color/atracker_gray_3"
                 app:tabSelectedTextColor="@color/atracker_white"
                 app:tabIndicatorColor="@color/atracker_white"
                 app:tabPaddingEnd="18dp"

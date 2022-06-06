@@ -34,12 +34,12 @@
 
     <color name="background_light_gray">#282A34</color>
     <color name="atracker_white">#F5F5F5</color>
-    <color name="atracker_grey_1">#B9BFD1</color>
+    <color name="atracker_gray_1">#B9BFD1</color>
 
-    <color name="atracker_grey_3">#979CAF</color>
+    <color name="atracker_gray_3">#979CAF</color>
 
 
-    <color name="atracker_grey_7">#42475B</color>
+    <color name="atracker_gray_7">#42475B</color>
 
 
     <color name="atracker_header_transparent">#80272933</color>

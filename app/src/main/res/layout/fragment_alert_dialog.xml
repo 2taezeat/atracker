@@ -62,7 +62,7 @@
                 android:id="@+id/alertDialogTV2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/atracker_grey_3"
+                android:textColor="@color/atracker_gray_3"
                 android:textSize="14sp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/alertDialogTV1"
