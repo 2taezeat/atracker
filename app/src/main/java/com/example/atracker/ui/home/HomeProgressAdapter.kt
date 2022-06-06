@@ -82,8 +82,6 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
                 homeProgressItem.success)
 
             homeProgressItemBinding.homeMainProgressBar.progressDrawable = bgProgress
-
-
             homeProgressItemBinding.homeProgressCompanyTitleTV.text = homeProgressItem.companyTitle
             homeProgressItemBinding.homeProgressjobTypeTV.text = homeProgressItem.jobType
 

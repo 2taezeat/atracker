@@ -13,6 +13,12 @@
         <entry key="app/src/main/res/drawable/chip_state_text_color_1.xml" value="0.3497835497835498" />
         <entry key="app/src/main/res/drawable/chip_state_text_color_2.xml" value="0.3523809523809524" />
         <entry key="app/src/main/res/drawable/circle_type_1.xml" value="0.28034188034188035" />
+        <entry key="app/src/main/res/drawable/circle_type_2.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/circle_type_3.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/circle_type_4.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/circle_type_5.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/circle_type_6.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/circle_type_7.xml" value="0.33157894736842103" />
         <entry key="app/src/main/res/drawable/circle_type_alert_dialog.xml" value="0.3457264957264957" />
         <entry key="app/src/main/res/drawable/dialog_radius.xml" value="0.3457264957264957" />
         <entry key="app/src/main/res/drawable/edge_grey.xml" value="0.28034188034188035" />
@@ -30,6 +36,13 @@
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1675925925925926" />
         <entry key="app/src/main/res/drawable/navigation_text_colored.xml" value="0.3457264957264957" />
         <entry key="app/src/main/res/drawable/pb_circular_determinative.xml" value="0.3658119658119658" />
+        <entry key="app/src/main/res/drawable/progress_type_1.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/progress_type_2.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/progress_type_3.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/progress_type_4.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/progress_type_5.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/progress_type_6.xml" value="0.33157894736842103" />
+        <entry key="app/src/main/res/drawable/progress_type_7.xml" value="0.33157894736842103" />
         <entry key="app/src/main/res/drawable/selected_chip.xml" value="0.4818181818181818" />
         <entry key="app/src/main/res/drawable/tab_background.xml" value="0.4818181818181818" />
         <entry key="app/src/main/res/drawable/tab_background_selected.xml" value="0.4818181818181818" />
@@ -57,7 +70,7 @@
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
-        <entry key="app/src/main/res/layout/home_detail_item.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/home_detail_item.xml" value="0.7993384785005513" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.75" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_review_layout.xml" value="0.335" />

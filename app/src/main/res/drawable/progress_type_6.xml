@@ -2,16 +2,18 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <stroke
-        android:width="4sp"
-        android:color="@color/progress_color_1"
+        android:width="0.1sp"
+        android:color="@color/progress_color_6"
         />
 
     <corners
-        android:radius="240dp" />
+        android:radius="2dp"
+
+        />
 
 
     <solid
-        android:color="@color/progress_color_1">
+        android:color="@color/progress_color_6">
 
     </solid>
 
