@@ -6,15 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="10dp"
+    android:id="@+id/homeWriteReviewWholeCL"
 
     >
 
+    <CheckBox
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/homeWriteReviewCheckBox"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:elevation="8dp"
+        android:visibility="invisible"
+        >
+    </CheckBox>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_round"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/homeWriteReviewMainCL"
         >
 
         <TextView

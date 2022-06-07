@@ -72,6 +72,7 @@
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/home_detail_item.xml" value="0.55" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/home_write_content_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_review_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout2.xml" value="0.19903926482873852" />

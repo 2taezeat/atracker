@@ -41,6 +41,60 @@
                     </LinearLayout>
 
 
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/homeWriteDeleteChip"
+                        android:layout_width="50dp"
+                        android:layout_height="42dp"
+                        style="@style/CustomChipChoice1"
+                        android:text="@string/delete"
+                        android:textAlignment="center"
+                        android:textColor="@color/atracker_white"
+                        app:chipStrokeWidth="0dp"
+                        android:textSize="14sp"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:visibility="invisible"
+                        >
+
+
+
+                    </com.google.android.material.chip.Chip>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/homeWriteEditButton"
+                        android:text="@string/edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="14sp"
+                        android:textColor="@color/atracker_white"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:visibility="visible"
+                        >
+                    </TextView>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/homeWriteEditCompleteButton"
+                        android:text="@string/edit_complete"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="14sp"
+                        android:textColor="@color/atracker_white"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:visibility="invisible"
+                        >
+                    </TextView>
+
+
                     <TextView
                         android:layout_width="165dp"
                         android:layout_height="46dp"

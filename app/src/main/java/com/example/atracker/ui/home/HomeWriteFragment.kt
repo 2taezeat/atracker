@@ -7,12 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -48,6 +49,11 @@ class HomeWriteFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeWriteContentLayout : ConstraintLayout
     private lateinit var dynamicLayoutList : ArrayList<ConstraintLayout>
+    //private lateinit var tmpList : ArrayList<ConstraintLayout>
+
+    val reviewLayoutList by lazy {
+        arrayListOf<ConstraintLayout>()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -158,6 +164,9 @@ class HomeWriteFragment : Fragment() {
             val homeWritePlusButton1 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton1)
             val homeWritePlusButton2 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton2)
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
+            val homeWriteEditButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditButton)
+            val homeWriteEditCompleteButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditCompleteButton)
+            val homeWriteDeleteChip = homeWriteMainCL.findViewById<Chip>(R.id.homeWriteDeleteChip)
             val homeWriteTypeSelect1 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect1)
             val homeWriteTypeSelect2 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect2)
             val homeWriteTypeSelect3 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect3)
@@ -169,35 +178,53 @@ class HomeWriteFragment : Fragment() {
             setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorStateList = resources.getColorStateList(R.color.progress_color_7))
 
 
-//            homeWritePlusButton1.setOnClickListener{
-//                val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
-//                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-//                    ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-//                )
-//                params.setMargins(0,20,0,10)
-//                homeWriteQnaLayout.layoutParams = params
-//                homeWriteQnaLayout.id = View.generateViewId()
-//
-//                homeWriteLL.addView(homeWriteQnaLayout)
-//            }
-//
-//
-//            homeWritePlusButton2.setOnClickListener{
-//                val homeWriteReviewLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
-//                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-//                    ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-//                )
-//                params.setMargins(0,20,0,10)
-//                homeWriteReviewLayout.layoutParams = params
-//                homeWriteReviewLayout.id = View.generateViewId()
-//
-//                homeWriteLL.addView(homeWriteReviewLayout)
-//            }
-
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout,homeWriteLL )
             setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout,homeWriteLL )
+
+
+            homeWriteEditButton.setOnClickListener {
+                homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
+                homeWriteEditButton.visibility = View.INVISIBLE
+                homeWriteEditCompleteButton.visibility = View.VISIBLE
+                homeWriteDeleteChip.visibility = View.VISIBLE
+
+                val addLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
+                val tmp = addLayout.getViewById(R.id.homeWriteReviewCheckBox)
+                tmp.visibility = View.VISIBLE
+
+                for (layout in reviewLayoutList) {
+                    layout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.VISIBLE
+                    val tmp = layout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+                    val checkBox = layout.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+
+                    val set = ConstraintSet()
+                    set.clone(layout)
+                    set.connect(tmp.id,ConstraintSet.START, checkBox.id , ConstraintSet.END, 10)
+                    set.applyTo(layout)
+                }
+
+            }
+
+
+            homeWriteEditCompleteButton.setOnClickListener {
+                homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
+                homeWriteEditCompleteButton.visibility = View.INVISIBLE
+                homeWriteDeleteChip.visibility = View.INVISIBLE
+                homeWriteEditButton.visibility = View.VISIBLE
+
+                for (layout in reviewLayoutList) {
+                    layout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.GONE
+//                    val tmp = layout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+//                    val checkBox = layout.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+//
+//                    val set = ConstraintSet()
+//                    set.clone(layout)
+//                    set.connect(tmp.id,ConstraintSet.START, checkBox.id , ConstraintSet.END)
+//                    set.applyTo(layout)
+
+                }
+
+            }
 
 
 
@@ -242,6 +269,7 @@ class HomeWriteFragment : Fragment() {
             addLayout.id = View.generateViewId()
 
             linearLayout.addView(addLayout)
+            reviewLayoutList.add(addLayout)
         }
 
     }
