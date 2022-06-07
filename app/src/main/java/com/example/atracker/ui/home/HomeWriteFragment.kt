@@ -1,9 +1,7 @@
 package com.example.atracker.ui.home
 
-import android.content.Context
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,19 +13,11 @@ import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
-import androidx.core.widget.NestedScrollView
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.R
-import com.example.atracker.databinding.ActivitySplashBinding
-import com.example.atracker.databinding.Test2Binding
-import com.example.atracker.databinding.TestBinding
+import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
 import com.google.android.material.tabs.TabLayout
@@ -56,8 +46,8 @@ class HomeWriteFragment : Fragment() {
     private lateinit var homeWriteTabLayout : TabLayout
     private val args : HomeWriteFragmentArgs by navArgs()
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private lateinit var tmp : ConstraintLayout
-    private lateinit var tmpList : ArrayList<ConstraintLayout>
+    private lateinit var homeWriteContentLayout : ConstraintLayout
+    private lateinit var dynamicLayoutList : ArrayList<ConstraintLayout>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,53 +74,15 @@ class HomeWriteFragment : Fragment() {
         }
 
 
-        binding.homeWriteTypeSelect1.setOnClickListener {
-            if (binding.homeWriteTypeSelect1.isChecked) {
-                binding.homeWriteTypeSelect1.chipStrokeWidth = 4f
-                binding.homeWriteTypeSelect1.chipStrokeColor = resources.getColorStateList(R.color.atracker_white)
-                binding.homeWriteTypeSelect2.chipStrokeWidth = 0f
-                binding.homeWriteTypeSelect3.chipStrokeWidth = 0f
-            } else {
-                binding.homeWriteTypeSelect1.chipStrokeWidth = 0f
-            }
-        }
-
-
-        binding.homeWriteTypeSelect2.setOnClickListener {
-            if (binding.homeWriteTypeSelect2.isChecked) {
-                binding.homeWriteTypeSelect2.chipStrokeWidth = 4f
-                binding.homeWriteTypeSelect2.chipStrokeColor = resources.getColorStateList(R.color.atracker_white)
-                binding.homeWriteTypeSelect1.chipStrokeWidth = 0f
-                binding.homeWriteTypeSelect3.chipStrokeWidth = 0f
-            } else {
-                binding.homeWriteTypeSelect2.chipStrokeWidth = 0f
-            }
-        }
-
-
-        binding.homeWriteTypeSelect3.setOnClickListener {
-            if (binding.homeWriteTypeSelect3.isChecked) {
-                binding.homeWriteTypeSelect3.chipStrokeWidth = 4f
-                binding.homeWriteTypeSelect3.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
-                binding.homeWriteTypeSelect1.chipStrokeWidth = 0f
-                binding.homeWriteTypeSelect2.chipStrokeWidth = 0f
-            } else {
-                binding.homeWriteTypeSelect3.chipStrokeWidth = 0f
-            }
-        }
-
 
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected","${tab!!.position}")
-                val pos = tab!!.position
                 changeView(tab.tag.toString())
-
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 Log.d("onTabReselected","${tab!!.position}")
-                val pos = tab!!.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -189,64 +141,35 @@ class HomeWriteFragment : Fragment() {
     private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
         val homeWriteProgressSelectStringList = homeViewModel.homeWriteProgressSelectArrayList.value!![progressIndex]
         var idx = 0
+        dynamicLayoutList = arrayListOf<ConstraintLayout>()
 
-        tmpList = arrayListOf<ConstraintLayout>()
         for (progressName in homeWriteProgressSelectStringList) {
             homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
 
-            tmp = this.layoutInflater.inflate(R.layout.test, null) as ConstraintLayout // inflating view from xml
+            homeWriteContentLayout = this.layoutInflater.inflate(R.layout.home_write_content_layout, null) as ConstraintLayout // inflating view from xml
             val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                 0 // This will define text view height
             )
 
-            val homeWriteNestedSV = tmp.getViewById(R.id.homeWriteNestedSV)
+            val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
             val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
             val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
             val homeWritePlusButton1 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton1)
             val homeWritePlusButton2 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton2)
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
+            val homeWriteTypeSelect1 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect1)
+            val homeWriteTypeSelect2 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect2)
+            val homeWriteTypeSelect3 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect3)
+
+            homeWriteContentLayout.layoutParams = params
+
+            setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorStateList = resources.getColorStateList(R.color.atracker_white))
+            setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorStateList = resources.getColorStateList(R.color.atracker_white))
+            setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorStateList = resources.getColorStateList(R.color.progress_color_7))
 
 
-            tmp.layoutParams = params
-
-            Log.d("testButton", "${homeWritePlusButton1.tag}")
-
-
-            homeWritePlusButton1.setOnClickListener{
-                val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
-                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-                )
-                params.setMargins(0,20,0,10)
-                homeWriteQnaLayout.layoutParams = params
-                homeWriteQnaLayout.id = View.generateViewId()
-
-                homeWriteLL.addView(homeWriteQnaLayout)
-            }
-
-
-
-            tmp.id = View.generateViewId()
-            tmp.tag = progressName
-            Log.d("test123", "${tmp.tag}")
-
-            if (idx == 0)
-                tmp.visibility = View.VISIBLE
-            else
-                tmp.visibility = View.INVISIBLE
-
-            tmpList.add(tmp)
-
-//            button.setOnClickListener {
-//                Log.d("test345", "test345")
-//            }
-
-
-
-
-//            button.setOnClickListener {
+//            homeWritePlusButton1.setOnClickListener{
 //                val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
 //                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
 //                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
@@ -256,52 +179,86 @@ class HomeWriteFragment : Fragment() {
 //                homeWriteQnaLayout.layoutParams = params
 //                homeWriteQnaLayout.id = View.generateViewId()
 //
+//                homeWriteLL.addView(homeWriteQnaLayout)
+//            }
+//
+//
+//            homeWritePlusButton2.setOnClickListener{
+//                val homeWriteReviewLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
+//                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+//                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+//                    ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+//                )
+//                params.setMargins(0,20,0,10)
+//                homeWriteReviewLayout.layoutParams = params
+//                homeWriteReviewLayout.id = View.generateViewId()
+//
+//                homeWriteLL.addView(homeWriteReviewLayout)
 //            }
 
+            setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout,homeWriteLL )
+            setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout,homeWriteLL )
 
 
 
-            binding.homeWriteContentCL.addView(tmp)
+            homeWriteContentLayout.id = View.generateViewId()
+            homeWriteContentLayout.tag = progressName
+
+            if (idx == 0)
+                homeWriteContentLayout.visibility = View.VISIBLE
+            else
+                homeWriteContentLayout.visibility = View.INVISIBLE
+
+            dynamicLayoutList.add(homeWriteContentLayout)
+
+            binding.homeWriteContentCL.addView(homeWriteContentLayout)
             idx += 1
         }
+    }
+
+    private fun setChip(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorStateList: ColorStateList){
+        chip1.setOnClickListener {
+            if (chip1.isChecked) {
+                chip1.chipStrokeWidth = 4f
+                chip1.chipStrokeColor = colorStateList
+                chip2.chipStrokeWidth = 0f
+                chip3.chipStrokeWidth = 0f
+            } else {
+                chip1.chipStrokeWidth = 0f
+            }
+        }
+    }
+
+
+    private fun setPlusButton(button: TextView, layoutInt : Int, linearLayout: LinearLayout){
+        button.setOnClickListener{
+            val addLayout = this.layoutInflater.inflate(layoutInt, null) as ConstraintLayout // inflating view from xml
+            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+            )
+            params.setMargins(0,20,0,10)
+            addLayout.layoutParams = params
+            addLayout.id = View.generateViewId()
+
+            linearLayout.addView(addLayout)
+        }
+
     }
 
 
 
     private fun changeView(layoutTagName : String) {
-//        when (index) {
-//            0 -> {
-//                binding.dashboardMainAddCl.visibility = View.VISIBLE
-//                binding.dashboardMainEditCl.visibility = View.INVISIBLE
-//            }
-//            1 -> {
-//                binding.dashboardMainAddCl.visibility = View.INVISIBLE
-//                binding.dashboardMainEditCl.visibility = View.VISIBLE
-//            }
-//        }
-
-        //val homeWriteProgressSelectStringList = homeViewModel.homeWriteProgressSelectArrayList.value!![progressIndex]
-
-        for(t in tmpList){
-            if (layoutTagName == t.tag) {
-                t.visibility = View.VISIBLE
+        for(layout in dynamicLayoutList){
+            if (layoutTagName == layout.tag) {
+                layout.visibility = View.VISIBLE
             } else {
-                t.visibility = View.INVISIBLE
+                layout.visibility = View.INVISIBLE
             }
 
         }
 
     }
-
-    fun convertDpToPixel(dp: Float, context: Context): Int {
-        return (dp * (context.resources
-            .displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
-    }
-
-
-
-
-
 
 
 }
