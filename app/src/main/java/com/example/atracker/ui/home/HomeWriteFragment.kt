@@ -1,7 +1,9 @@
 package com.example.atracker.ui.home
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
@@ -25,6 +28,7 @@ import com.example.atracker.R
 import com.example.atracker.databinding.ActivitySplashBinding
 import com.example.atracker.databinding.Test2Binding
 import com.example.atracker.databinding.TestBinding
+import com.google.android.material.chip.ChipGroup
 
 import com.google.android.material.tabs.TabLayout
 
@@ -193,24 +197,23 @@ class HomeWriteFragment : Fragment() {
             tmp = this.layoutInflater.inflate(R.layout.test, null) as ConstraintLayout // inflating view from xml
             val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                ConstraintLayout.LayoutParams.MATCH_PARENT // This will define text view height
+                0 // This will define text view height
             )
-
-            tmp.layoutParams = params
-
-            //val button = tmp.getViewById(R.id.testButton)
 
             val homeWriteNestedSV = tmp.getViewById(R.id.homeWriteNestedSV)
             val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
             val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
             val homeWritePlusButton1 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton1)
             val homeWritePlusButton2 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton2)
+            val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
+
+
+            tmp.layoutParams = params
 
             Log.d("testButton", "${homeWritePlusButton1.tag}")
 
 
             homeWritePlusButton1.setOnClickListener{
-                Log.d("test123123", "test123123123")
                 val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
                 val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
@@ -220,7 +223,7 @@ class HomeWriteFragment : Fragment() {
                 homeWriteQnaLayout.layoutParams = params
                 homeWriteQnaLayout.id = View.generateViewId()
 
-                binding.homeWriteLL.addView(homeWriteQnaLayout)
+                homeWriteLL.addView(homeWriteQnaLayout)
             }
 
 
@@ -258,7 +261,7 @@ class HomeWriteFragment : Fragment() {
 
 
 
-            binding.homeWriteWholeCL.addView(tmp)
+            binding.homeWriteContentCL.addView(tmp)
             idx += 1
         }
     }
@@ -288,8 +291,11 @@ class HomeWriteFragment : Fragment() {
 
         }
 
+    }
 
-
+    fun convertDpToPixel(dp: Float, context: Context): Int {
+        return (dp * (context.resources
+            .displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 
 
