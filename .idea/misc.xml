@@ -70,13 +70,14 @@
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
-        <entry key="app/src/main/res/layout/home_detail_item.xml" value="0.7993384785005513" />
+        <entry key="app/src/main/res/layout/home_detail_item.xml" value="0.55" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.75" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_review_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout2.xml" value="0.19903926482873852" />
         <entry key="app/src/main/res/layout/layout3.xml" value="0.30246913580246915" />
-        <entry key="app/src/main/res/layout/test.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/test_2.xml" value="0.31798245614035087" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.16538461538461538" />
       </map>
     </option>

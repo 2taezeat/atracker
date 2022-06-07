@@ -98,15 +98,9 @@
                 android:background="@color/background_light_gray"
                 android:id="@+id/homeWriteView1"
                 >
-
-
             </View>
 
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <androidx.core.widget.NestedScrollView
@@ -119,6 +113,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:id="@+id/homeWriteNestedSV"
+            android:visibility="invisible"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -168,111 +163,8 @@
                     android:gravity="center"
                     android:textColor="@color/atracker_white"
                     android:layout_marginBottom="10dp"
-
                     >
                 </TextView>
-
-
-<!--                <HorizontalScrollView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:id="@+id/homeWriteProgressSelectHorizontalSV"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteProgressSelectTV"-->
-<!--                    android:scrollbars="none"-->
-<!--                    >-->
-
-<!--                    <com.google.android.material.chip.ChipGroup-->
-<!--                        android:id="@+id/homeWriteProgressSelectChipGroup"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:chipSpacingHorizontal="14dp"-->
-<!--                        app:singleSelection="true"-->
-<!--                        >-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect1"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect2"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect3"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect4"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect5"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect6"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect7"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                            android:id="@+id/homeWriteProgressSelect8"-->
-<!--                            android:text="ALL"-->
-<!--                            >-->
-<!--                        </com.google.android.material.chip.Chip>-->
-
-<!--                    </com.google.android.material.chip.ChipGroup>-->
-
-
-<!--                </HorizontalScrollView>-->
-
-
-
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/homeWriteTypeSelectChipGroup"
@@ -338,54 +230,9 @@
                 </com.google.android.material.chip.ChipGroup>
 
 
-
-
-
-
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:id="@+id/homeWriteQuestionTV"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"-->
-<!--                    android:hint="@string/please_write_question"-->
-<!--                    android:background="@drawable/edge_grey_home_write"-->
-<!--                    >-->
-<!--                </TextView>-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:id="@+id/homeWriteAnswerTV"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteQuestionTV"-->
-<!--                    android:hint="@string/please_write_answer"-->
-<!--                    android:background="@drawable/edge_grey_home_write"-->
-<!--                    >-->
-<!--                </TextView>-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:id="@+id/homeWriteReviewTV"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/homeWriteAnswerTV"-->
-<!--                    android:hint="@string/please_write_review"-->
-<!--                    android:background="@drawable/edge_grey_home_write"-->
-<!--                    >-->
-<!--                </TextView>-->
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
         </androidx.core.widget.NestedScrollView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
