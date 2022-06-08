@@ -59,6 +59,14 @@ class HomeWriteFragment : Fragment() {
         arrayListOf<ConstraintLayout>()
     }
 
+    val reviewRemoveLayoutList by lazy {
+        arrayListOf<ConstraintLayout>()
+    }
+
+    val qnaRemoveLayoutList by lazy {
+        arrayListOf<ConstraintLayout>()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -181,39 +189,61 @@ class HomeWriteFragment : Fragment() {
             setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorStateList = resources.getColorStateList(R.color.atracker_white))
             setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorStateList = resources.getColorStateList(R.color.progress_color_7))
 
-
-            setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout,homeWriteLL )
-            setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout,homeWriteLL )
+            setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL )
+            setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout, homeWriteLL )
 
             homeWriteEditButton.setOnClickListener {
                 homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
                 homeWriteEditButton.visibility = View.INVISIBLE
                 homeWriteEditCompleteButton.visibility = View.VISIBLE
                 homeWriteDeleteChip.visibility = View.VISIBLE
+                homeWritePlusButton1.visibility = View.INVISIBLE
+                homeWritePlusButton2.visibility = View.INVISIBLE
 
                 for (reviewLayout in reviewLayoutList) {
                     reviewLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.VISIBLE
                     val homeWriteReviewMainCL = reviewLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
                     val reviewDeleteCheckBox = reviewLayout.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
-
                     val set = ConstraintSet()
                     set.clone(reviewLayout)
-                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, reviewDeleteCheckBox.id , ConstraintSet.END, 10)
+                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, reviewDeleteCheckBox.id , ConstraintSet.END, 20)
                     set.applyTo(reviewLayout)
+
+                    reviewDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
+                        if (boolean)
+                            reviewRemoveLayoutList.add(reviewLayout)
+                        else
+                            reviewRemoveLayoutList.remove(reviewLayout)
+                    }
+
                 }
 
                 for (qnaLayout in qnaLayoutList) {
                     qnaLayout.getViewById(R.id.homeWriteQnaCheckBox).visibility = View.VISIBLE
                     val homeWriteQnaMainCL = qnaLayout.findViewById<ConstraintLayout>(R.id.homeWriteQnaMainCL)
                     val qnaDeleteCheckBox = qnaLayout.findViewById<CheckBox>(R.id.homeWriteQnaCheckBox)
-
                     val set = ConstraintSet()
                     set.clone(qnaLayout)
-                    set.connect(homeWriteQnaMainCL.id,ConstraintSet.START, qnaDeleteCheckBox.id , ConstraintSet.END, 10)
+                    set.connect(homeWriteQnaMainCL.id,ConstraintSet.START, qnaDeleteCheckBox.id , ConstraintSet.END, 20)
                     set.applyTo(qnaLayout)
+
+                    qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
+                        if (boolean)
+                            qnaRemoveLayoutList.add(qnaLayout)
+                        else
+                            qnaRemoveLayoutList.remove(qnaLayout)
+                    }
+                }
+            }
+
+            homeWriteDeleteChip.setOnClickListener {
+                for (l in reviewRemoveLayoutList) {
+                    homeWriteLL.removeView(l)
                 }
 
-
+                for (l in qnaRemoveLayoutList) {
+                    homeWriteLL.removeView(l)
+                }
             }
 
 
@@ -222,15 +252,31 @@ class HomeWriteFragment : Fragment() {
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
                 homeWriteDeleteChip.visibility = View.INVISIBLE
                 homeWriteEditButton.visibility = View.VISIBLE
+                homeWritePlusButton1.visibility = View.VISIBLE
+                homeWritePlusButton2.visibility = View.VISIBLE
 
                 for (reviewLayout in reviewLayoutList) {
                     reviewLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.GONE
+                    val homeWriteReviewMainCL = reviewLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+                    val set = ConstraintSet()
+                    set.clone(reviewLayout)
+                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, ConstraintSet.PARENT_ID , ConstraintSet.START, 0 )
+                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
+                    set.applyTo(reviewLayout)
                 }
 
                 for (qnaLayout in qnaLayoutList) {
                     qnaLayout.getViewById(R.id.homeWriteQnaCheckBox).visibility = View.GONE
+                    val homeWriteQnaMainCL = qnaLayout.findViewById<ConstraintLayout>(R.id.homeWriteQnaMainCL)
+                    val set = ConstraintSet()
+                    set.clone(qnaLayout)
+                    set.connect(homeWriteQnaMainCL.id,ConstraintSet.START, ConstraintSet.PARENT_ID , ConstraintSet.START, 0 )
+                    set.connect(homeWriteQnaMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
+                    set.applyTo(qnaLayout)
                 }
             }
+
+
 
 
 
@@ -281,9 +327,7 @@ class HomeWriteFragment : Fragment() {
             } else if (layoutInt == R.layout.home_write_qna_layout) {
                 qnaLayoutList.add(addLayout)
             }
-
         }
-
     }
 
 
@@ -295,9 +339,7 @@ class HomeWriteFragment : Fragment() {
             } else {
                 layout.visibility = View.INVISIBLE
             }
-
         }
-
     }
 
 

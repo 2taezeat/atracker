@@ -21,6 +21,9 @@
         >
     </CheckBox>
 
+<!--    android:buttonTint="@color/atracker_gray_3"-->
+<!--    android:button="@drawable/custom_checkbox"-->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
