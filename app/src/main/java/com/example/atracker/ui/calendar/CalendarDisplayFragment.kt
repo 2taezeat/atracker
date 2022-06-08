@@ -1,6 +1,7 @@
 package com.example.atracker.ui.calendar
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +14,13 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
 import com.example.atracker.databinding.FragmentCalendarDisplayBinding
 import com.example.atracker.model.dto.Event
-import com.example.atracker.utils.daysOfWeekFromLocale
-import com.example.atracker.utils.makeInVisible
-import com.example.atracker.utils.makeVisible
+import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -57,38 +52,38 @@ class CalendarDisplayFragment : Fragment() {
             .show()
     }
 
-//    private val inputDialog by lazy {
-//        val editText = AppCompatEditText(requireContext())
-//        val layout = FrameLayout(requireContext()).apply {
-//            // Setting the padding on the EditText only pads the input area
-//            // not the entire EditText so we wrap it in a FrameLayout.
-//            val padding = dpToPx(20, requireContext())
-//            setPadding(padding, padding, padding, padding)
-//            addView(editText, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT))
-//        }
-//        AlertDialog.Builder(requireContext())
-//            .setTitle(getString(R.string.example_3_input_dialog_title))
-//            .setView(layout)
-//            .setPositiveButton(R.string.save) { _, _ ->
-//                saveEvent(editText.text.toString())
-//                // Prepare EditText for reuse.
-//                editText.setText("")
-//            }
-//            .setNegativeButton(R.string.close, null)
-//            .create()
-//            .apply {
-//                setOnShowListener {
-//                    // Show the keyboard
-//                    editText.requestFocus()
-//                    context.inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-//                }
-//                setOnDismissListener {
-//                    // Hide the keyboard
-//                    context.inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-//                }
-//            }
-//    }
+    private val inputDialog by lazy {
+        val editText = AppCompatEditText(requireContext())
+        val layout = FrameLayout(requireContext()).apply {
+            // Setting the padding on the EditText only pads the input area
+            // not the entire EditText so we wrap it in a FrameLayout.
+            val padding = dpToPx(20, requireContext())
+            setPadding(padding, padding, padding, padding)
+            addView(editText, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT))
+        }
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.example_3_input_dialog_title))
+            .setView(layout)
+            .setPositiveButton(R.string.save) { _, _ ->
+                saveEvent(editText.text.toString())
+                // Prepare EditText for reuse.
+                editText.setText("")
+            }
+            .setNegativeButton(R.string.close, null)
+            .create()
+            .apply {
+                setOnShowListener {
+                    // Show the keyboard
+                    editText.requestFocus()
+                    context.inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+                }
+                setOnDismissListener {
+                    // Hide the keyboard
+                    context.inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+                }
+            }
+    }
 
 
     private var selectedDate: LocalDate? = null
@@ -165,33 +160,61 @@ class CalendarDisplayFragment : Fragment() {
             override fun bind(container: DayViewContainer, day: CalendarDay) {
                 container.day = day
                 val textView = container.binding.exThreeDayText
-                val dotView = container.binding.exThreeDotView
+
+                val dotViewMore = container.binding.exThreeDotViewMore
+                val dotView1 = container.binding.exThreeDotView1
+                val dotView2 = container.binding.exThreeDotView2
+                val dotView3 = container.binding.exThreeDotView3
 
                 textView.text = day.date.dayOfMonth.toString()
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     textView.makeVisible()
+
+                    Log.d("test123", "${events[day.date]}")
+
                     when (day.date) {
                         today -> {
                             textView.setTextColorRes(R.color.example_3_white)
                             textView.setBackgroundResource(R.drawable.example_3_today_bg)
-                            dotView.makeInVisible()
+
+                            tmpFun(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+
+//                            dotView.makeInVisible()
+//
+//                            dotView1.makeInVisible()
+//                            dotView2.makeInVisible()
+//                            dotView3.makeInVisible()
+
                         }
                         selectedDate -> {
                             textView.setTextColorRes(R.color.example_3_blue)
                             textView.setBackgroundResource(R.drawable.example_3_selected_bg)
-                            dotView.makeInVisible()
+
+                            tmpFun(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+
+//                            dotView.makeInVisible()
+//
+//                            dotView1.makeInVisible()
+//                            dotView2.makeInVisible()
+//                            dotView3.makeInVisible()
                         }
                         else -> {
-                            textView.setTextColorRes(R.color.example_3_black)
+                            textView.setTextColorRes(R.color.white)
                             textView.background = null
-                            dotView.isVisible = events[day.date].orEmpty().isNotEmpty()
+                            //dotViewMore.isVisible = events[day.date].orEmpty().isNotEmpty()
+
+                            tmpFun(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+
                         }
                     }
                 } else {
-                    //textView.makeInVisible()
-                    textView.setTextColorRes(R.color.grey_progress)
-                    dotView.makeInVisible()
+                    textView.setTextColorRes(R.color.atracker_gray_3)
+
+                    dotViewMore.makeInVisible()
+                    dotView1.makeInVisible()
+                    dotView2.makeInVisible()
+                    dotView3.makeInVisible()
                 }
             }
         }
@@ -228,9 +251,9 @@ class CalendarDisplayFragment : Fragment() {
             }
         }
 
-//        binding.exThreeAddButton.setOnClickListener {
-//            inputDialog.show()
-//        }
+        binding.exThreeAddButton.setOnClickListener {
+            inputDialog.show()
+        }
     }
 
 
@@ -271,5 +294,45 @@ class CalendarDisplayFragment : Fragment() {
 //        binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
 //    }
 
+
+    private fun tmpFun(currentDataEvent : List<Event>?, view1: View, view2: View, view3: View, viewMore : View ){
+        Log.d("test123", "${currentDataEvent?.size}")
+        if (currentDataEvent == null) {
+            view1.makeInVisible()
+            view2.makeInVisible()
+            view3.makeInVisible()
+            viewMore.makeInVisible()
+        } else {
+            when (currentDataEvent.size) {
+                1 -> {
+                    view1.makeVisible()
+                    view2.makeInVisible()
+                    view3.makeInVisible()
+                    viewMore.makeInVisible()
+                }
+                2 -> {
+                    view1.makeVisible()
+                    view2.makeVisible()
+                    view3.makeInVisible()
+                    viewMore.makeInVisible()
+                }
+                3 -> {
+                    view1.makeVisible()
+                    view2.makeVisible()
+                    view3.makeVisible()
+                    viewMore.makeInVisible()
+                }
+                else -> {
+                    view1.makeVisible()
+                    view2.makeVisible()
+                    view3.makeVisible()
+                    viewMore.makeVisible()
+                }
+            }
+        }
+
+
+
+    }
 
 }

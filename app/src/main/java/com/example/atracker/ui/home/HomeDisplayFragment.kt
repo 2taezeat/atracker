@@ -80,10 +80,8 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             Log.d("homeDisplayNestedSV", "${bottomDetector}, ${binding.homeDisplayNestedSV.getHeight()}")
             if (bottomDetector == 0) {
                 binding.homeDisplayScrollTopButton.visibility = View.INVISIBLE
-                Log.d("test333", "111111")
             } else {
                 binding.homeDisplayScrollTopButton.visibility = View.VISIBLE
-                Log.d("test333", "22222")
             }
         }
 
@@ -91,15 +89,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             showAlert()
         }
 
-        //val isScrollable: Boolean = binding.homeDisplayNestedSV.getHeight() < childHeight + binding.homeDisplayNestedSV.getPaddingTop() + binding.homeDisplayNestedSV.getPaddingBottom()
-        Log.d("test1234", "${binding.homeDisplayNestedSV.canScrollVertically(-1) || binding.homeDisplayNestedSV.canScrollVertically(1)} , ${binding.homeDisplayNestedSV.isFillViewport}")
 
-
-        //binding.homeDisplayNestedSV.canScrollVertically(1)
-
-        binding.homeDisplayNestedSV.viewTreeObserver.addOnGlobalLayoutListener {
-            Log.d("test1234666", "${binding.homeDisplayNestedSV.canScrollVertically(-1)}")
-        }
 
         binding.homeProgressRV.also{
             it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
@@ -148,14 +138,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //            duration = 1000L // 스크롤이 지속되는 시간을 설정한다. (1000 밀리초 == 1초)
 //        }.start()
 //    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-
 
 
 
