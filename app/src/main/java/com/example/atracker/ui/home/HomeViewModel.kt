@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.atracker.model.dto.HomeDetailItem
 import com.example.atracker.model.dto.HomeProgressItem
+import com.example.atracker.model.dto.ProgressItemBodyType
 
 class HomeViewModel : ViewModel() {
 
@@ -43,13 +44,13 @@ class HomeViewModel : ViewModel() {
 
     private val _homeDetailContents = MutableLiveData<ArrayList<HomeDetailItem>>().apply {
         value = arrayListOf(
-            HomeDetailItem(progressType = 0,progressName = "00", itemType = "totalReview", totalReviewBody = "hello_0##################$$$$$$$$$$####################################################################%%%%%%%%%%%%", questionBody = null, answerBody = null),
-            HomeDetailItem(progressType = 1,progressName = "11", itemType = "totalReview", totalReviewBody = "hello_1", questionBody = null, answerBody = null),
-            HomeDetailItem(progressType = 2,progressName = "22", itemType = "totalReview", totalReviewBody = "hello_2\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null),
-            HomeDetailItem(progressType = 3,progressName = "33", itemType = "totalReview", totalReviewBody = "hello_3", questionBody = null, answerBody = null),
-            HomeDetailItem(progressType = 4,progressName = "44", itemType = "totalReview", totalReviewBody = "hello_4", questionBody = null, answerBody = null),
-            HomeDetailItem(progressType = 5,progressName = "55", itemType = "totalReview", totalReviewBody = "hello_5", questionBody = null, answerBody = null),
-            HomeDetailItem(progressType = 6,progressName = "66", itemType = "totalReview", totalReviewBody = "hello_6", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 0,progressName = "00", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_0##################$$$$$$$$$$####################################################################%%%%%%%%%%%%", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 1,progressName = "11", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_1", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 2,progressName = "22", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_2\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 3,progressName = "33", itemType = ProgressItemBodyType.QNA, totalReviewBody = "hello_3", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 4,progressName = "44", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_4", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 5,progressName = "55", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_5", questionBody = null, answerBody = null),
+            HomeDetailItem(progressType = 6,progressName = "66", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_6", questionBody = null, answerBody = null),
 
 
         )
