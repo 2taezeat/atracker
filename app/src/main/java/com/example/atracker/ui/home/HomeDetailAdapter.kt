@@ -8,8 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
+import com.example.atracker.databinding.HomeDetailQnaItemBinding
 import com.example.atracker.databinding.HomeDetailReviewItemBinding
-import com.example.atracker.databinding.TmpHomeDetailItemBinding
 import com.example.atracker.model.dto.HomeDetailItem
 
 class HomeDetailAdapter :
@@ -44,45 +44,48 @@ class HomeDetailAdapter :
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeDetailAdapter.HomeDetailReviewViewHolder {
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         Log.d("test12344", "${viewType}")
+
+        context = parent.context
 
         when (viewType) {
             0 -> { // Qna
-                val viewHolder = HomeDetailReviewViewHolder(TmpHomeDetailItemBinding.inflate(
+              return HomeDetailQnaViewHolder(HomeDetailQnaItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 ), parent.context)
-                context = parent.context
-                return viewHolder
-
             }
             1 -> { // Review
-                val viewHolder = HomeDetailReviewViewHolder(HomeDetailReviewItemBinding.inflate(
+                return HomeDetailReviewViewHolder(HomeDetailReviewItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 ), parent.context)
-                context = parent.context
-                return viewHolder
+            }
+            else -> {
+                return HomeDetailReviewViewHolder(HomeDetailReviewItemBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                ), parent.context)
             }
         }
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val viewType = currentList[position].itemType.ordinal
-
-        when (viewType) {
+        when (currentList[position].itemType.ordinal) {
             0 -> { // Qna
+                holder as HomeDetailQnaViewHolder
+                val homeDetailItem = getItem(position) as HomeDetailItem
+                holder.bind(homeDetailItem)
 
             }
             1 -> { // Review
-
+                holder as HomeDetailReviewViewHolder
+                val homeDetailItem = getItem(position) as HomeDetailItem
+                holder.bind(homeDetailItem)
             }
         }
 
-        holder as HomeDetailReviewViewHolder
-        val homeDetailItem = getItem(position) as HomeDetailItem
-        holder.bind(homeDetailItem)
+//        holder as HomeDetailReviewViewHolder
+//        val homeDetailItem = getItem(position) as HomeDetailItem
+//        holder.bind(homeDetailItem)
 
     }
 
@@ -125,9 +128,43 @@ class HomeDetailAdapter :
                     homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
                 }
             }
-
-
         }
-
     }
+
+
+    inner class HomeDetailQnaViewHolder(
+        val homeDetailQnaItemBinding: HomeDetailQnaItemBinding, val context : Context
+    ) : RecyclerView.ViewHolder(homeDetailQnaItemBinding.root) {
+
+
+        fun bind(homeDetailItem: HomeDetailItem) {
+            homeDetailQnaItemBinding.homeDetailItemQuestion.text = homeDetailItem.progressName
+            homeDetailQnaItemBinding.homeDetailItemAnswer.text = homeDetailItem.totalReviewBody
+
+            when (homeDetailItem.progressType) {
+                0 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_1)
+                }
+                1 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_2)
+                }
+                2 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_3)
+                }
+                3 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_4)
+                }
+                4 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_5)
+                }
+                5 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_6)
+                }
+                6 -> {
+                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
+                }
+            }
+        }
+    }
+
 }
