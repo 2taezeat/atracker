@@ -65,13 +65,15 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
+        <entry key="app/src/main/res/layout/bottom_sheet_persistent.xml" value="0.31798245614035087" />
         <entry key="app/src/main/res/layout/calendar_day_legend.xml" value="0.45" />
         <entry key="app/src/main/res/layout/example_3_calendar_day.xml" value="3.0" />
         <entry key="app/src/main/res/layout/example_3_calendar_header.xml" value="0.25" />
         <entry key="app/src/main/res/layout/example_3_event_item_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_alert_dialog.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_blog_display.xml" value="0.16538461538461538" />
-        <entry key="app/src/main/res/layout/fragment_calendar_display.xml" value="0.16538461538461538" />
+        <entry key="app/src/main/res/layout/fragment_calendar_bottom.xml" value="0.306140350877193" />
+        <entry key="app/src/main/res/layout/fragment_calendar_display.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_dashboard_display.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_add.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.25" />

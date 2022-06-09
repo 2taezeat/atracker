@@ -11,10 +11,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
@@ -22,6 +26,7 @@ import com.example.atracker.databinding.FragmentCalendarDisplayBinding
 import com.example.atracker.model.dto.Event
 import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -114,6 +119,8 @@ class CalendarDisplayFragment : Fragment() {
 //        calendarViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
+
         return root
     }
 
@@ -126,12 +133,14 @@ class CalendarDisplayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentCalendarDisplayBinding.bind(view)
-//        binding.exThreeRv.apply {
-//            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-//            adapter = eventsAdapter
-//            addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
-//        }
+        //_binding = FragmentCalendarDisplayBinding.bind(view)
+
+        binding.exThreeRv.apply {
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            adapter = eventsAdapter
+            addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        }
+
 
         val daysOfWeek = daysOfWeekFromLocale()
         val currentMonth = YearMonth.now()
