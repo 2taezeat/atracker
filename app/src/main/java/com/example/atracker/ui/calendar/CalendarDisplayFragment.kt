@@ -69,6 +69,9 @@ class CalendarDisplayFragment : Fragment() {
                 saveEvent(editText.text.toString())
                 // Prepare EditText for reuse.
                 editText.setText("")
+
+                binding.calendarView.notifyCalendarChanged()
+
             }
             .setNegativeButton(R.string.close, null)
             .create()
@@ -90,7 +93,8 @@ class CalendarDisplayFragment : Fragment() {
     private val today = LocalDate.now()
     private val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
-    private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
+    //private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
+    private val selectionFormatter = DateTimeFormatter.ofPattern("yyyy. MM")
     private val events = mutableMapOf<LocalDate, List<Event>>()
 
 
@@ -264,7 +268,7 @@ class CalendarDisplayFragment : Fragment() {
             selectedDate = date
             oldDate?.let { binding.calendarView.notifyDateChanged(it) }
             binding.calendarView.notifyDateChanged(date)
-            //updateAdapterForDate(date)
+            updateAdapterForDate(date)
         }
     }
 
@@ -274,7 +278,7 @@ class CalendarDisplayFragment : Fragment() {
         } else {
             selectedDate?.let {
                 events[it] = events[it].orEmpty().plus(Event(UUID.randomUUID().toString(), text, it))
-                //updateAdapterForDate(it)
+                updateAdapterForDate(it)
             }
         }
     }
@@ -282,21 +286,20 @@ class CalendarDisplayFragment : Fragment() {
     private fun deleteEvent(event: Event) {
         val date = event.date
         events[date] = events[date].orEmpty().minus(event)
-        //updateAdapterForDate(date)
+        updateAdapterForDate(date)
     }
 
-//    private fun updateAdapterForDate(date: LocalDate) {
-//        eventsAdapter.apply {
-//            events.clear()
-//            events.addAll(this@CalendarDisplayFragment.events[date].orEmpty())
-//            notifyDataSetChanged()
-//        }
-//        binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
-//    }
+    private fun updateAdapterForDate(date: LocalDate) {
+        eventsAdapter.apply {
+            events.clear()
+            events.addAll(this@CalendarDisplayFragment.events[date].orEmpty())
+            notifyDataSetChanged()
+        }
+        binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
+    }
 
 
     private fun tmpFun(currentDataEvent : List<Event>?, view1: View, view2: View, view3: View, viewMore : View ){
-        Log.d("test123", "${currentDataEvent?.size}")
         if (currentDataEvent == null) {
             view1.makeInVisible()
             view2.makeInVisible()
