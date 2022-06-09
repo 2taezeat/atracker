@@ -17,14 +17,7 @@
         >
     </View>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
 
-    </Button>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,48 +25,71 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
-        <View
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:id="@+id/homeDetailItemCircleView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="14dp"
-            android:background="@drawable/circle_type_1"
-            >
-        </View>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/homeDetailItemCircleView"
-            android:id="@+id/homeDetailItemProgressType"
+            android:id="@+id/homeDetailQ"
+            android:text="@string/q"
+            android:textColor="@color/atracker_gray_3"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="14dp"
+            >
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/homeDetailQ"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/homeDetailItemQuestion"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
             tool:text="서류"
             android:textColor="@color/atracker_white"
+            android:textSize="16sp"
+            android:layout_marginTop="14dp"
+            android:textStyle="bold"
+            >
+        </TextView>
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeDetailA"
+            android:text="@string/a"
+            android:textColor="@color/atracker_gray_3"
             android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailQ"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="14dp"
             >
         </TextView>
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/homeDetailItemTotalReviewBody"
-            app:layout_constraintTop_toBottomOf="@+id/homeDetailItemProgressType"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/homeDetailA"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/homeDetailItemAnswer"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailQ"
+            tool:text="PT는 의외였던 것이 종이에다가 유의미한 자료들을 적어서 가지고 들어간후 면접관에게 해당 종이를 어디다 붙여놓고 설명하는 것이 아니라 그냥 들어가자마자 PT내용을 나만 보면서 설명하는것이였다."
             android:textColor="@color/atracker_white"
             android:textSize="16sp"
-            tool:text="test"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="28dp"
             android:paddingBottom="20dp"
-            android:paddingEnd="20dp"
             >
-
         </TextView>
 
 
