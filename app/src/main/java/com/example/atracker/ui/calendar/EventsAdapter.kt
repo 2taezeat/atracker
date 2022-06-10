@@ -1,21 +1,16 @@
 package com.example.atracker.ui.calendar
 
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.databinding.Example3EventItemViewBinding
-import com.example.atracker.databinding.HomeProgressItemBinding
-import com.example.atracker.model.dto.Event
-import com.example.atracker.ui.home.HomeProgressAdapter
-import com.example.atracker.ui.home.HomeProgressOnclickListener
+import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.utils.layoutInflater
 
 class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) :
     RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
-    val events = mutableListOf<Event>()
+    val events = mutableListOf<CalendarEvent>()
 
     private var calendarEventOnclickListener: CalendarEventOnclickListener? = null
 
@@ -51,13 +46,13 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
 //            }
 //        }
 
-        fun bind(event: Event) {
-            binding.itemEventText.text = event.text
-            binding.itemEventDate.text = event.date.toString()
+        fun bind(calendarEvent: CalendarEvent) {
+            binding.itemEventText.text = calendarEvent.text
+            binding.itemEventDate.text = calendarEvent.date.toString()
         }
 
         override fun onClick(view: View?) {
-            this.calendarEventOnclickListener?.onClickContainerView(view = view!!, position = bindingAdapterPosition, viewTag = "tmpTag")
+            this.calendarEventOnclickListener?.onClickContainerView(view = view!!, position = bindingAdapterPosition, viewTag = "tmpTag", calendarEvent = events[bindingAdapterPosition])
 
         }
     }

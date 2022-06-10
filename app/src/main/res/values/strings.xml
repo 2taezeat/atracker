@@ -28,9 +28,9 @@
 
 
     <!--    -->
-    <string name="example_3_input_dialog_title">Enter event title</string>
+    <string name="example_3_input_dialog_title">Enter calendarEvent title</string>
     <string name="example_3_empty_input_text">Text is empty</string>
-    <string name="example_3_dialog_delete_confirmation">Delete this event?</string>
+    <string name="example_3_dialog_delete_confirmation">Delete this calendarEvent?</string>
     <string name="delete">삭제</string>
     <string name="save">Save</string>
     <string name="close">Close</string>

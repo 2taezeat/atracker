@@ -8,20 +8,30 @@ import android.view.ViewGroup
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentCalendarBottomBinding
 import com.example.atracker.databinding.FragmentHomeDetailBinding
+import com.example.atracker.model.dto.CalendarEvent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class CalendarBottomFragment : BottomSheetDialogFragment() {
+class CalendarBottomFragment(calendarEvent: CalendarEvent) : BottomSheetDialogFragment() {
+
+    private var calendarEvent: CalendarEvent? = null
+
+
+    init {
+        this.calendarEvent = calendarEvent
+    }
 
     companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CalendarBottomFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//            CalendarBottomFragment(calendarEvent).apply {
+//                arguments = Bundle().apply {
+//
+//                }
+//            }
     }
+
+
 
     private var _binding: FragmentCalendarBottomBinding? = null
     private val binding get() = _binding!!
@@ -42,11 +52,17 @@ class CalendarBottomFragment : BottomSheetDialogFragment() {
         _binding = FragmentCalendarBottomBinding.inflate(inflater, container, false)
 
 
+        binding.calendarBottomEventTitleTV.text = calendarEvent?.text
+
+
 
 
 
         return binding.root
     }
+
+
+    override fun getTheme(): Int = R.style.CustomBottomSheetDialog
 
 
 }

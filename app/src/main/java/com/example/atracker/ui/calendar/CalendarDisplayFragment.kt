@@ -21,7 +21,7 @@ import com.example.atracker.R
 import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
 import com.example.atracker.databinding.FragmentCalendarDisplayBinding
-import com.example.atracker.model.dto.Event
+import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -89,7 +89,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     //private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
     private val selectionFormatter = DateTimeFormatter.ofPattern("yyyy. MM")
-    private val events = mutableMapOf<LocalDate, List<Event>>()
+    private val events = mutableMapOf<LocalDate, List<CalendarEvent>>()
 
 
 
@@ -276,15 +276,15 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
             Toast.makeText(requireContext(), R.string.example_3_empty_input_text, Toast.LENGTH_LONG).show()
         } else {
             selectedDate?.let {
-                events[it] = events[it].orEmpty().plus(Event(UUID.randomUUID().toString(), text, it))
+                events[it] = events[it].orEmpty().plus(CalendarEvent(UUID.randomUUID().toString(), text, it))
                 updateAdapterForDate(it)
             }
         }
     }
 
-    private fun deleteEvent(event: Event) {
-        val date = event.date
-        events[date] = events[date].orEmpty().minus(event)
+    private fun deleteEvent(calendarEvent: CalendarEvent) {
+        val date = calendarEvent.date
+        events[date] = events[date].orEmpty().minus(calendarEvent)
         updateAdapterForDate(date)
     }
 
@@ -298,14 +298,14 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     }
 
 
-    private fun eventDotSetVisiblity(currentDataEvent : List<Event>?, view1: View, view2: View, view3: View, viewMore : View ){
-        if (currentDataEvent == null) {
+    private fun eventDotSetVisiblity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View, viewMore : View ){
+        if (currentDataCalendarEvent == null) {
             view1.makeInVisible()
             view2.makeInVisible()
             view3.makeInVisible()
             viewMore.makeInVisible()
         } else {
-            when (currentDataEvent.size) {
+            when (currentDataCalendarEvent.size) {
                 1 -> {
                     view1.makeVisible()
                     view2.makeInVisible()
@@ -337,9 +337,9 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
     }
 
-    override fun onClickContainerView(view: View, position: Int, viewTag: String) {
-        Log.d("test123", "test123")
-        val calendarBottomFragment = CalendarBottomFragment()
+    override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent) {
+        Log.d("test123", "${calendarEvent}")
+        val calendarBottomFragment = CalendarBottomFragment(calendarEvent)
         calendarBottomFragment.show(parentFragmentManager, calendarBottomFragment.tag)
     }
 
