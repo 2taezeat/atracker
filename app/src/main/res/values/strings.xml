@@ -54,6 +54,7 @@
     <string name="edit">편집</string>
     <string name="edit_complete">편집 완료</string>
     <string name="home_add_title">지원 현황 추가</string>
+    <string name="total_progress">총 지원 단계</string>
 
 
 </resources>

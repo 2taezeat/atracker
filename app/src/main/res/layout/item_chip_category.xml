@@ -1,0 +1,22 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+<com.google.android.material.chip.Chip
+
+    style="@style/Widget.MaterialComponents.Chip.Action"
+    android:layout_width="100dp"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:checkable="true"
+    android:clickable="true"
+    app:chipCornerRadius="10dp"
+    android:textColor="@color/black"
+    app:chipIconTint="@color/atracker_gray_3"
+    app:checkedIconTint="@color/teal_700"
+    android:layoutDirection="rtl"
+    />
+
+
+</layout>

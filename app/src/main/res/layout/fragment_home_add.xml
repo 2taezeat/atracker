@@ -74,15 +74,107 @@
             android:paddingRight="16dp"
             android:id="@+id/homeAddMainCL"
             >
-            
-            
-        
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/homeAddTotalProgress"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/total_progress"
+                >
+            </TextView>
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/homeAddTypeSelectChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddTotalProgress"
+                android:layout_marginStart="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                app:chipSpacingHorizontal="8dp"
+
+                >
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:id="@+id/homeAddTypeSelect1"
+                    android:text="@string/waiting"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layoutDirection="rtl"
+                    >
+                </com.google.android.material.chip.Chip>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:id="@+id/homeAddTypeSelect2"
+                    android:text="@string/not_passing"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="rtl"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+
+                    >
+
+                </com.google.android.material.chip.Chip>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:id="@+id/homeAddTypeSelect3"
+                    android:text="@string/passing"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="rtl"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+
+                    >
+                </com.google.android.material.chip.Chip>
+
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:id="@+id/homeAddTypeSelect4"
+                    android:text="@string/passing"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="rtl"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+
+
+                    >
+                </com.google.android.material.chip.Chip>
+
+
+
+            </com.google.android.material.chip.ChipGroup>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </layout>
