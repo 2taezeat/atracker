@@ -45,7 +45,6 @@ class HomeDetailAdapter :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("test12344", "${viewType}")
 
         context = parent.context
 

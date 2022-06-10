@@ -11,9 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -26,7 +24,6 @@ import com.example.atracker.databinding.FragmentCalendarDisplayBinding
 import com.example.atracker.model.dto.Event
 import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -38,7 +35,7 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class CalendarDisplayFragment : Fragment() {
+class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
     private lateinit var calendarViewModel: CalendarViewModel
     private var _binding: FragmentCalendarDisplayBinding? = null
@@ -47,15 +44,7 @@ class CalendarDisplayFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val eventsAdapter = EventsAdapter {
-        AlertDialog.Builder(requireContext())
-            .setMessage(R.string.example_3_dialog_delete_confirmation)
-            .setPositiveButton(R.string.delete) { _, _ ->
-                deleteEvent(it)
-            }
-            .setNegativeButton(R.string.close, null)
-            .show()
-    }
+    private val eventsAdapter = EventsAdapter(this)
 
     private val inputDialog by lazy {
         val editText = AppCompatEditText(requireContext())
@@ -135,6 +124,7 @@ class CalendarDisplayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //_binding = FragmentCalendarDisplayBinding.bind(view)
 
+
         binding.exThreeRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = eventsAdapter
@@ -184,14 +174,14 @@ class CalendarDisplayFragment : Fragment() {
                 if (day.owner == DayOwner.THIS_MONTH) {
                     textView.makeVisible()
 
-                    Log.d("test123", "${events[day.date]}")
+                    Log.d("events", "${events[day.date]}")
 
                     when (day.date) {
                         today -> {
                             textView.setTextColorRes(R.color.example_3_white)
                             textView.setBackgroundResource(R.drawable.example_3_today_bg)
 
-                            tmpFun(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
 
 //                            dotView.makeInVisible()
 //
@@ -204,7 +194,7 @@ class CalendarDisplayFragment : Fragment() {
                             textView.setTextColorRes(R.color.example_3_blue)
                             textView.setBackgroundResource(R.drawable.example_3_selected_bg)
 
-                            tmpFun(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
 
 //                            dotView.makeInVisible()
 //
@@ -217,7 +207,7 @@ class CalendarDisplayFragment : Fragment() {
                             textView.background = null
                             //dotViewMore.isVisible = events[day.date].orEmpty().isNotEmpty()
 
-                            tmpFun(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
 
                         }
                     }
@@ -308,7 +298,7 @@ class CalendarDisplayFragment : Fragment() {
     }
 
 
-    private fun tmpFun(currentDataEvent : List<Event>?, view1: View, view2: View, view3: View, viewMore : View ){
+    private fun eventDotSetVisiblity(currentDataEvent : List<Event>?, view1: View, view2: View, view3: View, viewMore : View ){
         if (currentDataEvent == null) {
             view1.makeInVisible()
             view2.makeInVisible()
@@ -345,6 +335,12 @@ class CalendarDisplayFragment : Fragment() {
 
 
 
+    }
+
+    override fun onClickContainerView(view: View, position: Int, viewTag: String) {
+        Log.d("test123", "test123")
+        val calendarBottomFragment = CalendarBottomFragment()
+        calendarBottomFragment.show(parentFragmentManager, calendarBottomFragment.tag)
     }
 
 }
