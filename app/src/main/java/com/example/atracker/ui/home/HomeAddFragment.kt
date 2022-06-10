@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -41,6 +42,12 @@ class HomeAddFragment : Fragment() {
 
     lateinit var numberDrawableList : ArrayList<Drawable?>
 
+    //lateinit var checkedChipIdList : ArrayList<Int>
+
+    val checkedChipIdList by lazy {
+        arrayListOf<Int>()
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,25 +78,32 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            Log.d("test333", "${checkedIds}")
-            //val tmp = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedIds[0])
-            //Log.d("test3334", "${tmp.tag}")
-
-            for (idx in 0 until checkedIds.size) {
-                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedIds[idx])
-                //Log.d("test3334", "$idx")
-
-
+            for (idx in 0 until checkedChipIdList.size) {
+                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
                 checkedChip.checkedIcon = numberDrawableList[idx]
-
-
             }
         }
 
-//        binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener(object : ChipGroup.OnCheckedStateChangeListener {
-//            override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
-//                TODO("Not yet implemented")
-//            }
+        binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
+            if (checked) checkedChipIdList.add(compoundButton.id)
+            else checkedChipIdList.remove(compoundButton.id)
+        }
+
+        binding.homeAddTypeSelect2.setOnCheckedChangeListener { compoundButton, checked ->
+            if (checked) checkedChipIdList.add(compoundButton.id)
+            else checkedChipIdList.remove(compoundButton.id)
+        }
+
+        binding.homeAddTypeSelect3.setOnCheckedChangeListener { compoundButton, checked ->
+            if (checked) checkedChipIdList.add(compoundButton.id)
+            else checkedChipIdList.remove(compoundButton.id)
+        }
+
+        binding.homeAddTypeSelect4.setOnCheckedChangeListener { compoundButton, checked ->
+            if (checked) checkedChipIdList.add(compoundButton.id)
+            else checkedChipIdList.remove(compoundButton.id)
+        }
+
 
 
 
