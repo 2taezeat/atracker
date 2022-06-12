@@ -247,8 +247,19 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                 if (container.legendLayout.tag == null) {
                     container.legendLayout.tag = month.yearMonth
                     container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
-                        tv.text = daysOfWeek[index].name.first().toString()
-                        tv.setTextColorRes(R.color.example_3_black)
+                        var dayNameKorean = ""
+                        when (daysOfWeek[index].name) {
+                            "SUNDAY" -> dayNameKorean = "일"
+                            "MONDAY" -> dayNameKorean = "월"
+                            "TUESDAY" -> dayNameKorean = "화"
+                            "WEDNESDAY" -> dayNameKorean = "수"
+                            "THURSDAY" -> dayNameKorean = "목"
+                            "FRIDAY" -> dayNameKorean = "금"
+                            "SATURDAY" -> dayNameKorean = "토"
+                        }
+
+                        tv.text = dayNameKorean
+                        tv.setTextColorRes(R.color.atracker_white)
                     }
                 }
             }
