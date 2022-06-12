@@ -35,6 +35,123 @@
             </TextView>
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomEventTitleTV"
+                android:background="@color/atracker_gray_3"
+                android:id="@+id/calendarBottomView1"
+                android:layout_marginTop="10dp"
+                >
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomView1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/teal_700"
+                android:id="@+id/calendarBottomDateTV"
+                android:text="@string/date_title"
+                android:layout_marginStart="20dp"
+                >
+
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomDateTV"
+                android:background="@color/atracker_gray_3"
+                android:id="@+id/calendarBottomView2"
+                android:layout_marginTop="20dp"
+                >
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomView2"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/teal_700"
+                android:id="@+id/calendarBottomLocationTV"
+                android:text="@string/location_title"
+                android:layout_marginStart="20dp"
+                >
+
+            </TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomView2"
+                app:layout_constraintStart_toEndOf="@+id/calendarBottomLocationTV"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="70dp"
+                android:hint="@string/location_hint"
+                android:id="@+id/calendarBottomLocationET"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:layout_marginEnd="10dp"
+
+
+                >
+
+            </EditText>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomLocationTV"
+                android:background="@color/atracker_gray_3"
+                android:id="@+id/calendarBottomView3"
+                android:layout_marginTop="20dp"
+                >
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomView3"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/teal_700"
+                android:id="@+id/calendarBottomNoteTV"
+                android:text="@string/note_title"
+               android:layout_marginStart="20dp"
+                >
+
+            </TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomView3"
+                app:layout_constraintStart_toEndOf="@+id/calendarBottomLocationTV"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="70dp"
+                android:hint="@string/note_hint"
+                android:id="@+id/calendarBottomNoteET"
+                android:background="@null"
+                android:paddingEnd="10dp"
+                android:layout_marginEnd="10dp"
+                >
+
+            </EditText>
+
+
+
+
 
 
 
