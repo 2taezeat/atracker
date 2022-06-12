@@ -71,9 +71,9 @@
     <string name="chip_title_8">코딩 테스트</string>
     <string name="chip_title_9">AI 면접</string>
     <string name="chip_title_10">최종 면접</string>
-
-
-
+    <string name="company_name_title">회사명</string>
+    <string name="apply_field_title">지원 분야</string>
+    <string name="position_name_title">포지션명</string>
 
 
 </resources>

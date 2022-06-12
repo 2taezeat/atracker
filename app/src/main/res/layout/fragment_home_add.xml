@@ -82,22 +82,111 @@
                 android:id="@+id/homeAddCompanyTitle"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/total_progress"
+                android:text="@string/company_name_title"
+                android:layout_marginTop="20dp"
                 >
             </TextView>
 
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitle"
                 app:layout_constraintStart_toEndOf="@+id/homeAddCompanyTitle"
-
+                android:hint="카카오 벤쳐스"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/homeAddCompanyTitleET"
+                android:background="@null"
                 >
 
+            </EditText>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitleET"
+                android:layout_marginTop="40dp"
+                android:background="@color/atracker_gray_3"
+                android:id="@+id/homeAddView1"
+                >
+            </View>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/homeAddApplyField"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddView1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/apply_field_title"
+                android:layout_marginTop="20dp"
+                >
+            </TextView>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddApplyField"
+                app:layout_constraintStart_toEndOf="@+id/homeAddApplyField"
+                android:hint="인턴"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/homeAddApplyFieldET"
+                android:background="@null"
+                >
 
             </EditText>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddApplyFieldET"
+                android:layout_marginTop="40dp"
+                android:background="@color/atracker_gray_3"
+                android:id="@+id/homeAddView2"
+                >
+            </View>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/homeAddPositionName"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddView2"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/position_name_title"
+                android:layout_marginTop="20dp"
+                >
+            </TextView>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddPositionName"
+                app:layout_constraintStart_toEndOf="@+id/homeAddPositionName"
+                android:hint="예시) 애널리스트"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/homeAddPositionNameET"
+                android:background="@null"
+                >
+
+            </EditText>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddPositionNameET"
+                android:layout_marginTop="40dp"
+                android:background="@color/atracker_gray_3"
+                android:id="@+id/homeAddView3"
+                >
+            </View>
 
 
 
@@ -109,8 +198,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/homeAddTotalProgress"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddView3"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
                 android:text="@string/total_progress"
                 >
             </TextView>
