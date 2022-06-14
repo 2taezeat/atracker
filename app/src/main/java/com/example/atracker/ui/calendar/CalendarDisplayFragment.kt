@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -47,39 +48,45 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     private val eventsAdapter = EventsAdapter(this)
 
     private val inputDialog by lazy {
-        val editText = AppCompatEditText(requireContext())
-        val layout = FrameLayout(requireContext()).apply {
-            // Setting the padding on the EditText only pads the input area
-            // not the entire EditText so we wrap it in a FrameLayout.
-            val padding = dpToPx(20, requireContext())
-            setPadding(padding, padding, padding, padding)
-            addView(editText, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT))
-        }
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.example_3_input_dialog_title))
-            .setView(layout)
-            .setPositiveButton(R.string.save) { _, _ ->
-                saveEvent(editText.text.toString())
-                // Prepare EditText for reuse.
-                editText.setText("")
+        EventCreateFragment()
 
-                binding.calendarView.notifyCalendarChanged()
 
-            }
-            .setNegativeButton(R.string.close, null)
-            .create()
-            .apply {
-                setOnShowListener {
-                    // Show the keyboard
-                    editText.requestFocus()
-                    context.inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-                }
-                setOnDismissListener {
-                    // Hide the keyboard
-                    context.inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-                }
-            }
+
+//        val editText = AppCompatEditText(requireContext())
+//        val layout = LinearLayout(requireContext()).apply {
+//            // Setting the padding on the EditText only pads the input area
+//            // not the entire EditText so we wrap it in a FrameLayout.
+//            val padding = dpToPx(20, requireContext())
+//            setPadding(padding, padding, padding, padding)
+//            addView(editText, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT))
+//        }
+//
+//
+//        AlertDialog.Builder(requireContext())
+//            .setTitle(getString(R.string.example_3_input_dialog_title))
+//            .setView(layout)
+//            .setPositiveButton(R.string.save) { _, _ ->
+//                saveEvent(editText.text.toString())
+//                // Prepare EditText for reuse.
+//                editText.setText("")
+//
+//                binding.calendarView.notifyCalendarChanged()
+//
+//            }
+//            .setNegativeButton(R.string.close, null)
+//            .create()
+//            .apply {
+//                setOnShowListener {
+//                    // Show the keyboard
+//                    editText.requestFocus()
+//                    context.inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+//                }
+//                setOnDismissListener {
+//                    // Hide the keyboard
+//                    context.inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+//                }
+//            }
     }
 
 
@@ -266,7 +273,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
         }
 
         binding.exThreeAddButton.setOnClickListener {
-            inputDialog.show()
+            inputDialog.show(parentFragmentManager, EventCreateFragment.TAG)
         }
     }
 

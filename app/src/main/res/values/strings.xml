@@ -74,6 +74,8 @@
     <string name="company_name_title">회사명</string>
     <string name="apply_field_title">지원 분야</string>
     <string name="position_name_title">포지션명</string>
+    <string name="cancel_title">취소</string>
+    <string name="save_title">저장</string>
 
 
 </resources>

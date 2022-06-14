@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eventCreateConstraintLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_radius"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="320dp"
+            android:layout_height="400dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+
+            <EditText
+                android:id="@+id/eventCreateEV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="title"
+                android:textColorHint="@color/atracker_gray_3"
+                 />
+
+
+            <EditText
+                android:id="@+id/eventCreateEV2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/eventCreateEV1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="@string/location_title"
+                android:textColorHint="@color/atracker_gray_3"
+                />
+
+
+            <EditText
+                android:id="@+id/eventCreateEV3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/atracker_white"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/eventCreateEV2"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="@string/note_hint"
+                android:textColorHint="@color/atracker_gray_3"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/eventCreateButton1"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:text="@string/cancel_title"
+                android:textColor="@color/atracker_white"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:background="@drawable/button_round_dark_grey"
+                />
+
+
+
+            <TextView
+                android:id="@+id/eventCreateButton2"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/save_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_round_dark_grey"
+                />
+            
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
