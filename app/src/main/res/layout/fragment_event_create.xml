@@ -95,6 +95,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:hint="@string/location_title"
                 android:textColorHint="@color/atracker_gray_3"
+                android:text="@={calendarVM._eventLocation}"
                 />
 
 
@@ -108,6 +109,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:hint="@string/note_hint"
                 android:textColorHint="@color/atracker_gray_3"
+                android:text="@={calendarVM._eventNote}"
+
                 />
 
 

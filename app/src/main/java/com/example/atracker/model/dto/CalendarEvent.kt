@@ -5,9 +5,9 @@ import java.time.ZonedDateTime
 
 data class CalendarEvent(
     val id: String,
-    val text: String,
+    val eventTitle: String?,
     //val date: LocalDate,
-    val zonedDateTime: ZonedDateTime
-
-
+    val zonedDateTime: ZonedDateTime,
+    val eventLocation : String?,
+    val eventNote : String?
     )

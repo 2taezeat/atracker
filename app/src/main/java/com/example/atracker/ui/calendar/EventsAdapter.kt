@@ -11,7 +11,6 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
     RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     val events = mutableListOf<CalendarEvent>()
-    val tmp = mutableListOf<CalendarEvent>()
 
 
     private var calendarEventOnclickListener: CalendarEventOnclickListener? = null

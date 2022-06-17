@@ -30,6 +30,13 @@ class CalendarViewModel : ViewModel() {
     val eventTitle : LiveData<String> = _eventTitle
 
 
+    val _eventLocation = MutableLiveData<String>()
+    val eventLocation : LiveData<String> = _eventLocation
+
+    val _eventNote = MutableLiveData<String>()
+    val eventNote : LiveData<String> = _eventNote
+
+
     val _eventDate = MutableLiveData<LocalDate>()
     val eventDate : LiveData<LocalDate> = _eventDate
 
@@ -60,21 +67,23 @@ class CalendarViewModel : ViewModel() {
 //            updateAdapterForDate(it)
 //        }
 
-        _events.value!![_zonedDateTime.value!!.toLocalDate()] = _events.value!![_zonedDateTime.value!!.toLocalDate()].orEmpty().plus(CalendarEvent(UUID.randomUUID().toString(), _eventTitle.value!!, _zonedDateTime.value!! ))
+        _events.value!![_zonedDateTime.value!!.toLocalDate()] = _events.value!![_zonedDateTime.value!!.toLocalDate()].orEmpty().plus(CalendarEvent(
+            UUID.randomUUID().toString(), _eventTitle.value!!, _zonedDateTime.value!!, _eventLocation.value!!,, _eventNote.value!!,  )
+        )
 
         Log.d("test123", "${_events.value}")
 
     }
 
     fun onDateChanged(year: Int, month: Int, day: Int){
-        Log.v("Test_Picker", "$year $month $day")
+        val dataTime = LocalDateTime.of(year, month + 1, day, hour.value!!, minute.value!!)
+        val defaultZoneId = TimeZone.getDefault().toZoneId()
+        _zonedDateTime.value = dataTime.atZone(defaultZoneId)
 
     }
 
 
     fun onTimeChanged(hour: Int, minute: Int){
-        Log.v("Test_Picker", "$hour $minute")
-
         val dataTime = LocalDateTime.of(year.value!!, month.value!! + 1, day.value!!, hour, minute)
         val defaultZoneId = TimeZone.getDefault().toZoneId()
         _zonedDateTime.value = dataTime.atZone(defaultZoneId)
