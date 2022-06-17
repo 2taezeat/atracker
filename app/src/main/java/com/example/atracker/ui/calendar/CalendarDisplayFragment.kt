@@ -5,17 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +18,6 @@ import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
 import com.example.atracker.databinding.FragmentCalendarDisplayBinding
 import com.example.atracker.model.dto.CalendarEvent
-import com.example.atracker.ui.home.HomeViewModel
 import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -52,9 +45,6 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
     private val inputDialog by lazy {
         EventCreateFragment()
-
-
-
 //        val editText = AppCompatEditText(requireContext())
 //        val layout = LinearLayout(requireContext()).apply {
 //            // Setting the padding on the EditText only pads the input area
@@ -132,6 +122,16 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //_binding = FragmentCalendarDisplayBinding.bind(view)
+
+
+
+        calendarViewModel.eventChangeFlag.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                updateAdapterForDate(calendarViewModel.zonedDateTime.value!!.toLocalDate())
+                binding.calendarView.notifyDateChanged(calendarViewModel.zonedDateTime.value!!.toLocalDate())
+            }
+
+        })
 
 
         binding.exThreeRv.apply {
@@ -311,8 +311,8 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
     private fun updateAdapterForDate(date: LocalDate) {
         eventsAdapter.apply {
-            events.clear()
-            events.addAll(calendarViewModel.events.value!![date].orEmpty())
+            selectedEvents.clear()
+            selectedEvents.addAll(calendarViewModel.events.value!![date].orEmpty())
             notifyDataSetChanged()
         }
         binding.exThreeSelectedDateText.text = selectionFormatter.format(date)

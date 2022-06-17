@@ -53,18 +53,14 @@ class EventCreateFragment : DialogFragment() {
 
         binding.eventCreateButton1.setOnClickListener {
             dismiss()
-
         }
 
 
         binding.eventCreateButton2.setOnClickListener {
             calendarViewModel.saveEvent()
+            dismiss()
         }
 
-
-        binding.eventCreateDatePicker.setOnDateChangedListener { datePicker, d, m, y ->
-            //Log.d("test456", "${datePicker}, ${i}, ${i2}, ${i3}")
-        }
 
 
         return root

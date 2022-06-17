@@ -52,7 +52,7 @@ class CalendarBottomFragment(calendarEvent: CalendarEvent) : BottomSheetDialogFr
         _binding = FragmentCalendarBottomBinding.inflate(inflater, container, false)
 
 
-        binding.calendarBottomEventTitleTV.text = calendarEvent?.text
+        binding.calendarBottomEventTitleTV.text = calendarEvent?.eventTitle
 
 
 

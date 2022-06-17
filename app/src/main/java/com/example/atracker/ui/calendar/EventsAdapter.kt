@@ -10,7 +10,7 @@ import com.example.atracker.utils.layoutInflater
 class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) :
     RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
-    val events = mutableListOf<CalendarEvent>()
+    val selectedEvents = mutableListOf<CalendarEvent>()
 
 
     private var calendarEventOnclickListener: CalendarEventOnclickListener? = null
@@ -26,10 +26,10 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
     }
 
     override fun onBindViewHolder(viewHolder: EventsViewHolder, position: Int) {
-        viewHolder.bind(events[position])
+        viewHolder.bind(selectedEvents[position])
     }
 
-    override fun getItemCount(): Int = events.size
+    override fun getItemCount(): Int = selectedEvents.size
 
     inner class EventsViewHolder(private val binding: Example3EventItemViewBinding, calendarEventOnclickListener: CalendarEventOnclickListener
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -48,12 +48,12 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
 //        }
 
         fun bind(calendarEvent: CalendarEvent) {
-            binding.itemEventText.text = calendarEvent.text
-            //binding.itemEventDate.text = calendarEvent.date.toString()
+            binding.itemEventText.text = calendarEvent.eventTitle
+            binding.itemEventDate.text = calendarEvent.zonedDateTime.toLocalTime().toString()
         }
 
         override fun onClick(view: View?) {
-            this.calendarEventOnclickListener?.onClickContainerView(view = view!!, position = bindingAdapterPosition, viewTag = "tmpTag", calendarEvent = events[bindingAdapterPosition])
+            this.calendarEventOnclickListener?.onClickContainerView(view = view!!, position = bindingAdapterPosition, viewTag = "tmpTag", calendarEvent = selectedEvents[bindingAdapterPosition])
 
         }
     }
