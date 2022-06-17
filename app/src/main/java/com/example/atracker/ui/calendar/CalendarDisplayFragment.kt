@@ -291,22 +291,22 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
         }
     }
 
-    private fun saveEvent(text: String) {
-        if (text.isBlank()) {
-            Toast.makeText(requireContext(), R.string.example_3_empty_input_text, Toast.LENGTH_LONG).show()
-        } else {
-            selectedDate?.let {
-                events[it] = events[it].orEmpty().plus(CalendarEvent(UUID.randomUUID().toString(), text, it))
-                updateAdapterForDate(it)
-            }
-        }
-    }
-
-    private fun deleteEvent(calendarEvent: CalendarEvent) {
-        val date = calendarEvent.date
-        events[date] = events[date].orEmpty().minus(calendarEvent)
-        updateAdapterForDate(date)
-    }
+//    private fun saveEvent(text: String) {
+//        if (text.isBlank()) {
+//            Toast.makeText(requireContext(), R.string.example_3_empty_input_text, Toast.LENGTH_LONG).show()
+//        } else {
+//            selectedDate?.let {
+//                events[it] = events[it].orEmpty().plus(CalendarEvent(UUID.randomUUID().toString(), text, it))
+//                updateAdapterForDate(it)
+//            }
+//        }
+//    }
+//
+//    private fun deleteEvent(calendarEvent: CalendarEvent) {
+//        val date = calendarEvent.date
+//        events[date] = events[date].orEmpty().minus(calendarEvent)
+//        updateAdapterForDate(date)
+//    }
 
     private fun updateAdapterForDate(date: LocalDate) {
         eventsAdapter.apply {
@@ -358,7 +358,6 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent) {
-        Log.d("test123", "${calendarEvent}")
         val calendarBottomFragment = CalendarBottomFragment(calendarEvent)
         calendarBottomFragment.show(parentFragmentManager, calendarBottomFragment.tag)
     }

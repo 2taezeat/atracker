@@ -62,15 +62,12 @@ class EventCreateFragment : DialogFragment() {
         }
 
 
-
-
-
-
+        binding.eventCreateDatePicker.setOnDateChangedListener { datePicker, d, m, y ->
+            //Log.d("test456", "${datePicker}, ${i}, ${i2}, ${i3}")
+        }
 
 
         return root
-
-
     }
 
 

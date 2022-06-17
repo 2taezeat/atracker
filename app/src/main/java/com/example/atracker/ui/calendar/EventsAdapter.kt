@@ -48,7 +48,7 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
 
         fun bind(calendarEvent: CalendarEvent) {
             binding.itemEventText.text = calendarEvent.text
-            binding.itemEventDate.text = calendarEvent.date.toString()
+            //binding.itemEventDate.text = calendarEvent.date.toString()
         }
 
         override fun onClick(view: View?) {

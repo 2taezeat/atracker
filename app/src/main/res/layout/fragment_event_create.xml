@@ -23,7 +23,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="320dp"
-            android:layout_height="600dp"
+            android:layout_height="640dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,9 +41,31 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:year="@={calendarVM.year}"
+                android:month="@={calendarVM.month}"
+                android:day="@={calendarVM.day}"
+                android:onDateChanged="@{(v, year, month, day) -> calendarVM.onDateChanged(year, month, day)}"
+
 
                 >
             </DatePicker>
+
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/eventCreateDatePicker"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:timePickerMode="spinner"
+                android:id="@+id/eventCreateTimePicker"
+                android:hour="@={calendarVM.hour}"
+                android:minute="@={calendarVM.minute}"
+                android:onTimeChanged="@{(v, hour, minute) -> calendarVM.onTimeChanged(hour, minute)}"
+                >
+
+
+            </TimePicker>
 
 
 
@@ -54,7 +76,7 @@
                 android:textColor="@color/atracker_white"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/eventCreateDatePicker"
+                app:layout_constraintTop_toBottomOf="@+id/eventCreateTimePicker"
                 app:layout_constraintStart_toStartOf="parent"
                 android:hint="title"
                 android:textColorHint="@color/atracker_gray_3"
