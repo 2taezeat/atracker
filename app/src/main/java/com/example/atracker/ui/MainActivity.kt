@@ -8,12 +8,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivityMainBinding
+import com.example.atracker.ui.calendar.CalendarViewModel
 import com.example.atracker.ui.home.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     val homeViewModel: HomeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
+    val calendarViewModel: CalendarViewModel by lazy { ViewModelProvider(this).get(CalendarViewModel::class.java) }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
 import com.example.atracker.databinding.FragmentCalendarDisplayBinding
 import com.example.atracker.model.dto.CalendarEvent
+import com.example.atracker.ui.home.HomeViewModel
 import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -38,7 +40,8 @@ import java.util.*
 
 class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
-    private lateinit var calendarViewModel: CalendarViewModel
+    private val calendarViewModel: CalendarViewModel by activityViewModels()
+
     private var _binding: FragmentCalendarDisplayBinding? = null
 
     // This property is only valid between onCreateView and
@@ -105,8 +108,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        calendarViewModel =
-            ViewModelProvider(this).get(CalendarViewModel::class.java)
+
 
         _binding = FragmentCalendarDisplayBinding.inflate(inflater, container, false)
         val root: View = binding.root

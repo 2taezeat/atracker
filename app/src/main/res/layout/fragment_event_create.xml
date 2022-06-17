@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+
+    <data>
+        <variable
+            name="calendarVM"
+            type="com.example.atracker.ui.calendar.CalendarViewModel" />
+    </data>
+
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/eventCreateConstraintLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_radius"
@@ -11,11 +23,28 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="320dp"
-            android:layout_height="400dp"
+            android:layout_height="600dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             >
+
+
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventCreateDatePicker"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:calendarTextColor="@color/atracker_white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                >
+            </DatePicker>
+
 
 
             <EditText
@@ -25,11 +54,12 @@
                 android:textColor="@color/atracker_white"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/eventCreateDatePicker"
                 app:layout_constraintStart_toStartOf="parent"
                 android:hint="title"
                 android:textColorHint="@color/atracker_gray_3"
-                 />
+                android:text="@={calendarVM._eventTitle}"
+                />
 
 
             <EditText
@@ -57,7 +87,6 @@
                 android:hint="@string/note_hint"
                 android:textColorHint="@color/atracker_gray_3"
                 />
-
 
 
 
