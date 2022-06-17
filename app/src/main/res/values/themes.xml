@@ -84,7 +84,12 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
-
+    <style name="MyDatePicker" >
+        <!-- Text color -->
+        <item name="android:textColorPrimary">@color/atracker_white</item>
+        <!-- Divider color -->
+        <item name="colorControlNormal">@color/progress_color_7</item>
+    </style>
 
 
 </resources>

@@ -47,12 +47,8 @@ class CalendarViewModel : ViewModel() {
         _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
 
 
-        val newDate = Calendar.getInstance()
-        year.value = newDate.get(Calendar.YEAR)
-        month.value = newDate.get(Calendar.MONTH)
-        day.value = newDate.get(Calendar.DAY_OF_MONTH)
-        hour.value = newDate.get(Calendar.HOUR)
-        minute.value = newDate.get(Calendar.MINUTE)
+
+        initTimeDateCurrent()
 
     }
 
@@ -90,6 +86,16 @@ class CalendarViewModel : ViewModel() {
         _eventTitle.value = ""
         _eventLocation.value = ""
         _eventNote.value = ""
+    }
+
+    fun initTimeDateCurrent(){
+        val newDate = Calendar.getInstance()
+        year.value = newDate.get(Calendar.YEAR)
+        month.value = newDate.get(Calendar.MONTH)
+        day.value = newDate.get(Calendar.DAY_OF_MONTH)
+        hour.value = newDate.get(Calendar.HOUR)
+        minute.value = newDate.get(Calendar.MINUTE)
+
     }
 
 

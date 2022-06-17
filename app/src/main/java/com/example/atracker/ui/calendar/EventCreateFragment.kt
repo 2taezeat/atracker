@@ -71,6 +71,7 @@ class EventCreateFragment : DialogFragment() {
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         calendarViewModel.clearEventText()
+        calendarViewModel.initTimeDateCurrent()
     }
 
 

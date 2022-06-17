@@ -24,21 +24,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/edit"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/calendarBottomEditTV"
+                >
+
+
+            </TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/save_korean"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/calendarBottomSaveTV"
+                android:visibility="invisible"
+                >
+            </TextView>
+
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
                 android:textColor="@color/teal_700"
-                android:id="@+id/calendarBottomEventTitleTV"
+                android:id="@+id/calendarBottomEventTitleET"
+                android:background="@null"
+                android:focusableInTouchMode="false"
                 >
 
-            </TextView>
+            </EditText>
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:layout_constraintTop_toBottomOf="@+id/calendarBottomEventTitleTV"
+                app:layout_constraintTop_toBottomOf="@+id/calendarBottomEventTitleET"
                 android:background="@color/atracker_gray_3"
                 android:id="@+id/calendarBottomView1"
                 android:layout_marginTop="10dp"
@@ -99,6 +132,7 @@
                 android:paddingEnd="10dp"
                 android:background="@null"
                 android:layout_marginEnd="10dp"
+                android:focusableInTouchMode="false"
 
 
                 >
@@ -145,6 +179,7 @@
                 android:background="@null"
                 android:paddingEnd="10dp"
                 android:layout_marginEnd="10dp"
+                android:focusableInTouchMode="false"
                 >
 
             </EditText>
