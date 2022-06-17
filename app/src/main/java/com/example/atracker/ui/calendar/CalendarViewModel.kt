@@ -21,8 +21,8 @@ class CalendarViewModel : ViewModel() {
 
 
 
-    private val _events = MutableLiveData<MutableMap<ZonedDateTime, List<CalendarEvent>>>()
-    val events : LiveData<MutableMap<ZonedDateTime, List<CalendarEvent>>> = _events
+    private val _events = MutableLiveData<MutableMap<LocalDate, List<CalendarEvent>>>()
+    val events : LiveData<MutableMap<LocalDate, List<CalendarEvent>>> = _events
 
 
 
@@ -47,7 +47,7 @@ class CalendarViewModel : ViewModel() {
     var zonedDateTime : LiveData<ZonedDateTime> = _zonedDateTime
 
     init {
-        _events.value = mutableMapOf<ZonedDateTime, List<CalendarEvent>>()
+        _events.value = mutableMapOf<LocalDate, List<CalendarEvent>>()
     }
 
 
@@ -60,7 +60,7 @@ class CalendarViewModel : ViewModel() {
 //            updateAdapterForDate(it)
 //        }
 
-        _events.value!![_zonedDateTime.value!!] = _events.value!![_zonedDateTime.value!!].orEmpty().plus(CalendarEvent(UUID.randomUUID().toString(), _eventTitle.value!!, _zonedDateTime.value!! ))
+        _events.value!![_zonedDateTime.value!!.toLocalDate()] = _events.value!![_zonedDateTime.value!!.toLocalDate()].orEmpty().plus(CalendarEvent(UUID.randomUUID().toString(), _eventTitle.value!!, _zonedDateTime.value!! ))
 
         Log.d("test123", "${_events.value}")
 

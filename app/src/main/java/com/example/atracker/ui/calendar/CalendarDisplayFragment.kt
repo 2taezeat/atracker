@@ -183,14 +183,15 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                 if (day.owner == DayOwner.THIS_MONTH) {
                     textView.makeVisible()
 
-                    Log.d("events", "${events[day.date]}")
+                    //Log.d("events", "${events[day.date]}")
+                    Log.d("events", "${calendarViewModel.events.value!![day.date]}")
 
                     when (day.date) {
                         today -> {
                             textView.setTextColorRes(R.color.example_3_white)
                             textView.setBackgroundResource(R.drawable.example_3_today_bg)
 
-                            eventDotSetVisiblity(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3, dotViewMore)
 
 //                            dotView.makeInVisible()
 //
@@ -203,7 +204,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.setTextColorRes(R.color.example_3_blue)
                             textView.setBackgroundResource(R.drawable.example_3_selected_bg)
 
-                            eventDotSetVisiblity(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3, dotViewMore)
 
 //                            dotView.makeInVisible()
 //
@@ -216,7 +217,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.background = null
                             //dotViewMore.isVisible = events[day.date].orEmpty().isNotEmpty()
 
-                            eventDotSetVisiblity(events[day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3, dotViewMore)
 
                         }
                     }
@@ -311,7 +312,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     private fun updateAdapterForDate(date: LocalDate) {
         eventsAdapter.apply {
             events.clear()
-            events.addAll(this@CalendarDisplayFragment.events[date].orEmpty())
+            events.addAll(calendarViewModel.events.value!![date].orEmpty())
             notifyDataSetChanged()
         }
         binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
