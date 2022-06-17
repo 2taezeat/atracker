@@ -51,6 +51,8 @@ class CalendarViewModel : ViewModel() {
         year.value = newDate.get(Calendar.YEAR)
         month.value = newDate.get(Calendar.MONTH)
         day.value = newDate.get(Calendar.DAY_OF_MONTH)
+        hour.value = newDate.get(Calendar.HOUR)
+        minute.value = newDate.get(Calendar.MINUTE)
 
     }
 
