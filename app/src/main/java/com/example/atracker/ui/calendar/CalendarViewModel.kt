@@ -1,11 +1,9 @@
 package com.example.atracker.ui.calendar
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.atracker.R
 import com.example.atracker.model.dto.CalendarEvent
 import java.time.Instant
 import java.time.LocalDate
@@ -30,9 +28,9 @@ class CalendarViewModel : ViewModel() {
     val _eventDate = MutableLiveData<LocalDate>()
     val eventDate : LiveData<LocalDate> = _eventDate
 
-    var year: MutableLiveData<Int> = MutableLiveData(2022)
-    var month: MutableLiveData<Int> = MutableLiveData(11)
-    var day: MutableLiveData<Int> = MutableLiveData(12)
+    var year: MutableLiveData<Int> = MutableLiveData()
+    var month: MutableLiveData<Int> = MutableLiveData()
+    var day: MutableLiveData<Int> = MutableLiveData()
     var hour: MutableLiveData<Int> = MutableLiveData()
     var minute: MutableLiveData<Int> = MutableLiveData()
 
@@ -47,6 +45,13 @@ class CalendarViewModel : ViewModel() {
         _events.value = mutableMapOf<LocalDate, List<CalendarEvent>>()
         val instant = Instant.now()
         _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
+
+
+        val newDate = Calendar.getInstance()
+        year.value = newDate.get(Calendar.YEAR)
+        month.value = newDate.get(Calendar.MONTH)
+        day.value = newDate.get(Calendar.DAY_OF_MONTH)
+
     }
 
 
@@ -78,6 +83,12 @@ class CalendarViewModel : ViewModel() {
 
     }
 
+
+    fun clearEventText() {
+        _eventTitle.value = ""
+        _eventLocation.value = ""
+        _eventNote.value = ""
+    }
 
 
 

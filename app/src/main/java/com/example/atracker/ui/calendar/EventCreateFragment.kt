@@ -1,5 +1,6 @@
 package com.example.atracker.ui.calendar
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -49,8 +50,6 @@ class EventCreateFragment : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
-
-
         binding.eventCreateButton1.setOnClickListener {
             dismiss()
         }
@@ -63,7 +62,15 @@ class EventCreateFragment : DialogFragment() {
 
 
 
+
+
+
         return root
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        calendarViewModel.clearEventText()
     }
 
 

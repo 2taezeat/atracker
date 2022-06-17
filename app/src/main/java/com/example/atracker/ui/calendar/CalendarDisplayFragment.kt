@@ -127,7 +127,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
         calendarViewModel.eventChangeFlag.observe(viewLifecycleOwner, Observer {
             if (it) {
-                updateAdapterForDate(calendarViewModel.zonedDateTime.value!!.toLocalDate())
+                updateAdapterForDate(selectedDate!!)
                 binding.calendarView.notifyDateChanged(calendarViewModel.zonedDateTime.value!!.toLocalDate())
             }
 
