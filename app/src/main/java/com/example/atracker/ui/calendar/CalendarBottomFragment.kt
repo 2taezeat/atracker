@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentCalendarBottomBinding
 import com.example.atracker.databinding.FragmentHomeDetailBinding
@@ -15,6 +16,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class CalendarBottomFragment(calendarEvent: CalendarEvent) : BottomSheetDialogFragment() {
 
     private var calendarEvent: CalendarEvent? = null
+    private val calendarViewModel: CalendarViewModel by activityViewModels()
+
 
 
     init {
@@ -79,10 +82,14 @@ class CalendarBottomFragment(calendarEvent: CalendarEvent) : BottomSheetDialogFr
             binding.calendarBottomEventTitleET.focusable = View.NOT_FOCUSABLE
             binding.calendarBottomLocationET.focusable = View.NOT_FOCUSABLE
             binding.calendarBottomNoteET.focusable = View.NOT_FOCUSABLE
-
-
         }
 
+
+
+        binding.calendarBottomDeleteTV.setOnClickListener {
+            calendarViewModel.deleteEvent(calendarEvent!!)
+            dismiss()
+        }
 
 
 

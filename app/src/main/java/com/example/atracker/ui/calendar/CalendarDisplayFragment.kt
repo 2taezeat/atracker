@@ -327,6 +327,12 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
             viewMore.makeInVisible()
         } else {
             when (currentDataCalendarEvent.size) {
+                0 -> {
+                    view1.makeInVisible()
+                    view2.makeInVisible()
+                    view3.makeInVisible()
+                    viewMore.makeInVisible()
+                }
                 1 -> {
                     view1.makeVisible()
                     view2.makeInVisible()

@@ -64,6 +64,18 @@ class CalendarViewModel : ViewModel() {
         _eventChangeFlag.value = false
     }
 
+
+    fun deleteEvent(calendarEvent: CalendarEvent) {
+        val date = calendarEvent.zonedDateTime.toLocalDate()
+        _events.value!![date] = _events.value!![date].orEmpty().minus(calendarEvent)
+
+        _eventChangeFlag.value = true
+        _eventChangeFlag.value = false
+    }
+
+
+
+
     fun onDateChanged(year: Int, month: Int, day: Int){
         val dataTime = LocalDateTime.of(year, month + 1, day, hour.value!!, minute.value!!)
         val defaultZoneId = TimeZone.getDefault().toZoneId()
