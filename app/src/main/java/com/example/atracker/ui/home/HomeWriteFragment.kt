@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.atracker.databinding.FragmentHomeWriteBinding
@@ -18,6 +19,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.R
+import com.example.atracker.model.dto.ProgressItemBodyType
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -293,12 +295,58 @@ class HomeWriteFragment : Fragment() {
 
         for (homeDetailItem in homeDetailContents!!) {
             val progressType = homeDetailItem.progressType
+            val progressName = homeDetailItem.progressName
             val itemType = homeDetailItem.itemType
             val totalReviewBody = homeDetailItem.totalReviewBody
             val questionBody = homeDetailItem.questionBody
             val answerBody = homeDetailItem.answerBody
 
-            Log.d("test123", "${dynamicLayoutList}")
+            for (dynamicLayoutCL in dynamicLayoutList) {
+                if (dynamicLayoutCL.tag == progressName) {
+                    Log.d("test123444", "${dynamicLayoutCL.tag}")
+
+                    val homeWriteNestedSV = dynamicLayoutCL.getViewById(R.id.homeWriteNestedSV)
+                    //val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
+                    val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
+
+                    if (itemType == ProgressItemBodyType.REVIEW) {
+                        val addLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
+                        val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                            ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+                        )
+                        params.setMargins(0,20,0,10)
+                        addLayout.layoutParams = params
+                        addLayout.id = View.generateViewId()
+                        homeWriteLL.addView(addLayout)
+
+                        val homeWriteReviewET = addLayout.findViewById<EditText>(R.id.homeWriteReviewET)
+                        homeWriteReviewET.setText(totalReviewBody)
+
+
+                        reviewLayoutList.add(addLayout)
+                    } else {
+                        val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
+                        val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                            ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+                        )
+                        params.setMargins(0,20,0,10)
+                        addLayout.layoutParams = params
+                        addLayout.id = View.generateViewId()
+                        homeWriteLL.addView(addLayout)
+
+                        val homeWriteQuestionTV = addLayout.findViewById<EditText>(R.id.homeWriteQuestionTV)
+                        homeWriteQuestionTV.setText(questionBody)
+                        val homeWriteAnswerET = addLayout.findViewById<EditText>(R.id.homeWriteAnswerET)
+                        homeWriteAnswerET.setText(answerBody)
+                        qnaLayoutList.add(addLayout)
+                    }
+
+
+
+                }
+            }
 
 
 

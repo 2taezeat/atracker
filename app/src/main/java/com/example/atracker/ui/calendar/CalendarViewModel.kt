@@ -88,7 +88,6 @@ class CalendarViewModel : ViewModel() {
         val dataTime = LocalDateTime.of(year.value!!, month.value!! + 1, day.value!!, hour, minute)
         val defaultZoneId = TimeZone.getDefault().toZoneId()
         _zonedDateTime.value = dataTime.atZone(defaultZoneId)
-
         Log.d("test123123", "${_zonedDateTime.value}")
 
     }
