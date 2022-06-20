@@ -1,10 +1,13 @@
 package com.example.atracker.ui.calendar
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.activityViewModels
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentCalendarBottomBinding
@@ -53,11 +56,23 @@ class CalendarBottomFragment(calendarEvent: CalendarEvent) : BottomSheetDialogFr
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentCalendarBottomBinding.inflate(inflater, container, false)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
 
         binding.calendarBottomEventTitleET.setText(calendarEvent?.eventTitle)
         binding.calendarBottomLocationET.setText(calendarEvent?.eventLocation)
         binding.calendarBottomNoteET.setText(calendarEvent?.eventNote)
+
+        val localDate = calendarEvent?.zonedDateTime?.toLocalDate()!!
+        val localTime = calendarEvent?.zonedDateTime?.toLocalTime()!!
+
+
+
+        binding.calendarBottomDatePicker.updateDate(localDate.year, localDate.monthValue - 1, localDate.dayOfMonth)
+        binding.calendarBottomTimePicker.hour = localTime.hour
+        binding.calendarBottomTimePicker.minute = localTime.minute
+
 
 
         binding.calendarBottomEditTV.setOnClickListener {
