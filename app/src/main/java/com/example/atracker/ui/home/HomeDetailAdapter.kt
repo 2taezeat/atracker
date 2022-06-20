@@ -137,8 +137,8 @@ class HomeDetailAdapter :
 
 
         fun bind(homeDetailItem: HomeDetailItem) {
-            homeDetailQnaItemBinding.homeDetailItemQuestion.text = homeDetailItem.progressName
-            homeDetailQnaItemBinding.homeDetailItemAnswer.text = homeDetailItem.totalReviewBody
+            homeDetailQnaItemBinding.homeDetailItemQuestion.text = homeDetailItem.questionBody
+            homeDetailQnaItemBinding.homeDetailItemAnswer.text = homeDetailItem.answerBody
 
             when (homeDetailItem.progressType) {
                 0 -> {

@@ -88,7 +88,7 @@ class HomeDetailFragment : Fragment() {
         }
 
 
-        homeDetailAdapter.submitList(homeViewModel.homeDetailContents.value)
+        homeDetailAdapter.submitList(homeViewModel.homeDetailContents.value!![args.progressIndex])
 
 
         binding.homeDetailRV.also{

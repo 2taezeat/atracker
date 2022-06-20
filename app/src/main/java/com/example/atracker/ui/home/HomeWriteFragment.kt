@@ -157,11 +157,12 @@ class HomeWriteFragment : Fragment() {
     }
 
     private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
-        val homeWriteProgressSelectStringList = homeViewModel.homeWriteProgressSelectArrayList.value!![progressIndex]
+        val homeWriteProgressSelectedMap = homeViewModel.homeWriteProgressSelectedMap.value!![progressIndex]
+        val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
         var idx = 0
         dynamicLayoutList = arrayListOf<ConstraintLayout>()
 
-        for (progressName in homeWriteProgressSelectStringList) {
+        for (progressName in homeWriteProgressSelectedMap!!) {
             homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
 
             homeWriteContentLayout = this.layoutInflater.inflate(R.layout.home_write_content_layout, null) as ConstraintLayout // inflating view from xml
@@ -215,7 +216,6 @@ class HomeWriteFragment : Fragment() {
                         else
                             reviewRemoveLayoutList.remove(reviewLayout)
                     }
-
                 }
 
                 for (qnaLayout in qnaLayoutList) {
@@ -276,10 +276,6 @@ class HomeWriteFragment : Fragment() {
                 }
             }
 
-
-
-
-
             homeWriteContentLayout.id = View.generateViewId()
             homeWriteContentLayout.tag = progressName
 
@@ -293,6 +289,23 @@ class HomeWriteFragment : Fragment() {
             binding.homeWriteContentCL.addView(homeWriteContentLayout)
             idx += 1
         }
+
+
+        for (homeDetailItem in homeDetailContents!!) {
+            val progressType = homeDetailItem.progressType
+            val itemType = homeDetailItem.itemType
+            val totalReviewBody = homeDetailItem.totalReviewBody
+            val questionBody = homeDetailItem.questionBody
+            val answerBody = homeDetailItem.answerBody
+
+            Log.d("test123", "${dynamicLayoutList}")
+
+
+
+        }
+
+
+
     }
 
     private fun setChip(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorStateList: ColorStateList){

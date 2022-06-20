@@ -227,7 +227,7 @@
                 >
 
                 <com.google.android.material.chip.Chip
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:id="@+id/homeAddTypeSelect1"
                     android:text="@string/chip_title_1"
@@ -244,7 +244,7 @@
                 </com.google.android.material.chip.Chip>
 
                 <com.google.android.material.chip.Chip
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:id="@+id/homeAddTypeSelect2"
                     android:text="@string/chip_title_2"
@@ -263,7 +263,7 @@
                 </com.google.android.material.chip.Chip>
 
                 <com.google.android.material.chip.Chip
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:id="@+id/homeAddTypeSelect3"
                     android:text="@string/chip_title_3"
@@ -281,7 +281,7 @@
 
 
                 <com.google.android.material.chip.Chip
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:id="@+id/homeAddTypeSelect4"
                     android:text="@string/chip_title_4"
