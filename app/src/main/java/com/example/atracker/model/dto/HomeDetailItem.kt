@@ -6,5 +6,6 @@ data class HomeDetailItem(
     val itemType : ProgressItemBodyType, //
     val totalReviewBody : String?,
     val questionBody : String?,
-    val answerBody : String?
+    val answerBody : String?,
+    val progressIsPassing : IsPassing?
 )

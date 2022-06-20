@@ -342,14 +342,8 @@ class HomeWriteFragment : Fragment() {
                         homeWriteAnswerET.setText(answerBody)
                         qnaLayoutList.add(addLayout)
                     }
-
-
-
                 }
             }
-
-
-
         }
 
 
