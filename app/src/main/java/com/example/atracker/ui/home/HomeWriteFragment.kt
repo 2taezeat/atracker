@@ -21,6 +21,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.atracker.R
 import com.example.atracker.model.dto.IsPassing
 import com.example.atracker.model.dto.ProgressItemBodyType
+import com.example.atracker.ui.AlertDialogFragment
+import com.example.atracker.ui.AlertDialogListener
+import com.example.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -53,6 +56,15 @@ class HomeWriteFragment : Fragment() {
     private lateinit var homeWriteContentLayout : ConstraintLayout
     //private lateinit var dynamicLayoutList : ArrayList<ConstraintLayout>
     private lateinit var dynamicLayoutMap : MutableMap<String, ConstraintLayout>
+    private var previousTabPosition = 0
+
+    private lateinit var progressIsPassingMap : MutableMap<Int, IsPassing?>
+
+    private lateinit var alertDialogFragmentType1: AlertDialogFragment
+    private lateinit var alertDialogFragmentType2: AlertDialogFragment
+
+
+
 
     private val reviewLayoutList by lazy {
         arrayListOf<ConstraintLayout>()
@@ -99,9 +111,26 @@ class HomeWriteFragment : Fragment() {
 
 
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Log.d("onTabSelected","${tab!!.position}")
-                changeView(tab.tag.toString())
+                Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
+
+
+                val previousState = progressIsPassingMap[previousTabPosition]
+                val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
+
+                if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS) ) {
+                    Log.d("test55566", "problem")
+                    showAlert(AlertType.TYPE2)
+
+                    binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                }else {
+                    previousTabPosition = tab.position
+                    changeView(tab.tag.toString())
+
+                }
+
+
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -125,8 +154,6 @@ class HomeWriteFragment : Fragment() {
             homeWriteQnaLayout.layoutParams = params
             homeWriteQnaLayout.id = View.generateViewId()
 
-//            val tmp = homeWriteQnaLayout.findViewById<TextView>(com.example.atracker.R.id.homeWriteQuestionTV)
-//            tmp.tag = "asd"
             binding.homeWriteLL.addView(homeWriteQnaLayout)
         }
 
@@ -139,16 +166,6 @@ class HomeWriteFragment : Fragment() {
             params.setMargins(0,20,0,10)
             homeWriteReviewLayout.layoutParams = params
             homeWriteReviewLayout.id = View.generateViewId()
-
-
-//            val name = thridlayoout.findViewById(com.example.atracker.R.id.homeWriteQuestionTV) as TextView
-//
-//
-//
-//            Log.d("test123_3", "${thridlayoout.id}")
-//            name.id = View.generateViewId()
-//            Log.d("test123_4", "${name.id}")
-
 
             binding.homeWriteLL.addView(homeWriteReviewLayout)
         }
@@ -165,6 +182,7 @@ class HomeWriteFragment : Fragment() {
         //dynamicLayoutList = arrayListOf<ConstraintLayout>()
 
         dynamicLayoutMap = mutableMapOf()
+        progressIsPassingMap = mutableMapOf()
 
         for (progressName in homeWriteProgressSelected!!) {
             homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
@@ -309,6 +327,8 @@ class HomeWriteFragment : Fragment() {
             val progressIsPassing = homeDetailItem.progressIsPassing
 
 
+
+            progressIsPassingMap[progressType] = progressIsPassing
             val dynamicHomeWriteCL = dynamicLayoutMap[progressName]
 
             val homeWriteNestedSV = dynamicHomeWriteCL!!.getViewById(R.id.homeWriteNestedSV)
@@ -476,15 +496,6 @@ class HomeWriteFragment : Fragment() {
 
 
     private fun changeView(layoutTagName : String) {
-//        for(layout in dynamicLayoutList){
-//            if (layoutTagName == layout.tag) {
-//                layout.visibility = View.VISIBLE
-//            } else {
-//                layout.visibility = View.INVISIBLE
-//            }
-//        }
-
-
         for(layout in dynamicLayoutMap.values){
             if (layoutTagName == layout.tag) {
                 layout.visibility = View.VISIBLE
@@ -492,6 +503,24 @@ class HomeWriteFragment : Fragment() {
                 layout.visibility = View.INVISIBLE
             }
         }
+    }
+
+
+    fun showAlert(alertType: AlertType){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onOkClick() {
+//                    mainViewModel.clickCommentDelete()
+                }
+
+                override fun onCancelClick() {
+
+                }
+
+            },
+            alertType
+        )
+        alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 
 

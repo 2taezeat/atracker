@@ -27,8 +27,6 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
     }
 
 
-
-
     private var _binding: FragmentAlertDialogBinding? = null
     private val binding get() = _binding!!
 
