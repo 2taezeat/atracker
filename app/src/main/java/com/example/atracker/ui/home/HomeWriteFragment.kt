@@ -14,7 +14,6 @@ import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -76,11 +75,11 @@ class HomeWriteFragment : Fragment() {
         mutableMapOf<String, List<ConstraintLayout>>()
     }
 
-    private val reviewRemoveLayoutList_map by lazy {
+    private val reviewRemoveLayoutListMap by lazy {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
-    private val qnaRemoveLayoutList_map by lazy {
+    private val qnaRemoveLayoutListMap by lazy {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
@@ -119,7 +118,6 @@ class HomeWriteFragment : Fragment() {
                 if (editBooleanMap[previousTabName] == true && previousTabPosition != tab!!.position) {
                     showAlert(AlertType.TYPE3, tab, null)
 
-                    Log.d("test123123123", "test123123123")
                 } else {
                     val previousState = progressIsPassingMap[previousTabPosition]
                     val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
@@ -144,7 +142,6 @@ class HomeWriteFragment : Fragment() {
                 Log.d("onTabUnselected","${tab!!.position}")
             }
         })
-
 
 
         binding.homeWritePlusButton1.setOnClickListener{
@@ -174,9 +171,8 @@ class HomeWriteFragment : Fragment() {
         }
 
 
-
         binding.homeWriteSaveTV.setOnClickListener {
-            showAlert(AlertType.TYPE4, null, null)
+            showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
         }
 
 
@@ -206,8 +202,8 @@ class HomeWriteFragment : Fragment() {
             )
 
             editBooleanMap[progressName] = false
-            reviewRemoveLayoutList_map[progressName] = arrayListOf()
-            qnaRemoveLayoutList_map[progressName] = arrayListOf()
+            reviewRemoveLayoutListMap[progressName] = arrayListOf()
+            qnaRemoveLayoutListMap[progressName] = arrayListOf()
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -260,9 +256,9 @@ class HomeWriteFragment : Fragment() {
 
                     reviewDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
-                            reviewRemoveLayoutList_map[progressName]!!.add(reviewLayout)
+                            reviewRemoveLayoutListMap[progressName]!!.add(reviewLayout)
                         else
-                            reviewRemoveLayoutList_map[progressName]!!.remove(reviewLayout)
+                            reviewRemoveLayoutListMap[progressName]!!.remove(reviewLayout)
 
                     }
                 }
@@ -279,9 +275,9 @@ class HomeWriteFragment : Fragment() {
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
-                            qnaRemoveLayoutList_map[progressName]!!.add(qnaLayout)
+                            qnaRemoveLayoutListMap[progressName]!!.add(qnaLayout)
                         else
-                            qnaRemoveLayoutList_map[progressName]!!.remove(qnaLayout)
+                            qnaRemoveLayoutListMap[progressName]!!.remove(qnaLayout)
                     }
                 }
             }
@@ -292,8 +288,8 @@ class HomeWriteFragment : Fragment() {
 
 
             homeWriteEditCompleteButton.setOnClickListener {
-                reviewRemoveLayoutList_map[progressName]!!.clear()
-                qnaRemoveLayoutList_map[progressName]!!.clear()
+                reviewRemoveLayoutListMap[progressName]!!.clear()
+                qnaRemoveLayoutListMap[progressName]!!.clear()
 
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
@@ -474,7 +470,6 @@ class HomeWriteFragment : Fragment() {
     fun showAlert(alertType: AlertType, tab : TabLayout.Tab?, deleteHomeWriteLL: LinearLayout? ){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
-
                 override fun onLeftClick() {
                     when (alertType) {
                         AlertType.TYPE3 -> {
@@ -493,15 +488,15 @@ class HomeWriteFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE1 -> {
-                            for (l in reviewRemoveLayoutList_map[tab!!.tag.toString()].orEmpty()) {
+                            for (l in reviewRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
-                            for (l in qnaRemoveLayoutList_map[tab!!.tag.toString()].orEmpty()) {
+                            for (l in qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
 
-                            reviewRemoveLayoutList_map[tab!!.tag.toString()]!!.clear()
-                            qnaRemoveLayoutList_map[tab!!.tag.toString()]!!.clear()
+                            reviewRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
+                            qnaRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
 
                         }
                         AlertType.TYPE3 -> {
@@ -516,7 +511,7 @@ class HomeWriteFragment : Fragment() {
                 }
             },
             alertType,
-            reviewRemoveLayoutList_map[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutList_map[tab!!.tag.toString()].orEmpty().size
+            reviewRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size
 
         )
 

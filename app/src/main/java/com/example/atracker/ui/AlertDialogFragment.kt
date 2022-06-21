@@ -122,6 +122,8 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                     dismiss()
                 }
 
+                this.isCancelable = false
+
             }
             AlertType.TYPE4 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_check_icon_raw)
@@ -155,6 +157,8 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
     }
 
 
-
+    override fun dismiss() {
+        super.dismiss()
+    }
 
 }
