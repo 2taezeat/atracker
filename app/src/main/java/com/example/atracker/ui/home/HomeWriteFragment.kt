@@ -57,8 +57,8 @@ class HomeWriteFragment : Fragment() {
     //private lateinit var dynamicLayoutList : ArrayList<ConstraintLayout>
     private lateinit var dynamicLayoutMap : MutableMap<String, ConstraintLayout>
     private var previousTabPosition = 0
+    private var previousTabName = ""
 
-    private var editCount = 0
 
     private var tmp = mutableMapOf<String, Boolean>()
 
@@ -116,13 +116,10 @@ class HomeWriteFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
 
-//                if (editCount % 2 == 1)
+                if (tmp[previousTabName] == true && previousTabPosition != tab!!.position) {
+                    showAlert(AlertType.TYPE3, tab)
 
-
-                if (tmp[tab.tag] == true) {
-                    //showAlert(AlertType.TYPE3, tab)
-
-                    Log.d("")
+                    Log.d("test123123123", "test123123123")
 
 
                 } else {
@@ -135,6 +132,8 @@ class HomeWriteFragment : Fragment() {
                         binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                     } else {
                         previousTabPosition = tab.position
+                        previousTabName = tab.tag.toString()
+
                         changeView(tab.tag.toString())
 
                     }
@@ -189,7 +188,10 @@ class HomeWriteFragment : Fragment() {
         val homeWriteProgressSelected = homeViewModel.homeWriteProgressSelectedMap.value!![progressIndex]
         val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
         var idx = 0
+
+
         //dynamicLayoutList = arrayListOf<ConstraintLayout>()
+        previousTabName = homeWriteProgressSelected!![0]
 
         dynamicLayoutMap = mutableMapOf()
         progressIsPassingMap = mutableMapOf()
@@ -203,7 +205,7 @@ class HomeWriteFragment : Fragment() {
                 0 // This will define text view height
             )
 
-            tmp[progressName] = tmp.orEmpty().plus(false)
+            tmp[progressName] = false
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -231,7 +233,6 @@ class HomeWriteFragment : Fragment() {
 
 
             homeWriteEditButton.setOnClickListener {
-                editCount += 1
 
                 homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
                 homeWriteEditButton.visibility = View.INVISIBLE
@@ -293,7 +294,6 @@ class HomeWriteFragment : Fragment() {
 
 
             homeWriteEditCompleteButton.setOnClickListener {
-                editCount += 1
 
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
@@ -476,9 +476,7 @@ class HomeWriteFragment : Fragment() {
                 override fun onLeftClick() {
                     when (alertType) {
                         AlertType.TYPE3 -> {
-                            editCount += 1
                             binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
-                            Log.d("test123", "${previousTabPosition}")
                         }
                     }
                 }
@@ -491,8 +489,9 @@ class HomeWriteFragment : Fragment() {
                     when (alertType) {
                         AlertType.TYPE3 -> {
                             previousTabPosition = tab.position
+                            previousTabName = tab.tag.toString()
+
                             changeView(tab.tag.toString())
-                            editCount += 1
                         }
                     }
                 }
