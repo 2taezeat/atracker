@@ -41,6 +41,20 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         val mForegroundSuccess7 = ContextCompat.getColor(lazyContext, R.color.progress_color_7)
 
+
+//        binding.alertDialogButton1.setOnClickListener {
+//            alertDialogListener.onLeftClick()
+//        }
+//
+//        binding.alertDialogButton3.setOnClickListener {
+//            alertDialogListener.onCenterClick()
+//            dismiss()
+//        }
+//
+//        binding.alertDialogButton2.setOnClickListener {
+//            alertDialogListener.onRightClick()
+//        }
+
         when (alertType) {
             AlertType.TYPE1 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
@@ -65,6 +79,11 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 binding.alertDialogButton3.text = "확인"
                 binding.alertDialogButton1.visibility = View.INVISIBLE
                 binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
             }
 
             AlertType.TYPE3 -> {
@@ -77,6 +96,18 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 binding.alertDialogButton1.text = "취소"
                 binding.alertDialogButton2.text = "나가기"
                 binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
+
+
 
             }
             AlertType.TYPE4 -> {

@@ -3,7 +3,7 @@
 
     <!-- 체크박스 선택 상태 -->
     <item android:state_checked="true"
-        android:drawable="@drawable/ic_baseline_check_24">
+        android:drawable="@drawable/ic_checkbox_selected_icon_raw">
     </item>
 
     <!-- 체크박스 해제 상태 -->

@@ -58,10 +58,10 @@ class HomeWriteFragment : Fragment() {
     private lateinit var dynamicLayoutMap : MutableMap<String, ConstraintLayout>
     private var previousTabPosition = 0
 
+    private var editCount = 0
+
     private lateinit var progressIsPassingMap : MutableMap<Int, IsPassing?>
 
-    private lateinit var alertDialogFragmentType1: AlertDialogFragment
-    private lateinit var alertDialogFragmentType2: AlertDialogFragment
 
 
 
@@ -115,6 +115,11 @@ class HomeWriteFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
 
+                if (editCount % 2 == 1) {
+                    showAlert(AlertType.TYPE3)
+                    binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                }
+
 
                 val previousState = progressIsPassingMap[previousTabPosition]
                 val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
@@ -122,7 +127,6 @@ class HomeWriteFragment : Fragment() {
                 if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS) ) {
                     Log.d("test55566", "problem")
                     showAlert(AlertType.TYPE2)
-
                     binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                 }else {
                     previousTabPosition = tab.position
@@ -216,6 +220,8 @@ class HomeWriteFragment : Fragment() {
             setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout, homeWriteLL )
 
             homeWriteEditButton.setOnClickListener {
+                editCount += 1
+
                 homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
                 homeWriteEditButton.visibility = View.INVISIBLE
                 homeWriteEditCompleteButton.visibility = View.VISIBLE
@@ -259,6 +265,8 @@ class HomeWriteFragment : Fragment() {
             }
 
             homeWriteDeleteChip.setOnClickListener {
+
+
                 for (l in reviewRemoveLayoutList) {
                     homeWriteLL.removeView(l)
                 }
@@ -270,6 +278,8 @@ class HomeWriteFragment : Fragment() {
 
 
             homeWriteEditCompleteButton.setOnClickListener {
+                editCount += 1
+
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
                 homeWriteDeleteChip.visibility = View.INVISIBLE
@@ -509,17 +519,34 @@ class HomeWriteFragment : Fragment() {
     fun showAlert(alertType: AlertType){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
-                override fun onOkClick() {
+
+                override fun onLeftClick() {
 //                    mainViewModel.clickCommentDelete()
+                    when (alertType) {
+                        AlertType.TYPE3 -> {
+
+                        }
+                    }
+
                 }
 
-                override fun onCancelClick() {
+                override fun onCenterClick() {
+
+                }
+
+                override fun onRightClick() {
+                    when (alertType) {
+                        AlertType.TYPE3 -> {
+
+                        }
+                    }
 
                 }
 
             },
             alertType
         )
+
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 

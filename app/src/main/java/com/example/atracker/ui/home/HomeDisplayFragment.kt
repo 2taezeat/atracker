@@ -85,10 +85,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             }
         }
 
-        binding.test.setOnClickListener {
-            showAlert()
-        }
-
 
 
         binding.homeProgressRV.also{
@@ -151,20 +147,4 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         findNavController().navigate(action)
     }
 
-    fun showAlert(){
-        val alertDialogFragment = AlertDialogFragment.instance(
-            object : AlertDialogListener {
-                override fun onOkClick() {
-//                    mainViewModel.clickCommentDelete()
-                }
-
-                override fun onCancelClick() {
-
-                }
-
-            },
-            AlertType.TYPE4
-        )
-        alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
-    }
 }

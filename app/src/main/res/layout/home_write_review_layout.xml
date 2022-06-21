@@ -18,11 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
         android:visibility="invisible"
+        android:button="@drawable/custom_checkbox"
+        app:buttonTint="@drawable/checkbox_color_state_list"
         >
     </CheckBox>
 
-<!--    android:buttonTint="@color/atracker_gray_3"-->
-<!--    android:button="@drawable/custom_checkbox"-->
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
