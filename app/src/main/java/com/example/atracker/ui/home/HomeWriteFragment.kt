@@ -60,18 +60,19 @@ class HomeWriteFragment : Fragment() {
 
     private var editCount = 0
 
+    private var tmp = mutableMapOf<String, Boolean>()
+
+
     private lateinit var progressIsPassingMap : MutableMap<Int, IsPassing?>
 
 
 
-
-
-    private val reviewLayoutList by lazy {
-        arrayListOf<ConstraintLayout>()
+    private val reviewLayoutListMap by lazy {
+        mutableMapOf<String, List<ConstraintLayout>>()
     }
 
-    private val qnaLayoutList by lazy {
-        arrayListOf<ConstraintLayout>()
+    private val qnaLayoutListMap by lazy {
+        mutableMapOf<String, List<ConstraintLayout>>()
     }
 
     private val reviewRemoveLayoutList by lazy {
@@ -115,23 +116,28 @@ class HomeWriteFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
 
-                if (editCount % 2 == 1) {
-                    showAlert(AlertType.TYPE3)
-                    binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
-                }
+//                if (editCount % 2 == 1)
 
 
-                val previousState = progressIsPassingMap[previousTabPosition]
-                val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
+                if (tmp[tab.tag] == true) {
+                    //showAlert(AlertType.TYPE3, tab)
 
-                if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS) ) {
-                    Log.d("test55566", "problem")
-                    showAlert(AlertType.TYPE2)
-                    binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
-                }else {
-                    previousTabPosition = tab.position
-                    changeView(tab.tag.toString())
+                    Log.d("")
 
+
+                } else {
+                    val previousState = progressIsPassingMap[previousTabPosition]
+                    val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
+
+                    if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS)) {
+                        Log.d("test55566", "problem")
+                        showAlert(AlertType.TYPE2 , tab)
+                        binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                    } else {
+                        previousTabPosition = tab.position
+                        changeView(tab.tag.toString())
+
+                    }
                 }
 
 
@@ -197,6 +203,9 @@ class HomeWriteFragment : Fragment() {
                 0 // This will define text view height
             )
 
+            tmp[progressName] = tmp.orEmpty().plus(false)
+
+
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
             val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
             val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
@@ -216,8 +225,10 @@ class HomeWriteFragment : Fragment() {
             setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorStateList = resources.getColorStateList(R.color.atracker_white))
             setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorStateList = resources.getColorStateList(R.color.progress_color_7))
 
-            setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL )
-            setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout, homeWriteLL )
+            setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
+            setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout, homeWriteLL, progressName)
+
+
 
             homeWriteEditButton.setOnClickListener {
                 editCount += 1
@@ -229,7 +240,12 @@ class HomeWriteFragment : Fragment() {
                 homeWritePlusButton1.visibility = View.INVISIBLE
                 homeWritePlusButton2.visibility = View.INVISIBLE
 
-                for (reviewLayout in reviewLayoutList) {
+                tmp[progressName] = true
+
+                val reviewLayoutList = reviewLayoutListMap[progressName]
+                val qnaLayoutList = qnaLayoutListMap[progressName]
+
+                for (reviewLayout in reviewLayoutList.orEmpty()) {
                     reviewLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.VISIBLE
                     val homeWriteReviewMainCL = reviewLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
                     val reviewDeleteCheckBox = reviewLayout.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
@@ -246,7 +262,7 @@ class HomeWriteFragment : Fragment() {
                     }
                 }
 
-                for (qnaLayout in qnaLayoutList) {
+                for (qnaLayout in qnaLayoutList.orEmpty()) {
                     qnaLayout.getViewById(R.id.homeWriteQnaCheckBox).visibility = View.VISIBLE
                     val homeWriteQnaMainCL = qnaLayout.findViewById<ConstraintLayout>(R.id.homeWriteQnaMainCL)
                     val qnaDeleteCheckBox = qnaLayout.findViewById<CheckBox>(R.id.homeWriteQnaCheckBox)
@@ -265,7 +281,6 @@ class HomeWriteFragment : Fragment() {
             }
 
             homeWriteDeleteChip.setOnClickListener {
-
 
                 for (l in reviewRemoveLayoutList) {
                     homeWriteLL.removeView(l)
@@ -287,7 +302,12 @@ class HomeWriteFragment : Fragment() {
                 homeWritePlusButton1.visibility = View.VISIBLE
                 homeWritePlusButton2.visibility = View.VISIBLE
 
-                for (reviewLayout in reviewLayoutList) {
+                tmp[progressName] = false
+
+                val reviewLayoutList = reviewLayoutListMap[progressName]
+                val qnaLayoutList = qnaLayoutListMap[progressName]
+
+                for (reviewLayout in reviewLayoutList.orEmpty()) {
                     reviewLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.GONE
                     val homeWriteReviewMainCL = reviewLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
                     val set = ConstraintSet()
@@ -297,7 +317,7 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(reviewLayout)
                 }
 
-                for (qnaLayout in qnaLayoutList) {
+                for (qnaLayout in qnaLayoutList.orEmpty()) {
                     qnaLayout.getViewById(R.id.homeWriteQnaCheckBox).visibility = View.GONE
                     val homeWriteQnaMainCL = qnaLayout.findViewById<ConstraintLayout>(R.id.homeWriteQnaMainCL)
                     val set = ConstraintSet()
@@ -335,8 +355,6 @@ class HomeWriteFragment : Fragment() {
             val questionBody = homeDetailItem.questionBody
             val answerBody = homeDetailItem.answerBody
             val progressIsPassing = homeDetailItem.progressIsPassing
-
-
 
             progressIsPassingMap[progressType] = progressIsPassing
             val dynamicHomeWriteCL = dynamicLayoutMap[progressName]
@@ -380,9 +398,7 @@ class HomeWriteFragment : Fragment() {
 
                 val homeWriteReviewET = addLayout.findViewById<EditText>(R.id.homeWriteReviewET)
                 homeWriteReviewET.setText(totalReviewBody)
-
-
-                reviewLayoutList.add(addLayout)
+                reviewLayoutListMap[progressName] = reviewLayoutListMap[progressName].orEmpty().plus(addLayout)
             } else {
                 val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
                 val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
@@ -398,74 +414,10 @@ class HomeWriteFragment : Fragment() {
                 homeWriteQuestionTV.setText(questionBody)
                 val homeWriteAnswerET = addLayout.findViewById<EditText>(R.id.homeWriteAnswerET)
                 homeWriteAnswerET.setText(answerBody)
-                qnaLayoutList.add(addLayout)
+                qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
+
             }
-
-
-
-//            for (dynamicLayoutCL in dynamicLayoutList) {
-//                if (dynamicLayoutCL.tag == progressName) {
-//                    Log.d("test123444", "${dynamicLayoutCL.tag}")
-
-//                    val homeWriteNestedSV = dynamicLayoutCL.getViewById(R.id.homeWriteNestedSV)
-//                    val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
-//                    val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
-//                    val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
-//                    val homeWriteTypeSelect1 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect1)
-//                    val homeWriteTypeSelect2 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect2)
-//                    val homeWriteTypeSelect3 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect3)
-//
-//                    when (progressIsPassing) {
-//                        IsPassing.WAITING -> {
-//                            homeWriteTypeSelect1.isChecked = true
-//                        }
-//                        IsPassing.FAIL -> {
-//                            homeWriteTypeSelect2.isChecked = true
-//                        }
-//                        IsPassing.SUCCESS -> {
-//                            homeWriteTypeSelect3.isChecked = true
-//                        }
-//                    }
-//
-//                    if (itemType == ProgressItemBodyType.REVIEW) {
-//                        val addLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
-//                        val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//                            ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-//                            ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-//                        )
-//                        params.setMargins(0,20,0,10)
-//                        addLayout.layoutParams = params
-//                        addLayout.id = View.generateViewId()
-//                        homeWriteLL.addView(addLayout)
-//
-//                        val homeWriteReviewET = addLayout.findViewById<EditText>(R.id.homeWriteReviewET)
-//                        homeWriteReviewET.setText(totalReviewBody)
-//
-//
-//                        reviewLayoutList.add(addLayout)
-//                    } else {
-//                        val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
-//                        val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//                            ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-//                            ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-//                        )
-//                        params.setMargins(0,20,0,10)
-//                        addLayout.layoutParams = params
-//                        addLayout.id = View.generateViewId()
-//                        homeWriteLL.addView(addLayout)
-//
-//                        val homeWriteQuestionTV = addLayout.findViewById<EditText>(R.id.homeWriteQuestionTV)
-//                        homeWriteQuestionTV.setText(questionBody)
-//                        val homeWriteAnswerET = addLayout.findViewById<EditText>(R.id.homeWriteAnswerET)
-//                        homeWriteAnswerET.setText(answerBody)
-//                        qnaLayoutList.add(addLayout)
-//                    }
-//                }
-//            }
         }
-
-
-
     }
 
     private fun setChip(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorStateList: ColorStateList){
@@ -482,7 +434,7 @@ class HomeWriteFragment : Fragment() {
     }
 
 
-    private fun setPlusButton(button: TextView, layoutInt : Int, linearLayout: LinearLayout){
+    private fun setPlusButton(button: TextView, layoutInt : Int, linearLayout: LinearLayout, progressName : String){
         button.setOnClickListener{
             val addLayout = this.layoutInflater.inflate(layoutInt, null) as ConstraintLayout // inflating view from xml
             val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
@@ -496,9 +448,10 @@ class HomeWriteFragment : Fragment() {
             linearLayout.addView(addLayout)
 
             if (layoutInt == R.layout.home_write_review_layout) {
-                reviewLayoutList.add(addLayout)
+                reviewLayoutListMap[progressName] = reviewLayoutListMap[progressName].orEmpty().plus(addLayout)
+
             } else if (layoutInt == R.layout.home_write_qna_layout) {
-                qnaLayoutList.add(addLayout)
+                qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
             }
         }
     }
@@ -516,18 +469,18 @@ class HomeWriteFragment : Fragment() {
     }
 
 
-    fun showAlert(alertType: AlertType){
+    fun showAlert(alertType: AlertType, tab : TabLayout.Tab){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
 
                 override fun onLeftClick() {
-//                    mainViewModel.clickCommentDelete()
                     when (alertType) {
                         AlertType.TYPE3 -> {
-
+                            editCount += 1
+                            binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                            Log.d("test123", "${previousTabPosition}")
                         }
                     }
-
                 }
 
                 override fun onCenterClick() {
@@ -537,12 +490,12 @@ class HomeWriteFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE3 -> {
-
+                            previousTabPosition = tab.position
+                            changeView(tab.tag.toString())
+                            editCount += 1
                         }
                     }
-
                 }
-
             },
             alertType
         )
