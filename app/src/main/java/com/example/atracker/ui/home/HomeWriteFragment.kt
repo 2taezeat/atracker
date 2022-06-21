@@ -1,6 +1,5 @@
 package com.example.atracker.ui.home
 
-import android.content.res.List
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -77,22 +76,12 @@ class HomeWriteFragment : Fragment() {
         mutableMapOf<String, List<ConstraintLayout>>()
     }
 
-    private val reviewRemoveLayoutList by lazy {
-        arrayListOf<ConstraintLayout>()
-    }
-
-    private val qnaRemoveLayoutList by lazy {
-        arrayListOf<ConstraintLayout>()
-    }
-
-
-
     private val reviewRemoveLayoutList_map by lazy {
-        mutableMapOf<String, List<ConstraintLayout>>()
+        mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
     private val qnaRemoveLayoutList_map by lazy {
-        mutableMapOf<String, List<ConstraintLayout>>()
+        mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
 
@@ -217,6 +206,8 @@ class HomeWriteFragment : Fragment() {
             )
 
             editBooleanMap[progressName] = false
+            reviewRemoveLayoutList_map[progressName] = arrayListOf()
+            qnaRemoveLayoutList_map[progressName] = arrayListOf()
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -269,9 +260,10 @@ class HomeWriteFragment : Fragment() {
 
                     reviewDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
-                            reviewRemoveLayoutList.add(reviewLayout)
+                            reviewRemoveLayoutList_map[progressName]!!.add(reviewLayout)
                         else
-                            reviewRemoveLayoutList.remove(reviewLayout)
+                            reviewRemoveLayoutList_map[progressName]!!.remove(reviewLayout)
+
                     }
                 }
 
@@ -287,31 +279,21 @@ class HomeWriteFragment : Fragment() {
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
-                            qnaRemoveLayoutList.add(qnaLayout)
+                            qnaRemoveLayoutList_map[progressName]!!.add(qnaLayout)
                         else
-                            qnaRemoveLayoutList.remove(qnaLayout)
+                            qnaRemoveLayoutList_map[progressName]!!.remove(qnaLayout)
                     }
                 }
             }
 
             homeWriteDeleteChip.setOnClickListener {
-
-                showAlert(AlertType.TYPE1, null, homeWriteLL)
-
-
-//                for (l in reviewRemoveLayoutList) {
-//                    homeWriteLL.removeView(l)
-//                }
-//
-//                for (l in qnaRemoveLayoutList) {
-//                    homeWriteLL.removeView(l)
-//                }
+                showAlert(AlertType.TYPE1, homeWriteTabLayout.getTabAt(previousTabPosition), homeWriteLL)
             }
 
 
             homeWriteEditCompleteButton.setOnClickListener {
-                reviewRemoveLayoutList.clear()
-                qnaRemoveLayoutList.clear()
+                reviewRemoveLayoutList_map[progressName]!!.clear()
+                qnaRemoveLayoutList_map[progressName]!!.clear()
 
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
@@ -511,15 +493,16 @@ class HomeWriteFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE1 -> {
-                            for (l in reviewRemoveLayoutList) {
+                            for (l in reviewRemoveLayoutList_map[tab!!.tag.toString()].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
-                            for (l in qnaRemoveLayoutList) {
+                            for (l in qnaRemoveLayoutList_map[tab!!.tag.toString()].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
 
-                            reviewRemoveLayoutList.clear()
-                            qnaRemoveLayoutList.clear()
+                            reviewRemoveLayoutList_map[tab!!.tag.toString()]!!.clear()
+                            qnaRemoveLayoutList_map[tab!!.tag.toString()]!!.clear()
+
                         }
                         AlertType.TYPE3 -> {
                             previousTabPosition = tab!!.position
@@ -533,7 +516,7 @@ class HomeWriteFragment : Fragment() {
                 }
             },
             alertType,
-            reviewRemoveLayoutList.size + qnaRemoveLayoutList.size
+            reviewRemoveLayoutList_map[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutList_map[tab!!.tag.toString()].orEmpty().size
 
         )
 
