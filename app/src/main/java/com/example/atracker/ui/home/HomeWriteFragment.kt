@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.R
 import com.example.atracker.model.dto.IsPassing
@@ -60,7 +61,7 @@ class HomeWriteFragment : Fragment() {
     private var previousTabName = ""
 
 
-    private var tmp = mutableMapOf<String, Boolean>()
+    private var editBooleanMap = mutableMapOf<String, Boolean>()
 
 
     private lateinit var progressIsPassingMap : MutableMap<Int, IsPassing?>
@@ -116,7 +117,7 @@ class HomeWriteFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
 
-                if (tmp[previousTabName] == true && previousTabPosition != tab!!.position) {
+                if (editBooleanMap[previousTabName] == true && previousTabPosition != tab!!.position) {
                     showAlert(AlertType.TYPE3, tab)
 
                     Log.d("test123123123", "test123123123")
@@ -180,6 +181,12 @@ class HomeWriteFragment : Fragment() {
         }
 
 
+
+        binding.homeWriteSaveTV.setOnClickListener {
+            showAlert(AlertType.TYPE4, null)
+        }
+
+
         return root
 
     }
@@ -205,7 +212,7 @@ class HomeWriteFragment : Fragment() {
                 0 // This will define text view height
             )
 
-            tmp[progressName] = false
+            editBooleanMap[progressName] = false
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -241,7 +248,7 @@ class HomeWriteFragment : Fragment() {
                 homeWritePlusButton1.visibility = View.INVISIBLE
                 homeWritePlusButton2.visibility = View.INVISIBLE
 
-                tmp[progressName] = true
+                editBooleanMap[progressName] = true
 
                 val reviewLayoutList = reviewLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
@@ -302,7 +309,7 @@ class HomeWriteFragment : Fragment() {
                 homeWritePlusButton1.visibility = View.VISIBLE
                 homeWritePlusButton2.visibility = View.VISIBLE
 
-                tmp[progressName] = false
+                editBooleanMap[progressName] = false
 
                 val reviewLayoutList = reviewLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
@@ -469,7 +476,7 @@ class HomeWriteFragment : Fragment() {
     }
 
 
-    fun showAlert(alertType: AlertType, tab : TabLayout.Tab){
+    fun showAlert(alertType: AlertType, tab : TabLayout.Tab?){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
 
@@ -477,6 +484,9 @@ class HomeWriteFragment : Fragment() {
                     when (alertType) {
                         AlertType.TYPE3 -> {
                             binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                        }
+                        AlertType.TYPE4 -> {
+
                         }
                     }
                 }
@@ -488,10 +498,12 @@ class HomeWriteFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE3 -> {
-                            previousTabPosition = tab.position
-                            previousTabName = tab.tag.toString()
-
-                            changeView(tab.tag.toString())
+                            previousTabPosition = tab!!.position
+                            previousTabName = tab!!.tag.toString()
+                            changeView(tab!!.tag.toString())
+                        }
+                        AlertType.TYPE4 -> {
+                            findNavController().popBackStack()
                         }
                     }
                 }

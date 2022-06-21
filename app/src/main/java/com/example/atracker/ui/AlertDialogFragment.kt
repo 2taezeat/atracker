@@ -122,6 +122,16 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 binding.alertDialogButton1.text = "계속 수정"
                 binding.alertDialogButton2.text = "나가기"
                 binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
             }
 
         }
