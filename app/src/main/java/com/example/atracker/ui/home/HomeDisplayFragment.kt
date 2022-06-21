@@ -1,28 +1,18 @@
 package com.example.atracker.ui.home
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
-import com.example.atracker.ui.AlertDialogFragment
-import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
-import com.example.atracker.utils.AlertType
 
 class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 

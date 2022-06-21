@@ -118,7 +118,7 @@ class HomeWriteFragment : Fragment() {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
 
                 if (editBooleanMap[previousTabName] == true && previousTabPosition != tab!!.position) {
-                    showAlert(AlertType.TYPE3, tab)
+                    showAlert(AlertType.TYPE3, tab, null)
 
                     Log.d("test123123123", "test123123123")
 
@@ -129,7 +129,7 @@ class HomeWriteFragment : Fragment() {
 
                     if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS)) {
                         Log.d("test55566", "problem")
-                        showAlert(AlertType.TYPE2 , tab)
+                        showAlert(AlertType.TYPE2 , tab,null)
                         binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                     } else {
                         previousTabPosition = tab.position
@@ -183,7 +183,7 @@ class HomeWriteFragment : Fragment() {
 
 
         binding.homeWriteSaveTV.setOnClickListener {
-            showAlert(AlertType.TYPE4, null)
+            showAlert(AlertType.TYPE4, null, null)
         }
 
 
@@ -261,6 +261,7 @@ class HomeWriteFragment : Fragment() {
                     set.clone(reviewLayout)
                     set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, reviewDeleteCheckBox.id , ConstraintSet.END, 20)
                     set.applyTo(reviewLayout)
+                    reviewDeleteCheckBox.isChecked = false
 
                     reviewDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -278,6 +279,7 @@ class HomeWriteFragment : Fragment() {
                     set.clone(qnaLayout)
                     set.connect(homeWriteQnaMainCL.id,ConstraintSet.START, qnaDeleteCheckBox.id , ConstraintSet.END, 20)
                     set.applyTo(qnaLayout)
+                    qnaDeleteCheckBox.isChecked = false
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -290,17 +292,22 @@ class HomeWriteFragment : Fragment() {
 
             homeWriteDeleteChip.setOnClickListener {
 
-                for (l in reviewRemoveLayoutList) {
-                    homeWriteLL.removeView(l)
-                }
+                showAlert(AlertType.TYPE1, null, homeWriteLL)
 
-                for (l in qnaRemoveLayoutList) {
-                    homeWriteLL.removeView(l)
-                }
+
+//                for (l in reviewRemoveLayoutList) {
+//                    homeWriteLL.removeView(l)
+//                }
+//
+//                for (l in qnaRemoveLayoutList) {
+//                    homeWriteLL.removeView(l)
+//                }
             }
 
 
             homeWriteEditCompleteButton.setOnClickListener {
+                reviewRemoveLayoutList.clear()
+                qnaRemoveLayoutList.clear()
 
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
@@ -476,7 +483,7 @@ class HomeWriteFragment : Fragment() {
     }
 
 
-    fun showAlert(alertType: AlertType, tab : TabLayout.Tab?){
+    fun showAlert(alertType: AlertType, tab : TabLayout.Tab?, deleteHomeWriteLL: LinearLayout? ){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
 
@@ -497,6 +504,17 @@ class HomeWriteFragment : Fragment() {
 
                 override fun onRightClick() {
                     when (alertType) {
+                        AlertType.TYPE1 -> {
+                            for (l in reviewRemoveLayoutList) {
+                                deleteHomeWriteLL!!.removeView(l)
+                            }
+                            for (l in qnaRemoveLayoutList) {
+                                deleteHomeWriteLL!!.removeView(l)
+                            }
+
+                            reviewRemoveLayoutList.clear()
+                            qnaRemoveLayoutList.clear()
+                        }
                         AlertType.TYPE3 -> {
                             previousTabPosition = tab!!.position
                             previousTabName = tab!!.tag.toString()
@@ -508,7 +526,9 @@ class HomeWriteFragment : Fragment() {
                     }
                 }
             },
-            alertType
+            alertType,
+            reviewRemoveLayoutList.size + qnaRemoveLayoutList.size
+
         )
 
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)

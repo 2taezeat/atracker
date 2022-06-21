@@ -4,7 +4,6 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,6 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.atracker.databinding.FragmentEventCreateBinding
-import com.example.atracker.ui.AlertDialogFragment
-import com.example.atracker.ui.AlertDialogListener
-import com.example.atracker.utils.AlertType
 
 class EventCreateFragment : DialogFragment() {
 

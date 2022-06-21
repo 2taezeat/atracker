@@ -79,4 +79,8 @@
     <string name="time_title">시간</string>
 
 
+    <string name="alert_type_1_text_1_message"><font color="#7EFCDD">개의 후기</font><font color="#F5F5F5">를 정말 삭제하시겠습니까?</font></string>
+
+
+
 </resources>

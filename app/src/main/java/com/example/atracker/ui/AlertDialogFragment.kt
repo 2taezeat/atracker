@@ -14,12 +14,12 @@ import com.example.atracker.databinding.FragmentAlertDialogBinding
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
 import com.example.atracker.utils.AlertType
 
-class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, private val alertType : AlertType ) : DialogFragment() {
+class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, private val alertType : AlertType, private val countNum : Int? = null ) : DialogFragment() {
 
     companion object{
         const val TAG = "AlertDialogFragment"
-        fun instance(alertDialogListener: AlertDialogListener, alertType : AlertType): AlertDialogFragment {
-            return AlertDialogFragment(alertDialogListener, alertType)
+        fun instance(alertDialogListener: AlertDialogListener, alertType : AlertType, countNum: Int? ): AlertDialogFragment {
+            return AlertDialogFragment(alertDialogListener, alertType, countNum)
         }
     }
     private val lazyContext by lazy {
@@ -59,20 +59,32 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
             AlertType.TYPE1 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
 
-
-                binding.alertDialogTV1.text = "3개의 후기를 정말 삭제하시겠습니까?"
+                binding.alertDialogTV0.text = countNum.toString()
                 binding.alertDialogButton3.visibility = View.INVISIBLE
                 binding.alertDialogTV2.text = "이 작업은 취소할 수 없습니다."
 
                 binding.alertDialogButton1.text = "취소"
                 binding.alertDialogButton2.text = "삭제"
                 binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
             }
 
             AlertType.TYPE2 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
 
+                binding.alertDialogTV0.visibility = View.INVISIBLE
                 binding.alertDialogTV1.text = "이전 전형에 합격을 선택하셔야"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
                 binding.alertDialogTV2.visibility = View.INVISIBLE
                 binding.alertDialogTV3.text = "다음 전형으로 넘어갈 수 있습니다."
 
@@ -89,7 +101,10 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
             AlertType.TYPE3 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
 
+                binding.alertDialogTV0.visibility = View.INVISIBLE
                 binding.alertDialogTV1.text = "작성을 취소하고 나가시겠습니까?"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
                 binding.alertDialogTV3.visibility = View.INVISIBLE
                 binding.alertDialogTV2.text = "작성하던 내용이 저장되지 않습니다."
 
@@ -107,12 +122,11 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                     dismiss()
                 }
 
-
-
             }
             AlertType.TYPE4 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_check_icon_raw)
 
+                binding.alertDialogTV0.visibility = View.INVISIBLE
                 binding.alertDialogTV1.text = "저장이 완료되었습니다!"
                 binding.alertDialogTV1.setTextColor(mForegroundSuccess7)
 
