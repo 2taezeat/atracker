@@ -88,7 +88,7 @@ class HomeAddFragment : Fragment() {
             if (checked) {
                 checkedChipIdList.add(compoundButton.id)
                 binding.homeAddTypeSelect1.chipStrokeWidth = 2f
-                binding.homeAddTypeSelect1.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
+                binding.homeAddTypeSelect1.setChipStrokeColorResource(R.color.progress_color_7)
 
             } else {
                 checkedChipIdList.remove(compoundButton.id)
@@ -100,7 +100,7 @@ class HomeAddFragment : Fragment() {
             if (checked) {
                 checkedChipIdList.add(compoundButton.id)
                 binding.homeAddTypeSelect2.chipStrokeWidth = 2f
-                binding.homeAddTypeSelect2.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
+                binding.homeAddTypeSelect2.setChipStrokeColorResource(R.color.progress_color_7)
 
             } else {
                 checkedChipIdList.remove(compoundButton.id)
@@ -112,7 +112,7 @@ class HomeAddFragment : Fragment() {
             if (checked) {
                 checkedChipIdList.add(compoundButton.id)
                 binding.homeAddTypeSelect3.chipStrokeWidth = 2f
-                binding.homeAddTypeSelect3.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
+                binding.homeAddTypeSelect3.setChipStrokeColorResource(R.color.progress_color_7)
 
             } else {
                 checkedChipIdList.remove(compoundButton.id)
@@ -124,7 +124,7 @@ class HomeAddFragment : Fragment() {
             if (checked) {
                 checkedChipIdList.add(compoundButton.id)
                 binding.homeAddTypeSelect4.chipStrokeWidth = 2f
-                binding.homeAddTypeSelect4.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
+                binding.homeAddTypeSelect4.setChipStrokeColorResource(R.color.progress_color_7)
 
             } else {
                 checkedChipIdList.remove(compoundButton.id)

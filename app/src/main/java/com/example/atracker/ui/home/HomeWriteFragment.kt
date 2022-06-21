@@ -1,6 +1,6 @@
 package com.example.atracker.ui.home
 
-import android.content.res.ColorStateList
+import android.content.res.List
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +15,7 @@ import com.example.atracker.databinding.FragmentHomeWriteBinding
 import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -86,6 +87,16 @@ class HomeWriteFragment : Fragment() {
 
 
 
+    private val reviewRemoveLayoutList_map by lazy {
+        mutableMapOf<String, List<ConstraintLayout>>()
+    }
+
+    private val qnaRemoveLayoutList_map by lazy {
+        mutableMapOf<String, List<ConstraintLayout>>()
+    }
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,7 +124,6 @@ class HomeWriteFragment : Fragment() {
 
 
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
 
@@ -121,14 +131,11 @@ class HomeWriteFragment : Fragment() {
                     showAlert(AlertType.TYPE3, tab, null)
 
                     Log.d("test123123123", "test123123123")
-
-
                 } else {
                     val previousState = progressIsPassingMap[previousTabPosition]
                     val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
 
                     if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS)) {
-                        Log.d("test55566", "problem")
                         showAlert(AlertType.TYPE2 , tab,null)
                         binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                     } else {
@@ -136,11 +143,8 @@ class HomeWriteFragment : Fragment() {
                         previousTabName = tab.tag.toString()
 
                         changeView(tab.tag.toString())
-
                     }
                 }
-
-
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -230,9 +234,9 @@ class HomeWriteFragment : Fragment() {
 
             homeWriteContentLayout.layoutParams = params
 
-            setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorStateList = resources.getColorStateList(R.color.atracker_white))
-            setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorStateList = resources.getColorStateList(R.color.atracker_white))
-            setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorStateList = resources.getColorStateList(R.color.progress_color_7))
+            setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
+            setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
+            setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValue = R.color.progress_color_7)
 
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
             setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout, homeWriteLL, progressName)
@@ -385,17 +389,19 @@ class HomeWriteFragment : Fragment() {
                 IsPassing.WAITING -> {
                     homeWriteTypeSelect1.isChecked = true
                     homeWriteTypeSelect1.chipStrokeWidth = 4f
-                    homeWriteTypeSelect1.chipStrokeColor = resources.getColorStateList(R.color.atracker_white)
+                    homeWriteTypeSelect1.setChipStrokeColorResource(R.color.atracker_white)
+
                 }
                 IsPassing.FAIL -> {
                     homeWriteTypeSelect2.isChecked = true
                     homeWriteTypeSelect2.chipStrokeWidth = 4f
-                    homeWriteTypeSelect2.chipStrokeColor = resources.getColorStateList(R.color.atracker_white)
+                    homeWriteTypeSelect2.setChipStrokeColorResource(R.color.atracker_white)
                 }
                 IsPassing.SUCCESS -> {
                     homeWriteTypeSelect3.isChecked = true
                     homeWriteTypeSelect3.chipStrokeWidth = 4f
-                    homeWriteTypeSelect3.chipStrokeColor = resources.getColorStateList(R.color.progress_color_7)
+                    homeWriteTypeSelect3.setChipStrokeColorResource(R.color.progress_color_7)
+
                 }
             }
 
@@ -434,11 +440,11 @@ class HomeWriteFragment : Fragment() {
         }
     }
 
-    private fun setChip(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorStateList: ColorStateList){
+    private fun setChip(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorValue: Int){
         chip1.setOnClickListener {
             if (chip1.isChecked) {
                 chip1.chipStrokeWidth = 4f
-                chip1.chipStrokeColor = colorStateList
+                chip1.setChipStrokeColorResource(colorValue)
                 chip2.chipStrokeWidth = 0f
                 chip3.chipStrokeWidth = 0f
             } else {
