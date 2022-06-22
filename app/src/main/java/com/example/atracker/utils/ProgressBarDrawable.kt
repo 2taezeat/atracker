@@ -95,8 +95,6 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
                     mSegmentMiniCircle.offset(mSegment.width(), 0f)
                     mSegmentMiniCircle.offset(mSegment.width() - (miniOffset * 3.0f)  , 0f)
 
-                    Log.d("test456", "${mSegment.left}, ${mSegment.right}")
-
 
                     canvas.drawRoundRect(mSegmentMiniCircle.left - (miniOffset * 1.2f) - numSegments  , mSegmentMiniCircle.top, mSegment.left + numSegments, mSegmentMiniCircle.bottom,50f,50f, mPaint)
                     //canvas.drawRoundRect(mSegmentMiniCircle.left - miniOffset * 1.4f  , mSegmentMiniCircle.top, mSegmentMiniCircle.right - miniOffset * 1.4f , mSegmentMiniCircle.bottom,50f,50f, mPaint)
