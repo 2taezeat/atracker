@@ -150,8 +150,67 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 }
             }
 
-        }
+            AlertType.TYPE5 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
 
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "회사명을 선택하셔야"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.text = "다음 단계로 넘어갈 수 있습니다."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
+            AlertType.TYPE6 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "지원분야를 선택하셔야"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.text = "다음 단계로 넘어갈 수 있습니다."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
+            AlertType.TYPE7 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "지원단계를 2개 이상 순서대로 입력하셔야"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.text = "다음 단계로 넘어갈 수 있습니다."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
+        }
 
         return root
     }
