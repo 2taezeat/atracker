@@ -54,7 +54,7 @@
     <string name="edit">편집</string>
     <string name="edit_complete">편집 완료</string>
     <string name="home_add_title">지원 현황 추가</string>
-    <string name="total_progress">총 지원 단계</string>
+    <string name="total_progress">지원 단계를 순서대로 눌러주세요.</string>
     <string name="date_title">일정</string>
     <string name="location_title">장소</string>
     <string name="location_hint">장소나 화상면접 추가하기</string>
@@ -81,17 +81,16 @@
     <string name="chip_title_7">적성 검사</string>
     <string name="chip_title_8">코딩 테스트</string>
 
-
     <string name="company_name_title">회사명</string>
-    <string name="apply_field_title">지원 분야</string>
-    <string name="position_name_title">포지션명</string>
+    <string name="apply_field_title">포지션</string>
+    <string name="work_type_name_title">근무 형태</string>
     <string name="cancel_title">취소</string>
     <string name="save_title">저장</string>
     <string name="time_title">시간</string>
 
-
     <string name="alert_type_1_text_1_message"><font color="#7EFCDD">개의 후기</font><font color="#F5F5F5">를 정말 삭제하시겠습니까?</font></string>
-
+    <string name="add_company_hint">회사명을 입력해주세요.</string>
+    <string name="add_apply_hint">포지션명을 입력해주세요.</string>
 
 
 </resources>

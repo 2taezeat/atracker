@@ -98,4 +98,10 @@
     </style>
 
 
+    <style name="MyEditTextTheme">
+        <item name="colorControlActivated">@color/teal_700</item>
+        <item name="colorControlHighlight">@color/teal_700</item>
+    </style>
+
+
 </resources>

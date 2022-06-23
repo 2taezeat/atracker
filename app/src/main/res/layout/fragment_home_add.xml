@@ -70,10 +70,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/homeAddHeadCL"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
             android:id="@+id/homeAddMainCL"
             >
 
@@ -85,7 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/company_name_title"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="34dp"
                 android:textColor="@color/atracker_gray_3"
                 android:textSize="14sp"
                 >
@@ -97,21 +96,23 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitle"
                 app:layout_constraintStart_toEndOf="@+id/homeAddCompanyTitle"
-                android:hint="카카오 벤쳐스"
-                android:textSize="14sp"
-                android:layout_marginTop="10dp"
+                android:hint="@string/add_company_hint"
+                android:textSize="16sp"
+                android:layout_marginTop="14dp"
                 android:id="@+id/homeAddCompanyTitleET"
+                android:textColorHint="@color/atracker_gray_6"
                 android:background="@null"
+                android:textColor="@color/atracker_white"
                 >
 
             </EditText>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitleET"
-                android:layout_marginTop="40dp"
-                android:background="@color/atracker_gray_3"
+                android:layout_marginTop="5dp"
+                android:background="@color/atracker_gray_4"
                 android:id="@+id/homeAddView1"
                 >
             </View>
@@ -125,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/homeAddView1"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/apply_field_title"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="38dp"
                 android:textColor="@color/atracker_gray_3"
                 android:textSize="14sp"
                 >
@@ -137,21 +138,23 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddApplyField"
                 app:layout_constraintStart_toEndOf="@+id/homeAddApplyField"
-                android:hint="인턴"
-                android:textSize="14sp"
+                android:hint="@string/add_apply_hint"
+                android:textSize="16sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/homeAddApplyFieldET"
                 android:background="@null"
+                android:textColorHint="@color/atracker_gray_6"
+                android:textColor="@color/atracker_white"
                 >
 
             </EditText>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddApplyFieldET"
-                android:layout_marginTop="40dp"
-                android:background="@color/atracker_gray_3"
+                android:layout_marginTop="5dp"
+                android:background="@color/atracker_gray_4"
                 android:id="@+id/homeAddView2"
                 >
             </View>
@@ -161,40 +164,54 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/homeAddPositionName"
+                android:id="@+id/homeAddWorkType"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddView2"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/position_name_title"
-                android:layout_marginTop="20dp"
+                android:text="@string/work_type_name_title"
+                android:layout_marginTop="38dp"
                 android:textColor="@color/atracker_gray_3"
                 android:textSize="14sp"
                 >
             </TextView>
 
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/homeAddPositionName"
-                app:layout_constraintStart_toEndOf="@+id/homeAddPositionName"
-                android:hint="예시) 애널리스트"
-                android:textSize="14sp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/homeAddPositionNameET"
-                android:background="@null"
-                >
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkType"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/homeAddWorkType"-->
+<!--                android:hint="예시) 애널리스트"-->
+<!--                android:textSize="14sp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:id="@+id/homeAddPositionNameET"-->
+<!--                android:background="@null"-->
+<!--                >-->
 
-            </EditText>
+<!--            </EditText>-->
 
-            <View
+            <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                app:layout_constraintTop_toBottomOf="@+id/homeAddPositionNameET"
-                android:layout_marginTop="40dp"
-                android:background="@color/atracker_gray_3"
-                android:id="@+id/homeAddView3"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkType"
+                app:layout_constraintStart_toEndOf="@+id/homeAddWorkType"
+                android:spinnerMode="dropdown"
+                android:id="@+id/homeAddWorkTypeSpinner"
+                android:background="@drawable/spinner_background"
+
                 >
-            </View>
+            </Spinner>
+
+
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkTypeSpinner"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@color/atracker_gray_4"-->
+<!--                android:id="@+id/homeAddView3"-->
+<!--                >-->
+<!--            </View>-->
 
 
 
@@ -202,10 +219,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/homeAddTotalProgress"
-                app:layout_constraintTop_toBottomOf="@+id/homeAddView3"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkTypeSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:text="@string/total_progress"
+                android:textSize="14sp"
+                android:textColor="@color/atracker_gray_3"
                 >
             </TextView>
 
@@ -214,7 +233,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/homeAddRefreshIV"
-                app:layout_constraintTop_toBottomOf="@+id/homeAddView3"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkTypeSpinner"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_refresh_icon_raw"
                 android:layout_marginTop="20dp"
@@ -234,7 +253,7 @@
                 android:layout_marginStart="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"
-                app:chipSpacingHorizontal="14dp"
+                app:chipSpacingHorizontal="16dp"
                 >
 
                 <com.google.android.material.chip.Chip

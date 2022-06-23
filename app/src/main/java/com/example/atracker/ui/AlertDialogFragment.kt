@@ -11,8 +11,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentAlertDialogBinding
-import com.example.atracker.databinding.FragmentHomeDisplayBinding
 import com.example.atracker.utils.AlertType
+import android.text.Spannable
+
+import android.text.style.ForegroundColorSpan
+
+import android.text.SpannableStringBuilder
+
+
+
 
 class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, private val alertType : AlertType, private val countNum : Int? = null ) : DialogFragment() {
 
@@ -33,7 +40,7 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentAlertDialogBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -152,9 +159,12 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
 
             AlertType.TYPE5 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
-
                 binding.alertDialogTV0.visibility = View.INVISIBLE
-                binding.alertDialogTV1.text = "회사명을 선택하셔야"
+
+                val testString1 = "회사명을 선택하셔야"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
                 binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
 
                 binding.alertDialogTV2.visibility = View.INVISIBLE
@@ -172,9 +182,12 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
 
             AlertType.TYPE6 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
-
                 binding.alertDialogTV0.visibility = View.INVISIBLE
-                binding.alertDialogTV1.text = "지원분야를 선택하셔야"
+
+                val testString1 = "포지션을 선택하셔야"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
                 binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
 
                 binding.alertDialogTV2.visibility = View.INVISIBLE
@@ -192,9 +205,12 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
 
             AlertType.TYPE7 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
-
                 binding.alertDialogTV0.visibility = View.INVISIBLE
-                binding.alertDialogTV1.text = "지원단계를 2개 이상 순서대로 입력하셔야"
+
+                val testString1 = "지원단계를 2개 이상 순서대로 입력하셔야"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 6, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
                 binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
 
                 binding.alertDialogTV2.visibility = View.INVISIBLE
@@ -212,13 +228,16 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
 
             AlertType.TYPE8 -> {
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
-
                 binding.alertDialogTV0.visibility = View.INVISIBLE
-                binding.alertDialogTV1.text = "지원단계는 최대 7개까지" // tmp
+
+                val testString1 = "지원단계는 최대 7개까지 선택가능합니다."
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 6, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
                 binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
 
                 binding.alertDialogTV2.visibility = View.INVISIBLE
-                binding.alertDialogTV3.text = "가능합니다."
+                binding.alertDialogTV3.text = "중요도에 따라 선택해주세요."
 
                 binding.alertDialogButton3.text = "확인"
                 binding.alertDialogButton1.visibility = View.INVISIBLE
