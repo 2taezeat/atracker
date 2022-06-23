@@ -210,6 +210,26 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 }
             }
 
+            AlertType.TYPE8 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "지원단계는 최대 7개까지" // tmp
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.text = "가능합니다."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
         }
 
         return root

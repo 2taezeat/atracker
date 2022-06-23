@@ -198,10 +198,6 @@
 
 
 
-
-
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -222,10 +218,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_refresh_icon_raw"
                 android:layout_marginTop="20dp"
-
                 >
-
-
 
             </ImageView>
 
@@ -242,12 +235,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"
                 app:chipSpacingHorizontal="14dp"
-
                 >
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/homeAddTypeSelect1"
                     android:text="@string/chip_title_1"
                     android:textAlignment="center"
@@ -257,14 +249,14 @@
                     android:clickable="true"
                     android:focusable="true"
                     style="@style/CustomChipChoice3"
-
+                    app:chipIconSize="14dp"
                     android:layoutDirection="rtl"
                     >
                 </com.google.android.material.chip.Chip>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/homeAddTypeSelect2"
                     android:text="@string/chip_title_2"
                     android:textAlignment="textStart"
@@ -274,7 +266,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:layoutDirection="rtl"
-                    app:chipIconSize="20dp"
+                    app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
 
                     >
@@ -283,7 +275,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/homeAddTypeSelect3"
                     android:text="@string/chip_title_3"
                     android:textAlignment="center"
@@ -293,6 +285,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:layoutDirection="rtl"
+                    app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
 
                     >
@@ -301,7 +294,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/homeAddTypeSelect4"
                     android:text="@string/chip_title_4"
                     android:textAlignment="center"
@@ -311,6 +304,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:layoutDirection="rtl"
+                    app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
 
                     >
@@ -318,7 +312,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/homeAddTypeSelect5"
                     android:text="@string/chip_title_5"
                     android:textAlignment="center"
@@ -328,8 +322,59 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:layoutDirection="rtl"
+                    app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    >
+                </com.google.android.material.chip.Chip>
 
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeAddTypeSelect6"
+                    android:text="@string/chip_title_6"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="rtl"
+                    app:chipIconSize="14dp"
+                    style="@style/CustomChipChoice3"
+                    >
+                </com.google.android.material.chip.Chip>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeAddTypeSelect7"
+                    android:text="@string/chip_title_7"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="rtl"
+                    app:chipIconSize="14dp"
+                    style="@style/CustomChipChoice3"
+                    >
+                </com.google.android.material.chip.Chip>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/homeAddTypeSelect8"
+                    android:text="@string/chip_title_8"
+                    android:textAlignment="center"
+                    app:chipStrokeWidth="0dp"
+                    android:textSize="14sp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="rtl"
+                    app:chipIconSize="14dp"
+                    style="@style/CustomChipChoice3"
                     >
                 </com.google.android.material.chip.Chip>
 
@@ -338,7 +383,6 @@
             </com.google.android.material.chip.ChipGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,19 +2,20 @@ package com.example.atracker.ui.home
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
-import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeAddBinding
+import com.example.atracker.ui.AlertDialogFragment
+import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -57,22 +58,23 @@ class HomeAddFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val numberDrawable1 =
-            ContextCompat.getDrawable(lazyContext, R.drawable.ic_baseline_looks_one_24)
-        val numberDrawable2 =
-            ContextCompat.getDrawable(lazyContext, R.drawable.ic_baseline_looks_two_24)
-        val numberDrawable3 =
-            ContextCompat.getDrawable(lazyContext, R.drawable.ic_baseline_looks_3_24)
-        val numberDrawable4 =
-            ContextCompat.getDrawable(lazyContext, R.drawable.ic_baseline_looks_4_24)
-        val numberDrawable5 =
-            ContextCompat.getDrawable(lazyContext, R.drawable.ic_baseline_looks_5_24)
+        val numberDrawable1 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_1_raw)
+        val numberDrawable2 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_2_raw)
+        val numberDrawable3 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_3_raw)
+        val numberDrawable4 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_4_raw)
+        val numberDrawable5 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_5_raw)
+        val numberDrawable6 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_6_raw)
+        val numberDrawable7 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_7_raw)
 
-        numberDrawableList = arrayListOf(numberDrawable1,
+        numberDrawableList = arrayListOf(
+            numberDrawable1,
             numberDrawable2,
             numberDrawable3,
             numberDrawable4,
-            numberDrawable5)
+            numberDrawable5,
+            numberDrawable6,
+            numberDrawable7,
+            )
     }
 
     override fun onCreateView(
@@ -95,8 +97,7 @@ class HomeAddFragment : Fragment() {
         binding.homeAddRefreshIV.setOnClickListener {
             val copyCheckedChipIdList = ArrayList(checkedChipIdList)
             for (idx in 0 until copyCheckedChipIdList.size) {
-                val checkedChip =
-                    binding.homeAddTypeSelectChipGroup.findViewById<Chip>(copyCheckedChipIdList[idx])
+                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(copyCheckedChipIdList[idx])
                 checkedChip.isChecked = false
             }
         }
@@ -112,81 +113,86 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
-            if (checkedChipIdList.size >= 3 && checked) {
-                binding.homeAddTypeSelect1.isCheckable = false
-                binding.homeAddRefreshIV.callOnClick()
-                binding.homeAddTypeSelect1.isCheckable = true
-            }
-
-            if (checked) {
-                checkedChipIdList.add(compoundButton.id)
-                binding.homeAddTypeSelect1.chipStrokeWidth = 4f
-                binding.homeAddTypeSelect1.setChipStrokeColorResource(R.color.progress_color_7)
-            } else {
-                checkedChipIdList.remove(compoundButton.id)
-                binding.homeAddTypeSelect1.chipStrokeWidth = 0f
-            }
-
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)
         }
 
         binding.homeAddTypeSelect2.setOnCheckedChangeListener { compoundButton, checked ->
-            if (checkedChipIdList.size >= 3 && checked) {
-                binding.homeAddTypeSelect2.isCheckable = false
-                binding.homeAddRefreshIV.callOnClick()
-                binding.homeAddTypeSelect2.isCheckable = true
-            }
-
-            if (checked) {
-                checkedChipIdList.add(compoundButton.id)
-                binding.homeAddTypeSelect2.chipStrokeWidth = 4f
-                binding.homeAddTypeSelect2.setChipStrokeColorResource(R.color.progress_color_7)
-
-            } else {
-                checkedChipIdList.remove(compoundButton.id)
-                binding.homeAddTypeSelect2.chipStrokeWidth = 0f
-            }
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect2)
         }
 
         binding.homeAddTypeSelect3.setOnCheckedChangeListener { compoundButton, checked ->
-            if (checkedChipIdList.size >= 3 && checked) {
-                binding.homeAddTypeSelect3.isCheckable = false
-                binding.homeAddRefreshIV.callOnClick()
-                binding.homeAddTypeSelect3.isCheckable = true
-            }
-
-
-            if (checked) {
-                checkedChipIdList.add(compoundButton.id)
-                binding.homeAddTypeSelect3.chipStrokeWidth = 4f
-                binding.homeAddTypeSelect3.setChipStrokeColorResource(R.color.progress_color_7)
-
-            } else {
-                checkedChipIdList.remove(compoundButton.id)
-                binding.homeAddTypeSelect3.chipStrokeWidth = 0f
-            }
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect3)
         }
 
         binding.homeAddTypeSelect4.setOnCheckedChangeListener { compoundButton, checked ->
-            if (checkedChipIdList.size >= 3 && checked) {
-                binding.homeAddTypeSelect4.isCheckable = false
-                binding.homeAddRefreshIV.callOnClick()
-                binding.homeAddTypeSelect4.isCheckable = true
-            }
-
-            if (checked) {
-                checkedChipIdList.add(compoundButton.id)
-                binding.homeAddTypeSelect4.chipStrokeWidth = 4f
-                binding.homeAddTypeSelect4.setChipStrokeColorResource(R.color.progress_color_7)
-
-            } else {
-                checkedChipIdList.remove(compoundButton.id)
-                binding.homeAddTypeSelect4.chipStrokeWidth = 0f
-            }
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect4)
         }
+
+        binding.homeAddTypeSelect5.setOnCheckedChangeListener { compoundButton, checked ->
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect5)
+        }
+
+        binding.homeAddTypeSelect6.setOnCheckedChangeListener { compoundButton, checked ->
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect6)
+        }
+
+        binding.homeAddTypeSelect7.setOnCheckedChangeListener { compoundButton, checked ->
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect7)
+        }
+
+        binding.homeAddTypeSelect8.setOnCheckedChangeListener { compoundButton, checked ->
+            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect8)
+        }
+
+
 
 
 
         return root
+    }
+
+    private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
+        if (checkedChipIdList.size >= 7 && checked) {
+            showAlert(AlertType.TYPE8)
+            chip.isCheckable = false
+            binding.homeAddRefreshIV.callOnClick()
+            chip.isCheckable = true
+        }
+
+        if (checked) {
+            checkedChipIdList.add(compoundButton.id)
+            chip.chipStrokeWidth = 4f
+            chip.setChipStrokeColorResource(R.color.progress_color_7)
+
+        } else {
+            checkedChipIdList.remove(compoundButton.id)
+            chip.chipStrokeWidth = 0f
+        }
+
+    }
+
+
+    private fun showAlert(alertType: AlertType ){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+
+                override fun onCenterClick() {
+                    when (alertType) {
+                        AlertType.TYPE8 -> {
+                        }
+                    }
+                }
+
+                override fun onRightClick() {
+                }
+            },
+            alertType,
+            null
+        )
+
+        alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 
 
