@@ -190,16 +190,35 @@
 <!--            </EditText>-->
 
             <Spinner
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddWorkType"
                 app:layout_constraintStart_toEndOf="@+id/homeAddWorkType"
                 android:spinnerMode="dropdown"
                 android:id="@+id/homeAddWorkTypeSpinner"
                 android:background="@drawable/spinner_background"
+                android:popupBackground="@drawable/button_round"
+                android:overlapAnchor="false"
+                android:paddingBottom="2dp"
 
                 >
             </Spinner>
+
+            <ImageView
+                android:layout_marginTop="18dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkType"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_down_icon_raw"
+                android:layout_marginEnd="2dp"
+
+
+                >
+
+
+            </ImageView>
 
 
 
@@ -221,7 +240,7 @@
                 android:id="@+id/homeAddTotalProgress"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddWorkTypeSpinner"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/total_progress"
                 android:textSize="14sp"
                 android:textColor="@color/atracker_gray_3"
@@ -236,7 +255,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/homeAddWorkTypeSpinner"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_refresh_icon_raw"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 >
 
             </ImageView>

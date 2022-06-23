@@ -1,18 +1,23 @@
 package com.example.atracker.ui.home
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
+import com.example.atracker.R.id.itemSpinnerTV
 import com.example.atracker.databinding.FragmentHomeAddBinding
 import com.example.atracker.ui.AlertDialogFragment
 import com.example.atracker.ui.AlertDialogListener
@@ -154,21 +159,17 @@ class HomeAddFragment : Fragment() {
 
 
 
-        val items: List<String> = listOf("asd", "qwe", "ter")
-
-        val myAapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner) {
+        val workTypeitems: List<String> = listOf("정규직", "계약직", "인턴")
+        val workTypeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
                 val v = super.getView(position, convertView, parent)
-
                 if (position == count) {
-                    //마지막 포지션의 textView 를 힌트 용으로 사용합니다.
-                    (v.findViewById<View>(R.id.tvItemSpinner) as TextView).text = ""
-                    //아이템의 마지막 값을 불러와 hint로 추가해 줍니다.
-                    (v.findViewById<View>(R.id.tvItemSpinner) as TextView).hint = getItem(count)
+                    val hintTextView = v.findViewById<TextView>(itemSpinnerTV)
+                    hintTextView.hint = getItem(count)
+                    hintTextView.setTextColor(Color.parseColor("#565B6E"))
+                    hintTextView.textSize = 16f
                 }
-
                 return v
             }
 
@@ -177,19 +178,46 @@ class HomeAddFragment : Fragment() {
                 return super.getCount() - 1
             }
 
+            override fun getDropDownView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup,
+            ): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                val dropDownTextView = view as TextView
+                dropDownTextView.setPadding(40,20,40,20)
+
+
+                return view
+            }
+
         }
 
-        //아이템을 추가해 줍니다.
-        myAapter.addAll(items.toMutableList())
+        workTypeAdapter.addAll(workTypeitems.toMutableList())
+        workTypeAdapter.add("근무 형태를 선택해주세요.")
+        binding.homeAddWorkTypeSpinner.adapter = workTypeAdapter
+        binding.homeAddWorkTypeSpinner.setSelection(workTypeAdapter.count)
 
-//힌트로 사용할 문구를 마지막 아이템에 추가해 줍니다.
-        myAapter.add("제목입니다.")
+        binding.homeAddWorkTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
+                when (position) {
+                    0 -> {
 
-//어댑터를 연결해줍니다.
-        binding.homeAddWorkTypeSpinner.adapter = myAapter
+                    }
+                    1 -> {
 
-//스피너 초기값을 마지막 아이템으로 설정해 줍니다. (마지막 아이템이 힌트 이기 때문이죠)
-        binding.homeAddWorkTypeSpinner.setSelection(myAapter.count)
+                    }
+                    else -> {
+
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                Log.d("MyTag", "onNothingSelected")
+            }
+        }
 
 
 
