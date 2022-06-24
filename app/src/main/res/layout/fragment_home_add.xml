@@ -103,6 +103,7 @@
                 android:textColorHint="@color/atracker_gray_6"
                 android:background="@null"
                 android:textColor="@color/atracker_white"
+                android:theme="@style/MyEditTextTheme"
                 >
 
             </EditText>
@@ -145,6 +146,7 @@
                 android:background="@null"
                 android:textColorHint="@color/atracker_gray_6"
                 android:textColor="@color/atracker_white"
+                android:theme="@style/MyEditTextTheme"
                 >
 
             </EditText>

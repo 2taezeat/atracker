@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.setPadding
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
@@ -25,6 +24,14 @@ import com.example.atracker.ui.MainActivity
 import com.example.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import android.widget.Toast
+
+import android.view.MotionEvent
+
+import android.view.View.OnTouchListener
+
+import android.R.string.no
+import android.annotation.SuppressLint
 
 
 class HomeAddFragment : Fragment() {
@@ -158,7 +165,7 @@ class HomeAddFragment : Fragment() {
         binding.homeAddWorkTypeSpinner.adapter = adapter
 
 
-
+        var spinnerSelectedPosition : Int = -1
         val workTypeitems: List<String> = listOf("정규직", "계약직", "인턴")
         val workTypeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
@@ -170,6 +177,8 @@ class HomeAddFragment : Fragment() {
                     hintTextView.setTextColor(Color.parseColor("#565B6E"))
                     hintTextView.textSize = 16f
                 }
+
+
                 return v
             }
 
@@ -186,27 +195,49 @@ class HomeAddFragment : Fragment() {
                 val view = super.getDropDownView(position, convertView, parent)
                 val dropDownTextView = view as TextView
                 dropDownTextView.setPadding(40,20,40,20)
-
-
+                if (position == spinnerSelectedPosition) {
+                    dropDownTextView.setTextColor(Color.parseColor("#7EFBDC"))
+                }
                 return view
             }
 
+
+
         }
+
 
         workTypeAdapter.addAll(workTypeitems.toMutableList())
         workTypeAdapter.add("근무 형태를 선택해주세요.")
         binding.homeAddWorkTypeSpinner.adapter = workTypeAdapter
         binding.homeAddWorkTypeSpinner.setSelection(workTypeAdapter.count)
 
+//        binding.homeAddWorkTypeSpinner.setOnTouchListener { view, motionEvent ->
+//
+//        }
+
+
+//        binding.homeAddWorkTypeSpinner.setOnTouchListener { v, event ->
+//            if (event.action == MotionEvent.ACTION_DOWN) {
+//
+//            } else {
+//
+//            }
+//            false
+//        }
+
         binding.homeAddWorkTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
                 when (position) {
                     0 -> {
-
+                        spinnerSelectedPosition = position
                     }
                     1 -> {
+                        spinnerSelectedPosition = position
 
+                    }
+                    2 -> {
+                        spinnerSelectedPosition = position
                     }
                     else -> {
 
@@ -217,6 +248,21 @@ class HomeAddFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {
                 Log.d("MyTag", "onNothingSelected")
             }
+        }
+
+
+        binding.homeAddCompanyTitleET.setOnFocusChangeListener { view, isFocuse ->
+            if (isFocuse)
+                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
+            else
+                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
+        }
+
+        binding.homeAddApplyFieldET.setOnFocusChangeListener { view, isFocuse ->
+            if (isFocuse)
+                binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
+            else
+                binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
         }
 
 
