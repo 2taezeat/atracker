@@ -33,8 +33,10 @@
 
 
     <color name="background_light_gray">#282A34</color>
-    <color name="atracker_white">#F5F5F5</color>
+    <color name="atracker_white">#FFFFFF</color>
     <color name="atracker_gray_1">#B9BFD1</color>
+
+    <color name="atracker_gray_2">#A6ABBD</color>
 
     <color name="atracker_gray_3">#979CAF</color>
     <color name="atracker_gray_4">#898EA1</color>

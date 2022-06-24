@@ -9,7 +9,7 @@
     <string name="title_calendar">일정</string>
     <string name="title_home_add">지원 현황 추가</string>
     <string name="title_home_write">홈 세부사항 작성</string>
-    <string name="login">로그인</string>
+    <string name="login_google">Google로 시작하기</string>
     <string name="님의">님의</string>
     <string name="지원현황입니다">지원현황입니다!</string>
     <string name="title_my_page">내 페이지</string>
@@ -91,6 +91,8 @@
     <string name="alert_type_1_text_1_message"><font color="#7EFCDD">개의 후기</font><font color="#F5F5F5">를 정말 삭제하시겠습니까?</font></string>
     <string name="add_company_hint">회사명을 입력해주세요.</string>
     <string name="add_apply_hint">포지션명을 입력해주세요.</string>
+    <string name="login_text_1">취업 프로세스를 기록을</string>
+    <string name="login_text_2">더 쉽고, 가치있게</string>
 
 
 </resources>
