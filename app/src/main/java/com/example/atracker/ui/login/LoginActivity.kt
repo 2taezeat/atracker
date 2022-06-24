@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        binding.loginButton.setOnClickListener {
+        binding.loginButtonFL.setOnClickListener {
             startMain()
         }
     }

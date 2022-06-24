@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.core.content.ContextCompat
+import com.example.atracker.R
 import com.example.atracker.databinding.ActivitySplashBinding
 import com.example.atracker.ui.login.LoginActivity
 
@@ -17,6 +18,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background_gray)
+
 
         val mHandler = Handler(Looper.getMainLooper())
         mHandler.postDelayed({

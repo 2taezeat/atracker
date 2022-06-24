@@ -42,10 +42,12 @@
         <entry key="app/src/main/res/drawable/ic_blank_checkbox_icon_raw.xml" value="0.412987012987013" />
         <entry key="app/src/main/res/drawable/ic_checkbox_icon_raw.xml" value="0.2864035087719298" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.412987012987013" />
+        <entry key="app/src/main/res/drawable/ic_google_icon_raw.xml" value="0.3105263157894737" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23034188034188033" />
         <entry key="app/src/main/res/drawable/ic_home_icon_raw.xml" value="0.17592592592592593" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1675925925925926" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/drawable/login_button_round.xml" value="0.3105263157894737" />
         <entry key="app/src/main/res/drawable/navigation_text_colored.xml" value="0.3457264957264957" />
         <entry key="app/src/main/res/drawable/pb_circular_determinative.xml" value="0.3658119658119658" />
         <entry key="app/src/main/res/drawable/progress_type_1.xml" value="0.33157894736842103" />
@@ -66,7 +68,7 @@
         <entry key="app/src/main/res/drawable/tmp2.xml" value="0.16111111111111112" />
         <entry key="app/src/main/res/drawable/tmp3.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/unselected_chip.xml" value="0.4818181818181818" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/bottom_sheet_persistent.xml" value="0.31798245614035087" />
