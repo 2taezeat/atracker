@@ -1,6 +1,5 @@
 package com.example.atracker.ui.home
 
-import android.R.id
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -25,23 +24,10 @@ import com.example.atracker.ui.MainActivity
 import com.example.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import android.widget.Toast
 
-import android.view.MotionEvent
-
-import android.view.View.OnTouchListener
-
-import android.R.string.no
-import android.annotation.SuppressLint
-import androidx.databinding.adapters.AutoCompleteTextViewBindingAdapter
-import android.R.string.no
-import android.R.id.edit
-
-import android.R.string.no
-import android.R.string.no
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 
 
 class HomeAddFragment : Fragment() {
@@ -108,6 +94,9 @@ class HomeAddFragment : Fragment() {
 
         _binding = FragmentHomeAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.homeVM = homeViewModel
+
 
         chipGroup = binding.homeAddTypeSelectChipGroup
 
@@ -244,7 +233,6 @@ class HomeAddFragment : Fragment() {
                     }
                     1 -> {
                         spinnerSelectedPosition = position
-
                     }
                     2 -> {
                         spinnerSelectedPosition = position
@@ -276,33 +264,53 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        val items = arrayOf("SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL", "K5", "K7")
+        val items = arrayOf("aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", )
 
         val adapterTmp = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,items)
+        binding.homeAddACTV.setAdapter(adapterTmp)
+
 
 
         binding.homeAddACTV.addTextChangedListener(object : TextWatcher{
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.d("qqq_test1111", "${p0},${p1},${p2},${p3}")
+            override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                Log.d("qqq_test1111", "${charSequence},${p1},${p2},${p3}")
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.d("qqq_test2222", "${p0},${p1},${p2},${p3}")
-                homeViewModel.viewModelFun()
+            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                Log.d("qqq_test2222", "${charSequence},${p1},${p2},${p3}")
+                if (charSequence!!.length >= 2) {
+                    homeViewModel.getCompanyTitle(charSequence.toString())
 
+                    homeViewModel.companyTitleList.observe(viewLifecycleOwner, Observer {
+                        Log.d("companyTitleList", "${it}")
 
+//                        val adapterTmp2 = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,it.toTypedArray())
+//                        binding.homeAddACTV.setAdapter(adapterTmp2)
+
+                    })
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {
                 Log.d("qqq_test3333", "${p0}")
+
+                val adapterTmp2 = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,homeViewModel.companyTitleList.value!!.toTypedArray())
+                binding.homeAddACTV.setAdapter(adapterTmp2)
             }
         }
         )
 
 
+        homeViewModel.companyTitleList.observe(viewLifecycleOwner, Observer {
+            Log.d("companyTitleList", "${it}")
+            val adapterTmp2 = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,homeViewModel.companyTitleList.value!!.toTypedArray())
+            binding.homeAddACTV.setAdapter(adapterTmp2)
+            binding.homeAddACTV.showDropDown()
+        })
 
-        binding.homeAddACTV.setAdapter(adapterTmp)
+
+
 
 
 

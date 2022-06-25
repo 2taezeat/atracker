@@ -8,10 +8,23 @@ import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
+
+    private val _companyTitleList = MutableLiveData<List<String>>().apply {
+        value = listOf()
+    }
+    val companyTitleList : LiveData<List<String>> = _companyTitleList
+
+
+    val _companyWord = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val companyWord : LiveData<String> = _companyWord
+
+
+
 
     private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
         value = arrayListOf(
@@ -91,15 +104,30 @@ class HomeViewModel : ViewModel() {
 
 
 
-    fun viewModelFun() {
+    fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-
-            val result = repositoryHome.repositoryHomeFun(
-                CompanySearchRequest("삼성", true)
-
+            val apiResult = repositoryHome.companySearchCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTMiLCJpYXQiOjE2NTYxNDg1ODMsImV4cCI6MTY1NjE1MjE4M30.R2Z4Cv9q-HCaYNJQpq0QpikpARuqePSSAZPDSjPD7SE",
+                companySearchRequest = CompanySearchRequest(
+                title = searchWord,
+                userDefined = true),
+                page = 1,
+                size = 10
             )
 
-            Log.d("result123123", "${result}")
+            Log.d("result123123", "${apiResult}")
+
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!.companySearchContents.map{ it.name }
+                Log.d("getReuslt", "${getResult}")
+                _companyTitleList.value = getResult
+
+
+            } else {
+
+            }
+
+
 
         }
     }

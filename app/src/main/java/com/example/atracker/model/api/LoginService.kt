@@ -10,7 +10,7 @@ interface LoginService {
 
     @POST("/api/v1/auth/sign")
     suspend fun loginServiceFun(
-        @Header("Authorization") AccessToken : String,
+        @Header("Authorization") accessToken : String,
         @Body loginRequest : LoginRequest
 
     ) : retrofit2.Response<JsonObject>
