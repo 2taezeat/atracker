@@ -19,20 +19,19 @@
             >
 
             <TextView
-                android:id="@+id/exThreeSelectedDateText"
+                android:id="@+id/exThreeSelectedDateHeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:paddingStart="20dp"
-                android:paddingTop="12dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="12dp"
-                android:textAllCaps="true"
-                android:textColor="@color/progress_color_7"
-                android:textSize="20sp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
                 tools:text="7 Jan, 2019"
                 android:layout_gravity="center"
                 />
+
 
 
             <com.kizitonwose.calendarview.CalendarView
@@ -43,10 +42,44 @@
                 app:cv_monthHeaderResource="@layout/example_3_calendar_header"
                 app:cv_orientation="horizontal"
                 app:cv_scrollMode="paged"
-                app:layout_constraintTop_toBottomOf="@+id/exThreeSelectedDateText"
+                app:layout_constraintTop_toBottomOf="@+id/exThreeSelectedDateHeaderText"
+                android:layout_marginBottom="10dp"
                 >
 
             </com.kizitonwose.calendarview.CalendarView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/atracker_gray_3"
+                >
+
+            </View>
+
+
+            <TextView
+                android:id="@+id/exThreeSelectedDateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/progress_color_7"
+                android:textSize="16sp"
+                tools:text="06월 24 금요일" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/atracker_gray_3"
+                android:layout_marginTop="6dp"
+                >
+
+            </View>
+
+
+
 
 
             <androidx.core.widget.NestedScrollView
@@ -58,8 +91,7 @@
                 android:background="@drawable/edge_grey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+
                 >
 
                 <androidx.recyclerview.widget.RecyclerView

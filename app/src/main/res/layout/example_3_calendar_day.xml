@@ -68,19 +68,6 @@
         />
 
 
-    <View
-        android:id="@+id/exThreeDotViewMore"
-        android:layout_width="10dp"
-        android:layout_height="5dp"
-        android:layout_marginBottom="2dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:background="@drawable/ic_baseline_more_horiz_24"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintTop_toBottomOf="@+id/exThreeDotView3"
-        app:layout_constraintStart_toStartOf="@+id/exThreeDotView3"
-
-        />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,14 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.atracker.model.dto.*
+import com.example.atracker.model.repository.RepositoryHome
 import java.time.LocalDate
 
 class HomeViewModel : ViewModel() {
+    val repositoryHome = RepositoryHome()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
 
 
     private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {

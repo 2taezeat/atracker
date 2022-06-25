@@ -88,7 +88,10 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     private val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     //private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-    private val selectionFormatter = DateTimeFormatter.ofPattern("yyyy. MM")
+    private val selectionHeaderFormatter = DateTimeFormatter.ofPattern("yyyy MM")
+    private val selectionDateFormatter = DateTimeFormatter.ofPattern("M월 d일 E요일", Locale.KOREAN)
+
+
     private val events = mutableMapOf<LocalDate, List<CalendarEvent>>()
 
 
@@ -173,7 +176,6 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                 container.day = day
                 val textView = container.binding.exThreeDayText
 
-                val dotViewMore = container.binding.exThreeDotViewMore
                 val dotView1 = container.binding.exThreeDotView1
                 val dotView2 = container.binding.exThreeDotView2
                 val dotView3 = container.binding.exThreeDotView3
@@ -191,7 +193,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.setTextColorRes(R.color.example_3_white)
                             textView.setBackgroundResource(R.drawable.example_3_today_bg)
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
 //                            dotView.makeInVisible()
 //
@@ -204,7 +206,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.setTextColorRes(R.color.example_3_blue)
                             textView.setBackgroundResource(R.drawable.example_3_selected_bg)
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
 //                            dotView.makeInVisible()
 //
@@ -217,14 +219,13 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.background = null
                             //dotViewMore.isVisible = events[day.date].orEmpty().isNotEmpty()
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3, dotViewMore)
+                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
                         }
                     }
                 } else {
                     textView.setTextColorRes(R.color.atracker_gray_3)
 
-                    dotViewMore.makeInVisible()
                     dotView1.makeInVisible()
                     dotView2.makeInVisible()
                     dotView3.makeInVisible()
@@ -315,47 +316,44 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
             selectedEvents.addAll(calendarViewModel.events.value!![date].orEmpty())
             notifyDataSetChanged()
         }
-        binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
+        binding.exThreeSelectedDateHeaderText.text = selectionHeaderFormatter.format(date)
+        binding.exThreeSelectedDateText.text = selectionDateFormatter.format(date)
+
+
     }
 
 
-    private fun eventDotSetVisiblity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View, viewMore : View ){
+    private fun eventDotSetVisiblity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View ){
         if (currentDataCalendarEvent == null) {
             view1.makeInVisible()
             view2.makeInVisible()
             view3.makeInVisible()
-            viewMore.makeInVisible()
         } else {
             when (currentDataCalendarEvent.size) {
                 0 -> {
                     view1.makeInVisible()
                     view2.makeInVisible()
                     view3.makeInVisible()
-                    viewMore.makeInVisible()
                 }
                 1 -> {
                     view1.makeVisible()
                     view2.makeInVisible()
                     view3.makeInVisible()
-                    viewMore.makeInVisible()
                 }
                 2 -> {
                     view1.makeVisible()
                     view2.makeVisible()
                     view3.makeInVisible()
-                    viewMore.makeInVisible()
                 }
                 3 -> {
                     view1.makeVisible()
                     view2.makeVisible()
                     view3.makeVisible()
-                    viewMore.makeInVisible()
                 }
                 else -> {
                     view1.makeVisible()
                     view2.makeVisible()
                     view3.makeVisible()
-                    viewMore.makeVisible()
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.example.atracker.ui.home
 
+import android.R.id
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -32,6 +33,15 @@ import android.view.View.OnTouchListener
 
 import android.R.string.no
 import android.annotation.SuppressLint
+import androidx.databinding.adapters.AutoCompleteTextViewBindingAdapter
+import android.R.string.no
+import android.R.id.edit
+
+import android.R.string.no
+import android.R.string.no
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.widget.addTextChangedListener
 
 
 class HomeAddFragment : Fragment() {
@@ -264,6 +274,34 @@ class HomeAddFragment : Fragment() {
             else
                 binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
         }
+
+
+        val items = arrayOf("SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL", "K5", "K7")
+
+        val adapterTmp = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,items)
+
+
+        binding.homeAddACTV.addTextChangedListener(object : TextWatcher{
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                Log.d("qqq_test1111", "${p0},${p1},${p2},${p3}")
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                Log.d("qqq_test2222", "${p0},${p1},${p2},${p3}")
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                Log.d("qqq_test3333", "${p0}")
+            }
+        }
+        )
+
+
+
+        binding.homeAddACTV.setAdapter(adapterTmp)
+
 
 
 
