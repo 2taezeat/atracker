@@ -1,16 +1,17 @@
 package com.example.atracker.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
-
-
 
     private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
         value = arrayListOf(
@@ -53,9 +54,6 @@ class HomeViewModel : ViewModel() {
     val homeWriteProgressSelectedMap : LiveData<MutableMap<Int, ArrayList<String>>> = _homeWriteProgressSelectedMap
 
 
-
-
-
 //    private val _homeDetailContents = MutableLiveData<ArrayList<HomeDetailItem>>().apply {
 //        value = arrayListOf(
 //            HomeDetailItem(progressType = 0,progressName = "00", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_0##################$$$$$$$$$$####################################################################%%%%%%%%%%%%", questionBody = null, answerBody = null),
@@ -89,6 +87,24 @@ class HomeViewModel : ViewModel() {
     }
 
     val homeDetailContents : LiveData<MutableMap<Int, ArrayList<HomeDetailItem>>> = _homeDetailContents
+
+
+
+
+    fun viewModelFun() {
+        viewModelScope.launch {
+
+            val result = repositoryHome.repositoryHomeFun(
+                CompanySearchRequest("삼성", true)
+
+            )
+
+            Log.d("result123123", "${result}")
+
+        }
+    }
+
+
 
 
 }

@@ -289,6 +289,8 @@ class HomeAddFragment : Fragment() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.d("qqq_test2222", "${p0},${p1},${p2},${p3}")
+                homeViewModel.viewModelFun()
+
 
             }
 

@@ -1,5 +1,6 @@
 package com.example.atracker.model.api
 
+import com.example.atracker.model.dto.CompanySearchRequest
 import com.example.atracker.model.dto.LoginRequest
 import com.google.gson.JsonObject
 import retrofit2.http.Body
@@ -9,13 +10,12 @@ import retrofit2.http.Query
 
 interface HomeAddService {
 
-    @POST("/api/v1/company/searcg")
+    @POST("/api/v1/company/search")
     suspend fun companySearch(
         @Header("Authorization") AccessToken : String,
-        @Body loginRequest : LoginRequest,
+        @Body companySearchRequest: CompanySearchRequest,
         @Query("page") page : Int,
         @Query("size") size : Int
-
 
         ) : retrofit2.Response<JsonObject>
 
