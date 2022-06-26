@@ -83,6 +83,7 @@
 
     <string name="company_name_title">회사명</string>
     <string name="apply_field_title">포지션</string>
+    <string name="position_title">포지션</string>
     <string name="work_type_name_title">근무 형태</string>
     <string name="cancel_title">취소</string>
     <string name="save_title">저장</string>
@@ -93,6 +94,13 @@
     <string name="add_apply_hint">포지션명을 입력해주세요.</string>
     <string name="login_text_1">취업 프로세스를 기록을</string>
     <string name="login_text_2">더 쉽고, 가치있게</string>
+    <string name="my_page_title">마이페이지</string>
+    <string name="my_page_hello_title">님, 안녕하세요!</string>
+    <string name="career_age_title">경력</string>
+    <string name="account_setting_title">계정 설정</string>
+    <string name="account_withdrawal_title">계정 탈퇴</string>
+    <string name="help_title">도움</string>
+    <string name="contact_title">연락하기</string>
 
 
 </resources>

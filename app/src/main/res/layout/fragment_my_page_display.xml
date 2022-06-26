@@ -9,49 +9,294 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.MyPageDisplayFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/title_my_page" />
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/myPageHeaderCL"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/logout"
-            android:id="@+id/myPageLogoutButton"
+            android:background="@color/atracker_header_transparent"
             >
-        </Button>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_back_icon_raw"
+                android:id="@+id/myPageBackButton"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                >
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/myPageHeaderTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/my_page_title"
+                android:textSize="16sp"
+                android:textColor="@color/atracker_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp"
-            android:text="@string/nickname_edit"
-            android:id="@+id/myPageNickNameEditButton"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/myPageHeaderCL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/myPageMainCL"
+
             >
-        </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/myPageNickNameTV"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="제시카"
+                >
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="200dp"
-            android:text="@string/mytitle_edit"
-            android:id="@+id/myPageMyTitleEditButton"
-            >
-        </Button>
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_page_hello_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
+                >
+            </TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/position_title"
+                app:layout_constraintTop_toBottomOf="@+id/myPageNickNameTV"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageNickNameTV"
+                app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
+                android:id="@+id/myPagePositionTV"
+                tools:text="애널리스트"
+                android:layout_marginStart="8dp"
+                >
+
+            </TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/career_age_title"
+                app:layout_constraintTop_toBottomOf="@+id/myPagePositionTV"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPagePositionTV"
+                app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
+                android:id="@+id/myPageCareerAgeTV"
+                tools:text="신입"
+                android:layout_marginStart="8dp"
+                >
+
+            </TextView>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageCareerAgeTV"
+                android:background="@color/atracker_gray_6"
+                android:id="@+id/myPageView1"
+                >
+
+            </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView1"
+                android:text="@string/account_setting_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageAccountSettingTV"
+                >
+
+            </TextView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageAccountSettingTV"
+                android:background="@color/atracker_gray_6"
+                android:id="@+id/myPageView2"
+                >
+
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView2"
+                android:text="@string/logout"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageLogoutTV"
+                >
+
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageLogoutTV"
+                android:background="@color/background_light_gray"
+                android:id="@+id/myPageView3"
+                >
+
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView3"
+                android:text="@string/account_withdrawal_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageAccountWithdrawalTV"
+                >
+
+            </TextView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageAccountWithdrawalTV"
+                android:background="@color/background_light_gray"
+                android:id="@+id/myPageView4"
+                >
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView4"
+                android:text="@string/help_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageHelpTV"
+                >
+
+            </TextView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageHelpTV"
+                android:background="@color/atracker_gray_6"
+                android:id="@+id/myPageView5"
+                >
+
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView5"
+                android:text="@string/contact_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageContactTV"
+                >
+
+            </TextView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageContactTV"
+                android:background="@color/background_light_gray"
+                android:id="@+id/myPageView6"
+                >
+            </View>
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:text="@string/logout"-->
+<!--            android:id="@+id/myPageLogoutButton"-->
+<!--            >-->
+<!--        </Button>-->
+
+
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="100dp"-->
+<!--            android:text="@string/nickname_edit"-->
+<!--            android:id="@+id/myPageNickNameEditButton"-->
+<!--            >-->
+<!--        </Button>-->
+
+
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="200dp"-->
+<!--            android:text="@string/mytitle_edit"-->
+<!--            android:id="@+id/myPageMyTitleEditButton"-->
+<!--            >-->
+<!--        </Button>-->
 
 
 
