@@ -8,10 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.CompoundButton
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -27,6 +23,7 @@ import com.google.android.material.chip.ChipGroup
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.*
 import androidx.lifecycle.Observer
 
 
@@ -199,9 +196,6 @@ class HomeAddFragment : Fragment() {
                 }
                 return view
             }
-
-
-
         }
 
 
@@ -209,6 +203,7 @@ class HomeAddFragment : Fragment() {
         workTypeAdapter.add("근무 형태를 선택해주세요.")
         binding.homeAddWorkTypeSpinner.adapter = workTypeAdapter
         binding.homeAddWorkTypeSpinner.setSelection(workTypeAdapter.count)
+
 
 //        binding.homeAddWorkTypeSpinner.setOnTouchListener { view, motionEvent ->
 //
@@ -249,7 +244,7 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        binding.homeAddCompanyTitleET.setOnFocusChangeListener { view, isFocuse ->
+        binding.homeAddACTV.setOnFocusChangeListener { view, isFocuse ->
             if (isFocuse)
                 binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
             else
@@ -264,50 +259,49 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        val items = arrayOf("aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", )
+        binding.homeAddACTV.setOnScrollChangeListener(object : View.OnScrollChangeListener{
+            override fun onScrollChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int) {
+                Log.d("test2222", "test2222")
+            }
+        })
 
-        val adapterTmp = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,items)
-        binding.homeAddACTV.setAdapter(adapterTmp)
 
-
+        binding.homeAddACTV.setDropDownBackgroundDrawable(ContextCompat.getDrawable(lazyContext, R.drawable.button_round))
 
         binding.homeAddACTV.addTextChangedListener(object : TextWatcher{
-
             override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.d("qqq_test1111", "${charSequence},${p1},${p2},${p3}")
+                //Log.d("qqq_test1111", "${charSequence},${p1},${p2},${p3}")
             }
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.d("qqq_test2222", "${charSequence},${p1},${p2},${p3}")
                 if (charSequence!!.length >= 2) {
                     homeViewModel.getCompanyTitle(charSequence.toString())
-
-                    homeViewModel.companyTitleList.observe(viewLifecycleOwner, Observer {
-                        Log.d("companyTitleList", "${it}")
-
-//                        val adapterTmp2 = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,it.toTypedArray())
-//                        binding.homeAddACTV.setAdapter(adapterTmp2)
-
-                    })
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) {
                 Log.d("qqq_test3333", "${p0}")
-
-                val adapterTmp2 = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,homeViewModel.companyTitleList.value!!.toTypedArray())
-                binding.homeAddACTV.setAdapter(adapterTmp2)
             }
-        }
-        )
-
+        })
 
         homeViewModel.companyTitleList.observe(viewLifecycleOwner, Observer {
             Log.d("companyTitleList", "${it}")
-            val adapterTmp2 = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,homeViewModel.companyTitleList.value!!.toTypedArray())
-            binding.homeAddACTV.setAdapter(adapterTmp2)
+            val companyTitleAdapter = ArrayAdapter<String>(lazyContext,R.layout.item_auto_complete_text_view, homeViewModel.companyTitleList.value!!.toTypedArray())
+
+            binding.homeAddACTV.setAdapter(companyTitleAdapter)
+
             binding.homeAddACTV.showDropDown()
         })
+
+
+        binding.homeAddACTV.setOnScrollChangeListener { view, i, i2, i3, i4 ->
+            Log.d("test333333", "${view}, ${i}, ${i2}")
+
+        }
+
+
+
 
 
 

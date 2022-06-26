@@ -98,30 +98,39 @@
             </TextView>
 
 
-            <EditText
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitle"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/homeAddCompanyTitle"-->
+<!--                android:hint="@string/add_company_hint"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_marginTop="14dp"-->
+<!--                android:id="@+id/homeAddCompanyTitleET"-->
+<!--                android:textColorHint="@color/atracker_gray_6"-->
+<!--                android:background="@null"-->
+<!--                android:textColor="@color/atracker_white"-->
+<!--                android:theme="@style/MyEditTextTheme"-->
+<!--                >-->
+
+<!--            </EditText>-->
+
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitle"
                 app:layout_constraintStart_toEndOf="@+id/homeAddCompanyTitle"
+                android:id="@+id/homeAddACTV"
+                android:text="@={homeVM._companyWord}"
                 android:hint="@string/add_company_hint"
                 android:textSize="16sp"
                 android:layout_marginTop="14dp"
-                android:id="@+id/homeAddCompanyTitleET"
                 android:textColorHint="@color/atracker_gray_6"
                 android:background="@null"
                 android:textColor="@color/atracker_white"
                 android:theme="@style/MyEditTextTheme"
-                >
 
-            </EditText>
 
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/homeAddACTV"
-                android:text="@={homeVM._companyWord}"
 
                 >
 
@@ -131,7 +140,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitleET"
+                app:layout_constraintTop_toBottomOf="@+id/homeAddACTV"
                 android:layout_marginTop="5dp"
                 android:background="@color/atracker_gray_4"
                 android:id="@+id/homeAddView1"

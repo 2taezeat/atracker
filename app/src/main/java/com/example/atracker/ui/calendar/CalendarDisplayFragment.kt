@@ -276,7 +276,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
             }
         }
 
-        binding.exThreeAddButton.setOnClickListener {
+        binding.calendarDisplayPlusIV.setOnClickListener {
             inputDialog.show(parentFragmentManager, EventCreateFragment.TAG)
         }
     }
