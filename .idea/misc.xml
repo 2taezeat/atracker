@@ -58,6 +58,7 @@
         <entry key="app/src/main/res/drawable/progress_type_6.xml" value="0.33157894736842103" />
         <entry key="app/src/main/res/drawable/progress_type_7.xml" value="0.33157894736842103" />
         <entry key="app/src/main/res/drawable/selected_chip.xml" value="0.4818181818181818" />
+        <entry key="app/src/main/res/drawable/shadow.xml" value="0.33596491228070174" />
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.3298245614035088" />
         <entry key="app/src/main/res/drawable/tab_background.xml" value="0.4818181818181818" />
         <entry key="app/src/main/res/drawable/tab_background_selected.xml" value="0.4818181818181818" />
@@ -89,7 +90,9 @@
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.49722735674676527" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
+        <entry key="app/src/main/res/layout/fragment_sign_up_complete.xml" value="0.3864035087719298" />
         <entry key="app/src/main/res/layout/fragment_sign_up_nick_name.xml" value="0.37456140350877193" />
+        <entry key="app/src/main/res/layout/fragment_sign_up_position.xml" value="0.37456140350877193" />
         <entry key="app/src/main/res/layout/home_detail_item.xml" value="0.55" />
         <entry key="app/src/main/res/layout/home_detail_qna_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_detail_review_item.xml" value="0.3162280701754386" />

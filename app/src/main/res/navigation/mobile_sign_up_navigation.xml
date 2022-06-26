@@ -13,10 +13,39 @@
     <fragment
         android:id="@+id/navigation_sign_up_nick_name"
         android:name="com.example.atracker.ui.signUp.SignUpNickNameFragment"
-        tools:layout="@layout/fragment_sign_up_nick_name"
+        tools:layout="@layout/fragment_sign_up_nick_name">
 
-        />
+        <action
+            android:id="@+id/action_navigation_sign_up_nick_name_to_navigation_sign_up_position"
+            app:destination="@id/navigation_sign_up_position"
+            app:popUpTo="@id/navigation_sign_up_nick_name" />
 
+
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_sign_up_position"
+        android:name="com.example.atracker.ui.signUp.SignUpPositionFragment"
+        tools:layout="@layout/fragment_sign_up_position">
+
+        <action
+            android:id="@+id/action_navigation_sign_up_position_to_navigation_sign_up_complete"
+            app:destination="@id/navigation_sign_up_complete"
+            app:popUpTo="@id/navigation_sign_up_position" />
+
+    </fragment>
+
+
+
+
+    <fragment
+        android:id="@+id/navigation_sign_up_complete"
+        android:name="com.example.atracker.ui.signUp.SignUpCompleteFragment"
+        tools:layout="@layout/fragment_sign_up_complete">
+
+    </fragment>
 
 
 </navigation>
