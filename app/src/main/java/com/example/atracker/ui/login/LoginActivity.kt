@@ -12,6 +12,7 @@ import com.example.atracker.databinding.ActivityLoginBinding
 import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.databinding.ActivitySplashBinding
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.ui.signUp.SignUpActivity
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -57,6 +58,14 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButtonFL.setOnClickListener {
             startMain()
         }
+
+        binding.loginTmpButton.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            ContextCompat.startActivity(this, intent, null)
+            //finish()
+
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -103,6 +112,8 @@ class LoginActivity : AppCompatActivity() {
         ContextCompat.startActivity(this, intent, null)
         finish()
     }
+
+
 
 
     private fun signOut() {

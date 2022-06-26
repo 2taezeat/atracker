@@ -106,7 +106,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTUiLCJpYXQiOjE2NTYxNTY1MTAsImV4cCI6MTY1NjE2MDExMH0.O8wWPa4BBkjfBiust6hAHBC6kwILTaMvwniQMuKkxmE",
+            val apiResult = repositoryHome.companySearchCall(accessToken = "",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
