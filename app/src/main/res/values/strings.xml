@@ -101,6 +101,7 @@
     <string name="account_withdrawal_title">계정 탈퇴</string>
     <string name="help_title">도움</string>
     <string name="contact_title">연락하기</string>
+    <string name="next_title">다음</string>
 
 
 </resources>

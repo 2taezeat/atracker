@@ -28,8 +28,6 @@ import androidx.lifecycle.Observer
 
 
 class HomeAddFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-
     private var _binding: FragmentHomeAddBinding? = null
     private val parentActivity by lazy {
         activity as MainActivity
@@ -155,14 +153,8 @@ class HomeAddFragment : Fragment() {
         }
 
 
-
-        val workTypeList: List<String> = listOf("asd", "qwe", "ter")
-        val adapter = ArrayAdapter<String>(lazyContext,R.layout.support_simple_spinner_dropdown_item,workTypeList)
-        binding.homeAddWorkTypeSpinner.adapter = adapter
-
-
         var spinnerSelectedPosition : Int = -1
-        val workTypeitems: List<String> = listOf("정규직", "계약직", "인턴")
+        val workTypeItems: List<String> = listOf("정규직", "계약직", "인턴")
         val workTypeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -199,7 +191,7 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        workTypeAdapter.addAll(workTypeitems.toMutableList())
+        workTypeAdapter.addAll(workTypeItems.toMutableList())
         workTypeAdapter.add("근무 형태를 선택해주세요.")
         binding.homeAddWorkTypeSpinner.adapter = workTypeAdapter
         binding.homeAddWorkTypeSpinner.setSelection(workTypeAdapter.count)
