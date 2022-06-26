@@ -6,11 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.databinding.Example3EventItemViewBinding
 import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.utils.layoutInflater
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) :
     RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     val selectedEvents = mutableListOf<CalendarEvent>()
+
+
+    private val selectionDateFormatter = DateTimeFormatter.ofPattern("a  hh : mm", Locale.KOREAN)
 
 
     private var calendarEventOnclickListener: CalendarEventOnclickListener? = null
@@ -35,6 +40,8 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         private var calendarEventOnclickListener: CalendarEventOnclickListener? = null
+        //private val selectionDateFormatter = DateTimeFormatter.ofPattern("a hh:mm", Locale.KOREAN)
+
 
         init {
             binding.itemEventMainCL.setOnClickListener(this)
@@ -48,8 +55,11 @@ class EventsAdapter(calendarEventOnclickListener: CalendarEventOnclickListener) 
 //        }
 
         fun bind(calendarEvent: CalendarEvent) {
-            binding.itemEventText.text = calendarEvent.eventTitle
-            binding.itemEventDate.text = calendarEvent.zonedDateTime.toLocalTime().toString()
+            binding.itemEventCompanyNameText.text = calendarEvent.eventTitle
+            //binding.itemEventDate.text = calendarEvent.zonedDateTime.toLocalTime().toString()
+            binding.itemEventDate.text = selectionDateFormatter.format(calendarEvent.zonedDateTime.toLocalTime())
+
+            //selectionHeaderFormatter.format(date)
         }
 
         override fun onClick(view: View?) {

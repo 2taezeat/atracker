@@ -79,7 +79,7 @@
         <entry key="app/src/main/res/layout/fragment_alert_dialog.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_blog_display.xml" value="0.16538461538461538" />
         <entry key="app/src/main/res/layout/fragment_calendar_bottom.xml" value="0.306140350877193" />
-        <entry key="app/src/main/res/layout/fragment_calendar_display.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_calendar_display.xml" value="0.55" />
         <entry key="app/src/main/res/layout/fragment_dashboard_display.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_create.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_home_add.xml" value="0.375" />

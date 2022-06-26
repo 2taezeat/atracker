@@ -47,9 +47,7 @@ class CalendarViewModel : ViewModel() {
         _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
 
 
-
         initTimeDateCurrent()
-
     }
 
 
@@ -104,9 +102,8 @@ class CalendarViewModel : ViewModel() {
         year.value = newDate.get(Calendar.YEAR)
         month.value = newDate.get(Calendar.MONTH)
         day.value = newDate.get(Calendar.DAY_OF_MONTH)
-        hour.value = newDate.get(Calendar.HOUR)
+        hour.value = newDate.get(Calendar.HOUR_OF_DAY)
         minute.value = newDate.get(Calendar.MINUTE)
-
     }
 
 
