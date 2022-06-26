@@ -67,6 +67,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="제시카"
+                android:layout_marginStart="28dp"
+                android:textColor="@color/progress_color_7"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+
                 >
 
 
@@ -78,6 +84,10 @@
                 android:text="@string/my_page_hello_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
+                android:textColor="@color/atracker_white"
+                android:textSize="24sp"
+                android:layout_marginTop="30dp"
+
                 >
             </TextView>
 
@@ -88,6 +98,10 @@
                 android:text="@string/position_title"
                 app:layout_constraintTop_toBottomOf="@+id/myPageNickNameTV"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+                android:layout_marginTop="26dp"
                 >
 
             </TextView>
@@ -99,7 +113,11 @@
                 app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
                 android:id="@+id/myPagePositionTV"
                 tools:text="애널리스트"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
+                android:layout_marginTop="26dp"
+
                 >
 
             </TextView>
@@ -111,6 +129,10 @@
                 android:text="@string/career_age_title"
                 app:layout_constraintTop_toBottomOf="@+id/myPagePositionTV"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+                android:layout_marginTop="12dp"
                 >
 
             </TextView>
@@ -122,7 +144,11 @@
                 app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
                 android:id="@+id/myPageCareerAgeTV"
                 tools:text="신입"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
+                android:layout_marginTop="12dp"
+
                 >
 
             </TextView>
@@ -135,6 +161,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/myPageCareerAgeTV"
                 android:background="@color/atracker_gray_6"
                 android:id="@+id/myPageView1"
+                android:layout_marginTop="32dp"
                 >
 
             </View>
@@ -146,6 +173,10 @@
                 android:text="@string/account_setting_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/myPageAccountSettingTV"
+                android:layout_marginTop="42dp"
+                android:layout_marginStart="28dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
                 >
 
             </TextView>
@@ -157,6 +188,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/myPageAccountSettingTV"
                 android:background="@color/atracker_gray_6"
                 android:id="@+id/myPageView2"
+                android:layout_marginTop="13dp"
                 >
 
             </View>
@@ -169,6 +201,11 @@
                 android:text="@string/logout"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/myPageLogoutTV"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+
                 >
 
             </TextView>
@@ -179,6 +216,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/myPageLogoutTV"
                 android:background="@color/background_light_gray"
                 android:id="@+id/myPageView3"
+                android:layout_marginTop="13dp"
                 >
 
             </View>
@@ -191,6 +229,11 @@
                 android:text="@string/account_withdrawal_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/myPageAccountWithdrawalTV"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+
                 >
 
             </TextView>
@@ -202,6 +245,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/myPageAccountWithdrawalTV"
                 android:background="@color/background_light_gray"
                 android:id="@+id/myPageView4"
+                android:layout_marginTop="13dp"
+
                 >
             </View>
 
@@ -213,6 +258,10 @@
                 android:text="@string/help_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/myPageHelpTV"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
                 >
 
             </TextView>
@@ -224,6 +273,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/myPageHelpTV"
                 android:background="@color/atracker_gray_6"
                 android:id="@+id/myPageView5"
+                android:layout_marginTop="13dp"
                 >
 
             </View>
@@ -236,6 +286,10 @@
                 android:text="@string/contact_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/myPageContactTV"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
                 >
 
             </TextView>
@@ -247,6 +301,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/myPageContactTV"
                 android:background="@color/background_light_gray"
                 android:id="@+id/myPageView6"
+                android:layout_marginTop="13dp"
                 >
             </View>
 

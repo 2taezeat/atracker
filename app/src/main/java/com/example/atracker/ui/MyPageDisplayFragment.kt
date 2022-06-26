@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
 import com.example.atracker.ui.login.LoginActivity
@@ -66,13 +67,20 @@ class MyPageDisplayFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(lazyContext, gso)
 
 
-        binding.myPageLogoutButton.setOnClickListener {
+        binding.myPageLogoutTV.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             googleSignInClient.signOut().addOnCompleteListener {
                 //activity!!.finish()
                 startLogin()
             }
         }
+
+
+        binding.myPageBackButton.setOnClickListener { view ->
+            val navController = view.findNavController()
+            navController.popBackStack()
+        }
+
 
 
         return binding.root

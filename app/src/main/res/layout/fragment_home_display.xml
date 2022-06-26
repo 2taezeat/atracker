@@ -111,6 +111,7 @@
                 android:id="@+id/homeMyNickNameTV"
                 android:text="제시카"
                 android:textSize="28sp"
+                android:textStyle="bold"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/progress_color_7"
                 >
