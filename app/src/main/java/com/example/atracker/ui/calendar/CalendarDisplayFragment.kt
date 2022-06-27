@@ -190,8 +190,8 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
                     when (day.date) {
                         today -> {
-                            textView.setTextColorRes(R.color.example_3_white)
-                            textView.setBackgroundResource(R.drawable.example_3_today_bg)
+                            textView.setTextColorRes(R.color.teal_700)
+                            //textView.setBackgroundResource(R.drawable.example_3_today_bg)
 
                             eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
@@ -203,8 +203,8 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
                         }
                         selectedDate -> {
-                            textView.setTextColorRes(R.color.example_3_blue)
-                            textView.setBackgroundResource(R.drawable.example_3_selected_bg)
+                            textView.setTextColorRes(R.color.progress_color_7)
+                            //textView.setBackgroundResource(R.drawable.example_3_selected_bg)
 
                             eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 

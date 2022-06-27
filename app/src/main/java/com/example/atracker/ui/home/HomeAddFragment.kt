@@ -89,11 +89,27 @@ class HomeAddFragment : Fragment() {
 
         _binding = FragmentHomeAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         binding.homeVM = homeViewModel
-
-
         chipGroup = binding.homeAddTypeSelectChipGroup
+
+        binding.homeAddSaveTV.setOnClickListener {
+            Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.positionWord.value!!}, ${homeViewModel.workTypeSelection.value!!}")
+
+
+            if (homeViewModel.companyWord.value.isNullOrBlank()) {
+                showAlert(AlertType.TYPE5)
+            }
+            if (homeViewModel.positionWord.value.isNullOrBlank()) {
+                showAlert(AlertType.TYPE6)
+            }
+            if (checkedChipIdList.size < 2) {
+                showAlert(AlertType.TYPE7)
+            } else {
+                homeViewModel.tmpFun(checkedChipIdList) //// not fix!
+            }
+
+
+        }
 
 
         binding.homeAddBackButton.setOnClickListener { view ->
@@ -165,8 +181,6 @@ class HomeAddFragment : Fragment() {
                     hintTextView.setTextColor(Color.parseColor("#565B6E"))
                     hintTextView.textSize = 16f
                 }
-
-
                 return v
             }
 
@@ -217,15 +231,18 @@ class HomeAddFragment : Fragment() {
                 when (position) {
                     0 -> {
                         spinnerSelectedPosition = position
+                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                     1 -> {
                         spinnerSelectedPosition = position
+                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                     2 -> {
                         spinnerSelectedPosition = position
+                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                     else -> {
-
+                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                 }
             }
@@ -291,10 +308,6 @@ class HomeAddFragment : Fragment() {
             Log.d("test333333", "${view}, ${i}, ${i2}")
 
         }
-
-
-
-
 
 
 

@@ -171,6 +171,7 @@
                 android:hint="@string/add_apply_hint"
                 android:textSize="16sp"
                 android:layout_marginTop="10dp"
+                android:text="@={homeVM._positionWord}"
                 android:id="@+id/homeAddApplyFieldET"
                 android:background="@null"
                 android:textColorHint="@color/atracker_gray_6"

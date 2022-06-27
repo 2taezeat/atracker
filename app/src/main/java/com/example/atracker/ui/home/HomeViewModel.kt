@@ -24,6 +24,24 @@ class HomeViewModel : ViewModel() {
     val companyWord : LiveData<String> = _companyWord
 
 
+    val _positionWord = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val positionWord : LiveData<String> = _positionWord
+
+
+    val _workTypeSelection = MutableLiveData<Int>().apply {
+    }
+    val workTypeSelection : LiveData<Int> = _workTypeSelection
+
+
+//    val _workTypeSelection = MutableLiveData<Int>().apply {
+//    }
+//    val workTypeSelection : LiveData<Int> = _workTypeSelection
+
+
+
+
 
 
     private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
@@ -126,10 +144,16 @@ class HomeViewModel : ViewModel() {
             } else {
 
             }
-
-
-
         }
+    }
+
+
+    fun setWorkTypePosition(position : Int) {
+        _workTypeSelection.value = position
+    }
+
+    fun tmpFun(tmp : ArrayList<Int>) {
+
     }
 
 
