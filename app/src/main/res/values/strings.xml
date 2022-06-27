@@ -43,8 +43,9 @@
     <string name="answer">답변</string>
     <string name="review_and_reflect">후기 및 반성</string>
 
-    <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">질의응답</font></string>
+    <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">Q&amp;A 양식</font></string>
     <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">후기</font></string>
+    <string name="plus_free"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">자유 양식</font></string>
 
 
     <string name="percent">%</string>
@@ -108,6 +109,8 @@
     <string name="nickname_title">닉네임</string>
     <string name="sign_up_complete_title">로그인 완료!</string>
     <string name="sign_up_complete_welcome">반갑습니다!</string>
+    <string name="free_hint_title">내용을 입력하세요.</string>
+    <string name="free_title">제목</string>
 
 
 </resources>

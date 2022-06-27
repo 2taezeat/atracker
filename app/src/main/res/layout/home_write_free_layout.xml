@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:id="@+id/homeWriteFreeWholeCL"
+
+    >
+
+    <CheckBox
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/homeWriteFreeCheckBox"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:button="@drawable/custom_checkbox"
+        app:buttonTint="@drawable/checkbox_color_state_list"
+        >
+    </CheckBox>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_round"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/homeWriteFreeMainCL"
+        >
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeWriteFree"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="@string/free_title"
+            android:textColor="@color/progress_color_7"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textColorHint="@color/progress_color_7"
+            android:background="@null"
+            >
+        </EditText>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeWriteFreeET"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeWriteFree"
+            android:hint="@string/free_hint_title"
+            android:padding="12dp"
+            android:background="@null"
+            android:textColor="@color/atracker_white"
+            android:textSize="16sp"
+            android:textColorHint="@color/atracker_gray_3"
+
+            >
+        </EditText>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
