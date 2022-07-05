@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
-import com.example.atracker.databinding.FragmentCalendarDisplayBinding
 import com.example.atracker.databinding.FragmentHomeAddCalendarBinding
 import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.ui.calendar.*
@@ -35,7 +34,7 @@ import java.util.*
 
 class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
-    private val calendarViewModel: CalendarViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     private var _binding: FragmentHomeAddCalendarBinding? = null
 
@@ -43,7 +42,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val eventsAdapter = EventsAdapter(this)
+    //private val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel)
 
     private val inputDialog by lazy {
         EventCreateFragment()
@@ -114,6 +113,8 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //        })
 
 
+
+
         return root
     }
 
@@ -130,18 +131,20 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
 
 
-        calendarViewModel.eventChangeFlag.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                updateAdapterForDate(selectedDate!!)
-                binding.calendarView.notifyDateChanged(calendarViewModel.zonedDateTime.value!!.toLocalDate())
-            }
+//        homeViewModel.eventChangeFlag.observe(viewLifecycleOwner, Observer {
+//            if (it) {
+//                updateAdapterForDate(selectedDate!!)
+//                binding.calendarView.notifyDateChanged(homeViewModel.zonedDateTime.value!!.toLocalDate())
+//            }
+//
+//        })
 
-        })
+        val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel)
 
 
         binding.exThreeRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = eventsAdapter
+            adapter = homeAddCalendarEventsAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         }
 
@@ -188,14 +191,14 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                     textView.makeVisible()
 
                     //Log.d("events", "${events[day.date]}")
-                    Log.d("events", "${calendarViewModel.events.value!![day.date]}")
+                    //Log.d("events", "${homeViewModel.events.value!![day.date]}")
 
                     when (day.date) {
                         today -> {
                             textView.setTextColorRes(R.color.atracker_white)
                             textView.setBackgroundResource(R.drawable.example_3_today_bg)
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
+                            //eventDotSetVisibiity(homeViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
 //                            dotView.makeInVisible()
 //
@@ -208,7 +211,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                             textView.setTextColorRes(R.color.progress_color_7)
                             //textView.setBackgroundResource(R.drawable.example_3_selected_bg)
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
+                            //eventDotSetVisibiity(homeViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
 //                            dotView.makeInVisible()
 //
@@ -221,7 +224,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                             textView.background = null
                             //dotViewMore.isVisible = events[day.date].orEmpty().isNotEmpty()
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
+                            //eventDotSetVisibiity(homeViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
                         }
                     }
@@ -291,7 +294,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             selectedDate = date
             oldDate?.let { binding.calendarView.notifyDateChanged(it) }
             binding.calendarView.notifyDateChanged(date)
-            updateAdapterForDate(date)
+            //updateAdapterForDate(date)
         }
     }
 
@@ -312,20 +315,20 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //        updateAdapterForDate(date)
 //    }
 
-    private fun updateAdapterForDate(date: LocalDate) {
-        eventsAdapter.apply {
-            selectedEvents.clear()
-            selectedEvents.addAll(calendarViewModel.events.value!![date].orEmpty())
-            notifyDataSetChanged()
-        }
-        binding.exThreeSelectedDateHeaderText.text = selectionHeaderFormatter.format(date)
-        binding.exThreeSelectedDateText.text = selectionDateFormatter.format(date)
+//    private fun updateAdapterForDate(date: LocalDate) {
+//        homeAddCalendarEventsAdapter.apply {
+//            selectedEvents.clear()
+//            //selectedEvents.addAll(homeViewModel.events.value!![date].orEmpty())
+//            notifyDataSetChanged()
+//        }
+//        binding.exThreeSelectedDateHeaderText.text = selectionHeaderFormatter.format(date)
+//        binding.exThreeSelectedDateText.text = selectionDateFormatter.format(date)
+//
+//
+//    }
 
 
-    }
-
-
-    private fun eventDotSetVisiblity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View ){
+    private fun eventDotSetVisibiity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View ){
         if (currentDataCalendarEvent == null) {
             view1.makeInVisible()
             view2.makeInVisible()

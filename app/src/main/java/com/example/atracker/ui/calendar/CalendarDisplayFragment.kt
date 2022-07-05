@@ -193,7 +193,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.setTextColorRes(R.color.atracker_white)
                             textView.setBackgroundResource(R.drawable.example_3_today_bg)
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
+                            eventDotSetVisibiity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
 //                            dotView.makeInVisible()
 //
@@ -206,7 +206,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.setTextColorRes(R.color.progress_color_7)
                             //textView.setBackgroundResource(R.drawable.example_3_selected_bg)
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
+                            eventDotSetVisibiity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
 //                            dotView.makeInVisible()
 //
@@ -219,7 +219,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                             textView.background = null
                             //dotViewMore.isVisible = events[day.date].orEmpty().isNotEmpty()
 
-                            eventDotSetVisiblity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
+                            eventDotSetVisibiity(calendarViewModel.events.value!![day.date], dotView1, dotView2, dotView3)
 
                         }
                     }
@@ -323,7 +323,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
     }
 
 
-    private fun eventDotSetVisiblity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View ){
+    private fun eventDotSetVisibiity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View ){
         if (currentDataCalendarEvent == null) {
             view1.makeInVisible()
             view2.makeInVisible()

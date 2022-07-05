@@ -35,9 +35,9 @@ class HomeViewModel : ViewModel() {
     val workTypeSelection : LiveData<Int> = _workTypeSelection
 
 
-//    val _workTypeSelection = MutableLiveData<Int>().apply {
-//    }
-//    val workTypeSelection : LiveData<Int> = _workTypeSelection
+    private val _homeAddSelectedChipName = MutableLiveData<ArrayList<String>>().apply {
+    }
+    val homeAddSelectedChipName : LiveData<ArrayList<String>> = _homeAddSelectedChipName
 
 
 
@@ -152,7 +152,8 @@ class HomeViewModel : ViewModel() {
         _workTypeSelection.value = position
     }
 
-    fun tmpFun(tmp : ArrayList<Int>) {
+    fun tmpFun(tmp : ArrayList<String>) {
+        _homeAddSelectedChipName.value = tmp
 
     }
 

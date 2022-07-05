@@ -92,20 +92,36 @@ class HomeAddFragment : Fragment() {
         binding.homeVM = homeViewModel
         chipGroup = binding.homeAddTypeSelectChipGroup
 
-        binding.homeAddSaveTV.setOnClickListener {
+        binding.homeAddNext.setOnClickListener { view ->
             Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.positionWord.value!!}, ${homeViewModel.workTypeSelection.value!!}")
 
+            var checkNext = true
 
             if (homeViewModel.companyWord.value.isNullOrBlank()) {
                 showAlert(AlertType.TYPE5)
+                checkNext = false
             }
             if (homeViewModel.positionWord.value.isNullOrBlank()) {
                 showAlert(AlertType.TYPE6)
+                checkNext = false
             }
             if (checkedChipIdList.size < 2) {
                 showAlert(AlertType.TYPE7)
+                checkNext = false
             } else {
-                homeViewModel.tmpFun(checkedChipIdList) //// not fix!
+                val aa = arrayListOf<String>()
+
+                for (idx in 0 until checkedChipIdList.size) {
+                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
+                    aa.add(checkedChip.text.toString())
+                }
+
+
+                homeViewModel.tmpFun(aa) //// not fix!
+            }
+
+            if (checkNext) {
+                view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
             }
 
 

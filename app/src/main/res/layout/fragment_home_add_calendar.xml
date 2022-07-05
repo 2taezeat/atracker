@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.calendar.CalendarDisplayFragment"
@@ -124,10 +124,43 @@
 
             </androidx.core.widget.NestedScrollView>
 
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/homeAddCalendarBottomCL"
+            android:background="@drawable/bottom_shadow"
+            >
+
+        </View>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/homeAddCalendarBottomCL"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="@string/finish_title"
+                android:textColor="@color/progress_color_7"
+                android:textSize="16sp"
+                android:id="@+id/homeAddCalendarFinish"
+                >
+            </TextView>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
