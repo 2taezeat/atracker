@@ -65,6 +65,10 @@ class SignUpPositionFragment : Fragment() {
             view.findNavController().navigate(R.id.action_navigation_sign_up_position_to_navigation_sign_up_complete)
         }
 
+        binding.signUpPositionBackIV.setOnClickListener { view ->
+            view.findNavController().popBackStack()
+        }
+
 
 
         var spinnerSelectedPosition : Int = -1

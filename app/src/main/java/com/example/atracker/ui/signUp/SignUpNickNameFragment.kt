@@ -51,6 +51,10 @@ class SignUpNickNameFragment : Fragment() {
             view.findNavController().navigate(R.id.action_navigation_sign_up_nick_name_to_navigation_sign_up_position)
         }
 
+        binding.signUpNickNameBackIV.setOnClickListener { view ->
+            view.findNavController().popBackStack()
+        }
+
 
 
 
