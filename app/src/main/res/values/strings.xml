@@ -36,16 +36,18 @@
     <string name="close">Close</string>
     <string name="save_korean">저장</string>
     <string name="home_display_please_write">아직 등록된 지원현황이 없어요!\n + 버튼을 눌러 추가해주세요</string>
-    <string name="review_title">후기</string>
+    <string name="review_title_hint">내용을 입력해주세요.</string>
+    <string name="review_title">종합 후기</string>
     <string name="q">Q.</string>
-    <string name="question">질문</string>
+    <string name="question_hint">질문을 입력하세요.</string>
     <string name="a">A.</string>
-    <string name="answer">답변</string>
-    <string name="review_and_reflect">후기 및 반성</string>
+    <string name="answer_hint">답변을 입력하세요.</string>
+    <string name="review_and_reflect_hint">후기를 입력하세요.</string>
 
+
+    <string name="plus_free"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">자유 양식</font></string>
     <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">Q&amp;A 양식</font></string>
     <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">후기</font></string>
-    <string name="plus_free"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">자유 양식</font></string>
 
 
     <string name="percent">%</string>

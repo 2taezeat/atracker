@@ -38,6 +38,80 @@
                         android:orientation="vertical"
                         android:paddingBottom="70dp"
                         >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:id="@+id/homeWriteReviewWholeCL"
+
+                            >
+
+                            <CheckBox
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:id="@+id/homeWriteReviewCheckBox"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_marginTop="10dp"
+                                android:visibility="invisible"
+                                android:button="@drawable/custom_checkbox"
+                                app:buttonTint="@drawable/checkbox_color_state_list"
+                                >
+                            </CheckBox>
+
+
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/button_round"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:id="@+id/homeWriteReviewMainCL"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/homeWriteReview"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    android:text="@string/review_title"
+                                    android:textColor="@color/atracker_gray_3"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="16sp"
+                                    >
+                                </TextView>
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/homeWriteReviewET"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/homeWriteReview"
+                                    android:hint="@string/review_title_hint"
+                                    android:padding="12dp"
+                                    android:background="@null"
+                                    android:textColor="@color/atracker_white"
+                                    android:textSize="16sp"
+                                    android:textColorHint="@color/atracker_white"
+
+                                    >
+                                </EditText>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
                     </LinearLayout>
 
 
@@ -117,7 +191,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:id="@+id/homeWritePlusButton2"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="@string/plus_review"
+                        android:text="@string/plus_free"
                         android:background="@drawable/button_round"
                         android:textSize="16sp"
                         android:gravity="center"

@@ -39,7 +39,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/homeWriteFree"
+            android:id="@+id/homeWriteFreeTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:hint="@string/free_title"
@@ -58,13 +58,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/homeWriteFreeET"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeWriteFree"
+            app:layout_constraintTop_toBottomOf="@+id/homeWriteFreeTitle"
             android:hint="@string/free_hint_title"
             android:padding="12dp"
             android:background="@null"
             android:textColor="@color/atracker_white"
             android:textSize="16sp"
-            android:textColorHint="@color/atracker_gray_3"
+            android:textColorHint="@color/atracker_white"
 
             >
         </EditText>

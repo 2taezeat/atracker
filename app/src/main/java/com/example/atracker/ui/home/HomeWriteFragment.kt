@@ -67,7 +67,7 @@ class HomeWriteFragment : Fragment() {
 
 
 
-    private val reviewLayoutListMap by lazy {
+    private val freeLayoutListMap by lazy {
         mutableMapOf<String, List<ConstraintLayout>>()
     }
 
@@ -75,7 +75,7 @@ class HomeWriteFragment : Fragment() {
         mutableMapOf<String, List<ConstraintLayout>>()
     }
 
-    private val reviewRemoveLayoutListMap by lazy {
+    private val freeRemoveLayoutListMap by lazy {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
@@ -158,16 +158,16 @@ class HomeWriteFragment : Fragment() {
         }
 
         binding.homeWritePlusButton2.setOnClickListener{
-            val homeWriteReviewLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
+            val homeWriteFreeLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
             val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                 ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
             params.setMargins(0,20,0,10)
-            homeWriteReviewLayout.layoutParams = params
-            homeWriteReviewLayout.id = View.generateViewId()
+            homeWriteFreeLayout.layoutParams = params
+            homeWriteFreeLayout.id = View.generateViewId()
 
-            binding.homeWriteLL.addView(homeWriteReviewLayout)
+            binding.homeWriteLL.addView(homeWriteFreeLayout)
         }
 
 
@@ -202,7 +202,7 @@ class HomeWriteFragment : Fragment() {
             )
 
             editBooleanMap[progressName] = false
-            reviewRemoveLayoutListMap[progressName] = arrayListOf()
+            freeRemoveLayoutListMap[progressName] = arrayListOf()
             qnaRemoveLayoutListMap[progressName] = arrayListOf()
 
 
@@ -219,6 +219,11 @@ class HomeWriteFragment : Fragment() {
             val homeWriteTypeSelect2 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect2)
             val homeWriteTypeSelect3 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect3)
 
+            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
+            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
+
             homeWriteContentLayout.layoutParams = params
 
             setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
@@ -226,12 +231,10 @@ class HomeWriteFragment : Fragment() {
             setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValue = R.color.progress_color_7)
 
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
-            setPlusButton(homeWritePlusButton2, R.layout.home_write_review_layout, homeWriteLL, progressName)
-
+            setPlusButton(homeWritePlusButton2, R.layout.home_write_free_layout, homeWriteLL, progressName)
 
 
             homeWriteEditButton.setOnClickListener {
-
                 homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
                 homeWriteEditButton.visibility = View.INVISIBLE
                 homeWriteEditCompleteButton.visibility = View.VISIBLE
@@ -241,25 +244,32 @@ class HomeWriteFragment : Fragment() {
 
                 editBooleanMap[progressName] = true
 
-                val reviewLayoutList = reviewLayoutListMap[progressName]
+                val freeLayoutList = freeLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
 
-                for (reviewLayout in reviewLayoutList.orEmpty()) {
-                    reviewLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.VISIBLE
-                    val homeWriteReviewMainCL = reviewLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
-                    val reviewDeleteCheckBox = reviewLayout.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+
+//                homeWriteReviewCheckBox.visibility = View.VISIBLE
+//                val set = ConstraintSet()
+//                set.clone(homeWriteReviewWholeCL)
+//                set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, homeWriteReviewCheckBox.id , ConstraintSet.END, 20)
+//                set.applyTo(homeWriteReviewWholeCL)
+
+
+                for (freeLayout in freeLayoutList.orEmpty()) {
+                    freeLayout.getViewById(R.id.homeWriteFreeCheckBox).visibility = View.VISIBLE
+                    val homeWriteFreeMainCL = freeLayout.findViewById<ConstraintLayout>(R.id.homeWriteFreeMainCL)
+                    val freeDeleteCheckBox = freeLayout.findViewById<CheckBox>(R.id.homeWriteFreeCheckBox)
                     val set = ConstraintSet()
-                    set.clone(reviewLayout)
-                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, reviewDeleteCheckBox.id , ConstraintSet.END, 20)
-                    set.applyTo(reviewLayout)
-                    reviewDeleteCheckBox.isChecked = false
+                    set.clone(freeLayout)
+                    set.connect(homeWriteFreeMainCL.id,ConstraintSet.START, freeDeleteCheckBox.id , ConstraintSet.END, 20)
+                    set.applyTo(freeLayout)
+                    freeDeleteCheckBox.isChecked = false
 
-                    reviewDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
+                    freeDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
-                            reviewRemoveLayoutListMap[progressName]!!.add(reviewLayout)
+                            freeRemoveLayoutListMap[progressName]!!.add(freeLayout)
                         else
-                            reviewRemoveLayoutListMap[progressName]!!.remove(reviewLayout)
-
+                            freeRemoveLayoutListMap[progressName]!!.remove(freeLayout)
                     }
                 }
 
@@ -288,7 +298,7 @@ class HomeWriteFragment : Fragment() {
 
 
             homeWriteEditCompleteButton.setOnClickListener {
-                reviewRemoveLayoutListMap[progressName]!!.clear()
+                freeRemoveLayoutListMap[progressName]!!.clear()
                 qnaRemoveLayoutListMap[progressName]!!.clear()
 
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
@@ -300,17 +310,17 @@ class HomeWriteFragment : Fragment() {
 
                 editBooleanMap[progressName] = false
 
-                val reviewLayoutList = reviewLayoutListMap[progressName]
+                val freeLayoutList = freeLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
 
-                for (reviewLayout in reviewLayoutList.orEmpty()) {
-                    reviewLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.GONE
-                    val homeWriteReviewMainCL = reviewLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+                for (freeLayout in freeLayoutList.orEmpty()) {
+                    freeLayout.getViewById(R.id.homeWriteFreeCheckBox).visibility = View.GONE
+                    val homeWriteFreeMainCL = freeLayout.findViewById<ConstraintLayout>(R.id.homeWriteFreeMainCL)
                     val set = ConstraintSet()
-                    set.clone(reviewLayout)
-                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, ConstraintSet.PARENT_ID , ConstraintSet.START, 0 )
-                    set.connect(homeWriteReviewMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
-                    set.applyTo(reviewLayout)
+                    set.clone(freeLayout)
+                    set.connect(homeWriteFreeMainCL.id,ConstraintSet.START, ConstraintSet.PARENT_ID , ConstraintSet.START, 0 )
+                    set.connect(homeWriteFreeMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
+                    set.applyTo(freeLayout)
                 }
 
                 for (qnaLayout in qnaLayoutList.orEmpty()) {
@@ -347,6 +357,7 @@ class HomeWriteFragment : Fragment() {
             val progressType = homeDetailItem.progressType
             val progressName = homeDetailItem.progressName
             val itemType = homeDetailItem.itemType
+            val freeBody = homeDetailItem.freeBody
             val totalReviewBody = homeDetailItem.totalReviewBody
             val questionBody = homeDetailItem.questionBody
             val answerBody = homeDetailItem.answerBody
@@ -383,8 +394,8 @@ class HomeWriteFragment : Fragment() {
                 }
             }
 
-            if (itemType == ProgressItemBodyType.REVIEW) {
-                val addLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
+            if (itemType == ProgressItemBodyType.FREE) {
+                val addLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
                 val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
                     ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
@@ -394,9 +405,9 @@ class HomeWriteFragment : Fragment() {
                 addLayout.id = View.generateViewId()
                 homeWriteLL.addView(addLayout)
 
-                val homeWriteReviewET = addLayout.findViewById<EditText>(R.id.homeWriteReviewET)
-                homeWriteReviewET.setText(totalReviewBody)
-                reviewLayoutListMap[progressName] = reviewLayoutListMap[progressName].orEmpty().plus(addLayout)
+                val homeWriteFreeET = addLayout.findViewById<EditText>(R.id.homeWriteFreeET)
+                homeWriteFreeET.setText(freeBody)
+                freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
             } else {
                 val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
                 val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
@@ -445,8 +456,8 @@ class HomeWriteFragment : Fragment() {
 
             linearLayout.addView(addLayout)
 
-            if (layoutInt == R.layout.home_write_review_layout) {
-                reviewLayoutListMap[progressName] = reviewLayoutListMap[progressName].orEmpty().plus(addLayout)
+            if (layoutInt == R.layout.home_write_free_layout) {
+                freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
 
             } else if (layoutInt == R.layout.home_write_qna_layout) {
                 qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
@@ -488,14 +499,14 @@ class HomeWriteFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE1 -> {
-                            for (l in reviewRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
+                            for (l in freeRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
                             for (l in qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
 
-                            reviewRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
+                            freeRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
                             qnaRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
 
                         }
@@ -511,7 +522,7 @@ class HomeWriteFragment : Fragment() {
                 }
             },
             alertType,
-            reviewRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size
+            freeRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size
 
         )
 

@@ -106,13 +106,13 @@ class HomeViewModel : ViewModel() {
     private val _homeDetailContents = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
         value = mutableMapOf(
             0 to arrayListOf<HomeDetailItem>(
-                HomeDetailItem(progressType = 0,progressName = "1차 면접", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, progressIsPassing = IsPassing.SUCCESS),
-                HomeDetailItem(progressType = 1,progressName = "2차 면접", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_1", questionBody = null, answerBody = null, progressIsPassing = IsPassing.SUCCESS),
-                HomeDetailItem(progressType = 2,progressName = "3차 면접", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_2\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, progressIsPassing = IsPassing.WAITING),
-                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_3\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, progressIsPassing = IsPassing.FAIL),
-                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.QNA, totalReviewBody = "hello_3", questionBody = "qna_3", answerBody = "answer_3", progressIsPassing = null),
-                HomeDetailItem(progressType = 4,progressName = "5차 면접", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_4", questionBody = null, answerBody = null, progressIsPassing = null),
-                HomeDetailItem(progressType = 5,progressName = "6차 면접", itemType = ProgressItemBodyType.REVIEW, totalReviewBody = "hello_5", questionBody = null, answerBody = null, progressIsPassing = null),
+                HomeDetailItem(progressType = 0,progressName = "1차 면접", itemType = ProgressItemBodyType.FREE, freeBody = null, totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, progressIsPassing = IsPassing.SUCCESS),
+                HomeDetailItem(progressType = 1,progressName = "2차 면접", itemType = ProgressItemBodyType.FREE, freeBody = null, totalReviewBody = "hello_1", questionBody = null, answerBody = null, progressIsPassing = IsPassing.SUCCESS),
+                HomeDetailItem(progressType = 2,progressName = "3차 면접", itemType = ProgressItemBodyType.FREE, freeBody = null, totalReviewBody = "hello_2\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, progressIsPassing = IsPassing.WAITING),
+                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.REVIEW, freeBody = null, totalReviewBody = "hello_3\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, progressIsPassing = IsPassing.FAIL),
+                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.QNA, freeBody = null, totalReviewBody = "hello_3", questionBody = "qna_3", answerBody = "answer_3", progressIsPassing = null),
+                HomeDetailItem(progressType = 4,progressName = "5차 면접", itemType = ProgressItemBodyType.FREE, freeBody = null, totalReviewBody = "hello_4", questionBody = null, answerBody = null, progressIsPassing = null),
+                HomeDetailItem(progressType = 5,progressName = "6차 면접", itemType = ProgressItemBodyType.FREE, freeBody = null, totalReviewBody = "hello_5", questionBody = null, answerBody = null, progressIsPassing = null),
             )
         )
     }
