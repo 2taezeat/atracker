@@ -92,6 +92,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         }
 
         binding.homeAddProgressFAB.setOnClickListener{view ->
+            parentActivity.mainBottomNavigationDisappear()
             view.findNavController().navigate(R.id.action_navigation_home_to_navigation_home_add)
         }
 

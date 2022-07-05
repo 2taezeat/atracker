@@ -1,11 +1,16 @@
 package com.example.atracker.ui
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivityMainBinding
@@ -17,6 +22,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val homeViewModel: HomeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
     val calendarViewModel: CalendarViewModel by lazy { ViewModelProvider(this).get(CalendarViewModel::class.java) }
+
+
+//    private val navDisplayController: NavController by lazy {
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragmentActivityMain)
+//        navHostFragment!!.findNavController()
+//    }
+
+    lateinit var navDisplayController: NavController
+
 
 
 
@@ -31,7 +45,8 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        //val navController = findNavController(R.id.navHostFragmentActivityMain)
+        navDisplayController = supportFragmentManager.findFragmentById(R.id.navHostFragmentActivityMain)?.findNavController()!!
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
@@ -42,14 +57,48 @@ class MainActivity : AppCompatActivity() {
 
         //setupActionBarWithNavController(navController, appBarConfiguration)
 
-        navController.navigate(R.id.navigation_home)
+        navDisplayController.navigate(R.id.navigation_home)
 
-        navView.setupWithNavController(navController)
+        navView.setupWithNavController(navDisplayController)
+
+    }
 
 
+    override fun onBackPressed() {
+        navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_blog -> {
+                    mainBottomNavigationAppear()
+                }
+                R.id.navigation_home -> {
+                    mainBottomNavigationAppear()
+                }
+                R.id.navigation_calendar -> {
+                    mainBottomNavigationAppear()
+                }
+                else -> {
+                }
+            }
+        }
 
 
+        super.onBackPressed()
+    }
 
+
+    fun mainBottomNavigationDisappear() {
+        binding.navView.visibility = View.GONE
+        val lp = binding.navHostFragmentActivityMain.layoutParams
+        lp.height = ViewGroup.LayoutParams.MATCH_PARENT
+        binding.navHostFragmentActivityMain.layoutParams = lp
+    }
+
+    fun mainBottomNavigationAppear() {
+        binding.navView.visibility = View.VISIBLE
+
+        val lp = binding.navHostFragmentActivityMain.layoutParams
+        lp.height = 0
+        binding.navHostFragmentActivityMain.layoutParams = lp
     }
 
 

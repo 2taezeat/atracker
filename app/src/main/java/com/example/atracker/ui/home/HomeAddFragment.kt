@@ -113,6 +113,7 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddBackButton.setOnClickListener { view ->
+            parentActivity.mainBottomNavigationAppear()
             val navController = view.findNavController()
             navController.popBackStack()
         }
