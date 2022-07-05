@@ -295,6 +295,21 @@
             </TextView>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView5"
+                app:layout_constraintStart_toEndOf="@+id/myPageContactTV"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/atracker_gray_6"
+                android:textSize="14sp"
+                android:text="@string/brianrudder_email"
+                >
+
+            </TextView>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -304,6 +319,20 @@
                 android:layout_marginTop="13dp"
                 >
             </View>
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="24dp"
+                android:src="@drawable/ic_login_atracker_image"
+                >
+
+
+            </ImageView>
 
 
 
