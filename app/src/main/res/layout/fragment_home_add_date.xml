@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="calendarVM"
-            type="com.example.atracker.ui.calendar.CalendarViewModel" />
+            name="homeVM"
+            type="com.example.atracker.ui.home.HomeViewModel" />
     </data>
 
 
@@ -42,10 +42,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:year="@={calendarVM.year}"
-                android:month="@={calendarVM.month}"
-                android:day="@={calendarVM.day}"
-                android:onDateChanged="@{(v, year, month, day) -> calendarVM.onDateChanged(year, month, day)}"
+                android:year="@={homeVM.year}"
+                android:month="@={homeVM.month}"
+                android:day="@={homeVM.day}"
+                android:onDateChanged="@{(v, year, month, day) -> homeVM.onDateChanged(year, month, day)}"
 
 
                 >
@@ -61,9 +61,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:timePickerMode="spinner"
                 android:id="@+id/eventCreateTimePicker"
-                android:hour="@={calendarVM.hour}"
-                android:minute="@={calendarVM.minute}"
-                android:onTimeChanged="@{(v, hour, minute) -> calendarVM.onTimeChanged(hour, minute)}"
+                android:hour="@={homeVM.hour}"
+                android:minute="@={homeVM.minute}"
+                android:onTimeChanged="@{(v, hour, minute) -> homeVM.onTimeChanged(hour, minute)}"
                 >
 
 

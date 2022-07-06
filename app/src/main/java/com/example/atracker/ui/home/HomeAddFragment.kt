@@ -40,9 +40,7 @@ class HomeAddFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-
     lateinit var numberDrawableList: ArrayList<Drawable?>
-
     private lateinit var chipGroup: ChipGroup
 
 
@@ -50,14 +48,6 @@ class HomeAddFragment : Fragment() {
         arrayListOf<Int>()
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeAddFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +75,7 @@ class HomeAddFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         _binding = FragmentHomeAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -93,7 +83,7 @@ class HomeAddFragment : Fragment() {
         chipGroup = binding.homeAddTypeSelectChipGroup
 
         binding.homeAddNext.setOnClickListener { view ->
-            Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.positionWord.value!!}, ${homeViewModel.workTypeSelection.value!!}")
+            Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.positionWord.value!!}")
 
             var checkNext = true
 
@@ -118,6 +108,8 @@ class HomeAddFragment : Fragment() {
 
 
                 homeViewModel.tmpFun(aa) //// not fix!
+
+                checkedChipIdList.clear()
             }
 
             if (checkNext) {
@@ -243,8 +235,11 @@ class HomeAddFragment : Fragment() {
 //        }
 
         binding.homeAddWorkTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
+
+                Log.d("test22222", "${position}")
+
                 when (position) {
                     0 -> {
                         spinnerSelectedPosition = position
@@ -259,6 +254,7 @@ class HomeAddFragment : Fragment() {
                         homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                     else -> {
+                        spinnerSelectedPosition = -1
                         homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                 }
@@ -316,7 +312,6 @@ class HomeAddFragment : Fragment() {
             val companyTitleAdapter = ArrayAdapter<String>(lazyContext,R.layout.item_auto_complete_text_view, homeViewModel.companyTitleList.value!!.toTypedArray())
 
             binding.homeAddACTV.setAdapter(companyTitleAdapter)
-
             binding.homeAddACTV.showDropDown()
         })
 
@@ -325,8 +320,6 @@ class HomeAddFragment : Fragment() {
             Log.d("test333333", "${view}, ${i}, ${i2}")
 
         }
-
-
 
 
 

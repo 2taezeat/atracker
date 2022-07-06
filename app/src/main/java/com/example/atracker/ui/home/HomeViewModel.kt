@@ -8,9 +8,34 @@ import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZonedDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
+
+    var _zonedDateTime = MutableLiveData<ZonedDateTime>()
+    var zonedDateTime : LiveData<ZonedDateTime> = _zonedDateTime
+
+    var year: MutableLiveData<Int> = MutableLiveData()
+    var month: MutableLiveData<Int> = MutableLiveData()
+    var day: MutableLiveData<Int> = MutableLiveData()
+    var hour: MutableLiveData<Int> = MutableLiveData()
+    var minute: MutableLiveData<Int> = MutableLiveData()
+
+    init {
+        val instant = Instant.now()
+        _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
+
+        initTimeDateCurrent()
+    }
+
+
+
 
     private val _companyTitleList = MutableLiveData<List<String>>().apply {
         value = listOf()
@@ -155,6 +180,32 @@ class HomeViewModel : ViewModel() {
     fun tmpFun(tmp : ArrayList<String>) {
         _homeAddSelectedChipName.value = tmp
 
+    }
+
+    fun onDateChanged(year: Int, month: Int, day: Int){
+        val dataTime = LocalDateTime.of(year, month + 1, day, hour.value!!, minute.value!!)
+        val defaultZoneId = TimeZone.getDefault().toZoneId()
+        _zonedDateTime.value = dataTime.atZone(defaultZoneId)
+
+    }
+
+
+    fun onTimeChanged(hour: Int, minute: Int){
+        val dataTime = LocalDateTime.of(year.value!!, month.value!! + 1, day.value!!, hour, minute)
+        val defaultZoneId = TimeZone.getDefault().toZoneId()
+        _zonedDateTime.value = dataTime.atZone(defaultZoneId)
+        Log.d("test123123", "${_zonedDateTime.value}")
+
+    }
+
+
+    fun initTimeDateCurrent(){
+        val newDate = Calendar.getInstance()
+        year.value = newDate.get(Calendar.YEAR)
+        month.value = newDate.get(Calendar.MONTH)
+        day.value = newDate.get(Calendar.DAY_OF_MONTH)
+        hour.value = newDate.get(Calendar.HOUR_OF_DAY)
+        minute.value = newDate.get(Calendar.MINUTE)
     }
 
 

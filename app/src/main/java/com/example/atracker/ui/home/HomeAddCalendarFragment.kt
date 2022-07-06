@@ -10,6 +10,7 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -144,6 +145,12 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //        })
 
         val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel, lazyContext)
+
+
+        binding.homeAddCalendarBackButton.setOnClickListener { view ->
+            val navController = view.findNavController()
+            navController.popBackStack()
+        }
 
 
         binding.exThreeRv.apply {
@@ -298,7 +305,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             selectedDate = date
             oldDate?.let { binding.calendarView.notifyDateChanged(it) }
             binding.calendarView.notifyDateChanged(date)
-            //updateAdapterForDate(date)
+            updateAdapterForDate(date)
         }
     }
 
@@ -319,17 +326,19 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //        updateAdapterForDate(date)
 //    }
 
-//    private fun updateAdapterForDate(date: LocalDate) {
+    private fun updateAdapterForDate(date: LocalDate) {
 //        homeAddCalendarEventsAdapter.apply {
 //            selectedEvents.clear()
 //            //selectedEvents.addAll(homeViewModel.events.value!![date].orEmpty())
 //            notifyDataSetChanged()
 //        }
-//        binding.exThreeSelectedDateHeaderText.text = selectionHeaderFormatter.format(date)
-//        binding.exThreeSelectedDateText.text = selectionDateFormatter.format(date)
-//
-//
-//    }
+
+
+        binding.exThreeSelectedDateHeaderText.text = selectionHeaderFormatter.format(date)
+        //binding.exThreeSelectedDateText.text = selectionDateFormatter.format(date)
+
+
+    }
 
 
     private fun eventDotSetVisibiity(currentDataCalendarEvent : List<CalendarEvent>?, view1: View, view2: View, view3: View ){
