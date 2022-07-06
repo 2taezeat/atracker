@@ -16,7 +16,7 @@ import com.example.atracker.model.dto.CalendarEvent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class CalendarBottomFragment(calendarEvent: CalendarEvent) : BottomSheetDialogFragment() {
+class CalendarBottomFragment(calendarEvent: CalendarEvent?) : BottomSheetDialogFragment() {
 
     private var calendarEvent: CalendarEvent? = null
     private val calendarViewModel: CalendarViewModel by activityViewModels()

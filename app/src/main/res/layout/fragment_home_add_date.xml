@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+
+    <data>
+        <variable
+            name="calendarVM"
+            type="com.example.atracker.ui.calendar.CalendarViewModel" />
+    </data>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eventCreateConstraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_radius"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="320dp"
+            android:layout_height="360dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+
+
+            <DatePicker
+                android:theme="@style/MyDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:id="@+id/eventCreateDatePicker"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:calendarTextColor="@color/atracker_white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:year="@={calendarVM.year}"
+                android:month="@={calendarVM.month}"
+                android:day="@={calendarVM.day}"
+                android:onDateChanged="@{(v, year, month, day) -> calendarVM.onDateChanged(year, month, day)}"
+
+
+                >
+            </DatePicker>
+
+
+            <TimePicker
+                android:theme="@style/MyDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                app:layout_constraintTop_toBottomOf="@+id/eventCreateDatePicker"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:timePickerMode="spinner"
+                android:id="@+id/eventCreateTimePicker"
+                android:hour="@={calendarVM.hour}"
+                android:minute="@={calendarVM.minute}"
+                android:onTimeChanged="@{(v, hour, minute) -> calendarVM.onTimeChanged(hour, minute)}"
+                >
+
+
+            </TimePicker>
+
+
+
+            <TextView
+                android:id="@+id/eventCreateButton1"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:text="@string/cancel_title"
+                android:textColor="@color/atracker_white"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:background="@drawable/button_round_dark_grey"
+                />
+
+
+
+            <TextView
+                android:id="@+id/eventCreateButton2"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:textColor="@color/atracker_white"
+                android:textSize="16sp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/save_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_round_dark_grey"
+                />
+            
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

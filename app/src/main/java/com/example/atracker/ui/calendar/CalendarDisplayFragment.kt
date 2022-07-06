@@ -362,7 +362,7 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
 
     }
 
-    override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent) {
+    override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent?) {
         val calendarBottomFragment = CalendarBottomFragment(calendarEvent)
         calendarBottomFragment.show(parentFragmentManager, calendarBottomFragment.tag)
     }

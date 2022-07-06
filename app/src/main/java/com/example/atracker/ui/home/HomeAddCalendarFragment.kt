@@ -42,6 +42,10 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val lazyContext by lazy {
+        requireContext()
+    }
+
     //private val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel)
 
     private val inputDialog by lazy {
@@ -139,7 +143,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //
 //        })
 
-        val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel)
+        val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel, lazyContext)
 
 
         binding.exThreeRv.apply {
@@ -367,9 +371,9 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
     }
 
-    override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent) {
-        val calendarBottomFragment = CalendarBottomFragment(calendarEvent)
-        calendarBottomFragment.show(parentFragmentManager, calendarBottomFragment.tag)
+    override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent?) {
+        HomeAddDateFragment().show(parentFragmentManager, HomeAddDateFragment.TAG)
+
     }
 
 }
