@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
 import com.example.atracker.ui.login.LoginActivity
+import com.example.atracker.utils.AlertType
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -71,7 +73,9 @@ class MyPageDisplayFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             googleSignInClient.signOut().addOnCompleteListener {
                 //activity!!.finish()
-                startLogin()
+                //startLogin()
+
+                showAlert(AlertType.TYPE10)
             }
         }
 
@@ -90,6 +94,32 @@ class MyPageDisplayFragment : Fragment() {
         val intent = Intent(lazyContext, LoginActivity::class.java)
         ContextCompat.startActivity(lazyContext, intent, null)
         activity!!.finish()
+    }
+
+
+    private fun showAlert(alertType: AlertType){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+
+                override fun onCenterClick() {
+
+                }
+
+                override fun onRightClick() {
+                    when (alertType) {
+                        AlertType.TYPE10 -> {
+                            startLogin()
+                        }
+                    }
+                }
+            },
+            alertType,
+            null
+        )
+
+        alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 
 }

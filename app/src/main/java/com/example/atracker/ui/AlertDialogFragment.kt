@@ -273,6 +273,35 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
             }
 
 
+            AlertType.TYPE10 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+
+                val testString1 = "로그아웃 하시겠습니까?"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.text = "취소"
+                binding.alertDialogButton2.text = "확인"
+                binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
+            }
+
+
 
         }
 

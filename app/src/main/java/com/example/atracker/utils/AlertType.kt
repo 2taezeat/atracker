@@ -10,5 +10,8 @@ enum class AlertType {
     TYPE6,
     TYPE7,
     TYPE8,
-    TYPE9
+    TYPE9,
+
+    TYPE10, // myPage, 로그아웃
+    TYPE11 // myPage
 }
