@@ -95,6 +95,10 @@ class HomeAddFragment : Fragment() {
                 showAlert(AlertType.TYPE6)
                 checkNext = false
             }
+            if (homeViewModel.workTypeSelection.value == -1) {
+                showAlert(AlertType.TYPE9)
+                checkNext = false
+            }
             if (checkedChipIdList.size < 2) {
                 showAlert(AlertType.TYPE7)
                 checkNext = false
@@ -109,11 +113,11 @@ class HomeAddFragment : Fragment() {
 
                 homeViewModel.tmpFun(aa) //// not fix!
 
-                checkedChipIdList.clear()
             }
 
             if (checkNext) {
                 view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
+                checkedChipIdList.clear()
             }
 
 

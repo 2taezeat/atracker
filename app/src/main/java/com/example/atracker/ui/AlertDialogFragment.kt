@@ -249,6 +249,31 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 }
             }
 
+            AlertType.TYPE9 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+
+                val testString1 = "근무형태를 선택하셔야"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.text = "다음 단계로 넘어갈 수 있습니다."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
+
+
         }
 
         return root

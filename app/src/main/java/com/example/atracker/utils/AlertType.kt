@@ -9,5 +9,6 @@ enum class AlertType {
     TYPE5,
     TYPE6,
     TYPE7,
-    TYPE8
+    TYPE8,
+    TYPE9
 }

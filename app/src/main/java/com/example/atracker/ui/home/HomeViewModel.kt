@@ -56,6 +56,7 @@ class HomeViewModel : ViewModel() {
 
 
     val _workTypeSelection = MutableLiveData<Int>().apply {
+        value = -1
     }
     val workTypeSelection : LiveData<Int> = _workTypeSelection
 
