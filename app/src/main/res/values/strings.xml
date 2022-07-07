@@ -116,6 +116,8 @@
     <string name="free_title">제목</string>
     <string name="brianrudder_email">brianrudder@naver.com</string>
     <string name="review_edit_title">지원 후기 수정하기</string>
+    <string name="progress_edit_title">전형 편집하기</string>
+    <string name="review_delete_title">지원 후기 삭제하기</string>
 
 
 </resources>
