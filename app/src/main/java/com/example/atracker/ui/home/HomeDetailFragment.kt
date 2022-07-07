@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.ui.calendar.CalendarBottomFragment
 
 
 class HomeDetailFragment : Fragment() {
@@ -93,6 +94,11 @@ class HomeDetailFragment : Fragment() {
 
         val bgProgress = ProgressBarDrawable( lazyContext,homeProgress.totalProgress,homeProgress.myProgress, true)
         binding.homeDetailProgressView.progressDrawable = bgProgress
+
+
+        binding.homeDetailMoreIV.setOnClickListener {
+            HomeBottomSheetFragment().show(parentFragmentManager, HomeBottomSheetFragment().tag)
+        }
 
 
         return root

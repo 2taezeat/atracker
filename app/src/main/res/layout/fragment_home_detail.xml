@@ -65,19 +65,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
-            <TextView
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/save_korean"
                 android:layout_marginEnd="16dp"
-                android:id="@+id/homeDetailSaveTV"
-                android:textSize="16sp"
-                android:textColor="@color/atracker_white"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_more_icon_raw"
+                android:id="@+id/homeDetailMoreIV"
                 >
-            </TextView>
+
+
+            </ImageView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

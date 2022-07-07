@@ -27,16 +27,6 @@ class CalendarBottomFragment(calendarEvent: CalendarEvent?) : BottomSheetDialogF
         this.calendarEvent = calendarEvent
     }
 
-    companion object {
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            CalendarBottomFragment(calendarEvent).apply {
-//                arguments = Bundle().apply {
-//
-//                }
-//            }
-    }
-
 
 
     private var _binding: FragmentCalendarBottomBinding? = null
