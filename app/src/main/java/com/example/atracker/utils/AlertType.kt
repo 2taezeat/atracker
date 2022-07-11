@@ -13,5 +13,9 @@ enum class AlertType {
     TYPE9,
 
     TYPE10, // myPage, 로그아웃
-    TYPE11 // myPage
+    TYPE11, // myPage, 회원 탈퇴
+
+    TYPE12, // homeBottom
+    TYPE13, // homeBottom
+
 }

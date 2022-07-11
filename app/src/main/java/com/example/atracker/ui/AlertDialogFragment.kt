@@ -302,6 +302,61 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
             }
 
 
+            AlertType.TYPE11 -> { // 회원 탈퇴
+
+            }
+
+
+            AlertType.TYPE12 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                val testString1 = "후기를 정말 삭제하시겠습니까?"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "이 작업은 취소하실 수 없습니다."
+
+                binding.alertDialogButton1.text = "취소"
+                binding.alertDialogButton2.text = "삭제"
+                binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
+            }
+
+
+            AlertType.TYPE13 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_check_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "삭제가 완료되었습니다"
+                binding.alertDialogTV1.setTextColor(mForegroundSuccess7)
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "홈 화면에서 해당 지원 후기가 삭제되었습니다."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
+
 
         }
 

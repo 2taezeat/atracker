@@ -105,7 +105,5 @@ class HomeDetailFragment : Fragment() {
 
 //    private fun initDataToSeekbar() {
 
-    fun tmp() {
 
-    }
 }
