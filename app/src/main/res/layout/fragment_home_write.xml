@@ -108,142 +108,179 @@
             android:layout_height="0dp"
             android:id="@+id/homeWriteContentCL"
             app:layout_constraintTop_toBottomOf="@+id/homeWriteHeaderCL"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/homeWriteBottomView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
             >
 
 
-
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/homeWriteNestedSV"
-            android:visibility="invisible"
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/homeWriteMainCL"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/homeWriteNestedSV"
+                android:visibility="invisible"
                 >
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/homeWriteLL"
-                    android:orientation="vertical"
-                    android:paddingBottom="70dp"
-                    >
-                </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="165dp"
-                    android:layout_height="46dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/homeWritePlusButton1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="@string/plus_qna"
-                    android:background="@drawable/button_round"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:textColor="@color/atracker_white"
-                    android:layout_marginBottom="10dp"
-                    >
-                </TextView>
-
-
-                <TextView
-                    android:layout_width="165dp"
-                    android:layout_height="46dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/homeWritePlusButton2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="@string/plus_free"
-                    android:background="@drawable/button_round"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:textColor="@color/atracker_white"
-                    android:layout_marginBottom="10dp"
-                    >
-                </TextView>
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/homeWriteTypeSelectChipGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:singleSelection="true"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="10dp"
-                    app:chipSpacingHorizontal="8dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/homeWriteMainCL"
                     >
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="66dp"
-                        android:layout_height="42dp"
-                        style="@style/CustomChipChoice1"
-                        android:id="@+id/homeWriteTypeSelect1"
-                        android:text="@string/waiting"
-                        android:textAlignment="center"
-                        app:chipStrokeWidth="0dp"
-                        android:textSize="14sp"
-                        android:checkable="true"
-                        android:clickable="true"
-                        android:focusable="true"
-
-
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/homeWriteLL"
+                        android:orientation="vertical"
+                        android:paddingBottom="70dp"
                         >
-                    </com.google.android.material.chip.Chip>
+                    </LinearLayout>
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="66dp"
-                        android:layout_height="42dp"
-                        style="@style/CustomChipChoice1"
-                        android:id="@+id/homeWriteTypeSelect2"
-                        android:text="@string/not_passing"
-                        android:textAlignment="center"
-                        app:chipStrokeWidth="0dp"
-                        android:textSize="14sp"
-                        android:checkable="true"
-                        android:clickable="true"
-                        android:focusable="true"
 
+                    <TextView
+                        android:layout_width="165dp"
+                        android:layout_height="46dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/homeWritePlusButton1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/plus_qna"
+                        android:background="@drawable/button_round"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/atracker_white"
+                        android:layout_marginBottom="10dp"
                         >
-                    </com.google.android.material.chip.Chip>
+                    </TextView>
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="66dp"
-                        android:layout_height="42dp"
-                        style="@style/CustomChipChoice2"
-                        android:id="@+id/homeWriteTypeSelect3"
-                        android:text="@string/passing"
-                        android:textAlignment="center"
-                        app:chipStrokeWidth="0dp"
-                        android:textSize="14sp"
-                        android:checkable="true"
-                        android:clickable="true"
-                        android:focusable="true"
 
+                    <TextView
+                        android:layout_width="165dp"
+                        android:layout_height="46dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/homeWritePlusButton2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/plus_free"
+                        android:background="@drawable/button_round"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/atracker_white"
+                        android:layout_marginBottom="10dp"
                         >
-                    </com.google.android.material.chip.Chip>
+                    </TextView>
 
-                </com.google.android.material.chip.ChipGroup>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/homeWriteTypeSelectChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleSelection="true"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="10dp"
+                        app:chipSpacingHorizontal="8dp"
+                        >
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="66dp"
+                            android:layout_height="42dp"
+                            style="@style/CustomChipChoice1"
+                            android:id="@+id/homeWriteTypeSelect1"
+                            android:text="@string/waiting"
+                            android:textAlignment="center"
+                            app:chipStrokeWidth="0dp"
+                            android:textSize="14sp"
+                            android:checkable="true"
+                            android:clickable="true"
+                            android:focusable="true"
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                            >
+                        </com.google.android.material.chip.Chip>
 
-        </androidx.core.widget.NestedScrollView>
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="66dp"
+                            android:layout_height="42dp"
+                            style="@style/CustomChipChoice1"
+                            android:id="@+id/homeWriteTypeSelect2"
+                            android:text="@string/not_passing"
+                            android:textAlignment="center"
+                            app:chipStrokeWidth="0dp"
+                            android:textSize="14sp"
+                            android:checkable="true"
+                            android:clickable="true"
+                            android:focusable="true"
+
+                            >
+                        </com.google.android.material.chip.Chip>
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="66dp"
+                            android:layout_height="42dp"
+                            style="@style/CustomChipChoice2"
+                            android:id="@+id/homeWriteTypeSelect3"
+                            android:text="@string/passing"
+                            android:textAlignment="center"
+                            app:chipStrokeWidth="0dp"
+                            android:textSize="14sp"
+                            android:checkable="true"
+                            android:clickable="true"
+                            android:focusable="true"
+
+                            >
+                        </com.google.android.material.chip.Chip>
+
+                    </com.google.android.material.chip.ChipGroup>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/homeWriteBottomCL"
+            android:background="@drawable/bottom_shadow"
+            android:id="@+id/homeWriteBottomView"
+            >
+
+        </View>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/homeWriteBottomCL"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:text="@string/save_title"
+                android:textColor="@color/progress_color_7"
+                android:textSize="16sp"
+                android:id="@+id/homeWriteNext"
+                >
+            </TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
