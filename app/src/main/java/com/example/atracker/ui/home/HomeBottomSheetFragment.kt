@@ -58,14 +58,17 @@ class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment()
 
 
         binding.homeBottomSheetProgressEditCL.setOnClickListener {
+            val action = HomeDetailFragmentDirections.actionNavigationHomeDetailToNavigationHomeAdd(progressIndex!!)
+            val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+            dismiss()
+            navController.navigate(action)
+            parentActivity.mainBottomNavigationDisappear()
 
         }
 
 
         binding.homeBottomSheetReviewDeleteCL.setOnClickListener {
             showAlert(AlertType.TYPE12)
-
-
         }
 
 
