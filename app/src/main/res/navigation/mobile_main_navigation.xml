@@ -153,5 +153,25 @@
     </fragment>
 
 
+    <fragment
+        android:id="@+id/navigation_home_bottom_sheet"
+        android:name="com.example.atracker.ui.home.HomeBottomSheetFragment"
+        tools:layout="@layout/fragment_home_bottom_sheet">
+
+
+        <action
+            android:id="@+id/action_navigation_home_bottom_sheet_to_navigation_home_write"
+            app:destination="@id/navigation_home_write"
+            app:popUpTo="@id/navigation_home_bottom_sheet" >
+            <argument
+                android:name="progressIndex"
+                app:argType="integer"
+                android:defaultValue="0"
+                />
+        </action>
+
+    </fragment>
+
+
 
 </navigation>

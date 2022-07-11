@@ -107,6 +107,7 @@ class HomeWriteFragment : Fragment() {
         binding.homeWriteBackButton.setOnClickListener { view ->
             val navController = view.findNavController()
             navController.popBackStack()
+            parentActivity.mainBottomNavigationAppear()
         }
 
 

@@ -65,11 +65,10 @@ class HomeDetailFragment : Fragment() {
 
 
 
-        binding.homeDetailWriteIV.setOnClickListener { view ->
-            val action = HomeDetailFragmentDirections.actionNavigationHomeDetailToNavigationHomeWrite(args.progressIndex)
-
-            view.findNavController().navigate(action)
-        }
+//        binding.homeDetailWriteIV.setOnClickListener { view ->
+//            val action = HomeDetailFragmentDirections.actionNavigationHomeDetailToNavigationHomeWrite(args.progressIndex)
+//            view.findNavController().navigate(action)
+//        }
 
         binding.homeDetailProgressView.secondaryProgress = 1
         binding.homeDetailProgressView.max = 6
@@ -97,7 +96,7 @@ class HomeDetailFragment : Fragment() {
 
 
         binding.homeDetailMoreIV.setOnClickListener {
-            HomeBottomSheetFragment().show(parentFragmentManager, HomeBottomSheetFragment().tag)
+            HomeBottomSheetFragment(args.progressIndex).show(parentFragmentManager, HomeBottomSheetFragment(args.progressIndex).tag)
         }
 
 
@@ -105,4 +104,8 @@ class HomeDetailFragment : Fragment() {
     }
 
 //    private fun initDataToSeekbar() {
+
+    fun tmp() {
+
+    }
 }

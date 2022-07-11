@@ -76,6 +76,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_calendar -> {
                     mainBottomNavigationAppear()
                 }
+                R.id.navigation_home_detail -> {
+                    mainBottomNavigationAppear()
+                }
                 else -> {
                 }
             }

@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentCalendarBottomBinding
 import com.example.atracker.databinding.FragmentHomeBottomSheetBinding
+import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.calendar.CalendarViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class HomeBottomSheetFragment : BottomSheetDialogFragment() {
+class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment() {
 
 
     private val homeViewModel: HomeViewModel by activityViewModels()
@@ -24,9 +26,15 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentHomeBottomSheetBinding? = null
     private val binding get() = _binding!!
+    private var progressIndex: Int? = null
+    private val parentActivity by lazy {
+        activity as MainActivity
+    }
 
 
-
+    init {
+        this.progressIndex = progressIndex
+    }
 
 
 
@@ -40,12 +48,18 @@ class HomeBottomSheetFragment : BottomSheetDialogFragment() {
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
 
+        binding.homeBottomSheetReviewEditCL.setOnClickListener {
+            val action = HomeDetailFragmentDirections.actionNavigationHomeDetailToNavigationHomeWrite(progressIndex!!)
+            val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+            dismiss()
+            navController.navigate(action)
+            parentActivity.mainBottomNavigationDisappear()
+        }
+
+
 
         return binding.root
     }
-
-
-    //override fun getTheme(): Int = R.style.CustomBottomSheetDialog
 
 
 
