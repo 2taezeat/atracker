@@ -25,6 +25,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
 import androidx.lifecycle.Observer
+import com.example.atracker.model.dto.HomeAddProgress
 
 
 class HomeAddFragment : Fragment() {
@@ -103,15 +104,16 @@ class HomeAddFragment : Fragment() {
                 showAlert(AlertType.TYPE7)
                 checkNext = false
             } else {
-                val aa = arrayListOf<String>()
+                val checkedChipProgress = arrayListOf<HomeAddProgress>()
 
                 for (idx in 0 until checkedChipIdList.size) {
                     val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
-                    aa.add(checkedChip.text.toString())
+                    //checkedChipName.add(checkedChip.text.toString())
+                    checkedChipProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
                 }
 
 
-                homeViewModel.tmpFun(aa) //// not fix!
+                homeViewModel.setSelectedChipName(checkedChipProgress) //// not fix!
 
             }
 

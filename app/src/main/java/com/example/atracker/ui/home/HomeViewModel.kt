@@ -9,7 +9,6 @@ import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.util.*
@@ -61,11 +60,15 @@ class HomeViewModel : ViewModel() {
     val workTypeSelection : LiveData<Int> = _workTypeSelection
 
 
-    private val _homeAddSelectedChipName = MutableLiveData<ArrayList<String>>().apply {
+    private val _homeAddSelectedProgress = MutableLiveData<ArrayList<HomeAddProgress>>().apply {
     }
-    val homeAddSelectedChipName : LiveData<ArrayList<String>> = _homeAddSelectedChipName
+    val homeAddSelectedProgress : LiveData<ArrayList<HomeAddProgress>> = _homeAddSelectedProgress
 
 
+    private val _homeAddDateSelectFlag = MutableLiveData<Boolean?>().apply {
+        null
+    }
+    val homeAddDateSelectFlag : LiveData<Boolean?> = _homeAddDateSelectFlag
 
 
 
@@ -178,16 +181,14 @@ class HomeViewModel : ViewModel() {
         _workTypeSelection.value = position
     }
 
-    fun tmpFun(tmp : ArrayList<String>) {
-        _homeAddSelectedChipName.value = tmp
-
+    fun setSelectedChipName(addCheckedProgress : ArrayList<HomeAddProgress>) {
+        _homeAddSelectedProgress.value = addCheckedProgress
     }
 
     fun onDateChanged(year: Int, month: Int, day: Int){
         val dataTime = LocalDateTime.of(year, month + 1, day, hour.value!!, minute.value!!)
         val defaultZoneId = TimeZone.getDefault().toZoneId()
         _zonedDateTime.value = dataTime.atZone(defaultZoneId)
-
     }
 
 
@@ -195,8 +196,6 @@ class HomeViewModel : ViewModel() {
         val dataTime = LocalDateTime.of(year.value!!, month.value!! + 1, day.value!!, hour, minute)
         val defaultZoneId = TimeZone.getDefault().toZoneId()
         _zonedDateTime.value = dataTime.atZone(defaultZoneId)
-        Log.d("test123123", "${_zonedDateTime.value}")
-
     }
 
 
@@ -207,6 +206,18 @@ class HomeViewModel : ViewModel() {
         day.value = newDate.get(Calendar.DAY_OF_MONTH)
         hour.value = newDate.get(Calendar.HOUR_OF_DAY)
         minute.value = newDate.get(Calendar.MINUTE)
+    }
+
+
+    fun setZonedHomeAddProgress(position: Int?) {
+        _homeAddSelectedProgress.value!![position!!].zonedDateTime = _zonedDateTime.value
+        switch(_homeAddDateSelectFlag)
+
+
+    }
+
+    fun switch(mutableLiveData: MutableLiveData<Boolean?>){
+        mutableLiveData.value = if(mutableLiveData.value==null) true else !mutableLiveData.value!!
     }
 
 

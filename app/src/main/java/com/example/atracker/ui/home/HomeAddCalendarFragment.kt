@@ -159,6 +159,10 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         }
 
+        homeViewModel.homeAddDateSelectFlag.observe(viewLifecycleOwner, Observer {
+            homeAddCalendarEventsAdapter.notifyDataSetChanged()
+        })
+
 
         val daysOfWeek = daysOfWeekFromLocale()
         val currentMonth = YearMonth.now()
@@ -381,7 +385,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent?) {
-        HomeAddDateFragment().show(parentFragmentManager, HomeAddDateFragment.TAG)
+        HomeAddDateFragment(position).show(parentFragmentManager, HomeAddDateFragment.TAG)
 
     }
 

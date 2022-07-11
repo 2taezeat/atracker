@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.atracker.databinding.FragmentHomeAddDateBinding
 
-class HomeAddDateFragment : DialogFragment() {
+class HomeAddDateFragment(position : Int) : DialogFragment() {
 
 
     private var _binding: FragmentHomeAddDateBinding? = null
@@ -21,7 +21,12 @@ class HomeAddDateFragment : DialogFragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
 
 
+    private var position: Int? = null
 
+
+    init {
+        this.position = position
+    }
 
     companion object{
         const val TAG = "HomeAddDateFragment"
@@ -51,10 +56,10 @@ class HomeAddDateFragment : DialogFragment() {
         }
 
 
-//        binding.eventCreateButton2.setOnClickListener {
-//            homeViewModel.saveEvent()
-//            dismiss()
-//        }
+        binding.eventCreateButton2.setOnClickListener {
+            homeViewModel.setZonedHomeAddProgress(position)
+            dismiss()
+        }
 
 
 

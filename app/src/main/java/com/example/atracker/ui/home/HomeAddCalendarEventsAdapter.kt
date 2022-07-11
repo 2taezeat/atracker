@@ -4,16 +4,15 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
-import com.example.atracker.databinding.Example3EventItemViewBinding
 import com.example.atracker.databinding.HomeAddCalendarEventItemViewBinding
 import com.example.atracker.model.dto.CalendarEvent
+import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.ui.calendar.CalendarEventOnclickListener
-import com.example.atracker.ui.calendar.EventsAdapter
 import com.example.atracker.utils.layoutInflater
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -22,7 +21,8 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
 
     val selectedEvents = mutableListOf<CalendarEvent>()
 
-    val selectedChips = homeViewModel.homeAddSelectedChipName.value
+    val homeAddSelectedProgress = homeViewModel.homeAddSelectedProgress.value
+
 
     private val mForegroundSuccess1 = ContextCompat.getDrawable(context, R.drawable.circle_type_1) as Drawable
     private val mForegroundSuccess2 = ContextCompat.getDrawable(context, R.drawable.circle_type_2) as Drawable
@@ -35,7 +35,7 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
     var mForegroundColorList : ArrayList<Drawable>? = null
 
     init {
-        when (selectedChips!!.size) {
+        when (homeAddSelectedProgress!!.size) {
             1 -> mForegroundColorList = arrayListOf<Drawable>( mForegroundSuccess7 )
             2 -> mForegroundColorList = arrayListOf<Drawable>( mForegroundSuccess1, mForegroundSuccess7 )
             3 -> mForegroundColorList = arrayListOf<Drawable>( mForegroundSuccess1, mForegroundSuccess4, mForegroundSuccess7 )
@@ -66,10 +66,10 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
     }
 
     override fun onBindViewHolder(viewHolder: HomeAddCalendarEventsAdapter.HomeAddCalendarEventsViewHolder, position: Int) {
-        viewHolder.bind(selectedChips!![position]!!)
+        viewHolder.bind(homeAddSelectedProgress!![position]!!)
     }
 
-    override fun getItemCount(): Int = selectedChips!!.size
+    override fun getItemCount(): Int = homeAddSelectedProgress!!.size
 
     inner class HomeAddCalendarEventsViewHolder(private val binding: HomeAddCalendarEventItemViewBinding, calendarEventOnclickListener: CalendarEventOnclickListener
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -89,15 +89,23 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
 //            }
 //        }
 
-        fun bind(chipProgressName: String) {
+        fun bind(addProgress: HomeAddProgress) {
             //binding.itemEventCompanyNameText.text = calendarEvent.eventTitle
             //binding.itemEventDate.text = calendarEvent.zonedDateTime.toLocalTime().toString()
             //binding.itemEventDate.text = selectionDateFormatter.format(calendarEvent.zonedDateTime.toLocalTime())
             //selectionHeaderFormatter.format(date)
 
 
-            binding.itemEventProgressText.text = chipProgressName
+            binding.itemEventProgressText.text = addProgress.progressName
             binding.itemEventCircle.background = mForegroundColorList!![bindingAdapterPosition]
+
+
+            addProgress.zonedDateTime?.toLocalTime()?.let{
+                binding.itemEventDate.text = selectionDateFormatter.format(addProgress.zonedDateTime?.toLocalTime())
+            }
+
+
+
 
 
         }
