@@ -12,7 +12,6 @@ import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.ui.calendar.CalendarEventOnclickListener
 import com.example.atracker.utils.layoutInflater
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -47,7 +46,9 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
     }
 
 
-    private val selectionDateFormatter = DateTimeFormatter.ofPattern("a  hh : mm", Locale.KOREAN)
+    private val selectionTimeFormatter = DateTimeFormatter.ofPattern("a  hh : mm", Locale.KOREAN)
+    private val selectionDateFormatter = DateTimeFormatter.ofPattern("yyyy MM dd")
+
 
 
     private var calendarEventOnclickListener: CalendarEventOnclickListener? = null
@@ -95,13 +96,19 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
             //binding.itemEventDate.text = selectionDateFormatter.format(calendarEvent.zonedDateTime.toLocalTime())
             //selectionHeaderFormatter.format(date)
 
+            val zonedTime = addProgress.zonedDateTime
 
             binding.itemEventProgressText.text = addProgress.progressName
             binding.itemEventCircle.background = mForegroundColorList!![bindingAdapterPosition]
 
 
-            addProgress.zonedDateTime?.toLocalTime()?.let{
-                binding.itemEventDate.text = selectionDateFormatter.format(addProgress.zonedDateTime?.toLocalTime())
+            if (zonedTime == null) {
+                binding.itemEventPlusTV.visibility = View.VISIBLE
+            } else {
+                binding.itemEventTime.text = selectionTimeFormatter.format(zonedTime.toLocalTime())
+                binding.itemEventDate.text = selectionDateFormatter.format(zonedTime.toLocalDate())
+                binding.itemEventPlusTV.visibility = View.INVISIBLE
+
             }
 
 

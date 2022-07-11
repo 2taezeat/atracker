@@ -34,6 +34,7 @@
         android:text="+"
         android:textSize="16sp"
         android:textColor="@color/atracker_gray_3"
+        android:id="@+id/itemEventPlusTV"
         >
 
 
@@ -61,8 +62,8 @@
         android:textSize="16sp"
         android:textColor="@color/atracker_gray_3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/itemEventProgressText"
         app:layout_constraintEnd_toStartOf="@+id/itemEventTime"
+        android:layout_marginEnd="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
@@ -77,6 +78,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="4dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
