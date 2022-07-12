@@ -371,6 +371,13 @@ class HomeWriteFragment : Fragment() {
 
             val homeWriteNestedSV = dynamicHomeWriteCL!!.getViewById(R.id.homeWriteNestedSV)
             val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
+
+
+            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
+            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
+
             val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
             val homeWriteTypeSelect1 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect1)
@@ -382,7 +389,6 @@ class HomeWriteFragment : Fragment() {
                     homeWriteTypeSelect1.isChecked = true
                     homeWriteTypeSelect1.chipStrokeWidth = 4f
                     homeWriteTypeSelect1.setChipStrokeColorResource(R.color.atracker_white)
-
                 }
                 IsPassing.FAIL -> {
                     homeWriteTypeSelect2.isChecked = true
@@ -393,7 +399,6 @@ class HomeWriteFragment : Fragment() {
                     homeWriteTypeSelect3.isChecked = true
                     homeWriteTypeSelect3.chipStrokeWidth = 4f
                     homeWriteTypeSelect3.setChipStrokeColorResource(R.color.progress_color_7)
-
                 }
             }
 
@@ -436,7 +441,7 @@ class HomeWriteFragment : Fragment() {
                 qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
 
             } else if (itemType == ProgressItemBodyType.REVIEW) {
-
+                homeWriteReviewET.setText(totalReviewBody)
 
             }
         }
