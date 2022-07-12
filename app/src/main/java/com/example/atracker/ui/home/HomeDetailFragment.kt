@@ -13,6 +13,7 @@ import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.calendar.CalendarBottomFragment
+import com.google.android.material.tabs.TabLayout
 
 
 class HomeDetailFragment : Fragment() {
@@ -40,6 +41,9 @@ class HomeDetailFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val args : HomeDetailFragmentArgs by navArgs()
 
+    private lateinit var homeDetailTabLayout : TabLayout
+
+
     private val homeDetailAdapter by lazy {
         HomeDetailAdapter()
     }
@@ -60,8 +64,12 @@ class HomeDetailFragment : Fragment() {
 
         _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         val homeProgress = homeViewModel.homeProgressArrayList.value!![args.progressIndex]
+        homeDetailTabLayout = binding.homeDetailTabLayout
+
+
+
+        addTabItem(args.progressIndex, container)
 
 
 
@@ -104,6 +112,16 @@ class HomeDetailFragment : Fragment() {
     }
 
 //    private fun initDataToSeekbar() {
+
+
+    private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
+        val homeWriteProgressSelected = homeViewModel.homeWriteProgressSelectedMap.value!![progressIndex]
+
+        for (progressName in homeWriteProgressSelected!!) {
+            homeDetailTabLayout.addTab(homeDetailTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
+
+        }
+    }
 
 
 }

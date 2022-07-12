@@ -83,63 +83,45 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="우리은행"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/homeDetailMyPageIV"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            android:textSize="30sp"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:id="@+id/homeDetailCompanyTitleTV"-->
-<!--            >-->
-<!--        </TextView>-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="인턴"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/homeDetailMyPageIV"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/homeDetailCompanyTitleTV"-->
-<!--            android:textSize="20sp"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:id="@+id/homeDetailJobTypeTV"-->
-<!--            >-->
-<!--        </TextView>-->
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailHeadCL"
+            android:id="@+id/homeDetailTabLayout"
+            app:tabMode="scrollable"
+            app:tabGravity="fill"
+            android:background="@color/background_gray"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="@color/atracker_gray_3"
+            app:tabSelectedTextColor="@color/atracker_gray_3"
+            app:tabIndicatorColor="@color/atracker_white"
+            app:tabPaddingEnd="18dp"
+            app:tabPaddingStart="18dp"
+            app:tabIndicatorHeight="0dp"
+            >
+
+
+
+        </com.google.android.material.tabs.TabLayout>
+
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
             android:background="@drawable/edge_grey_progress_bar"
             app:layout_constraintWidth_percent="0.9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeDetailHeadCL"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailTabLayout"
             app:layout_constraintVertical_bias="0.6"
-            android:layout_marginTop="16dp"
             android:id="@+id/homeDetailProgressView"
+            android:elevation="10dp"
             >
         </ProgressBar>
 
 
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/homeDetailWriteIV"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:textSize="16sp"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/homeDetailProgressView"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            android:src="@drawable/ic_baseline_add_circle_outline_24"-->
-<!--            >-->
-
-
-<!--        </ImageView>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
