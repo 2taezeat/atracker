@@ -71,7 +71,8 @@
                 android:textSize="16sp"
                 android:textColor="@color/atracker_white"
                 android:textColorHint="@color/atracker_gray_3"
-                android:textStyle="bold"
+                android:theme="@style/MyEditTextTheme"
+
                 >
             </EditText>
 
@@ -111,7 +112,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="12dp"
                 android:layout_marginLeft="24dp"
-
+                android:theme="@style/MyEditTextTheme"
                 android:background="@null"
                 android:textSize="16sp"
                 android:textColor="@color/atracker_white"
@@ -136,7 +137,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/homeWriteReviewAndReflectTV"
+                android:id="@+id/homeWriteQnaOfReviewET"
                 android:hint="@string/review_and_reflect_hint"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -146,6 +147,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/atracker_gray_2"
                 android:textColorHint="@color/atracker_gray_3"
+                android:theme="@style/MyEditTextTheme"
                 >
             </EditText>
 

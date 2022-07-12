@@ -358,10 +358,12 @@ class HomeWriteFragment : Fragment() {
             val progressType = homeDetailItem.progressType
             val progressName = homeDetailItem.progressName
             val itemType = homeDetailItem.itemType
+            val freeTitle =  homeDetailItem.freeTitle
             val freeBody = homeDetailItem.freeBody
             val totalReviewBody = homeDetailItem.totalReviewBody
             val questionBody = homeDetailItem.questionBody
             val answerBody = homeDetailItem.answerBody
+            val qnaReviewBody = homeDetailItem.qnaReviewBody
             val progressIsPassing = homeDetailItem.progressIsPassing
 
             progressIsPassingMap[progressType] = progressIsPassing
@@ -395,7 +397,7 @@ class HomeWriteFragment : Fragment() {
                 }
             }
 
-            if (itemType == ProgressItemBodyType.FREE) {
+            if (itemType == ProgressItemBodyType.FREE) { // free
                 val addLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
                 val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
@@ -408,8 +410,12 @@ class HomeWriteFragment : Fragment() {
 
                 val homeWriteFreeET = addLayout.findViewById<EditText>(R.id.homeWriteFreeET)
                 homeWriteFreeET.setText(freeBody)
+                val homeWriteFreeTitle = addLayout.findViewById<EditText>(R.id.homeWriteFreeTitle)
+                homeWriteFreeTitle.setText(freeTitle)
+
+
                 freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
-            } else {
+            } else if (itemType == ProgressItemBodyType.QNA) { // qna
                 val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
                 val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
@@ -424,7 +430,13 @@ class HomeWriteFragment : Fragment() {
                 homeWriteQuestionTV.setText(questionBody)
                 val homeWriteAnswerET = addLayout.findViewById<EditText>(R.id.homeWriteAnswerET)
                 homeWriteAnswerET.setText(answerBody)
+                val homeWriteQnaOfReviewET = addLayout.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
+                homeWriteQnaOfReviewET.setText(qnaReviewBody)
+
                 qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
+
+            } else if (itemType == ProgressItemBodyType.REVIEW) {
+
 
             }
         }
