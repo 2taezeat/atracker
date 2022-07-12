@@ -24,29 +24,21 @@
         android:layout_marginTop="20dp"
         >
 
-        <View
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:id="@+id/homeDetailItemCircleView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="14dp"
-            android:background="@drawable/circle_type_1"
-            >
-        </View>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/homeDetailItemCircleView"
-            android:id="@+id/homeDetailItemProgressType"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/homeDetailItemFreeTitle"
             app:layout_constraintTop_toTopOf="parent"
-            tool:text="서류"
-            android:textColor="@color/atracker_white"
-            android:textSize="18sp"
+            android:text="@string/free_type_title"
+            android:textColor="@color/progress_color_7"
+            android:textSize="16sp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="14dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="20dp"
             >
         </TextView>
 
@@ -54,8 +46,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/homeDetailItemTotalReviewBody"
-            app:layout_constraintTop_toBottomOf="@+id/homeDetailItemProgressType"
+            android:id="@+id/homeDetailItemTotalFreeBody"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailItemFreeTitle"
             app:layout_constraintStart_toStartOf="parent"
             android:textColor="@color/atracker_white"
             android:textSize="16sp"
@@ -80,7 +72,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
-            android:id="@+id/homeDetailItemReviewBottomView"
+            android:id="@+id/homeDetailItemFreeBottomView"
             >
         </View>
 

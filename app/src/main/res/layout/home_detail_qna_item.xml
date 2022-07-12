@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:id="@+id/homeDetailItemVerticalView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/progress_type_1"
-        >
-    </View>
+<!--    <View-->
+<!--        android:layout_width="2dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:id="@+id/homeDetailItemVerticalView"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:background="@drawable/progress_type_1"-->
+<!--        >-->
+<!--    </View>-->
 
 
 
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
         >
 
 
@@ -54,7 +55,7 @@
             android:textColor="@color/atracker_white"
             android:textSize="16sp"
             android:layout_marginTop="14dp"
-            android:textStyle="bold"
+            android:layout_marginEnd="14dp"
             >
         </TextView>
 
@@ -88,14 +89,36 @@
             android:textColor="@color/atracker_white"
             android:textSize="16sp"
             android:layout_marginTop="28dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="10dp"
+            android:layout_marginEnd="14dp"
+
+            >
+        </TextView>
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeDetailItemQnaReview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeDetailItemAnswer"
+            android:textColor="@color/atracker_white"
+            android:textSize="16sp"
+            tool:text="test"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="14dp"
+            android:paddingBottom="30dp"
+            android:paddingEnd="20dp"
             >
         </TextView>
 
 
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             app:layout_constraintWidth_percent="0.94"
             android:layout_height="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +126,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
+            android:id="@+id/homeDetailItemReviewBottomView"
             >
         </View>
 

@@ -118,6 +118,7 @@
     <string name="review_edit_title">지원 후기 수정하기</string>
     <string name="progress_edit_title">전형 편집하기</string>
     <string name="review_delete_title">지원 후기 삭제하기</string>
+    <string name="free_type_title">자유 양식 제목</string>
 
 
 </resources>
