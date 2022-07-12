@@ -125,17 +125,15 @@ class HomeDetailAdapter :
         fun bind(homeDetailItem: HomeDetailItem) {
             homeDetailQnaItemBinding.homeDetailItemQuestion.text = homeDetailItem.questionBody
             homeDetailQnaItemBinding.homeDetailItemAnswer.text = homeDetailItem.answerBody
+            homeDetailQnaItemBinding.homeDetailItemQnaReview.text = homeDetailItem.qnaReviewBody
 
             if (bindingAdapterPosition < currentList.size - 1 && currentList[bindingAdapterPosition].progressName != currentList[bindingAdapterPosition + 1].progressName) {
                 setBottomViewColor(homeDetailQnaItemBinding.homeDetailItemQnaBottomView, homeDetailItem, context)
             }
 
-
             if (bindingAdapterPosition == currentList.size - 1) {
                 setBottomViewColor(homeDetailQnaItemBinding.homeDetailItemQnaBottomView, homeDetailItem, context)
             }
-
-
 
         }
     }
@@ -147,9 +145,8 @@ class HomeDetailAdapter :
 
 
         fun bind(homeDetailItem: HomeDetailItem) {
-//            homeDetailFreeItemBinding.homeDetailItemQuestion.text = homeDetailItem.questionBody
-//            homeDetailFreeItemBinding.homeDetailItemAnswer.text = homeDetailItem.answerBody
-
+            homeDetailFreeItemBinding.homeDetailItemFreeTitle.text = homeDetailItem.freeTitle
+            homeDetailFreeItemBinding.homeDetailItemTotalFreeBody.text = homeDetailItem.freeBody
 
             if (bindingAdapterPosition < currentList.size - 1 && currentList[bindingAdapterPosition].progressName != currentList[bindingAdapterPosition + 1].progressName) {
                 setBottomViewColor(homeDetailFreeItemBinding.homeDetailItemFreeBottomView, homeDetailItem, context)
