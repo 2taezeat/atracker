@@ -19,6 +19,7 @@ import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
 import com.example.atracker.databinding.FragmentHomeAddCalendarBinding
 import com.example.atracker.model.dto.CalendarEvent
+import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.calendar.*
 import com.example.atracker.utils.*
 import com.example.atracker.utils.setTextColorRes
@@ -36,13 +37,12 @@ import java.util.*
 class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-
     private var _binding: FragmentHomeAddCalendarBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private val parentActivity by lazy {
+        activity as MainActivity
+    }
     private val binding get() = _binding!!
-
     private val lazyContext by lazy {
         requireContext()
     }
@@ -150,6 +150,13 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
         binding.homeAddCalendarBackButton.setOnClickListener { view ->
             val navController = view.findNavController()
             navController.popBackStack()
+        }
+
+        binding.homeAddCalendarBottomCL.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+
+            parentActivity.mainBottomNavigationAppear()
+
         }
 
 

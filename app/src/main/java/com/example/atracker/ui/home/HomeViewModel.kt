@@ -221,7 +221,11 @@ class HomeViewModel : ViewModel() {
         mutableLiveData.value = if(mutableLiveData.value==null) true else !mutableLiveData.value!!
     }
 
+    fun clearHomeAddText(){
+        _positionWord.value = ""
+        _companyWord.value = ""
 
+    }
 
 
 }

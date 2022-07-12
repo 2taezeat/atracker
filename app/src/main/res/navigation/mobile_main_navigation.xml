@@ -166,6 +166,14 @@
         android:id="@+id/navigation_home_add_calendar"
         android:name="com.example.atracker.ui.home.HomeAddCalendarFragment"
         tools:layout="@layout/fragment_home_add_calendar">
+
+        <action
+            android:id="@+id/action_navigation_home_add_calendar_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_home_add_calendar" />
+
+
+
     </fragment>
 
 

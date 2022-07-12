@@ -49,6 +49,10 @@ class HomeAddFragment : Fragment() {
         arrayListOf<Int>()
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,6 +134,8 @@ class HomeAddFragment : Fragment() {
             parentActivity.mainBottomNavigationAppear()
             val navController = view.findNavController()
             navController.popBackStack()
+            homeViewModel.clearHomeAddText()
+
         }
 
 

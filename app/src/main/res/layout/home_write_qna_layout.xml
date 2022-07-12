@@ -139,13 +139,12 @@
                 android:id="@+id/homeWriteReviewAndReflectTV"
                 android:hint="@string/review_and_reflect_hint"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="24dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="12dp"
                 android:background="@null"
                 android:textSize="16sp"
-                android:textColor="@color/atracker_white"
+                android:textColor="@color/atracker_gray_2"
                 android:textColorHint="@color/atracker_gray_3"
                 >
             </EditText>

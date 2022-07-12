@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_home -> {
                     mainBottomNavigationAppear()
+                    homeViewModel.clearHomeAddText()
                 }
                 R.id.navigation_calendar -> {
                     mainBottomNavigationAppear()
