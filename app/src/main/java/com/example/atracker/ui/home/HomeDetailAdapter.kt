@@ -1,8 +1,8 @@
 package com.example.atracker.ui.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -42,7 +42,6 @@ class HomeDetailAdapter :
         //return super.getItemViewType(position)
         return currentList[position].itemType.ordinal
     }
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -86,92 +85,64 @@ class HomeDetailAdapter :
             }
         }
 
-//        holder as HomeDetailReviewViewHolder
-//        val homeDetailItem = getItem(position) as HomeDetailItem
-//        holder.bind(homeDetailItem)
 
     }
 
     inner class HomeDetailReviewViewHolder(
-        val homeDetailReviewItemBinding: HomeDetailReviewItemBinding, val context : Context
+        val homeDetailReviewItemBinding: HomeDetailReviewItemBinding, val context: Context
     ) : RecyclerView.ViewHolder(homeDetailReviewItemBinding.root) {
 
         fun bind(homeDetailItem: HomeDetailItem) {
+            if (bindingAdapterPosition < currentList.size - 1 && currentList[bindingAdapterPosition].progressName != currentList[bindingAdapterPosition + 1].progressName) {
+                setBottomViewColor(homeDetailReviewItemBinding.homeDetailItemReviewBottomView, homeDetailItem, context)
+            }
+
+            if (bindingAdapterPosition == currentList.size - 1) {
+                setBottomViewColor(homeDetailReviewItemBinding.homeDetailItemReviewBottomView, homeDetailItem, context)
+            }
+
+
             homeDetailReviewItemBinding.homeDetailItemProgressType.text = homeDetailItem.progressName
             homeDetailReviewItemBinding.homeDetailItemTotalReviewBody.text = homeDetailItem.totalReviewBody
 
             when (homeDetailItem.progressType) {
-                0 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_1)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_1)
-                }
-                1 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_2)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_2)
-                }
-                2 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_3)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_3)
-                }
-                3 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_4)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_4)
-                }
-                4 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_5)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_5)
-                }
-                5 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_6)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_6)
-                }
-                6 -> {
-                    homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_7)
-                    //homeDetailReviewItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
-                }
+                0 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_1)
+                1 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_2)
+                2 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_3)
+                3 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_4)
+                4 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_5)
+                5 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_6)
+                6 -> homeDetailReviewItemBinding.homeDetailItemCircleView.background = ContextCompat.getDrawable(context, R.drawable.circle_type_7)
             }
         }
     }
 
 
     inner class HomeDetailQnaViewHolder(
-        val homeDetailQnaItemBinding: HomeDetailQnaItemBinding, val context : Context
+        val homeDetailQnaItemBinding: HomeDetailQnaItemBinding, val context: Context
     ) : RecyclerView.ViewHolder(homeDetailQnaItemBinding.root) {
-
 
         fun bind(homeDetailItem: HomeDetailItem) {
             homeDetailQnaItemBinding.homeDetailItemQuestion.text = homeDetailItem.questionBody
             homeDetailQnaItemBinding.homeDetailItemAnswer.text = homeDetailItem.answerBody
 
-            when (homeDetailItem.progressType) {
-//                0 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_1)
-//                }
-//                1 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_2)
-//                }
-//                2 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_3)
-//                }
-//                3 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_4)
-//                }
-//                4 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_5)
-//                }
-//                5 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_6)
-//                }
-//                6 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
-//                }
+            if (bindingAdapterPosition < currentList.size - 1 && currentList[bindingAdapterPosition].progressName != currentList[bindingAdapterPosition + 1].progressName) {
+                setBottomViewColor(homeDetailQnaItemBinding.homeDetailItemQnaBottomView, homeDetailItem, context)
             }
+
+
+            if (bindingAdapterPosition == currentList.size - 1) {
+                setBottomViewColor(homeDetailQnaItemBinding.homeDetailItemQnaBottomView, homeDetailItem, context)
+            }
+
+
+
         }
     }
 
 
     inner class HomeDetailFreeViewHolder(
-        val homeDetailFreeItemBinding: HomeDetailFreeItemBinding, val context : Context
+        val homeDetailFreeItemBinding: HomeDetailFreeItemBinding, val context: Context
     ) : RecyclerView.ViewHolder(homeDetailFreeItemBinding.root) {
 
 
@@ -179,30 +150,32 @@ class HomeDetailAdapter :
 //            homeDetailFreeItemBinding.homeDetailItemQuestion.text = homeDetailItem.questionBody
 //            homeDetailFreeItemBinding.homeDetailItemAnswer.text = homeDetailItem.answerBody
 
-            when (homeDetailItem.progressType) {
-//                0 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_1)
-//                }
-//                1 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_2)
-//                }
-//                2 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_3)
-//                }
-//                3 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_4)
-//                }
-//                4 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_5)
-//                }
-//                5 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_6)
-//                }
-//                6 -> {
-//                    homeDetailQnaItemBinding.homeDetailItemVerticalView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
-//                }
+
+            if (bindingAdapterPosition < currentList.size - 1 && currentList[bindingAdapterPosition].progressName != currentList[bindingAdapterPosition + 1].progressName) {
+                setBottomViewColor(homeDetailFreeItemBinding.homeDetailItemFreeBottomView, homeDetailItem, context)
             }
+
+            if (bindingAdapterPosition == currentList.size - 1) {
+                setBottomViewColor(homeDetailFreeItemBinding.homeDetailItemFreeBottomView, homeDetailItem, context)
+            }
+
+
         }
+    }
+
+
+    fun setBottomViewColor(bottomView : View, homeDetailItem: HomeDetailItem, context: Context) {
+        when (homeDetailItem.progressType) {
+            0 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_1)
+            1 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_2)
+            2 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_3)
+            3 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_4)
+            4 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_5)
+            5 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_6)
+            6 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
+        }
+
+
     }
 
 
