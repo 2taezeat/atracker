@@ -83,13 +83,13 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             it.adapter = homeProgressAdapter
         }
 
-        binding.homeNotificationIV.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_notification_display)
-        }
-
-        binding.homeMyPageIV.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_my_page_display)
-        }
+//        binding.homeNotificationIV.setOnClickListener { view ->
+//            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_notification_display)
+//        }
+//
+//        binding.homeMyPageIV.setOnClickListener { view ->
+//            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_my_page_display)
+//        }
 
         binding.homeAddProgressFAB.setOnClickListener{view ->
             parentActivity.mainBottomNavigationDisappear()

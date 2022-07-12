@@ -61,30 +61,30 @@
             >
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeMyPageIV"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/homeNotificationIV"
-                android:src="@drawable/ic_mypage_icon_raw"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="17dp"
-                >
-            </ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/homeMyPageIV"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/homeNotificationIV"-->
+<!--                android:src="@drawable/ic_mypage_icon_raw"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginEnd="17dp"-->
+<!--                >-->
+<!--            </ImageView>-->
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeNotificationIV"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_notification_icon_raw"
-                android:layout_marginEnd="14dp"
-                >
-            </ImageView>
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/homeNotificationIV"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:src="@drawable/ic_notification_icon_raw"-->
+<!--                android:layout_marginEnd="14dp"-->
+<!--                >-->
+<!--            </ImageView>-->
 
 
             <TextView

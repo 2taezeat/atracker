@@ -13,8 +13,8 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_calendar"
-        android:icon="@drawable/ic_calendar_icon_raw"
-        android:title="@string/title_calendar" />
+        android:id="@+id/navigation_my_page_display"
+        android:icon="@drawable/ic_mypage_icon_raw"
+        android:title="@string/my_title" />
 
 </menu>

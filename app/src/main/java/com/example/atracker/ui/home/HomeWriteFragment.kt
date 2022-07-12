@@ -111,6 +111,11 @@ class HomeWriteFragment : Fragment() {
         }
 
 
+        binding.homeWriteBottomCL.setOnClickListener {
+            showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
+        }
+
+
 
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -169,11 +174,6 @@ class HomeWriteFragment : Fragment() {
             homeWriteFreeLayout.id = View.generateViewId()
 
             binding.homeWriteLL.addView(homeWriteFreeLayout)
-        }
-
-
-        binding.homeWriteSaveTV.setOnClickListener {
-            showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
         }
 
 
@@ -518,6 +518,7 @@ class HomeWriteFragment : Fragment() {
                         }
                         AlertType.TYPE4 -> {
                             findNavController().popBackStack()
+                            parentActivity.mainBottomNavigationAppear()
                         }
                     }
                 }

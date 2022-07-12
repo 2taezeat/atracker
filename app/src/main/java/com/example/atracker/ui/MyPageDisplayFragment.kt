@@ -80,10 +80,10 @@ class MyPageDisplayFragment : Fragment() {
         }
 
 
-        binding.myPageBackButton.setOnClickListener { view ->
-            val navController = view.findNavController()
-            navController.popBackStack()
-        }
+//        binding.myPageBackButton.setOnClickListener { view ->
+//            val navController = view.findNavController()
+//            navController.popBackStack()
+//        }
 
 
 

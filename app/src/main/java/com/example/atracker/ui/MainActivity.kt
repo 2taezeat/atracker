@@ -80,6 +80,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home_detail -> {
                     mainBottomNavigationAppear()
                 }
+                R.id.navigation_my_page_display -> {
+                    mainBottomNavigationAppear()
+                }
                 else -> {
                 }
             }

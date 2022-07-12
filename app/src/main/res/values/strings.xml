@@ -120,6 +120,7 @@
     <string name="review_delete_title">지원 후기 삭제하기</string>
     <string name="free_type_title">자유 양식 제목</string>
     <string name="complete_title">완료</string>
+    <string name="my_title">마이</string>
 
 
 </resources>
