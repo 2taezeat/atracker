@@ -121,6 +121,8 @@
     <string name="free_type_title">자유 양식 제목</string>
     <string name="complete_title">완료</string>
     <string name="my_title">마이</string>
+    <string name="confirm_title">확인</string>
+    <string name="service_term_confirm_title">서비스 이용 동의</string>
 
 
 </resources>
