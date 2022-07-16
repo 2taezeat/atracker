@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+
+    <data>
+        <variable
+            name="signUpVM"
+            type="com.example.atracker.ui.signUp.SignUpViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -46,6 +53,54 @@
 
             </TextView>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/signUpCompleteText1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:id="@+id/signUpCompleteCL1"
+
+
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signUpCompleteNickNameTV"
+                    android:text=""
+                    android:textSize="26sp"
+                    android:textColor="@color/atracker_white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/signUpCompleteText3"
+                    >
+                </TextView>
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signUpCompleteText3"
+                    android:text="@string/sla_title"
+                    android:textSize="26sp"
+                    android:textColor="@color/atracker_white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/signUpCompleteNickNameTV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+                </TextView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +108,7 @@
                 android:text="@string/sign_up_complete_welcome"
                 android:textSize="26sp"
                 android:textColor="@color/atracker_white"
-                app:layout_constraintTop_toBottomOf="@+id/signUpCompleteText1"
+                app:layout_constraintTop_toBottomOf="@+id/signUpCompleteCL1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >

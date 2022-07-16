@@ -127,6 +127,7 @@
     <string name="terms_service_confirm_title">(필수) 서비스 이용약관</string>
     <string name="terms_privacy_title">(필수) 개인정보 처리방침</string>
     <string name="terms_marketing_title">(선택) 마케팅 정보 수신 동의</string>
+    <string name="sla_title">님,</string>
 
 
 </resources>

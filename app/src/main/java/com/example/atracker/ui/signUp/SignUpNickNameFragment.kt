@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpNickNameBinding
@@ -21,6 +22,7 @@ class SignUpNickNameFragment : Fragment() {
 
     private var _binding: FragmentSignUpNickNameBinding? = null
     private val binding get() = _binding!!
+    private val signUpViewModel: SignUpViewModel by activityViewModels()
 
 
 
@@ -37,6 +39,8 @@ class SignUpNickNameFragment : Fragment() {
     ): View? {
 
         _binding = DataBindingUtil.inflate<FragmentSignUpNickNameBinding>(inflater, R.layout.fragment_sign_up_nick_name, container, false)
+        binding.signUpVM = signUpViewModel
+
 
 
         binding.signUpNickNameNickNameET.setOnFocusChangeListener { view, isFocuse ->

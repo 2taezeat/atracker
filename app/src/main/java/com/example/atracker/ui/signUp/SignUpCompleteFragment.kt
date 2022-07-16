@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpCompleteBinding
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.ui.home.HomeViewModel
 
 
 class SignUpCompleteFragment : Fragment() {
@@ -28,6 +30,8 @@ class SignUpCompleteFragment : Fragment() {
     private var _binding: FragmentSignUpCompleteBinding? = null
     private val binding get() = _binding!!
 
+    private val signUpViewModel: SignUpViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,9 @@ class SignUpCompleteFragment : Fragment() {
     ): View? {
 
         _binding = DataBindingUtil.inflate<FragmentSignUpCompleteBinding>(inflater, R.layout.fragment_sign_up_complete, container, false)
+        binding.signUpVM = signUpViewModel
+
+        binding.signUpCompleteNickNameTV.text = signUpViewModel.signUpNickName.value
 
 
         val mHandler = Handler(Looper.getMainLooper())
