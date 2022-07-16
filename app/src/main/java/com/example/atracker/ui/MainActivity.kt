@@ -61,6 +61,9 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navDisplayController)
 
+
+        homeViewModel.getStage()
+
     }
 
 

@@ -154,16 +154,13 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchCall(accessToken = "",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
                 page = 1,
                 size = 10
             )
-
-            Log.d("result123123", "${apiResult}")
-
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!.companySearchContents.map{ it.name }
@@ -176,6 +173,23 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
+
+
+    fun getStage() {
+        viewModelScope.launch {
+            val apiResult = repositoryHome.stageGetCall(accessToken = "")
+
+            Log.d("result123", "${apiResult}")
+
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!
+                Log.d("result123123", "${getResult}")
+            }
+
+        }
+    }
+
 
 
     fun setWorkTypePosition(position : Int) {
