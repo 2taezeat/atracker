@@ -156,6 +156,17 @@ class HomeAddFragment : Fragment() {
 
         }
 
+        binding.homeAddTypeSelect1.text = homeViewModel.homeAddStagesName.value!![0]
+        binding.homeAddTypeSelect2.text = homeViewModel.homeAddStagesName.value!![1]
+        binding.homeAddTypeSelect3.text = homeViewModel.homeAddStagesName.value!![2]
+        binding.homeAddTypeSelect4.text = homeViewModel.homeAddStagesName.value!![3]
+        binding.homeAddTypeSelect5.text = homeViewModel.homeAddStagesName.value!![4]
+        binding.homeAddTypeSelect6.text = homeViewModel.homeAddStagesName.value!![5]
+        binding.homeAddTypeSelect7.text = homeViewModel.homeAddStagesName.value!![6]
+        binding.homeAddTypeSelect8.text = homeViewModel.homeAddStagesName.value!![7]
+
+
+
 
         binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
             setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)

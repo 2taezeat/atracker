@@ -17,6 +17,8 @@ object RetrofitClient {
     fun getClient(baseUrl : String) : Retrofit {
         if ( !this::retrofit.isInitialized) {
             val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+
             val client = OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .addNetworkInterceptor { chain ->

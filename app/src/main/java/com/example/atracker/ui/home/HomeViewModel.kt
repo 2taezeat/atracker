@@ -72,6 +72,11 @@ class HomeViewModel : ViewModel() {
 
 
 
+    private val _homeAddStagesName = MutableLiveData<List<String>>().apply {
+    }
+    val homeAddStagesName : LiveData<List<String>> = _homeAddStagesName
+
+
 
     private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
         value = arrayListOf(
@@ -164,7 +169,7 @@ class HomeViewModel : ViewModel() {
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!.companySearchContents.map{ it.name }
-                Log.d("getReuslt", "${getResult}")
+                Log.d("getResult", "${getResult}")
                 _companyTitleList.value = getResult
 
 
@@ -179,12 +184,10 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             val apiResult = repositoryHome.stageGetCall(accessToken = "")
 
-            Log.d("result123", "${apiResult}")
-
-
             if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!
-                Log.d("result123123", "${getResult}")
+                val getResult = apiResult.body()!!.map { it.title }
+                Log.d("getResult", "${getResult}")
+                _homeAddStagesName.value = getResult
             }
 
         }

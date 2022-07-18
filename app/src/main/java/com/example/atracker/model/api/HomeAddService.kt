@@ -18,7 +18,7 @@ interface HomeAddService {
         ) : retrofit2.Response<CompanySearchResponse>
 
 
-    @GET("/api/v1/stage")
+    @GET("/api/v1/stage/")
     suspend fun stageGetApi(
         @Header("Authorization") accessToken : String
     ) : retrofit2.Response<StageResponse>
