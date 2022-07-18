@@ -2,6 +2,8 @@ package com.example.atracker.ui.signUp
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpNickNameBinding
 import com.example.atracker.databinding.FragmentSignUpPositionBinding
+import com.example.atracker.utils.ChangeUIState
 
 
 class SignUpPositionFragment : Fragment() {
@@ -56,7 +59,7 @@ class SignUpPositionFragment : Fragment() {
 
         _binding = DataBindingUtil.inflate<FragmentSignUpPositionBinding>(inflater, R.layout.fragment_sign_up_position, container, false)
         binding.signUpVM = signUpViewModel
-
+        val careerAgeItems = signUpViewModel.careerAgeItems.value
 
 
         binding.signUpPositionPositionET.setOnFocusChangeListener { view, isFocuse ->
@@ -74,10 +77,23 @@ class SignUpPositionFragment : Fragment() {
             view.findNavController().popBackStack()
         }
 
-
-
         var spinnerSelectedPosition : Int = -1
-        val careerAgeItems = signUpViewModel.careerAgeItems.value
+
+
+
+        binding.signUpPositionPositionET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                ChangeUIState(lazyContext).viewEnable(binding.signUpPositionNext, charSequence!!.isNotBlank(), spinnerSelectedPosition > -1)
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+
+
 
         val careerAgeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
@@ -126,16 +142,15 @@ class SignUpPositionFragment : Fragment() {
                     0 -> {
                         spinnerSelectedPosition = position
                         signUpViewModel.setUserCareerPosition(spinnerSelectedPosition)
+                        ChangeUIState(lazyContext).viewEnable(binding.signUpPositionNext, signUpViewModel.signUpPosition.value!!.isNotBlank(), true)
                     }
                     1 -> {
                         spinnerSelectedPosition = position
                         signUpViewModel.setUserCareerPosition(spinnerSelectedPosition)
-
+                        ChangeUIState(lazyContext).viewEnable(binding.signUpPositionNext, signUpViewModel.signUpPosition.value!!.isNotBlank(), true)
                     }
                     else -> {
-                        spinnerSelectedPosition = -1
-                        signUpViewModel.setUserCareerPosition(spinnerSelectedPosition)
-
+                        ChangeUIState(lazyContext).viewEnable(binding.signUpPositionNext, signUpViewModel.signUpPosition.value!!.isNotBlank(), false)
                     }
                 }
             }

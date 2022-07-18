@@ -31,19 +31,16 @@ class SignUpViewModel : ViewModel() {
     val signUpCareer : LiveData<String> = _signUpCareer
 
 
-    val careerAgeItems = MutableLiveData<List<String>>().apply {
-        listOf("신입", "경력")
-    }
-
+    val careerAgeItems = MutableLiveData<List<String>>()
 
     init {
-
+        careerAgeItems.value = listOf("신입", "경력")
     }
 
 
 
     fun setUserCareerPosition(position : Int) {
-        _signUpPosition.value = careerAgeItems.value!![position]
+        _signUpCareer.value = careerAgeItems.value!![position]
 
     }
 

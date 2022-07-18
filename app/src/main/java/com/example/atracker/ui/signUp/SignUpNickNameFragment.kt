@@ -1,16 +1,21 @@
 package com.example.atracker.ui.signUp
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpNickNameBinding
+import com.example.atracker.utils.ChangeUIState
 
 class SignUpNickNameFragment : Fragment() {
 
@@ -59,6 +64,22 @@ class SignUpNickNameFragment : Fragment() {
             view.findNavController().popBackStack()
         }
 
+
+        binding.signUpNickNameNickNameET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                ChangeUIState(lazyContext).viewEnable(binding.signUpNickNameNext, charSequence!!.isNotBlank() )
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+
+        binding.signUpNickNameNickNameET.addTextChangedListener(
+
+        )
 
 
 

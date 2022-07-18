@@ -152,9 +152,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:gravity="center"
                 android:text="@string/next_title"
-                android:textColor="@color/progress_color_7"
+                android:textColor="@color/atracker_gray_3"
                 android:textSize="16sp"
                 android:id="@+id/signUpPositionNext"
+                android:enabled="false"
+
                 >
             </TextView>
 
