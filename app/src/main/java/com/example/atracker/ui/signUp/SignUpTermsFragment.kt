@@ -14,6 +14,7 @@ import com.example.atracker.databinding.FragmentSignUpNickNameBinding
 import com.example.atracker.databinding.FragmentSignUpTermsBinding
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.login.LoginActivity
+import com.example.atracker.utils.ChangeUIState
 
 class SignUpTermsFragment : Fragment() {
 
@@ -46,6 +47,33 @@ class SignUpTermsFragment : Fragment() {
         binding.signUpTermsBackIV.setOnClickListener { view ->
             startLogin()
         }
+
+
+        binding.signUpTermsTotalCheckBox.setOnClickListener { view ->
+            if (binding.signUpTermsTotalCheckBox.isChecked) {
+                binding.signUpTermsServiceCheckBox.isChecked = true
+                binding.signUpTermsPrivacyCheckBox.isChecked = true
+                binding.signUpTermsMarketingCheckBox.isChecked = true
+            } else {
+                binding.signUpTermsServiceCheckBox.isChecked = false
+                binding.signUpTermsPrivacyCheckBox.isChecked = false
+                binding.signUpTermsMarketingCheckBox.isChecked = false
+            }
+
+        }
+
+
+
+
+        binding.signUpTermsServiceCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            ChangeUIState(lazyContext).viewEnable(binding.signUpTermsNext, b, binding.signUpTermsPrivacyCheckBox.isChecked )
+        }
+
+        binding.signUpTermsPrivacyCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            ChangeUIState(lazyContext).viewEnable(binding.signUpTermsNext, binding.signUpTermsServiceCheckBox.isChecked, b )
+        }
+
+
 
 
         return binding.root
