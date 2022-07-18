@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
 import com.example.atracker.ui.login.LoginActivity
+import com.example.atracker.ui.signUp.SignUpViewModel
 import com.example.atracker.utils.AlertType
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -25,6 +27,8 @@ class MyPageDisplayFragment : Fragment() {
     private val lazyContext by lazy {
         requireContext()
     }
+
+    private val myPageViewModel: MyPageViewModel by activityViewModels()
 
 
 

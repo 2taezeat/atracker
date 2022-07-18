@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val homeViewModel: HomeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
     val calendarViewModel: CalendarViewModel by lazy { ViewModelProvider(this).get(CalendarViewModel::class.java) }
+    val myPageViewModel: MyPageViewModel by lazy { ViewModelProvider(this).get(MyPageViewModel::class.java) }
 
 
 //    private val navDisplayController: NavController by lazy {
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
 
         homeViewModel.getStage()
+        myPageViewModel.getMyPage()
 
     }
 
