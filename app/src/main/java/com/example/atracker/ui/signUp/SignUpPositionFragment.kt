@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpNickNameBinding
@@ -36,6 +37,8 @@ class SignUpPositionFragment : Fragment() {
 
     private var _binding: FragmentSignUpPositionBinding? = null
     private val binding get() = _binding!!
+    private val signUpViewModel: SignUpViewModel by activityViewModels()
+
 
 
 
@@ -52,6 +55,8 @@ class SignUpPositionFragment : Fragment() {
     ): View? {
 
         _binding = DataBindingUtil.inflate<FragmentSignUpPositionBinding>(inflater, R.layout.fragment_sign_up_position, container, false)
+        binding.signUpVM = signUpViewModel
+
 
 
         binding.signUpPositionPositionET.setOnFocusChangeListener { view, isFocuse ->
@@ -72,7 +77,8 @@ class SignUpPositionFragment : Fragment() {
 
 
         var spinnerSelectedPosition : Int = -1
-        val careerAgeItems: List<String> = listOf("신입", "경력")
+        val careerAgeItems = signUpViewModel.careerAgeItems.value
+
         val careerAgeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -108,7 +114,7 @@ class SignUpPositionFragment : Fragment() {
         }
 
 
-        careerAgeAdapter.addAll(careerAgeItems.toMutableList())
+        careerAgeAdapter.addAll(careerAgeItems!!.toMutableList())
         careerAgeAdapter.add("경력을 선택해주세요.")
         binding.signUpPositionCareerAgeSpinner.adapter = careerAgeAdapter
         binding.signUpPositionCareerAgeSpinner.setSelection(careerAgeAdapter.count)
@@ -119,11 +125,16 @@ class SignUpPositionFragment : Fragment() {
                 when (position) {
                     0 -> {
                         spinnerSelectedPosition = position
+                        signUpViewModel.setUserCareerPosition(spinnerSelectedPosition)
                     }
                     1 -> {
                         spinnerSelectedPosition = position
+                        signUpViewModel.setUserCareerPosition(spinnerSelectedPosition)
+
                     }
                     else -> {
+                        spinnerSelectedPosition = -1
+                        signUpViewModel.setUserCareerPosition(spinnerSelectedPosition)
 
                     }
                 }
