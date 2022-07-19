@@ -152,14 +152,15 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
         }
 
         binding.homeAddCalendarBottomCL.setOnClickListener { view ->
-            homeViewModel.clearHomeAddText()
             homeViewModel.postApply()
-            //homeViewModel.getApplyDisplay(applyIds = null, includeContent = true)
 
+            homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
+                homeViewModel.clearHomeAddText()
+                homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
 
-            view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
-            parentActivity.mainBottomNavigationAppear()
-
+                view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+                parentActivity.mainBottomNavigationAppear()
+            })
         }
 
 

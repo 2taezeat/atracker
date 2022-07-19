@@ -57,12 +57,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //        })
 
 
-        if (homeViewModel.homeProgressArrayList.value?.size == 0) {
-            binding.homeDisplayPleaseWriteTV.visibility = View.VISIBLE
 
-            binding.homeProgressCL.visibility = View.INVISIBLE
-            binding.homeProgressHiddenCL.visibility = View.VISIBLE
-        }
 
         homeMyCurrentStateTotalCircleView = binding.homeMyCurrentStateTotalCircleView
 
@@ -104,13 +99,20 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
 
 
-        homeViewModel.homeProgressArrayList_tmp.observe(viewLifecycleOwner, Observer {
-            Log.d("qqqqqqqq", "qqqqq")
-            homeProgressAdapter.submitList(it.toMutableList().map { it.copy() })
+        homeViewModel.homeDisplayArrayList.observe(viewLifecycleOwner, Observer {
+            if (it.size == 0) {
+                binding.homeDisplayPleaseWriteTV.visibility = View.VISIBLE
+                binding.homeProgressCL.visibility = View.INVISIBLE
+                binding.homeProgressHiddenCL.visibility = View.VISIBLE
+            } else {
+                binding.homeDisplayPleaseWriteTV.visibility = View.INVISIBLE
+                binding.homeProgressCL.visibility = View.VISIBLE
+                binding.homeProgressHiddenCL.visibility = View.INVISIBLE
+            }
+
+            homeProgressAdapter.submitList(it.toMutableList())
         })
 
-
-        //homeProgressAdapter.submitList(hqqomeViewModel.homeProgressArrayList_tmp.value)
 
         setProgress(30, 20, 10)
 

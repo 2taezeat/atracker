@@ -95,32 +95,35 @@ class HomeViewModel : ViewModel() {
     }
     val homeAddStagesContent : LiveData<List<StageResponseItem>> = _homeAddStagesContent
 
+    private val _postApplyFlag = MutableLiveData<Boolean?>().apply {
+        null
+    }
+    val postApplyFlag : LiveData<Boolean?> = _postApplyFlag
 
 
-    private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
-        value = arrayListOf(
-            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 2, totalProgress = 2, true),
-            HomeProgressItem(companyTitle = "1", jobType = "asd", myProgress = 3, totalProgress = 3, true),
-            HomeProgressItem(companyTitle = "2", jobType = "asd", myProgress = 7, totalProgress = 7, true),
-            HomeProgressItem(companyTitle = "3", jobType = "asd", myProgress = 4, totalProgress = 5, true),
-            HomeProgressItem(companyTitle = "4", jobType = "asd", myProgress = 1, totalProgress = 4, true),
-            HomeProgressItem(companyTitle = "5", jobType = "asd", myProgress = 1, totalProgress = 7, true),
-            HomeProgressItem(companyTitle = "6", jobType = "asd", myProgress = 2, totalProgress = 7, true),
-            HomeProgressItem(companyTitle = "7", jobType = "asd", myProgress = 6, totalProgress = 6, true),
-            )
+
+//    private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
+//        value = arrayListOf(
+//            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 2, totalProgress = 2, true),
+//            HomeProgressItem(companyTitle = "1", jobType = "asd", myProgress = 3, totalProgress = 3, true),
+//            HomeProgressItem(companyTitle = "2", jobType = "asd", myProgress = 7, totalProgress = 7, true),
+//            HomeProgressItem(companyTitle = "3", jobType = "asd", myProgress = 4, totalProgress = 5, true),
+//            HomeProgressItem(companyTitle = "4", jobType = "asd", myProgress = 1, totalProgress = 4, true),
+//            HomeProgressItem(companyTitle = "5", jobType = "asd", myProgress = 1, totalProgress = 7, true),
+//            HomeProgressItem(companyTitle = "6", jobType = "asd", myProgress = 2, totalProgress = 7, true),
+//            HomeProgressItem(companyTitle = "7", jobType = "asd", myProgress = 6, totalProgress = 6, true),
+//            )
+//    }
+//
+//    val homeProgressArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList
+
+
+
+    private val _homeDisplayArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
+        value = arrayListOf()
     }
 
-    val homeProgressArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList
-
-
-
-    private val _homeProgressArrayList_tmp = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
-        value = arrayListOf(
-            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 2, totalProgress = 2, true),
-        )
-    }
-
-    val homeProgressArrayList_tmp : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList_tmp
+    val homeDisplayArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeDisplayArrayList
 
 
 
@@ -185,7 +188,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjEiLCJpYXQiOjE2NTgyMjQ5NDAsImV4cCI6MTY1ODIyODU0MH0.m5REa_pWLm4Iet1yLEagqYi1V3Tgo_rJpEDEKUwaImw",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -208,7 +211,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjEiLCJpYXQiOjE2NTgyMjQ5NDAsImV4cCI6MTY1ODIyODU0MH0.m5REa_pWLm4Iet1yLEagqYi1V3Tgo_rJpEDEKUwaImw")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -231,19 +234,20 @@ class HomeViewModel : ViewModel() {
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0", createApplyRequest = createApplyRequest )
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjEiLCJpYXQiOjE2NTgyMjQ5NDAsImV4cCI6MTY1ODIyODU0MH0.m5REa_pWLm4Iet1yLEagqYi1V3Tgo_rJpEDEKUwaImw", createApplyRequest = createApplyRequest )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
+                switch(_postApplyFlag)
             }
 
         }
 
     }
 
-    fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
+    fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = false) {
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjEiLCJpYXQiOjE2NTgyMjQ5NDAsImV4cCI6MTY1ODIyODU0MH0.m5REa_pWLm4Iet1yLEagqYi1V3Tgo_rJpEDEKUwaImw",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -251,38 +255,37 @@ class HomeViewModel : ViewModel() {
                 val getResult = apiResult.body()!!.applies
                 Log.d("getResult22", "${getResult}")
 
+                val newArrayList = arrayListOf<HomeProgressItem>()
+
                 for (apply in getResult){
                     var myProgress = 0
                     var success = true
+                    val applyId = apply.apply_id
                     val stageProgress = apply.stage_progress
                     val companyTitle = apply.company_name
                     val jobType = apply.job_position
                     val totalProgress = stageProgress.size
 
                     for (stage in stageProgress) {
-                        if (stage.status == IsPassingTmp.FAIL.toString() && success) {
+                        if (stage.status == IsPassingTmp.FAIL.toString() && success)
                             success = false
-                        }
 
-                        if (stage.status == IsPassingTmp.PASS.toString()) {
+                        if (stage.status == IsPassingTmp.PASS.toString())
                             myProgress += 1
-                        }
                     }
-
-                    _homeProgressArrayList_tmp.value!!.add(HomeProgressItem(
+                    newArrayList.add(HomeProgressItem(
                         companyTitle = companyTitle,
                         jobType = jobType,
                         myProgress = myProgress,
                         totalProgress = totalProgress,
-                        success = success)
+                        success = success,
+                        applyId = applyId
+                        )
                     )
                 }
+                _homeDisplayArrayList.value = newArrayList!!
             }
-
         }
-
-
-
     }
 
 

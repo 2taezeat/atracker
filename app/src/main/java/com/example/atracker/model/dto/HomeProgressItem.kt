@@ -5,5 +5,6 @@ data class HomeProgressItem(
     val jobType : String,
     val myProgress : Int,
     val totalProgress : Int,
-    val success : Boolean
+    val success : Boolean,
+    val applyId : Int
 )
