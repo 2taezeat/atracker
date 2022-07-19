@@ -26,9 +26,14 @@ class HomeViewModel : ViewModel() {
     var hour: MutableLiveData<Int> = MutableLiveData()
     var minute: MutableLiveData<Int> = MutableLiveData()
 
+    private val workTypeItems = MutableLiveData<List<String>>()
+
+
     init {
         val instant = Instant.now()
         _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
+        workTypeItems.value = listOf("PERMANENT", "TEMPORARY", "INTERN")
+
 
         initTimeDateCurrent()
     }
@@ -36,10 +41,10 @@ class HomeViewModel : ViewModel() {
 
 
 
-    private val _companyTitleList = MutableLiveData<List<String>>().apply {
+    private val _companyList = MutableLiveData<List<CompanySearchContent>>().apply {
         value = listOf()
     }
-    val companyTitleList : LiveData<List<String>> = _companyTitleList
+    val companyList : LiveData<List<CompanySearchContent>> = _companyList
 
 
     val _companyWord = MutableLiveData<String>().apply {
@@ -48,10 +53,22 @@ class HomeViewModel : ViewModel() {
     val companyWord : LiveData<String> = _companyWord
 
 
+    val _companyId = MutableLiveData<Int>().apply {
+        value = 0
+    }
+    val companyId : LiveData<Int> = _companyId
+
+
     val _positionWord = MutableLiveData<String>().apply {
         value = ""
     }
     val positionWord : LiveData<String> = _positionWord
+
+    val _workTypeWord = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val workTypeWord : LiveData<String> = _workTypeWord
+
 
 
     val _workTypeSelection = MutableLiveData<Int>().apply {
@@ -156,10 +173,9 @@ class HomeViewModel : ViewModel() {
 
 
 
-
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTciLCJpYXQiOjE2NTgyMDk1MTAsImV4cCI6MTY1ODIxMzExMH0.SmPB5VW8m9IjtidNNF28eclwSeHVXWaCFmOnwkN9UN0",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -168,9 +184,9 @@ class HomeViewModel : ViewModel() {
             )
 
             if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!.companySearchContents.map{ it.name }
+                val getResult = apiResult.body()!!.companySearchContents
                 Log.d("getResult", "${getResult}")
-                _companyTitleList.value = getResult
+                _companyList.value = getResult
 
 
             } else {
@@ -182,7 +198,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTciLCJpYXQiOjE2NTgyMDk1MTAsImV4cCI6MTY1ODIxMzExMH0.SmPB5VW8m9IjtidNNF28eclwSeHVXWaCFmOnwkN9UN0")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!.map { it.title }
@@ -194,10 +210,38 @@ class HomeViewModel : ViewModel() {
     }
 
 
+    fun postApply() {
+        val createApplyRequest = CreateApplyRequest(
+            company = Company(id = _companyId.value!!, name = _companyWord.value!!),
+            job_position = _positionWord.value!!,
+            job_type = _workTypeWord.value!!,
+            stages = listOf()
+        )
+
+        viewModelScope.launch {
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "", createApplyRequest = createApplyRequest )
+
+            if (apiResult.code() == 200) {
+                //val getResult = apiResult.body()!!.map { it.title }
+                //Log.d("getResult", "${getResult}")
+                //_homeAddStagesName.value = getResult
+            }
+
+        }
+
+    }
+
+
 
     fun setWorkTypePosition(position : Int) {
         _workTypeSelection.value = position
+        _workTypeWord.value = workTypeItems.value!![position]
     }
+
+    fun setCompanyNameID(position: Int) {
+        _companyId.value = _companyList.value!![position].id
+    }
+
 
     fun setSelectedChipName(addCheckedProgress : ArrayList<HomeAddProgress>) {
         _homeAddSelectedProgress.value = addCheckedProgress

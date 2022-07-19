@@ -5,7 +5,9 @@ import com.example.atracker.model.RetrofitClient
 import com.example.atracker.model.api.HomeAddService
 import com.example.atracker.model.dto.CompanySearchRequest
 import com.example.atracker.model.dto.CompanySearchResponse
+import com.example.atracker.model.dto.CreateApplyRequest
 import com.example.atracker.model.dto.StageResponse
+import com.google.gson.JsonObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -34,7 +36,17 @@ class RepositoryHome {
         }.await()
 
         return apiResponse
+    }
 
+    suspend fun createApplyPostCall (accessToken : String, createApplyRequest : CreateApplyRequest ) : retrofit2.Response<JsonObject> {
+        val apiResponse = CoroutineScope(Dispatchers.IO).async{
+            homeAddService.createApplyPostApi(
+                accessToken = accessToken,
+                createApplyRequest = createApplyRequest
+                )
+        }.await()
+
+        return apiResponse
     }
 
 

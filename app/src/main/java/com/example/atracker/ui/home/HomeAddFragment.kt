@@ -156,14 +156,14 @@ class HomeAddFragment : Fragment() {
 
         }
 
-        binding.homeAddTypeSelect1.text = homeViewModel.homeAddStagesName.value!![0]
-        binding.homeAddTypeSelect2.text = homeViewModel.homeAddStagesName.value!![1]
-        binding.homeAddTypeSelect3.text = homeViewModel.homeAddStagesName.value!![2]
-        binding.homeAddTypeSelect4.text = homeViewModel.homeAddStagesName.value!![3]
-        binding.homeAddTypeSelect5.text = homeViewModel.homeAddStagesName.value!![4]
-        binding.homeAddTypeSelect6.text = homeViewModel.homeAddStagesName.value!![5]
-        binding.homeAddTypeSelect7.text = homeViewModel.homeAddStagesName.value!![6]
-        binding.homeAddTypeSelect8.text = homeViewModel.homeAddStagesName.value!![7]
+//        binding.homeAddTypeSelect1.text = homeViewModel.homeAddStagesName.value!![0]
+//        binding.homeAddTypeSelect2.text = homeViewModel.homeAddStagesName.value!![1]
+//        binding.homeAddTypeSelect3.text = homeViewModel.homeAddStagesName.value!![2]
+//        binding.homeAddTypeSelect4.text = homeViewModel.homeAddStagesName.value!![3]
+//        binding.homeAddTypeSelect5.text = homeViewModel.homeAddStagesName.value!![4]
+//        binding.homeAddTypeSelect6.text = homeViewModel.homeAddStagesName.value!![5]
+//        binding.homeAddTypeSelect7.text = homeViewModel.homeAddStagesName.value!![6]
+//        binding.homeAddTypeSelect8.text = homeViewModel.homeAddStagesName.value!![7]
 
 
 
@@ -277,8 +277,8 @@ class HomeAddFragment : Fragment() {
                         homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                     else -> {
-                        spinnerSelectedPosition = -1
-                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
+//                        spinnerSelectedPosition = -1
+//                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                 }
             }
@@ -330,22 +330,28 @@ class HomeAddFragment : Fragment() {
             }
         })
 
-        homeViewModel.companyTitleList.observe(viewLifecycleOwner, Observer {
+        homeViewModel.companyList.observe(viewLifecycleOwner, Observer {
+
+            val companyNameList = homeViewModel.companyList.value!!.map { it.name}
+
             Log.d("companyTitleList", "${it}")
-            val companyTitleAdapter = ArrayAdapter<String>(lazyContext,R.layout.item_auto_complete_text_view, homeViewModel.companyTitleList.value!!.toTypedArray())
+            val companyTitleAdapter = ArrayAdapter<String>(lazyContext,R.layout.item_auto_complete_text_view, companyNameList.toTypedArray())
 
             binding.homeAddACTV.setAdapter(companyTitleAdapter)
             binding.homeAddACTV.showDropDown()
         })
 
 
-        binding.homeAddACTV.setOnScrollChangeListener { view, i, i2, i3, i4 ->
-            Log.d("test333333", "${view}, ${i}, ${i2}")
+//        binding.homeAddACTV.setOnScrollChangeListener { view, i, i2, i3, i4 ->
+//            Log.d("test333333", "${view}, ${i}, ${i2}")
+//
+//        }
 
+        ////////////////////////////
+        binding.homeAddACTV.setOnItemClickListener { adapterView, view, i, l ->
+            Log.d("tmp123123", "${adapterView}, ${view}, ${i}, ${l}")
+            homeViewModel.setCompanyNameID(i)
         }
-
-
-
 
 
         return root

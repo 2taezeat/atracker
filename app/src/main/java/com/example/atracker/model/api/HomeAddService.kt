@@ -1,15 +1,12 @@
 package com.example.atracker.model.api
 
-import com.example.atracker.model.dto.CompanySearchRequest
-import com.example.atracker.model.dto.CompanySearchResponse
-import com.example.atracker.model.dto.LoginRequest
-import com.example.atracker.model.dto.StageResponse
+import com.example.atracker.model.dto.*
 import com.google.gson.JsonObject
 import retrofit2.http.*
 
 interface HomeAddService {
 
-    @POST("/api/v1/company/search")
+    @POST("/api/v1/company/search/")
     suspend fun companySearchPostApi(
         @Header("Authorization") accessToken : String,
         @Body companySearchRequest: CompanySearchRequest,
@@ -22,5 +19,13 @@ interface HomeAddService {
     suspend fun stageGetApi(
         @Header("Authorization") accessToken : String
     ) : retrofit2.Response<StageResponse>
+
+
+    @POST("/api/v1/apply/")
+    suspend fun createApplyPostApi(
+        @Header("Authorization") accessToken : String,
+        @Body createApplyRequest : CreateApplyRequest
+    ) : retrofit2.Response<JsonObject>
+
 
 }
