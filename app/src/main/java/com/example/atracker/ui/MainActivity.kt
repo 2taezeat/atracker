@@ -1,6 +1,5 @@
 package com.example.atracker.ui
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.atracker.R
@@ -65,6 +63,8 @@ class MainActivity : AppCompatActivity() {
 
         homeViewModel.getStage()
         myPageViewModel.getMyPage()
+        homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+
 
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -102,7 +103,14 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         }
 
 
-        homeProgressAdapter.submitList(homeViewModel.homeProgressArrayList.value)
+
+        homeViewModel.homeProgressArrayList_tmp.observe(viewLifecycleOwner, Observer {
+            Log.d("qqqqqqqq", "qqqqq")
+            homeProgressAdapter.submitList(it.toMutableList().map { it.copy() })
+        })
+
+
+        //homeProgressAdapter.submitList(hqqomeViewModel.homeProgressArrayList_tmp.value)
 
         setProgress(30, 20, 10)
 

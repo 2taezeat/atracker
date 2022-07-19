@@ -4,7 +4,7 @@ import com.example.atracker.model.dto.*
 import com.google.gson.JsonObject
 import retrofit2.http.*
 
-interface HomeAddService {
+interface HomeService {
 
     @POST("/api/v1/company/search/")
     suspend fun companySearchPostApi(
@@ -27,5 +27,12 @@ interface HomeAddService {
         @Body createApplyRequest : CreateApplyRequest
     ) : retrofit2.Response<Void>
 
+
+    @GET("/api/v1/apply/")
+    suspend fun applyGetApi(
+        @Header("Authorization") accessToken : String,
+        @Query("applyIds") applyIds : Array<Int>?,
+        @Query("includeContent") includeContent : Boolean?
+    ) : retrofit2.Response<ApplyResponse>
 
 }

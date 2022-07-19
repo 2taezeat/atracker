@@ -2,24 +2,20 @@ package com.example.atracker.model.repository
 
 import com.example.atracker.BuildConfig
 import com.example.atracker.model.RetrofitClient
-import com.example.atracker.model.api.HomeAddService
-import com.example.atracker.model.dto.CompanySearchRequest
-import com.example.atracker.model.dto.CompanySearchResponse
-import com.example.atracker.model.dto.CreateApplyRequest
-import com.example.atracker.model.dto.StageResponse
-import com.google.gson.JsonObject
+import com.example.atracker.model.api.HomeService
+import com.example.atracker.model.dto.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
 class RepositoryHome {
 
-    private val homeAddService : HomeAddService = RetrofitClient.getClient(BuildConfig.BASE_URL).create(HomeAddService::class.java)
+    private val homeService : HomeService = RetrofitClient.getClient(BuildConfig.BASE_URL).create(HomeService::class.java)
 
 
     suspend fun companySearchPostCall (accessToken : String, companySearchRequest: CompanySearchRequest, page : Int, size: Int) : retrofit2.Response<CompanySearchResponse> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{
-            homeAddService.companySearchPostApi(
+            homeService.companySearchPostApi(
                 accessToken = accessToken,
                 companySearchRequest = companySearchRequest,
                 page = 1,
@@ -32,7 +28,7 @@ class RepositoryHome {
 
     suspend fun stageGetCall (accessToken : String ) : retrofit2.Response<StageResponse>{
         val apiResponse = CoroutineScope(Dispatchers.IO).async {
-            homeAddService.stageGetApi(accessToken = accessToken)
+            homeService.stageGetApi(accessToken = accessToken)
         }.await()
 
         return apiResponse
@@ -40,7 +36,7 @@ class RepositoryHome {
 
     suspend fun createApplyPostCall (accessToken : String, createApplyRequest : CreateApplyRequest ) : retrofit2.Response<Void> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{
-            homeAddService.createApplyPostApi(
+            homeService.createApplyPostApi(
                 accessToken = accessToken,
                 createApplyRequest = createApplyRequest
                 )
@@ -48,6 +44,16 @@ class RepositoryHome {
 
         return apiResponse
     }
+
+
+    suspend fun applyGetCall (accessToken : String, applyIds : Array<Int>?, includeContent : Boolean? ) : retrofit2.Response<ApplyResponse>{
+        val apiResponse = CoroutineScope(Dispatchers.IO).async {
+            homeService.applyGetApi(accessToken = accessToken, applyIds = applyIds, includeContent = includeContent)
+        }.await()
+
+        return apiResponse
+    }
+
 
 
 

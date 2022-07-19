@@ -1,7 +1,6 @@
 package com.example.atracker.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -153,8 +152,12 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
         }
 
         binding.homeAddCalendarBottomCL.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+            homeViewModel.clearHomeAddText()
+            homeViewModel.postApply()
+            //homeViewModel.getApplyDisplay(applyIds = null, includeContent = true)
 
+
+            view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
             parentActivity.mainBottomNavigationAppear()
 
         }
@@ -169,10 +172,6 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
         homeViewModel.homeAddDateSelectFlag.observe(viewLifecycleOwner, Observer {
             homeAddCalendarEventsAdapter.notifyDataSetChanged()
         })
-
-        binding.homeAddCalendarFinish.setOnClickListener {
-            homeViewModel.postApply()
-        }
 
 
         val daysOfWeek = daysOfWeekFromLocale()

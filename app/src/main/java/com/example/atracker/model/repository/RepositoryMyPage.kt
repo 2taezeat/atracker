@@ -2,10 +2,8 @@ package com.example.atracker.model.repository
 
 import com.example.atracker.BuildConfig
 import com.example.atracker.model.RetrofitClient
-import com.example.atracker.model.api.HomeAddService
 import com.example.atracker.model.api.MyPageService
 import com.example.atracker.model.dto.MyPageResponse
-import com.example.atracker.model.dto.StageResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

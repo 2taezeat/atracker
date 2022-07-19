@@ -113,7 +113,15 @@ class HomeViewModel : ViewModel() {
     val homeProgressArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList
 
 
-    //private val _events = MutableLiveData<MutableMap<LocalDate, List<CalendarEvent>>>()
+
+    private val _homeProgressArrayList_tmp = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
+        value = arrayListOf(
+            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 2, totalProgress = 2, true),
+        )
+    }
+
+    val homeProgressArrayList_tmp : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList_tmp
+
 
 
 //    private val _homeWriteProgressSelectArrayList = MutableLiveData<ArrayList<ArrayList<String>>>().apply {
@@ -177,7 +185,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTgiLCJpYXQiOjE2NTgyMTM1ODAsImV4cCI6MTY1ODIxNzE4MH0.36hJLjMUArcdOw3N5MxXMNIoV4PF_B_EoePqFJjEKt0",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -200,7 +208,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTgiLCJpYXQiOjE2NTgyMTM1ODAsImV4cCI6MTY1ODIxNzE4MH0.36hJLjMUArcdOw3N5MxXMNIoV4PF_B_EoePqFJjEKt0")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -223,13 +231,57 @@ class HomeViewModel : ViewModel() {
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTgiLCJpYXQiOjE2NTgyMTM1ODAsImV4cCI6MTY1ODIxNzE4MH0.36hJLjMUArcdOw3N5MxXMNIoV4PF_B_EoePqFJjEKt0", createApplyRequest = createApplyRequest )
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0", createApplyRequest = createApplyRequest )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
-
             }
 
         }
+
+    }
+
+    fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
+        viewModelScope.launch {
+            val apiResult = repositoryHome.applyGetCall(
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjAiLCJpYXQiOjE2NTgyMjEyMjUsImV4cCI6MTY1ODIyNDgyNX0.gCfpOb7vH6Otx0iVLJSCEd0pKhrDrUrr6clR455TJN0",
+                applyIds = applyIds,
+                includeContent = includeContent)
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!.applies
+                Log.d("getResult22", "${getResult}")
+
+                for (apply in getResult){
+                    var myProgress = 0
+                    var success = true
+                    val stageProgress = apply.stage_progress
+                    val companyTitle = apply.company_name
+                    val jobType = apply.job_position
+                    val totalProgress = stageProgress.size
+
+                    for (stage in stageProgress) {
+                        if (stage.status == IsPassingTmp.FAIL.toString() && success) {
+                            success = false
+                        }
+
+                        if (stage.status == IsPassingTmp.PASS.toString()) {
+                            myProgress += 1
+                        }
+                    }
+
+                    _homeProgressArrayList_tmp.value!!.add(HomeProgressItem(
+                        companyTitle = companyTitle,
+                        jobType = jobType,
+                        myProgress = myProgress,
+                        totalProgress = totalProgress,
+                        success = success)
+                    )
+                }
+            }
+
+        }
+
+
 
     }
 
@@ -298,8 +350,10 @@ class HomeViewModel : ViewModel() {
     fun clearHomeAddText(){
         _positionWord.value = ""
         _companyWord.value = ""
-
+        _companyList.value = listOf()
     }
+
+
 
 
 }
