@@ -170,6 +170,10 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             homeAddCalendarEventsAdapter.notifyDataSetChanged()
         })
 
+        binding.homeAddCalendarFinish.setOnClickListener {
+            homeViewModel.postApply()
+        }
+
 
         val daysOfWeek = daysOfWeekFromLocale()
         val currentMonth = YearMonth.now()

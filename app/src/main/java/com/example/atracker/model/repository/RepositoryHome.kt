@@ -38,7 +38,7 @@ class RepositoryHome {
         return apiResponse
     }
 
-    suspend fun createApplyPostCall (accessToken : String, createApplyRequest : CreateApplyRequest ) : retrofit2.Response<JsonObject> {
+    suspend fun createApplyPostCall (accessToken : String, createApplyRequest : CreateApplyRequest ) : retrofit2.Response<Void> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{
             homeAddService.createApplyPostApi(
                 accessToken = accessToken,

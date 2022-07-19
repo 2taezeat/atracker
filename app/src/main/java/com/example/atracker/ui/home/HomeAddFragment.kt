@@ -26,6 +26,7 @@ import android.text.TextWatcher
 import android.widget.*
 import androidx.lifecycle.Observer
 import com.example.atracker.model.dto.HomeAddProgress
+import com.example.atracker.model.dto.Stage
 
 
 class HomeAddFragment : Fragment() {
@@ -108,16 +109,21 @@ class HomeAddFragment : Fragment() {
                 showAlert(AlertType.TYPE7)
                 checkNext = false
             } else {
-                val checkedChipProgress = arrayListOf<HomeAddProgress>()
+                val checkedChipStage = arrayListOf<Stage>()
+                val checkedChipAddProgress = arrayListOf<HomeAddProgress>()
 
                 for (idx in 0 until checkedChipIdList.size) {
                     val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
-                    //checkedChipName.add(checkedChip.text.toString())
-                    checkedChipProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
+                    checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
+
+                    val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
+                    checkedChipStage.add(Stage(event_at = "", order = idx, stage_id = stageId))
                 }
 
 
-                homeViewModel.setSelectedChipName(checkedChipProgress) //// not fix!
+                homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
+                homeViewModel.setSelectedChipName(checkedChipAddProgress)
+
 
             }
 
@@ -156,15 +162,16 @@ class HomeAddFragment : Fragment() {
 
         }
 
-//        binding.homeAddTypeSelect1.text = homeViewModel.homeAddStagesName.value!![0]
-//        binding.homeAddTypeSelect2.text = homeViewModel.homeAddStagesName.value!![1]
-//        binding.homeAddTypeSelect3.text = homeViewModel.homeAddStagesName.value!![2]
-//        binding.homeAddTypeSelect4.text = homeViewModel.homeAddStagesName.value!![3]
-//        binding.homeAddTypeSelect5.text = homeViewModel.homeAddStagesName.value!![4]
-//        binding.homeAddTypeSelect6.text = homeViewModel.homeAddStagesName.value!![5]
-//        binding.homeAddTypeSelect7.text = homeViewModel.homeAddStagesName.value!![6]
-//        binding.homeAddTypeSelect8.text = homeViewModel.homeAddStagesName.value!![7]
+        val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!.map { it.title }
 
+        binding.homeAddTypeSelect1.text = homeAddStagesName[0]
+        binding.homeAddTypeSelect2.text = homeAddStagesName[1]
+        binding.homeAddTypeSelect3.text = homeAddStagesName[2]
+        binding.homeAddTypeSelect4.text = homeAddStagesName[3]
+        binding.homeAddTypeSelect5.text = homeAddStagesName[4]
+        binding.homeAddTypeSelect6.text = homeAddStagesName[5]
+        binding.homeAddTypeSelect7.text = homeAddStagesName[6]
+        binding.homeAddTypeSelect8.text = homeAddStagesName[7]
 
 
 

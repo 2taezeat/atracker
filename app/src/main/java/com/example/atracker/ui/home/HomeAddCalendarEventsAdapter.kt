@@ -20,7 +20,7 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
 
     val selectedEvents = mutableListOf<CalendarEvent>()
 
-    val homeAddSelectedProgress = homeViewModel.homeAddSelectedProgress.value
+    private val homeAddSelectedProgress = homeViewModel.homeAddSelectedProgress.value
 
 
     private val mForegroundSuccess1 = ContextCompat.getDrawable(context, R.drawable.circle_type_1) as Drawable
@@ -91,11 +91,6 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
 //        }
 
         fun bind(addProgress: HomeAddProgress) {
-            //binding.itemEventCompanyNameText.text = calendarEvent.eventTitle
-            //binding.itemEventDate.text = calendarEvent.zonedDateTime.toLocalTime().toString()
-            //binding.itemEventDate.text = selectionDateFormatter.format(calendarEvent.zonedDateTime.toLocalTime())
-            //selectionHeaderFormatter.format(date)
-
             val zonedTime = addProgress.zonedDateTime
 
             binding.itemEventProgressText.text = addProgress.progressName
@@ -110,9 +105,6 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
                 binding.itemEventPlusTV.visibility = View.INVISIBLE
 
             }
-
-
-
 
 
         }

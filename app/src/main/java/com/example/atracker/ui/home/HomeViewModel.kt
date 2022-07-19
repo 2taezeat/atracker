@@ -33,8 +33,6 @@ class HomeViewModel : ViewModel() {
         val instant = Instant.now()
         _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
         workTypeItems.value = listOf("PERMANENT", "TEMPORARY", "INTERN")
-
-
         initTimeDateCurrent()
     }
 
@@ -77,6 +75,10 @@ class HomeViewModel : ViewModel() {
     val workTypeSelection : LiveData<Int> = _workTypeSelection
 
 
+    private val _homeAddSelectedStage = MutableLiveData<ArrayList<Stage>>().apply {
+    }
+    val homeAddSelectedStage : LiveData<ArrayList<Stage>> = _homeAddSelectedStage
+
     private val _homeAddSelectedProgress = MutableLiveData<ArrayList<HomeAddProgress>>().apply {
     }
     val homeAddSelectedProgress : LiveData<ArrayList<HomeAddProgress>> = _homeAddSelectedProgress
@@ -89,9 +91,9 @@ class HomeViewModel : ViewModel() {
 
 
 
-    private val _homeAddStagesName = MutableLiveData<List<String>>().apply {
+    private val _homeAddStagesContent = MutableLiveData<List<StageResponseItem>>().apply {
     }
-    val homeAddStagesName : LiveData<List<String>> = _homeAddStagesName
+    val homeAddStagesContent : LiveData<List<StageResponseItem>> = _homeAddStagesContent
 
 
 
@@ -175,7 +177,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTciLCJpYXQiOjE2NTgyMDk1MTAsImV4cCI6MTY1ODIxMzExMH0.SmPB5VW8m9IjtidNNF28eclwSeHVXWaCFmOnwkN9UN0",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTgiLCJpYXQiOjE2NTgyMTM1ODAsImV4cCI6MTY1ODIxNzE4MH0.36hJLjMUArcdOw3N5MxXMNIoV4PF_B_EoePqFJjEKt0",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -198,12 +200,12 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTciLCJpYXQiOjE2NTgyMDk1MTAsImV4cCI6MTY1ODIxMzExMH0.SmPB5VW8m9IjtidNNF28eclwSeHVXWaCFmOnwkN9UN0")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTgiLCJpYXQiOjE2NTgyMTM1ODAsImV4cCI6MTY1ODIxNzE4MH0.36hJLjMUArcdOw3N5MxXMNIoV4PF_B_EoePqFJjEKt0")
 
             if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!.map { it.title }
+                val getResult = apiResult.body()!!
                 Log.d("getResult", "${getResult}")
-                _homeAddStagesName.value = getResult
+                _homeAddStagesContent.value = getResult
             }
 
         }
@@ -215,16 +217,16 @@ class HomeViewModel : ViewModel() {
             company = Company(id = _companyId.value!!, name = _companyWord.value!!),
             job_position = _positionWord.value!!,
             job_type = _workTypeWord.value!!,
-            stages = listOf()
+            stages = _homeAddSelectedStage.value!!
         )
 
-        viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "", createApplyRequest = createApplyRequest )
+        Log.d("createApplyRequest", "${createApplyRequest}")
 
+        viewModelScope.launch {
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMTgiLCJpYXQiOjE2NTgyMTM1ODAsImV4cCI6MTY1ODIxNzE4MH0.36hJLjMUArcdOw3N5MxXMNIoV4PF_B_EoePqFJjEKt0", createApplyRequest = createApplyRequest )
+            Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
-                //val getResult = apiResult.body()!!.map { it.title }
-                //Log.d("getResult", "${getResult}")
-                //_homeAddStagesName.value = getResult
+
             }
 
         }
@@ -243,9 +245,17 @@ class HomeViewModel : ViewModel() {
     }
 
 
+    fun setSelectedChipStage(addCheckedStage : ArrayList<Stage>) {
+        _homeAddSelectedStage.value = addCheckedStage
+        Log.d("tttt123", "${_homeAddSelectedStage.value}")
+    }
+
+
     fun setSelectedChipName(addCheckedProgress : ArrayList<HomeAddProgress>) {
         _homeAddSelectedProgress.value = addCheckedProgress
     }
+
+
 
     fun onDateChanged(year: Int, month: Int, day: Int){
         val dataTime = LocalDateTime.of(year, month + 1, day, hour.value!!, minute.value!!)
@@ -272,9 +282,12 @@ class HomeViewModel : ViewModel() {
 
 
     fun setZonedHomeAddProgress(position: Int?) {
+        _homeAddSelectedStage.value!![position!!].event_at = _zonedDateTime.value.toString()
         _homeAddSelectedProgress.value!![position!!].zonedDateTime = _zonedDateTime.value
-        switch(_homeAddDateSelectFlag)
 
+
+        switch(_homeAddDateSelectFlag)
+        Log.d("tttt1234", "${_homeAddSelectedStage.value}")
 
     }
 

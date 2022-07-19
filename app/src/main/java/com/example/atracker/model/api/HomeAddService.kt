@@ -25,7 +25,7 @@ interface HomeAddService {
     suspend fun createApplyPostApi(
         @Header("Authorization") accessToken : String,
         @Body createApplyRequest : CreateApplyRequest
-    ) : retrofit2.Response<JsonObject>
+    ) : retrofit2.Response<Void>
 
 
 }
