@@ -25,6 +25,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
 
@@ -44,6 +45,9 @@ class HomeAddFragment : Fragment() {
 
     lateinit var numberDrawableList: ArrayList<Drawable?>
     private lateinit var chipGroup: ChipGroup
+
+    private val args : HomeAddFragmentArgs by navArgs()
+
 
 
     private val checkedChipIdList by lazy {
@@ -87,6 +91,13 @@ class HomeAddFragment : Fragment() {
         val root: View = binding.root
         binding.homeVM = homeViewModel
         chipGroup = binding.homeAddTypeSelectChipGroup
+
+        Log.d("HomeAddFragment", "${args.progressIndex}")
+
+        if (args.progressIndex != 0) {
+            binding.homeAddHeaderTitle.text = "지원 현황 편집"
+        }
+
 
         binding.homeAddNext.setOnClickListener { view ->
             Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.positionWord.value!!}")

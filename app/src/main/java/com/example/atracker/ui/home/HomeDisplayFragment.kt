@@ -144,7 +144,10 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
-        val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(position)
+        val applyId = homeViewModel.homeDisplayArrayList.value!![position].applyId
+        val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
+            progressIndex = applyId,
+            displayListPosition = position)
         findNavController().navigate(action)
     }
 

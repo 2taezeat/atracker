@@ -40,6 +40,12 @@
                 android:defaultValue="0"
                 />
 
+            <argument
+                android:name="displayListPosition"
+                app:argType="integer"
+                android:defaultValue="0"
+                />
+
         </action>
 
 
@@ -118,10 +124,15 @@
         </action>
 
 
+        <argument
+            android:name="progressIndex"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
 
 
         <argument
-            android:name="progressIndex"
+            android:name="displayListPosition"
             app:argType="integer"
             android:defaultValue="0"
             />
@@ -142,6 +153,11 @@
             app:destination="@id/navigation_home_add_calendar"
             app:popUpTo="@id/navigation_home_add" />
 
+        <argument
+            android:name="progressIndex"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
 
     </fragment>
 
