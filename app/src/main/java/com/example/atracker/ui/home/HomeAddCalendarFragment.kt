@@ -1,6 +1,7 @@
 package com.example.atracker.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -155,6 +156,8 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             homeViewModel.postApply()
 
             homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
+                Log.d("postApplyFlag11" , "${homeViewModel.postApplyFlag.value}")
+
                 homeViewModel.clearHomeAddText()
                 homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
 

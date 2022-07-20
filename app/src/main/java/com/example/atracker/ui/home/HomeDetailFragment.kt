@@ -19,15 +19,6 @@ import com.google.android.material.tabs.TabLayout
 class HomeDetailFragment : Fragment() {
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeDetailFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
-
     private var _binding: FragmentHomeDetailBinding? = null
     private val binding get() = _binding!!
     private val parentActivity by lazy {

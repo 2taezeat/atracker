@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentCalendarBottomBinding
@@ -86,17 +87,24 @@ class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment()
                 override fun onCenterClick() {
                     when (alertType) {
                         AlertType.TYPE13 -> {
-                            val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
-                            dismiss()
-                            navController.popBackStack()
+                            homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
+                                homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+
+                                val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+                                dismiss()
+                                navController.popBackStack()
+                            })
                         }
                     }
-
                 }
 
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE12 -> {
+                            val applyId = homeViewModel.homeDisplayArrayList.value!![progressIndex!!].applyId
+                            val deleteIds = arrayOf(applyId)
+                            homeViewModel.deleteApply(deleteIds)
+
                             showAlert(AlertType.TYPE13)
                         }
                     }
