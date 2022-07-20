@@ -19,7 +19,6 @@ import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -183,7 +182,7 @@ class HomeAddFragment : Fragment() {
         binding.homeAddTypeSelect8.text = homeAddStagesName[7].title
 
 
-        val tmp = mapOf<Int, Chip>(
+        val chipsMap = mapOf<Int, Chip>(
             homeAddStagesName[0].id to binding.homeAddTypeSelect1,
             homeAddStagesName[1].id to binding.homeAddTypeSelect2,
             homeAddStagesName[2].id to binding.homeAddTypeSelect3,
@@ -234,8 +233,8 @@ class HomeAddFragment : Fragment() {
 
             for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
-                val c = tmp[stageId]
-                c!!.isChecked = true
+                val selectedChip = chipsMap[stageId]
+                selectedChip!!.isChecked = true
             }
 
         }
