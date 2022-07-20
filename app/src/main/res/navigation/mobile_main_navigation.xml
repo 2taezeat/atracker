@@ -151,7 +151,17 @@
         <action
             android:id="@+id/action_navigation_home_add_to_navigation_home_add_calendar"
             app:destination="@id/navigation_home_add_calendar"
-            app:popUpTo="@id/navigation_home_add" />
+            app:popUpTo="@id/navigation_home_add">
+
+            <argument
+                android:name="progressIndex"
+                app:argType="integer"
+                android:defaultValue="0"
+                />
+
+
+        </action>
+
 
         <argument
             android:name="progressIndex"
@@ -187,6 +197,13 @@
             android:id="@+id/action_navigation_home_add_calendar_to_navigation_home"
             app:destination="@id/navigation_home"
             app:popUpTo="@id/navigation_home_add_calendar" />
+
+
+        <argument
+            android:name="progressIndex"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
 
 
 

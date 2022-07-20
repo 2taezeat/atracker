@@ -54,6 +54,18 @@ class RepositoryHome {
         return apiResponse
     }
 
+    suspend fun updateApplyPutCall (accessToken : String, updateApplyRequest : UpdateApplyRequest ) : retrofit2.Response<Void> {
+        val apiResponse = CoroutineScope(Dispatchers.IO).async{
+            homeService.updateApplyPutApi(
+                accessToken = accessToken,
+                updateApplyRequest = updateApplyRequest
+            )
+        }.await()
+
+        return apiResponse
+    }
+
+
 
     suspend fun deleteApplyCall (accessToken : String, ids : Array<Int> ) : retrofit2.Response<Void> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{

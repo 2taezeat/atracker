@@ -6,5 +6,5 @@ data class Apply(
     val company_name: String,
     val job_position: String,
     val job_type: String,
-    val stage_progress: List<StageProgres>
+    val stage_progress: List<StageProgress>
 )

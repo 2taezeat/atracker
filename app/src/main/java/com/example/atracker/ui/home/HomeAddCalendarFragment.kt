@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +47,9 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
     private val lazyContext by lazy {
         requireContext()
     }
+
+    private val args : HomeAddCalendarFragmentArgs by navArgs()
+
 
     //private val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel)
 
@@ -144,6 +148,8 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //
 //        })
 
+
+
         val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel, lazyContext)
 
 
@@ -152,8 +158,15 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             navController.popBackStack()
         }
 
+
         binding.homeAddCalendarBottomCL.setOnClickListener { view ->
-            homeViewModel.postApply()
+            if (args.progressIndex != 0) { // 편집인 경우, update
+                homeViewModel.updateApply(args.progressIndex)
+            } else { // 그냥 homdAdd 추가인 경우 post
+                homeViewModel.postApply()
+            }
+
+            //homeViewModel.postApply()
 
             homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
                 Log.d("postApplyFlag11" , "${homeViewModel.postApplyFlag.value}")
@@ -165,6 +178,32 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                 parentActivity.mainBottomNavigationAppear()
             })
         }
+
+
+
+//        if (args.progressIndex != 0) { // 편집인 경우
+//
+//
+//        } else { // 그냥 추가인 경우
+//            binding.homeAddCalendarBottomCL.setOnClickListener { view ->
+//                homeViewModel.postApply()
+//
+//                homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
+//                    Log.d("postApplyFlag11" , "${homeViewModel.postApplyFlag.value}")
+//
+//                    homeViewModel.clearHomeAddText()
+//                    homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+//
+//                    view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+//                    parentActivity.mainBottomNavigationAppear()
+//                })
+//            }
+//
+//        }
+
+
+
+
 
 
         binding.exThreeRv.apply {

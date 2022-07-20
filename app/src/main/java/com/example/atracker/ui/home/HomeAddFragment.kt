@@ -44,11 +44,10 @@ class HomeAddFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
 
     lateinit var numberDrawableList: ArrayList<Drawable?>
-    private lateinit var chipGroup: ChipGroup
 
     private val args : HomeAddFragmentArgs by navArgs()
 
-
+    private var count = 0
 
     private val checkedChipIdList by lazy {
         arrayListOf<Int>()
@@ -90,13 +89,10 @@ class HomeAddFragment : Fragment() {
         _binding = FragmentHomeAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.homeVM = homeViewModel
-        chipGroup = binding.homeAddTypeSelectChipGroup
+        var spinnerSelectedPosition : Int = -1
+
 
         Log.d("HomeAddFragment", "${args.progressIndex}")
-
-        if (args.progressIndex != 0) {
-            binding.homeAddHeaderTitle.text = "지원 현황 편집"
-        }
 
 
         binding.homeAddNext.setOnClickListener { view ->
@@ -131,18 +127,19 @@ class HomeAddFragment : Fragment() {
                     checkedChipStage.add(Stage(event_at = "", order = idx, stage_id = stageId))
                 }
 
-
                 homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
                 homeViewModel.setSelectedChipName(checkedChipAddProgress)
-
-
             }
+
 
             if (checkNext) {
-                view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
+
+                val action = HomeAddFragmentDirections.actionNavigationHomeAddToNavigationHomeAddCalendar(args.progressIndex)
+                view.findNavController().navigate(action)
+
+                //view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
                 checkedChipIdList.clear()
             }
-
 
         }
 
@@ -165,6 +162,7 @@ class HomeAddFragment : Fragment() {
         }
 
         binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            Log.d("checkedChipIdList","${checkedChipIdList}")
             for (idx in 0 until checkedChipIdList.size) {
                 val checkedChip =
                     binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
@@ -173,18 +171,28 @@ class HomeAddFragment : Fragment() {
 
         }
 
-        val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!.map { it.title }
+        val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
-        binding.homeAddTypeSelect1.text = homeAddStagesName[0]
-        binding.homeAddTypeSelect2.text = homeAddStagesName[1]
-        binding.homeAddTypeSelect3.text = homeAddStagesName[2]
-        binding.homeAddTypeSelect4.text = homeAddStagesName[3]
-        binding.homeAddTypeSelect5.text = homeAddStagesName[4]
-        binding.homeAddTypeSelect6.text = homeAddStagesName[5]
-        binding.homeAddTypeSelect7.text = homeAddStagesName[6]
-        binding.homeAddTypeSelect8.text = homeAddStagesName[7]
+        binding.homeAddTypeSelect1.text = homeAddStagesName[0].title
+        binding.homeAddTypeSelect2.text = homeAddStagesName[1].title
+        binding.homeAddTypeSelect3.text = homeAddStagesName[2].title
+        binding.homeAddTypeSelect4.text = homeAddStagesName[3].title
+        binding.homeAddTypeSelect5.text = homeAddStagesName[4].title
+        binding.homeAddTypeSelect6.text = homeAddStagesName[5].title
+        binding.homeAddTypeSelect7.text = homeAddStagesName[6].title
+        binding.homeAddTypeSelect8.text = homeAddStagesName[7].title
 
 
+        val tmp = mapOf<Int, Chip>(
+            homeAddStagesName[0].id to binding.homeAddTypeSelect1,
+            homeAddStagesName[1].id to binding.homeAddTypeSelect2,
+            homeAddStagesName[2].id to binding.homeAddTypeSelect3,
+            homeAddStagesName[3].id to binding.homeAddTypeSelect4,
+            homeAddStagesName[4].id to binding.homeAddTypeSelect5,
+            homeAddStagesName[5].id to binding.homeAddTypeSelect6,
+            homeAddStagesName[6].id to binding.homeAddTypeSelect7,
+            homeAddStagesName[7].id to binding.homeAddTypeSelect8,
+        )
 
         binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
             setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)
@@ -219,7 +227,21 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        var spinnerSelectedPosition : Int = -1
+        if (args.progressIndex != 0) { // 편집인 경우
+            binding.homeAddHeaderTitle.text = "지원 현황 편집"
+            spinnerSelectedPosition = homeViewModel.setWorkTypeSpinnerPosition()
+            homeViewModel.setHomeEdit()
+
+            for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
+                val stageId = editSelectedStage.stage_id
+                val c = tmp[stageId]
+                c!!.isChecked = true
+            }
+
+        }
+
+
+
         val workTypeItems: List<String> = listOf("정규직", "계약직", "인턴")
         val workTypeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
@@ -258,22 +280,14 @@ class HomeAddFragment : Fragment() {
         workTypeAdapter.addAll(workTypeItems.toMutableList())
         workTypeAdapter.add("근무 형태를 선택해주세요.")
         binding.homeAddWorkTypeSpinner.adapter = workTypeAdapter
-        binding.homeAddWorkTypeSpinner.setSelection(workTypeAdapter.count)
+
+        if (args.progressIndex != 0) {
+            binding.homeAddWorkTypeSpinner.setSelection(spinnerSelectedPosition)
+        } else {
+            binding.homeAddWorkTypeSpinner.setSelection(workTypeAdapter.count)
+        }
 
 
-//        binding.homeAddWorkTypeSpinner.setOnTouchListener { view, motionEvent ->
-//
-//        }
-
-
-//        binding.homeAddWorkTypeSpinner.setOnTouchListener { v, event ->
-//            if (event.action == MotionEvent.ACTION_DOWN) {
-//
-//            } else {
-//
-//            }
-//            false
-//        }
 
         binding.homeAddWorkTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -382,16 +396,27 @@ class HomeAddFragment : Fragment() {
             binding.homeAddRefreshIV.callOnClick()
             chip.isCheckable = true
         }
+        Log.d("count123123", "${count}")
 
         if (checked) {
             checkedChipIdList.add(compoundButton.id)
             chip.chipStrokeWidth = 4f
             chip.setChipStrokeColorResource(R.color.progress_color_7)
+            //Log.d("count123123", "${count}")
+
+            //chip.checkedIcon = numberDrawableList[checkedChipIdList.size - 1]
+
+            count += 1
 
         } else {
             checkedChipIdList.remove(compoundButton.id)
             chip.chipStrokeWidth = 0f
+
+            count -= 1
         }
+
+        //checkedChip.checkedIcon = numberDrawableList[idx]
+
 
     }
 

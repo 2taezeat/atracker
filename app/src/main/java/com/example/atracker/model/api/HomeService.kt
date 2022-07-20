@@ -35,6 +35,12 @@ interface HomeService {
         @Query("includeContent") includeContent : Boolean?
     ) : retrofit2.Response<ApplyResponse>
 
+    @PUT("/api/v1/apply/")
+    suspend fun updateApplyPutApi(
+        @Header("Authorization") accessToken : String,
+        @Body updateApplyRequest : UpdateApplyRequest
+    ) : retrofit2.Response<Void>
+
 
     @DELETE("/api/v1/apply/applies/")
     suspend fun deleteApplyApi(
