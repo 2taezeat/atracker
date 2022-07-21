@@ -115,6 +115,8 @@ class HomeWriteFragment : Fragment() {
             showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
         }
 
+        binding.homeWriteCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
+
 
 
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
