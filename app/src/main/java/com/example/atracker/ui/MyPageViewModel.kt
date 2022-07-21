@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.CalendarEvent
+import com.example.atracker.model.dto.ExperienceType
 import com.example.atracker.model.repository.RepositoryHome
 import com.example.atracker.model.repository.RepositoryMyPage
 import kotlinx.coroutines.launch
@@ -19,17 +20,43 @@ class MyPageViewModel : ViewModel() {
 
     val repositoryMyPage = RepositoryMyPage()
 
+    private val _userNickName = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val userNickName : LiveData<String> = _userNickName
 
+    private val _userJobPosition = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val userJobPosition : LiveData<String> = _userJobPosition
+
+    private val _userExperienceType = MutableLiveData<String>().apply {
+        value = ""
+    }
+
+    val userExperienceType : LiveData<String> = _userExperienceType
+
+
+    init {
+
+    }
 
 
 
     fun getMyPage() {
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "")
+            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()
-                Log.d("getResult", "${getResult}")
+                Log.d("getMyPage", "${getResult}")
+                _userNickName.value = getResult!!.nick_name
+                _userJobPosition.value = getResult!!.job_position
+
+                when (getResult!!.experience_type) {
+                    ExperienceType.EXPERIENCED.toString() -> _userExperienceType.value = "경력"
+                    ExperienceType.NOT_EXPERIENCED.toString() -> _userExperienceType.value = "신입"
+                }
             }
 
         }

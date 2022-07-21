@@ -71,6 +71,10 @@ class MyPageDisplayFragment : Fragment() {
             }
         }
 
+        binding.myPageNickNameTV.text = myPageViewModel.userNickName.value
+        binding.myPagePositionTV.text = myPageViewModel.userJobPosition.value
+        binding.myPageCareerAgeTV.text = myPageViewModel.userExperienceType.value
+
 
 //        binding.myPageBackButton.setOnClickListener { view ->
 //            val navController = view.findNavController()
