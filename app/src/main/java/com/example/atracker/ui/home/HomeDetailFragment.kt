@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
-import com.example.atracker.ui.calendar.CalendarBottomFragment
 import com.google.android.material.tabs.TabLayout
 
 
@@ -41,28 +40,36 @@ class HomeDetailFragment : Fragment() {
         HomeDetailAdapter()
     }
 
+    private lateinit var progressNameList : ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+        Log.d("HomeDetailFragment","onCreate")
+        progressNameList = arrayListOf()
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-
-
         _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val homeProgress = homeViewModel.homeDisplayArrayList.value!![args.displayListPosition]
         homeDetailTabLayout = binding.homeDetailTabLayout
 
 
+        homeViewModel.homeProgressNameDetail.observe(viewLifecycleOwner, Observer {
+            val ori = it.getContentIfNotHandled()
+            if (ori != null) {
+                homeViewModel.setHomeProgressNameWrite(ori)
+                addTabItem(ori)
+            } else {
+                addTabItem(progressNameList)
+            }
+        })
 
-        addTabItem(args.progressIndex, container)
 
 
 
@@ -71,8 +78,8 @@ class HomeDetailFragment : Fragment() {
 //            view.findNavController().navigate(action)
 //        }
 
-        binding.homeDetailProgressView.secondaryProgress = 1
-        binding.homeDetailProgressView.max = 6
+//        binding.homeDetailProgressView.secondaryProgress = 1
+//        binding.homeDetailProgressView.max = 6
 
 
         binding.homeDetailBackButton.setOnClickListener { view ->
@@ -108,17 +115,24 @@ class HomeDetailFragment : Fragment() {
         return root
     }
 
-//    private fun initDataToSeekbar() {
+    override fun onResume() {
+        super.onResume()
+        Log.d("HomeDetailFragment","onResume")
 
-
-    private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
-        val homeWriteProgressSelected = homeViewModel.homeWriteProgressSelectedMap.value!![progressIndex]
-
-        for (progressName in homeWriteProgressSelected!!) {
-            homeDetailTabLayout.addTab(homeDetailTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
-
-        }
     }
 
+    override fun onStop() {
+        super.onStop()
+        Log.d("HomeDetailFragment","onStop")
+        progressNameList = homeViewModel.homeProgressNameWrite.value!!
+
+    }
+
+
+    private fun addTabItem(stageTitleList : ArrayList<String>) {
+        for (progressName in stageTitleList) {
+            homeDetailTabLayout.addTab(homeDetailTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
+        }
+    }
 
 }

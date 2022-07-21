@@ -101,6 +101,7 @@ class HomeWriteFragment : Fragment() {
         val root: View = binding.root
 
         homeWriteTabLayout = binding.homeWriteTabLayout
+        Log.d("args.progressIndex","${args.progressIndex}")
 
         addTabItem(args.progressIndex, container)
 
@@ -184,7 +185,8 @@ class HomeWriteFragment : Fragment() {
     }
 
     private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
-        val homeWriteProgressSelected = homeViewModel.homeWriteProgressSelectedMap.value!![progressIndex]
+        val homeWriteProgressSelected = homeViewModel.homeProgressNameWrite.value
+
         val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
         var idx = 0
 
@@ -195,7 +197,7 @@ class HomeWriteFragment : Fragment() {
         dynamicLayoutMap = mutableMapOf()
         progressIsPassingMap = mutableMapOf()
 
-        for (progressName in homeWriteProgressSelected!!) {
+        for (progressName in homeWriteProgressSelected) {
             homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
 
             homeWriteContentLayout = this.layoutInflater.inflate(R.layout.home_write_content_layout, null) as ConstraintLayout // inflating view from xml

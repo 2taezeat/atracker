@@ -3,6 +3,7 @@ package com.example.atracker.model.repository
 import com.example.atracker.BuildConfig
 import com.example.atracker.model.RetrofitClient
 import com.example.atracker.model.api.HomeService
+import com.example.atracker.model.api.StageProgressService
 import com.example.atracker.model.dto.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +12,7 @@ import kotlinx.coroutines.async
 class RepositoryHome {
 
     private val homeService : HomeService = RetrofitClient.getClient(BuildConfig.BASE_URL).create(HomeService::class.java)
+    private val stageProgressService : StageProgressService = RetrofitClient.getClient(BuildConfig.BASE_URL).create(StageProgressService::class.java)
 
 
     suspend fun companySearchPostCall (accessToken : String, companySearchRequest: CompanySearchRequest, page : Int, size: Int) : retrofit2.Response<CompanySearchResponse> {
@@ -65,8 +67,6 @@ class RepositoryHome {
         return apiResponse
     }
 
-
-
     suspend fun deleteApplyCall (accessToken : String, ids : Array<Int> ) : retrofit2.Response<Void> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{
             homeService.deleteApplyApi(
@@ -78,6 +78,17 @@ class RepositoryHome {
         return apiResponse
     }
 
+
+    suspend fun updateStageProgressCall (accessToken : String, stageProgressRequest: StageProgressRequest ) : retrofit2.Response<Void> {
+        val apiResponse = CoroutineScope(Dispatchers.IO).async{
+            stageProgressService.updateStageProgressApi(
+                accessToken = accessToken,
+                stageProgressRequest = stageProgressRequest
+            )
+        }.await()
+
+        return apiResponse
+    }
 
 
 

@@ -123,7 +123,7 @@ class HomeAddFragment : Fragment() {
                     checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
 
                     val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
-                    checkedChipStage.add(Stage(event_at = "", order = idx, stage_id = stageId))
+                    checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
                 }
 
                 homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!

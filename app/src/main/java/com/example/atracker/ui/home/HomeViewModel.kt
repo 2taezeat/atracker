@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
+import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDateTime
@@ -141,13 +142,27 @@ class HomeViewModel : ViewModel() {
 
     private val _homeWriteProgressSelectedMap = MutableLiveData<MutableMap<Int, ArrayList<String>>>().apply {
         value = mutableMapOf(
-            2494 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접",  "6차 면접"),
+            2545 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접",  "6차 면접"),
             1 to arrayListOf("1차 면접", "2차 면접", "3차 면접" ),
             2 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접" )
         )
     }
 
     val homeWriteProgressSelectedMap : LiveData<MutableMap<Int, ArrayList<String>>> = _homeWriteProgressSelectedMap
+
+
+
+    private val _homeProgressNameDetail = MutableLiveData<Event<ArrayList<String>>>()
+
+    val homeProgressNameDetail : LiveData<Event<ArrayList<String>>> = _homeProgressNameDetail
+
+
+    private val _homeProgressNameWrite = MutableLiveData<ArrayList<String>>()
+
+    val homeProgressNameWrite : LiveData<ArrayList<String>> = _homeProgressNameWrite
+
+
+
 
 
 //    private val _homeDetailContents = MutableLiveData<ArrayList<HomeDetailItem>>().apply {
@@ -170,15 +185,20 @@ class HomeViewModel : ViewModel() {
 
     private val _homeDetailContents = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
         value = mutableMapOf(
-            2494 to arrayListOf<HomeDetailItem>(
-                HomeDetailItem(progressType = 0,progressName = "1차 면접", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.SUCCESS),
-                HomeDetailItem(progressType = 1,progressName = "2차 면접", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
-                HomeDetailItem(progressType = 2,progressName = "3차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = "freetitle3", freeBody = "freeBody3", totalReviewBody = "hello_2\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = IsPassing.WAITING),
-                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.REVIEW, freeTitle = null, freeBody = null, totalReviewBody = "hello_3\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = IsPassing.FAIL),
-                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_3", questionBody = "qna_3", answerBody = "answer_3", qnaReviewBody = "qna_review_body_3",  progressIsPassing = null),
-                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = "freetitle4", freeBody = "freeBody4", totalReviewBody = "hello_3", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = null),
-                HomeDetailItem(progressType = 4,progressName = "5차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = null, freeBody = null, totalReviewBody = "hello_4", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = null),
-                HomeDetailItem(progressType = 5,progressName = "6차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = null, freeBody = null, totalReviewBody = "hello_5", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = null),
+//            2519 to arrayListOf<HomeDetailItem>(
+//                HomeDetailItem(progressType = 0,progressName = "1차 면접", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.SUCCESS),
+//                HomeDetailItem(progressType = 1,progressName = "2차 면접", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
+//                HomeDetailItem(progressType = 2,progressName = "3차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = "freetitle3", freeBody = "freeBody3", totalReviewBody = "hello_2\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = IsPassing.WAITING),
+//                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.REVIEW, freeTitle = null, freeBody = null, totalReviewBody = "hello_3\n\n\n\n\n\n\n\n\n\n\n\n\n", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = IsPassing.FAIL),
+//                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_3", questionBody = "qna_3", answerBody = "answer_3", qnaReviewBody = "qna_review_body_3",  progressIsPassing = null),
+//                HomeDetailItem(progressType = 3,progressName = "4차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = "freetitle4", freeBody = "freeBody4", totalReviewBody = "hello_3", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = null),
+//                HomeDetailItem(progressType = 4,progressName = "5차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = null, freeBody = null, totalReviewBody = "hello_4", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = null),
+//                HomeDetailItem(progressType = 5,progressName = "6차 면접", itemType = ProgressItemBodyType.FREE, freeTitle = null, freeBody = null, totalReviewBody = "hello_5", questionBody = null, answerBody = null, qnaReviewBody = null,  progressIsPassing = null),
+//            ),
+            2545 to arrayListOf<HomeDetailItem>(
+                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.SUCCESS),
+                HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
+                HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
             )
         )
     }
@@ -203,7 +223,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyTitle (searchWord : String) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -226,7 +246,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -249,7 +269,7 @@ class HomeViewModel : ViewModel() {
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA", createApplyRequest = createApplyRequest )
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk", createApplyRequest = createApplyRequest )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -267,7 +287,7 @@ class HomeViewModel : ViewModel() {
         Log.d("updateApplyRequest", "${updateApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA", updateApplyRequest = updateApplyRequest )
+            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk", updateApplyRequest = updateApplyRequest )
             Log.d("getResult_33", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -279,7 +299,7 @@ class HomeViewModel : ViewModel() {
 
     fun deleteApply(deleteIds : Array<Int>) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA", ids = deleteIds )
+            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk", ids = deleteIds )
             Log.d("deleteApply", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -293,7 +313,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = false) {
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -336,20 +356,44 @@ class HomeViewModel : ViewModel() {
 
 
 
-    fun getApplyDetail(applyIds : Array<Int>? = null, includeContent : Boolean? = false) {
+    fun getApplyDetail(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMiIsImlhdCI6MTY1ODM4MDA0OCwiZXhwIjoxNjU4MzgzNjQ4fQ.cCwzZ5Fs1sK2mFUmbUw9u4uAlNwOx35LQKE3M0ruxpA",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!.applies[0]
                 _homeApplyIdContent.value = getResult
-                Log.d("_homeApplyIdContent" ,"${_homeApplyIdContent.value}")
+
+                val newStageTitleArrayList = arrayListOf<String>()
+
+                val stageProgress = getResult.stage_progress
+                for (s in stageProgress) {
+                    newStageTitleArrayList.add(s.stage_title)
+                }
+                _homeProgressNameDetail.value = Event(newStageTitleArrayList)
+                Log.d("_homeApplyIdContent" ,"${_homeProgressNameDetail.value}")
             }
         }
+
+
     }
+
+//    fun updateStageProgress(){
+//        viewModelScope.launch {
+//            val apiResult = repositoryHome.updateStageProgressCall(
+//                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk",
+//                stageProgressRequest = applyIds,
+//           )
+//
+//            if (apiResult.code() == 200) {
+//                val getResult = apiResult.body()!!
+//
+//            }
+//        }
+//    }
 
 
     fun setWorkTypePosition(position : Int) {
@@ -455,6 +499,10 @@ class HomeViewModel : ViewModel() {
         return idx
     }
 
+    fun setHomeProgressNameWrite(ori : ArrayList<String>){
+        _homeProgressNameWrite.value = ori
+
+    }
 
 
 
