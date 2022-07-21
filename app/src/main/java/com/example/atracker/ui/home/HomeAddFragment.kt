@@ -375,11 +375,6 @@ class HomeAddFragment : Fragment() {
         })
 
 
-//        binding.homeAddACTV.setOnScrollChangeListener { view, i, i2, i3, i4 ->
-//            Log.d("test333333", "${view}, ${i}, ${i2}")
-//
-//        }
-
         ////////////////////////////
         binding.homeAddACTV.setOnClickListener {
             homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
@@ -391,6 +386,12 @@ class HomeAddFragment : Fragment() {
             Log.d("tmp123123", "${adapterView}, ${view}, ${i}, ${l}")
             homeViewModel.setCompanyNameID(i)
         }
+
+        homeViewModel.companyId.observe(viewLifecycleOwner, Observer {
+            binding.homeAddACTV.setText(homeViewModel.companyWord.value)
+        })
+
+
 
 
         return root

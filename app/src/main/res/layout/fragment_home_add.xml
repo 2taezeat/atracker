@@ -117,13 +117,20 @@
                 android:background="@null"
                 android:textColor="@color/atracker_white"
                 android:theme="@style/MyEditTextTheme"
-
-
-
                 >
 
 
             </AutoCompleteTextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/tmpTV"
+                >
+
+            </TextView>
 
             <View
                 android:layout_width="match_parent"

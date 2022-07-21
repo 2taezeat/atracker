@@ -69,7 +69,6 @@ class HomeCompanySearchAdapter(homeCompanySearchOnclickListener: HomeCompanySear
 
 
         fun bind(companySearchContent: CompanySearchContent) {
-
             homeCompanySearchItemBinding.itemCompanyTitleTV.text = companySearchContent.name
         }
 
@@ -77,7 +76,7 @@ class HomeCompanySearchAdapter(homeCompanySearchOnclickListener: HomeCompanySear
         override fun onClick(view: View?) {
             this.homeCompanySearchOnclickListener?.onClickContainerView(view = view!!,
                 position = bindingAdapterPosition,
-                viewTag = "tmp")
+                viewTag = currentList[bindingAdapterPosition].name)
         }
     }
 }
