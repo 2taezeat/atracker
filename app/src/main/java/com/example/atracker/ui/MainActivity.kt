@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var navDisplayController: NavController
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

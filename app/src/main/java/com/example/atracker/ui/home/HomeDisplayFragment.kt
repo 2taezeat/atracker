@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.ui.MyPageViewModel
 
 class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
@@ -38,6 +40,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     private lateinit var homeMyCurrentStateTotalCircleView : com.example.atracker.utils.MyProgress
 
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private val myPageViewModel: MyPageViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -98,7 +101,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         }
 
 
-
         homeViewModel.homeDisplayArrayList.observe(viewLifecycleOwner, Observer {
             if (it.size == 0) {
                 binding.homeDisplayPleaseWriteTV.visibility = View.VISIBLE
@@ -113,8 +115,18 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             homeProgressAdapter.submitList(it.toMutableList())
         })
 
-
         setProgress(30, 20, 10)
+
+
+
+
+        myPageViewModel.userExperienceType.observe(viewLifecycleOwner, Observer {
+            binding.homeExperienceTypeTV.text = myPageViewModel.userExperienceType.value
+            binding.homeMyTitleTV.text = myPageViewModel.userJobPosition.value
+            binding.homeMyNickNameTV.text = myPageViewModel.userNickName.value
+        })
+
+
 
 
 

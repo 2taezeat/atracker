@@ -92,8 +92,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/homeMyTitleTV"
-                android:text="신입 UX/UI 디자이너"
+                android:id="@+id/homeExperienceTypeTV"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="12dp"
                 android:textSize="16sp"
@@ -105,11 +104,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/homeExperienceTypeTV"
+                android:id="@+id/homeMyTitleTV"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="6dp"
+                android:textSize="16sp"
+                android:textColor="@color/atracker_gray_1"
+                >
+            </TextView>
+
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeMyTitleTV"
                 android:layout_marginTop="4dp"
                 android:id="@+id/homeMyNickNameTV"
-                android:text="제시카"
+                tools:text="제시카"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:layout_marginStart="12dp"
