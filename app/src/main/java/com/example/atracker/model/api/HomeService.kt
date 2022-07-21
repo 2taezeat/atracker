@@ -15,6 +15,15 @@ interface HomeService {
         ) : retrofit2.Response<CompanySearchResponse>
 
 
+    @POST("/api/v1/company/companies/")
+    suspend fun companyAddPostApi(
+        @Header("Authorization") accessToken : String,
+        @Body companyCreateRequests: List<CreateCompanyRequestItem>,
+    ) : retrofit2.Response<CreateCompanyResponse>
+
+
+
+
     @GET("/api/v1/stage/")
     suspend fun stageGetApi(
         @Header("Authorization") accessToken : String

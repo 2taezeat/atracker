@@ -27,6 +27,18 @@ class RepositoryHome {
         return apiResponse
     }
 
+    suspend fun companyAddPostCall (accessToken : String, createCompanyRequest: List<CreateCompanyRequestItem> ) : retrofit2.Response<CreateCompanyResponse> {
+        val apiResponse = CoroutineScope(Dispatchers.IO).async{
+            homeService.companyAddPostApi(
+                accessToken = accessToken,
+                companyCreateRequests = createCompanyRequest,
+            )
+        }.await()
+
+        return apiResponse
+    }
+
+
 
     suspend fun stageGetCall (accessToken : String ) : retrofit2.Response<StageResponse>{
         val apiResponse = CoroutineScope(Dispatchers.IO).async {
