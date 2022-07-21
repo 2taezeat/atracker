@@ -52,9 +52,8 @@ class HomeAddFragment : Fragment() {
         arrayListOf<Int>()
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
+    lateinit var homeCompanySearchFragment: HomeCompanySearchFragment
+
 
 
 
@@ -89,6 +88,7 @@ class HomeAddFragment : Fragment() {
         val root: View = binding.root
         binding.homeVM = homeViewModel
         var spinnerSelectedPosition : Int = -1
+        homeCompanySearchFragment = HomeCompanySearchFragment()
 
 
         Log.d("HomeAddFragment", "${args.progressIndex}")
@@ -321,10 +321,12 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddACTV.setOnFocusChangeListener { view, isFocuse ->
-            if (isFocuse)
+            if (isFocuse) {
                 binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
-            else
+                homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
+            } else {
                 binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
+            }
         }
 
         binding.homeAddApplyFieldET.setOnFocusChangeListener { view, isFocuse ->
@@ -379,6 +381,12 @@ class HomeAddFragment : Fragment() {
 //        }
 
         ////////////////////////////
+        binding.homeAddACTV.setOnClickListener {
+            homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
+        }
+
+
+
         binding.homeAddACTV.setOnItemClickListener { adapterView, view, i, l ->
             Log.d("tmp123123", "${adapterView}, ${view}, ${i}, ${l}")
             homeViewModel.setCompanyNameID(i)

@@ -45,7 +45,7 @@ class MyPageViewModel : ViewModel() {
 
     fun getMyPage() {
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjgiLCJpYXQiOjE2NTgzOTE4MDksImV4cCI6MTY1ODM5NTQwOX0.EB-gItIIIYteLiqnSqAIy4xtoDLUIoomSjXSfg_uAmk")
+            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiMjkiLCJpYXQiOjE2NTgzOTU0NjUsImV4cCI6MTY1ODM5OTA2NX0.eRqLyqqdmJee_dFHQkYlarh8eRKUmGno9NiotOf7wRI")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()

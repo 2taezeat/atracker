@@ -104,7 +104,8 @@ class HomeDetailFragment : Fragment() {
 
 
         binding.homeDetailMoreIV.setOnClickListener {
-            HomeBottomSheetFragment(args.progressIndex).show(parentFragmentManager, HomeBottomSheetFragment(args.progressIndex).tag)
+            val homeBottomSheetFragment = HomeBottomSheetFragment(args.progressIndex)
+            homeBottomSheetFragment.show(parentFragmentManager, homeBottomSheetFragment.tag)
         }
 
         homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
