@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:683196079012:android:104c01a7246dc3712a7f31",
+        "mobilesdk_app_id": "1:683196079012:android:7325f8afc9d8d1af2a7f31",
         "android_client_info": {
           "package_name": "com.example.atracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "683196079012-74rjnrcef5u8sa8qom2ji3hifjm8lt4k.apps.googleusercontent.com",
+          "client_id": "683196079012-bnhch0tcvne80rnfkftiak1dc19kqtnp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.atracker",

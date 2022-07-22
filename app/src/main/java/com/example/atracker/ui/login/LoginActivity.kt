@@ -1,5 +1,6 @@
 package com.example.atracker.ui.login
 
+import android.R.attr
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.gms.tasks.Task
+
+import com.google.android.gms.tasks.OnCompleteListener
+import android.R.attr.data
+import com.google.android.gms.common.Scopes
+import com.google.android.gms.common.api.Scope
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -40,8 +48,16 @@ class LoginActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
 
 
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+           // .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            //.requestIdToken("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
+            .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+            .requestServerAuthCode("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
@@ -66,23 +82,51 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+        ///////////
+//        GoogleSignIn.silentSignIn()
+//            .addOnCompleteListener(
+//                this,
+//                OnCompleteListener<GoogleSignInAccount?> { task -> handleSignInResult(task) })
+
+
+    }
+
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            val authCode = account.serverAuthCode
+
+            val idToken = account.idToken
+            Log.d("google_login_id","${idToken}, ${authCode}")
+
+            // TODO(developer): send ID Token to server and validate
+            //updateUI(account)
+        } catch (e: ApiException) {
+            Log.w("google_login", "handleSignInResult:error", e)
+            //updateUI(null)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RC_SIGN_IN) {
+//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+////            val account = task.getResult(ApiException::class.java)
+////            firebaseAuthWithGoogle(account)
+
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            val account = task.getResult(ApiException::class.java)
-//            firebaseAuthWithGoogle(account)
+            handleSignInResult(task)
 
-            try {
-                val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account)
 
-            } catch (e: ApiException) {
-                Log.d("loginError", "${e}")
-            }
+//            try {
+//                val account = task.getResult(ApiException::class.java)
+//                firebaseAuthWithGoogle(account)
+//
+//            } catch (e: ApiException) {
+//                Log.d("loginError", "${e}")
+//            }
 
         }
     }
