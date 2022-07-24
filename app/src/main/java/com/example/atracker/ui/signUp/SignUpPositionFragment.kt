@@ -70,6 +70,9 @@ class SignUpPositionFragment : Fragment() {
         }
 
         binding.signUpPositionNext.setOnClickListener { view ->
+            signUpViewModel.postSign()
+
+
             view.findNavController().navigate(R.id.action_navigation_sign_up_position_to_navigation_sign_up_complete)
         }
 

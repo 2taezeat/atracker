@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_login_atracker_image"
+            android:src="@drawable/atracker_logo_final_png"
             android:layout_marginTop="230dp"
             android:id="@+id/loginIconIV"
             >
@@ -84,9 +84,9 @@
             >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/google_logo_png"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/google_logo_final"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/loginButton"
@@ -106,7 +106,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintHorizontal_bias="0.55"
                 android:textColor="@color/atracker_white"
                 android:textSize="16sp"
                 >

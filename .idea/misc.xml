@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.375" />
         <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar_indicator_material.xml" value="0.3658119658119658" />
+        <entry key="app/src/main/res/drawable/_123.xml" value="0.375" />
         <entry key="app/src/main/res/drawable/background_color_chip_state_list.xml" value="0.2706140350877193" />
         <entry key="app/src/main/res/drawable/bottom_navigation_item_background.xml" value="0.1111111111111111" />
         <entry key="app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.1111111111111111" />
@@ -37,6 +38,7 @@
         <entry key="app/src/main/res/drawable/example_3_today_bg2.xml" value="0.2826839826839827" />
         <entry key="app/src/main/res/drawable/example_3_today_bg3.xml" value="0.2826839826839827" />
         <entry key="app/src/main/res/drawable/example_3_today_bg_2.xml" value="0.29780701754385963" />
+        <entry key="app/src/main/res/drawable/google_logo_final.xml" value="0.375" />
         <entry key="app/src/main/res/drawable/home_progress_grey.xml" value="0.28717948717948716" />
         <entry key="app/src/main/res/drawable/ic_back_icon_raw.xml" value="0.35219298245614034" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.3658119658119658" />
@@ -73,10 +75,10 @@
         <entry key="app/src/main/res/drawable/tmp3.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/unselected_chip.xml" value="0.4818181818181818" />
         <entry key="app/src/main/res/font/font.xml" value="0.31842105263157894" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.39085714285714285" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.3162280701754386" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.16354166666666667" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_webview_modal.xml" value="0.2929824561403509" />
         <entry key="app/src/main/res/layout/bottom_sheet_persistent.xml" value="0.31798245614035087" />
         <entry key="app/src/main/res/layout/calendar_day_legend.xml" value="0.45" />
@@ -101,7 +103,7 @@
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
-        <entry key="app/src/main/res/layout/fragment_sign_up_complete.xml" value="0.3864035087719298" />
+        <entry key="app/src/main/res/layout/fragment_sign_up_complete.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_sign_up_nick_name.xml" value="0.36140350877192984" />
         <entry key="app/src/main/res/layout/fragment_sign_up_position.xml" value="0.37456140350877193" />
         <entry key="app/src/main/res/layout/fragment_sign_up_terms.xml" value="0.335" />
