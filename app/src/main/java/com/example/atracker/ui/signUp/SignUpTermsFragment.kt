@@ -1,10 +1,13 @@
 package com.example.atracker.ui.signUp
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -67,11 +70,38 @@ class SignUpTermsFragment : Fragment() {
 
         binding.signUpTermsServiceCheckBox.setOnCheckedChangeListener { compoundButton, b ->
             ChangeUIState(lazyContext).viewEnable(binding.signUpTermsNext, b, binding.signUpTermsPrivacyCheckBox.isChecked )
+            if (!b)
+                binding.signUpTermsTotalCheckBox.isChecked = false
         }
 
         binding.signUpTermsPrivacyCheckBox.setOnCheckedChangeListener { compoundButton, b ->
             ChangeUIState(lazyContext).viewEnable(binding.signUpTermsNext, binding.signUpTermsServiceCheckBox.isChecked, b )
+            if (!b)
+                binding.signUpTermsTotalCheckBox.isChecked = false
         }
+
+        binding.signUpTermsMarketingCheckBox.setOnCheckedChangeListener { compoundButton, b ->
+            if (!b)
+                binding.signUpTermsTotalCheckBox.isChecked = false
+        }
+
+
+//        binding.signUpTermsServiceIV.setOnClickListener {
+//            val dialogView: View = layoutInflater.inflate(R.layout.activity_webview_modal, null)
+//            val termsOfServiceURL = "https://sites.google.com/view/mateprivacyterms"
+//            dialogView.termsWebView.apply {
+//                webViewClient = WebViewClient()
+//                settings.builtInZoomControls = true
+//                settings.javaScriptEnabled = true
+//                settings.cacheMode = WebSettings.LOAD_DEFAULT
+//            }
+//
+//            dialogView.termsWebView.loadUrl(termsOfServiceURL)
+//            val builder: AlertDialog.Builder = AlertDialog.Builder(lazyContext)
+//            builder.setView(dialogView)
+//            val alertDialog: AlertDialog = builder.create()
+//            alertDialog.show()
+//        }
 
 
 
