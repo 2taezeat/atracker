@@ -34,9 +34,9 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private val RC_SIGN_IN = 9001
+    private val RC_SIGN_IN = 1001
     private var googleSignInClient : GoogleSignInClient? = null
-    private var firebaseAuth : FirebaseAuth? = null
+    //private var firebaseAuth : FirebaseAuth? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,19 +55,22 @@ class LoginActivity : AppCompatActivity() {
            // .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            //.requestIdToken("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
+            .requestIdToken("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
             .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+            //.requestScopes(Scope(Scopes.EMAIL))
             .requestServerAuthCode("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
+            //.requestServerAuthCode("683196079012-c7qhe8vef6i4a3ml09ttj3gvaa2fdhri.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
-
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        firebaseAuth = FirebaseAuth.getInstance()
+        //firebaseAuth = FirebaseAuth.getInstance()
 
         binding.loginGoogleButton.setOnClickListener {
             val signInIntent = googleSignInClient?.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
+            Log.d("asd", "${gso.serverClientId}")
+            Log.d("asd2", "${gso.isIdTokenRequested}")
         }
 
 
@@ -96,11 +99,14 @@ class LoginActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             val authCode = account.serverAuthCode
-
             val idToken = account.idToken
             Log.d("google_login_id","${idToken}, ${authCode}")
 
-            // TODO(developer): send ID Token to server and validate
+            // todo
+            val intent = Intent(this, SignUpActivity::class.java)
+            ContextCompat.startActivity(this, intent, null)
+
+
             //updateUI(account)
         } catch (e: ApiException) {
             Log.w("google_login", "handleSignInResult:error", e)
@@ -131,24 +137,24 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        firebaseAuth!!.signInWithCredential(credential)
-            .addOnCompleteListener(this){
-                if (it.isSuccessful) {
-                    val user = firebaseAuth?.currentUser
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    startMain()
-
-                    val email = user?.email
-
-                } else {
-                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-    }
+//    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+//        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+//        firebaseAuth!!.signInWithCredential(credential)
+//            .addOnCompleteListener(this){
+//                if (it.isSuccessful) {
+//                    val user = firebaseAuth?.currentUser
+//                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+//                    startMain()
+//
+//                    val email = user?.email
+//
+//                } else {
+//                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+//                }
+//
+//            }
+//
+//    }
 
 
     private fun startMain() {

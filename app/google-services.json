@@ -7,23 +7,19 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:683196079012:android:7325f8afc9d8d1af2a7f31",
+        "mobilesdk_app_id": "1:683196079012:android:d8e2d8c4efa1be5d2a7f31",
         "android_client_info": {
           "package_name": "com.example.atracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "683196079012-bnhch0tcvne80rnfkftiak1dc19kqtnp.apps.googleusercontent.com",
+          "client_id": "683196079012-73ujl1qv3j4119366telddpf7lsahvga.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.atracker",
             "certificate_hash": "f116525157fb7accd046085751ea5f9560c2bfdb"
           }
-        },
-        {
-          "client_id": "683196079012-692ppsecp3hp9ep7j5gad9fa14d4agvl.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -33,12 +29,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "683196079012-692ppsecp3hp9ep7j5gad9fa14d4agvl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
