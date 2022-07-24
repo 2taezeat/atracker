@@ -138,6 +138,7 @@ class HomeAddFragment : Fragment() {
 
                 //view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
                 checkedChipIdList.clear()
+                Log.d("checkNext", "${checkedChipIdList}")
             }
 
         }
@@ -160,15 +161,7 @@ class HomeAddFragment : Fragment() {
             }
         }
 
-        binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            Log.d("checkedChipIdList","${checkedChipIdList}")
-            for (idx in 0 until checkedChipIdList.size) {
-                val checkedChip =
-                    binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
-                checkedChip.checkedIcon = numberDrawableList[idx]
-            }
 
-        }
 
         val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
@@ -224,6 +217,17 @@ class HomeAddFragment : Fragment() {
         binding.homeAddTypeSelect8.setOnCheckedChangeListener { compoundButton, checked ->
             setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect8)
         }
+
+
+        binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            Log.d("checkedChipIdList","${checkedChipIdList}")
+            for (idx in 0 until checkedChipIdList.size) {
+                val checkedChip =
+                    binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
+                checkedChip.checkedIcon = numberDrawableList[idx]
+            }
+        }
+
 
 
         if (args.progressIndex != 0) { // 편집인 경우
@@ -337,55 +341,12 @@ class HomeAddFragment : Fragment() {
         }
 
 
-//        binding.homeAddACTV.setOnScrollChangeListener(object : View.OnScrollChangeListener{
-//            override fun onScrollChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int) {
-//                Log.d("test2222", "test2222")
-//            }
-//        })
-
-
-        //binding.homeAddACTV.setDropDownBackgroundDrawable(ContextCompat.getDrawable(lazyContext, R.drawable.button_round))
-
-//        binding.homeAddACTV.addTextChangedListener(object : TextWatcher{
-//            override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                //Log.d("qqq_test1111", "${charSequence},${p1},${p2},${p3}")
-//            }
-//
-//            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                Log.d("qqq_test2222", "${charSequence},${p1},${p2},${p3}")
-//                if (charSequence!!.length >= 2) {
-//                    homeViewModel.getCompanyTitle(charSequence.toString())
-//                }
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                Log.d("qqq_test3333", "${p0}")
-//            }
-//        })
-
-//        homeViewModel.companyList.observe(viewLifecycleOwner, Observer {
-//
-//            val companyNameList = homeViewModel.companyList.value!!.map { it.name}
-//
-//            Log.d("companyTitleList", "${it}")
-//            val companyTitleAdapter = ArrayAdapter<String>(lazyContext,R.layout.item_auto_complete_text_view, companyNameList.toTypedArray())
-//
-//            binding.homeAddACTV.setAdapter(companyTitleAdapter)
-//            binding.homeAddACTV.showDropDown()
-//        })
-
-
-        ////////////////////////////
         binding.homeAddACTV.setOnClickListener {
             homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
         }
 
 
 
-//        binding.homeAddACTV.setOnItemClickListener { adapterView, view, i, l ->
-//            Log.d("tmp123123", "${adapterView}, ${view}, ${i}, ${l}")
-//            homeViewModel.setCompanyNameID(i)
-//        }
 
         homeViewModel.companyId.observe(viewLifecycleOwner, Observer {
             binding.homeAddACTV.setText(homeViewModel.companyWord.value)
@@ -397,6 +358,8 @@ class HomeAddFragment : Fragment() {
         return root
     }
 
+
+
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
         if (checkedChipIdList.size >= 7 && checked) {
             showAlert(AlertType.TYPE8)
@@ -404,7 +367,7 @@ class HomeAddFragment : Fragment() {
             binding.homeAddRefreshIV.callOnClick()
             chip.isCheckable = true
         }
-        Log.d("count123123", "${count}")
+        Log.d("count123123", "${checkedChipIdList}")
 
         if (checked) {
             checkedChipIdList.add(compoundButton.id)

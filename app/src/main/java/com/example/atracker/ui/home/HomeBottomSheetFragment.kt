@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.atracker.R
-import com.example.atracker.databinding.FragmentCalendarBottomBinding
 import com.example.atracker.databinding.FragmentHomeBottomSheetBinding
 import com.example.atracker.ui.AlertDialogFragment
 import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
-import com.example.atracker.ui.calendar.CalendarViewModel
 import com.example.atracker.utils.AlertType
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -88,11 +85,16 @@ class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment()
                     when (alertType) {
                         AlertType.TYPE13 -> {
                             homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
-                                homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
 
-                                val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
-                                dismiss()
-                                navController.popBackStack()
+                                if (it == true) {
+                                    homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+
+                                    val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+                                    dismiss()
+                                    navController.popBackStack()
+
+                                    homeViewModel.switchFlagNull()
+                                }
                             })
                         }
                     }
@@ -101,6 +103,7 @@ class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment()
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE12 -> {
+                            Log.d("asdasd", "${progressIndex}, ${homeViewModel.homeDisplayArrayList.value}")
                             val applyId = homeViewModel.homeDisplayArrayList.value!![progressIndex!!].applyId
                             val deleteIds = arrayOf(applyId)
                             homeViewModel.deleteApply(deleteIds)

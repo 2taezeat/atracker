@@ -169,13 +169,16 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             //homeViewModel.postApply()
 
             homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
-                Log.d("postApplyFlag11" , "${homeViewModel.postApplyFlag.value}")
+                if (it == true){
+                    homeViewModel.clearHomeAddText()
+                    homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
 
-                homeViewModel.clearHomeAddText()
-                homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+                    view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+                    parentActivity.mainBottomNavigationAppear()
 
-                view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
-                parentActivity.mainBottomNavigationAppear()
+                    homeViewModel.switchFlagNull()
+                }
+
             })
         }
 
