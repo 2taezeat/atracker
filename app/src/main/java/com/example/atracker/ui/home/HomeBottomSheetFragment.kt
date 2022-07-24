@@ -20,11 +20,12 @@ import com.example.atracker.utils.AlertType
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment() {
+class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : BottomSheetDialogFragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentHomeBottomSheetBinding? = null
     private val binding get() = _binding!!
     private var progressIndex: Int? = null
+    private var displayListPosition: Int? = null
     private val parentActivity by lazy {
         activity as MainActivity
     }
@@ -32,6 +33,7 @@ class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment()
 
     init {
         this.progressIndex = progressIndex
+        this.displayListPosition = displayListPosition
     }
 
 
@@ -103,8 +105,7 @@ class HomeBottomSheetFragment(progressIndex : Int) : BottomSheetDialogFragment()
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE12 -> {
-                            Log.d("asdasd", "${progressIndex}, ${homeViewModel.homeDisplayArrayList.value}")
-                            val applyId = homeViewModel.homeDisplayArrayList.value!![progressIndex!!].applyId
+                            val applyId = homeViewModel.homeDisplayArrayList.value!![displayListPosition!!].applyId
                             val deleteIds = arrayOf(applyId)
                             homeViewModel.deleteApply(deleteIds)
 

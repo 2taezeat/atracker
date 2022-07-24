@@ -98,13 +98,12 @@ class HomeDetailFragment : Fragment() {
         }
 
 
-
         val bgProgress = ProgressBarDrawable( lazyContext,homeProgress.totalProgress,homeProgress.myProgress, true)
         binding.homeDetailProgressView.progressDrawable = bgProgress
 
 
         binding.homeDetailMoreIV.setOnClickListener {
-            val homeBottomSheetFragment = HomeBottomSheetFragment(args.progressIndex)
+            val homeBottomSheetFragment = HomeBottomSheetFragment(args.progressIndex, args.displayListPosition)
             homeBottomSheetFragment.show(parentFragmentManager, homeBottomSheetFragment.tag)
         }
 
