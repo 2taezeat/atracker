@@ -1,6 +1,7 @@
 package com.example.atracker.ui.home
 
 import android.content.DialogInterface
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,6 +12,11 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.atracker.databinding.FragmentHomeAddDateBinding
+import java.util.*
+import java.util.Locale
+
+
+
 
 class HomeAddDateFragment(position : Int) : DialogFragment() {
 
@@ -39,7 +45,7 @@ class HomeAddDateFragment(position : Int) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         _binding = FragmentHomeAddDateBinding.inflate(inflater, container, false)
@@ -50,6 +56,8 @@ class HomeAddDateFragment(position : Int) : DialogFragment() {
         val root: View = binding.root
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+
+
 
         binding.eventCreateButton1.setOnClickListener {
             dismiss()

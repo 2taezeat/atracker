@@ -1,5 +1,6 @@
 package com.example.atracker.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.atracker.R
 import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.ui.calendar.CalendarViewModel
 import com.example.atracker.ui.home.HomeViewModel
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +40,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
+
+        //datapicker 한글화
+        val locale = Locale.KOREA
+        Locale.setDefault(locale)
+        val config: Configuration = baseContext.resources.configuration
+        config.setLocale(locale)
+        createConfigurationContext(config)
 
 
         val navView: BottomNavigationView = binding.navView
