@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
+import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.CheckBox
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -86,22 +88,13 @@ class SignUpTermsFragment : Fragment() {
         }
 
 
-//        binding.signUpTermsServiceIV.setOnClickListener {
-//            val dialogView: View = layoutInflater.inflate(R.layout.activity_webview_modal, null)
-//            val termsOfServiceURL = "https://sites.google.com/view/mateprivacyterms"
-//            dialogView.termsWebView.apply {
-//                webViewClient = WebViewClient()
-//                settings.builtInZoomControls = true
-//                settings.javaScriptEnabled = true
-//                settings.cacheMode = WebSettings.LOAD_DEFAULT
-//            }
-//
-//            dialogView.termsWebView.loadUrl(termsOfServiceURL)
-//            val builder: AlertDialog.Builder = AlertDialog.Builder(lazyContext)
-//            builder.setView(dialogView)
-//            val alertDialog: AlertDialog = builder.create()
-//            alertDialog.show()
-//        }
+        binding.signUpTermsServiceIV.setOnClickListener {
+            showWebViewDialog("https://atracker-web.netlify.app/terms/user", getString(R.string.terms_service_confirm_title), binding.signUpTermsServiceCheckBox)
+        }
+
+        binding.signUpTermsPrivacyIV.setOnClickListener {
+            showWebViewDialog("https://atracker-web.netlify.app/terms", getString(R.string.terms_privacy_title), binding.signUpTermsPrivacyCheckBox)
+        }
 
 
 
@@ -116,4 +109,36 @@ class SignUpTermsFragment : Fragment() {
         parentActivity.finish()
     }
 
+
+    private fun showWebViewDialog(url: String?, headTitle : String, checkBox: CheckBox) {
+        val webView = WebView(lazyContext).apply {
+            loadUrl(url!!)
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                    view!!.loadUrl(url!!)
+                    return true
+                }
+            }.apply {
+                settings.javaScriptEnabled = true
+                settings.cacheMode = WebSettings.LOAD_DEFAULT
+            }
+        }
+        val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(lazyContext, R.style.AppCompatAlertDialog)
+        alertDialogBuilder.apply {
+            setTitle(headTitle)
+            setView(webView)
+            setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+                checkBox.isChecked = false
+            }
+            setPositiveButton("동의") { dialog, _ ->
+                dialog.dismiss()
+                checkBox.isChecked = true
+            }
+            show()
+        }
+
+
+
+    }
 }
