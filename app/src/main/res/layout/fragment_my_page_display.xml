@@ -328,7 +328,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginBottom="24dp"
-                android:src="@drawable/ic_login_atracker_image"
+                android:src="@drawable/atracker_logo_final_png"
                 >
 
 

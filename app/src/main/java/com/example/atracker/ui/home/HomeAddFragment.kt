@@ -132,9 +132,7 @@ class HomeAddFragment : Fragment() {
 
                 for (idx in posList.indices) {
                     val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(posList[idx])
-
                     checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
-
                     val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
                     checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
                 }
