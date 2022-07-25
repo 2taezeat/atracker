@@ -356,6 +356,25 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 }
             }
 
+            AlertType.TYPE14 -> {
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+
+
+                binding.alertDialogTV1.visibility = View.INVISIBLE
+                binding.alertDialogTV2.visibility = View.INVISIBLE
+                binding.alertDialogTV3.text = "다시 한번 시도 해주세요!"
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+            }
+
 
 
         }

@@ -28,6 +28,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
+import com.example.atracker.utils.ApiExceptionUtil
 import com.example.atracker.utils.ChangeUIState
 
 
@@ -105,6 +106,27 @@ class HomeAddFragment : Fragment() {
             binding.homeAddTypeSelect8,
         )
 
+//        ApiExceptionUtil.apiExceptionFlag.observe(this, androidx.lifecycle.Observer {
+//            it.getContentIfNotHandled()?.let { boolean ->
+//                if (boolean) {
+//                    showAlert(AlertType.TYPE14, null)
+//                    binding.homeAddBackButton.callOnClick()
+//                }
+//            }
+//        })
+
+        binding.homeAddBackButton.setOnClickListener { view ->
+            parentActivity.mainBottomNavigationAppear()
+            val navController = view.findNavController()
+            navController.popBackStack()
+            homeViewModel.clearHomeAddText()
+        }
+
+
+        if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){ // api 예외 처리
+            parentActivity.mainBottomNavigationAppear()
+            parentActivity.onBackPressed()
+        }
 
 
 
@@ -162,14 +184,6 @@ class HomeAddFragment : Fragment() {
 
         }
 
-
-        binding.homeAddBackButton.setOnClickListener { view ->
-            parentActivity.mainBottomNavigationAppear()
-            val navController = view.findNavController()
-            navController.popBackStack()
-            homeViewModel.clearHomeAddText()
-
-        }
 
 
         binding.homeAddRefreshIV.setOnClickListener {

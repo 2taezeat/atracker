@@ -18,4 +18,6 @@ enum class AlertType {
     TYPE12, // homeBottom
     TYPE13, // homeBottom
 
+    TYPE14 // api Exception
+
 }

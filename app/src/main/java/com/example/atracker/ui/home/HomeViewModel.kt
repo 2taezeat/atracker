@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
+import com.example.atracker.utils.ApiExceptionUtil
 import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -282,6 +283,7 @@ class HomeViewModel : ViewModel() {
 
 
             } else {
+                ApiExceptionUtil._apiExceptionFlag.value = Event(true)
 
             }
         }
@@ -312,18 +314,15 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDIiLCJpYXQiOjE2NTg3MzM5MjQsImV4cCI6MTY1ODczNzUyNH0.fnkqXpBHnR9mM7z55MlWcus-lF6Q_oP7HNIT0zKaoJg")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 Log.d("getResult", "${getResult}")
                 _homeAddStagesContent.value = getResult
-
-                for (sc in getResult){
-                    //_map.value!![sc.id] = false
-                    //_tmp2.value!!.add()
-                }
-
+            } else {
+                _homeAddStagesContent.value = listOf()
+                //ApiExceptionUtil._apiExceptionFlag.value = Event(true)
             }
 
         }
@@ -585,12 +584,10 @@ class HomeViewModel : ViewModel() {
         _homeProgressNameWrite.value = ori
     }
 
+
     fun clearCompanyValue(){
         _companyWord.value = ""
         _companyId.value = 0
-
     }
-
-
 
 }

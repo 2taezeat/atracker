@@ -2,6 +2,7 @@ package com.example.atracker.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,6 +16,8 @@ import com.example.atracker.R
 import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.ui.calendar.CalendarViewModel
 import com.example.atracker.ui.home.HomeViewModel
+import com.example.atracker.utils.AlertType
+import com.example.atracker.utils.ApiExceptionUtil
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -68,15 +71,31 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navDisplayController)
 
 
+//        ApiExceptionUtil.apiExceptionFlag.observe(this, androidx.lifecycle.Observer {
+//            it.getContentIfNotHandled()?.let { boolean ->
+//                if (boolean) {
+//                    showAlert(AlertType.TYPE14)
+//                }
+//            }
+//        })
+
+
+
         homeViewModel.getStage()
         myPageViewModel.getMyPage()
         homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
-
 
     }
 
 
     override fun onBackPressed() {
+
+        if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){
+            showAlert(AlertType.TYPE14)
+        }
+
+
+
         navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_blog -> {
@@ -118,6 +137,25 @@ class MainActivity : AppCompatActivity() {
         val lp = binding.navHostFragmentActivityMain.layoutParams
         lp.height = 0
         binding.navHostFragmentActivityMain.layoutParams = lp
+    }
+
+    private fun showAlert(alertType: AlertType ){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+
+                override fun onCenterClick() {
+
+                }
+
+                override fun onRightClick() {
+                }
+            },
+            alertType,
+            null
+        )
+        alertDialogFragment.show(supportFragmentManager, AlertDialogFragment.TAG)
     }
 
 
