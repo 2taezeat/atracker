@@ -2,7 +2,6 @@ package com.example.atracker.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,7 +16,6 @@ import com.example.atracker.databinding.ActivityMainBinding
 import com.example.atracker.ui.calendar.CalendarViewModel
 import com.example.atracker.ui.home.HomeViewModel
 import com.example.atracker.utils.AlertType
-import com.example.atracker.utils.ApiExceptionUtil
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     lateinit var navDisplayController: NavController
+    lateinit var alertDialogFragment : AlertDialogFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +63,22 @@ class MainActivity : AppCompatActivity() {
         navDisplayController.navigate(R.id.navigation_home)
         navView.setupWithNavController(navDisplayController)
 
+        alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+
+                override fun onCenterClick() {
+
+                }
+
+                override fun onRightClick() {
+                }
+            },
+            AlertType.TYPE14,
+            null
+        )
+
 
 //        ApiExceptionUtil.apiExceptionFlag.observe(this, androidx.lifecycle.Observer {
 //            it.getContentIfNotHandled()?.let { boolean ->
@@ -78,8 +93,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_blog -> {
                 }
                 R.id.navigation_home -> {
-                    if (myPageViewModel.userNickName.value == ""){
-                        showAlert(AlertType.TYPE14)
+                    if (myPageViewModel.userNickName.value == "" || homeViewModel.homeAddStagesContent.value!!.isEmpty()){
+                        //showAlert(AlertType.TYPE14)
+                        showAlertInstance(alertDialogFragment)
                     }
 
                 }
@@ -104,12 +120,6 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-
-        if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){
-            showAlert(AlertType.TYPE14)
-        }
-
-
         navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_blog -> {
@@ -153,23 +163,11 @@ class MainActivity : AppCompatActivity() {
         binding.navHostFragmentActivityMain.layoutParams = lp
     }
 
-    private fun showAlert(alertType: AlertType ){
-        val alertDialogFragment = AlertDialogFragment.instance(
-            object : AlertDialogListener {
-                override fun onLeftClick() {
-                }
 
-                override fun onCenterClick() {
-
-                }
-
-                override fun onRightClick() {
-                }
-            },
-            alertType,
-            null
-        )
-        alertDialogFragment.show(supportFragmentManager, AlertDialogFragment.TAG)
+    private fun showAlertInstance(alert : AlertDialogFragment){
+        if (!alert.isAdded) { // fragment already added 처리 해야됨
+            alert.show(supportFragmentManager, AlertDialogFragment.TAG)
+        }
     }
 
 
