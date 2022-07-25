@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import com.example.atracker.R
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
 import com.example.atracker.ui.login.LoginActivity
 import com.example.atracker.ui.signUp.SignUpViewModel
@@ -26,6 +28,9 @@ class MyPageDisplayFragment : Fragment() {
 
     private val lazyContext by lazy {
         requireContext()
+    }
+    private val parentActivity by lazy {
+        activity as MainActivity
     }
 
     private val myPageViewModel: MyPageViewModel by activityViewModels()
@@ -53,12 +58,18 @@ class MyPageDisplayFragment : Fragment() {
             container,
             false)
 
+        if (myPageViewModel.userNickName.value == "") {
+            val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+            navController.navigate(R.id.navigation_home)
+        }
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             //.requestIdToken(getString(com.example.atracker.R.string.default_web_client_id))
             .requestEmail()
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(lazyContext, gso)
+
 
 
         binding.myPageLogoutTV.setOnClickListener {

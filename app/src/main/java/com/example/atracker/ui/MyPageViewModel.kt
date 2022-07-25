@@ -57,6 +57,8 @@ class MyPageViewModel : ViewModel() {
                     ExperienceType.EXPERIENCED.toString() -> _userExperienceType.value = "경력"
                     ExperienceType.NOT_EXPERIENCED.toString() -> _userExperienceType.value = "신입"
                 }
+            } else {
+                _userNickName.value = ""
             }
 
         }

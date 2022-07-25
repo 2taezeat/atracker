@@ -56,18 +56,12 @@ class MainActivity : AppCompatActivity() {
 
         //val navController = findNavController(R.id.navHostFragmentActivityMain)
         navDisplayController = supportFragmentManager.findFragmentById(R.id.navHostFragmentActivityMain)?.findNavController()!!
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
 
 //        val appBarConfiguration = AppBarConfiguration(setOf(
 //            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-
-
         //setupActionBarWithNavController(navController, appBarConfiguration)
 
         navDisplayController.navigate(R.id.navigation_home)
-
         navView.setupWithNavController(navDisplayController)
 
 
@@ -78,6 +72,27 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
 //        })
+
+        navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_blog -> {
+                }
+                R.id.navigation_home -> {
+                    if (myPageViewModel.userNickName.value == ""){
+                        showAlert(AlertType.TYPE14)
+                    }
+
+                }
+                R.id.navigation_calendar -> {
+                }
+                R.id.navigation_home_detail -> {
+                }
+                R.id.navigation_my_page_display -> {
+                }
+                else -> {
+                }
+            }
+        }
 
 
 
@@ -93,7 +108,6 @@ class MainActivity : AppCompatActivity() {
         if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){
             showAlert(AlertType.TYPE14)
         }
-
 
 
         navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
