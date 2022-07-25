@@ -142,7 +142,6 @@ class HomeViewModel : ViewModel() {
     val homeWriteProgressSelectedMap : LiveData<MutableMap<Int, ArrayList<String>>> = _homeWriteProgressSelectedMap
 
 
-
     private val _homeProgressNameDetail = MutableLiveData<Event<ArrayList<String>>>()
 
     val homeProgressNameDetail : LiveData<Event<ArrayList<String>>> = _homeProgressNameDetail
@@ -153,51 +152,44 @@ class HomeViewModel : ViewModel() {
     val homeProgressNameWrite : LiveData<ArrayList<String>> = _homeProgressNameWrite
 
 
-    private val _tmp = MutableLiveData<MutableSet<Int>>()
-    val tmp : LiveData<MutableSet<Int>> = _tmp
+    private val _trueChipSet = MutableLiveData<MutableSet<Int>>()
+    val trueChipSet : LiveData<MutableSet<Int>> = _trueChipSet
 
+    private val _falseChipSet = MutableLiveData<MutableSet<Int>>()
+    val falseChipSet : LiveData<MutableSet<Int>> = _falseChipSet
 
-    private val _tmp2 = MutableLiveData<MutableSet<Int>>()
-
-    val tmp2 : LiveData<MutableSet<Int>> = _tmp2
-
-
-    private val _tmp3 = MutableLiveData<MutableSet<Int>>()
-
-    val tmp3 : LiveData<MutableSet<Int>> = _tmp3
-
+    private val _oriChipSet = MutableLiveData<MutableSet<Int>>()
+    val oriChipSet : LiveData<MutableSet<Int>> = _oriChipSet
 
 
     fun pos(boolean: Boolean, num : Int){
-        val new = _tmp.value!!
-        val new2 = _tmp2.value!!
+        val trueNew = _trueChipSet.value!!
+        val falseNew = _falseChipSet.value!!
 
         if (boolean){
-            new.add(num)
-            new2.remove(num)
+            trueNew.add(num)
+            falseNew.remove(num)
         } else {
-            new.remove(num)
-            new2.add(num)
+            trueNew.remove(num)
+            falseNew.add(num)
         }
 
-        _tmp.value = new
-        _tmp2.value = new2
-        Log.d("tmp_pos", "${_tmp.value}, ${_tmp2.value}")
+        _trueChipSet.value = trueNew
+        _falseChipSet.value = falseNew
+        Log.d("tmp_pos", "${_trueChipSet.value}, ${_falseChipSet.value}")
     }
 
 
-    fun refresh(){
-        val new = mutableSetOf<Int>()
-        _tmp.value = new
-
-        val new3 = _tmp3.value!!.toMutableSet()
-        _tmp2.value = new3!!
-        Log.d("refresh", "${_tmp2.value}, ${_tmp3.value}")
+    fun refreshChip(){
+        _trueChipSet.value = mutableSetOf<Int>()
+        val newOriChip = _oriChipSet.value!!.toMutableSet()
+        _falseChipSet.value = newOriChip
+        Log.d("refresh", "${_falseChipSet.value}, ${_oriChipSet.value}")
     }
 
 
-    fun setId(chipId : Int){
-        _tmp3.value!!.add(chipId)
+    fun setOriChipId(chipId : Int){
+        _oriChipSet.value!!.add(chipId)
     }
 
 
@@ -206,9 +198,9 @@ class HomeViewModel : ViewModel() {
         _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
         workTypeItems.value = listOf("PERMANENT", "TEMPORARY", "INTERN")
         initTimeDateCurrent()
-        _tmp.value = mutableSetOf()
-        _tmp2.value = mutableSetOf()
-        _tmp3.value = mutableSetOf()
+        _trueChipSet.value = mutableSetOf()
+        _falseChipSet.value = mutableSetOf()
+        _oriChipSet.value = mutableSetOf()
     }
 
 
