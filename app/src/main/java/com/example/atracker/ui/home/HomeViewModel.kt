@@ -168,38 +168,6 @@ class HomeViewModel : ViewModel() {
 
 
 
-
-    private val _map = MutableLiveData<MutableMap<Int, Boolean>>().apply {
-
-    }
-
-    val map : LiveData<MutableMap<Int, Boolean>> = _map
-
-
-
-
-    fun asd(boolean: Boolean, num : Int){
-//        val new = _tmp.value!!
-//
-//        if (boolean){
-//            new.add(num)
-//
-//        }else {
-//            new.remove(num)
-//        }
-//
-//        _tmp.value = new
-//        Log.d("tmp", "${_tmp.value}")
-
-
-        val new = _map.value!!
-        new[num] = boolean
-
-        _map.value = new
-        Log.d("tmp", "${_map.value}")
-    }
-
-
     fun pos(boolean: Boolean, num : Int){
         val new = _tmp.value!!
         val new2 = _tmp2.value!!
@@ -207,34 +175,15 @@ class HomeViewModel : ViewModel() {
         if (boolean){
             new.add(num)
             new2.remove(num)
-
         } else {
             new.remove(num)
             new2.add(num)
-
         }
 
         _tmp.value = new
         _tmp2.value = new2
         Log.d("tmp_pos", "${_tmp.value}, ${_tmp2.value}")
     }
-
-
-    fun neg(boolean: Boolean, num : Int){
-        val new = _tmp2.value!!
-
-        if (boolean){
-            new.add(num)
-            _tmp.value!!.remove(num)
-        } else {
-            new.remove(num)
-            _tmp.value!!.add(num)
-        }
-
-        _tmp2.value = new
-        Log.d("tmp_neg", "${_tmp.value}, ${_tmp2.value}")
-    }
-
 
 
     fun refresh(){
@@ -260,7 +209,6 @@ class HomeViewModel : ViewModel() {
         _tmp.value = mutableSetOf()
         _tmp2.value = mutableSetOf()
         _tmp3.value = mutableSetOf()
-        _map.value = mutableMapOf()
     }
 
 

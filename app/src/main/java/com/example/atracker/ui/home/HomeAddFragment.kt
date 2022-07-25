@@ -61,6 +61,8 @@ class HomeAddFragment : Fragment() {
     lateinit var qweqwe : MutableSet<Int>
     lateinit var qweqwe2 : MutableSet<Int>
 
+    lateinit var chipsMap : MutableMap<Int, Chip>
+    lateinit var chipsList : ArrayList<Chip>
 
 
 
@@ -85,6 +87,8 @@ class HomeAddFragment : Fragment() {
             numberDrawable6,
             numberDrawable7,
             )
+
+        chipsMap = mutableMapOf()
     }
 
     override fun onCreateView(
@@ -101,6 +105,18 @@ class HomeAddFragment : Fragment() {
 
         qweqwe = homeViewModel.tmp.value!!
         qweqwe2 = homeViewModel.tmp2.value!!
+
+
+        chipsList = arrayListOf(
+            binding.homeAddTypeSelect1,
+            binding.homeAddTypeSelect2,
+            binding.homeAddTypeSelect3,
+            binding.homeAddTypeSelect4,
+            binding.homeAddTypeSelect5,
+            binding.homeAddTypeSelect6,
+            binding.homeAddTypeSelect7,
+            binding.homeAddTypeSelect8,
+        )
 
 
         binding.homeAddNext.setOnClickListener { view ->
@@ -194,85 +210,55 @@ class HomeAddFragment : Fragment() {
 
         }
 
-
-
         val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
-        binding.homeAddTypeSelect1.text = homeAddStagesName[0].title
-        binding.homeAddTypeSelect2.text = homeAddStagesName[1].title
-        binding.homeAddTypeSelect3.text = homeAddStagesName[2].title
-        binding.homeAddTypeSelect4.text = homeAddStagesName[3].title
-        binding.homeAddTypeSelect5.text = homeAddStagesName[4].title
-        binding.homeAddTypeSelect6.text = homeAddStagesName[5].title
-        binding.homeAddTypeSelect7.text = homeAddStagesName[6].title
-        binding.homeAddTypeSelect8.text = homeAddStagesName[7].title
+        if (!flag) {
+            for (idx in homeAddStagesName.indices) {
+                val h = homeAddStagesName[idx]
+                val c = chipsList[idx]
+                c.text = h.title
+                homeViewModel.setId(c.id)
+                h.id to c
 
-
-//        binding.homeAddTypeSelect1.tag = homeAddStagesName[0].id
-//        binding.homeAddTypeSelect2.tag = homeAddStagesName[1].id
-//        binding.homeAddTypeSelect3.tag = homeAddStagesName[2].id
-//        binding.homeAddTypeSelect4.tag = homeAddStagesName[3].id
-//        binding.homeAddTypeSelect5.tag = homeAddStagesName[4].id
-//        binding.homeAddTypeSelect6.tag = homeAddStagesName[5].id
-//        binding.homeAddTypeSelect7.tag = homeAddStagesName[6].id
-//        binding.homeAddTypeSelect8.tag = homeAddStagesName[7].id
-
-        homeViewModel.setId(binding.homeAddTypeSelect1.id)
-        homeViewModel.setId(binding.homeAddTypeSelect2.id)
-        homeViewModel.setId(binding.homeAddTypeSelect3.id)
-        homeViewModel.setId(binding.homeAddTypeSelect4.id)
-        homeViewModel.setId(binding.homeAddTypeSelect5.id)
-        homeViewModel.setId(binding.homeAddTypeSelect6.id)
-        homeViewModel.setId(binding.homeAddTypeSelect7.id)
-        homeViewModel.setId(binding.homeAddTypeSelect8.id)
-
-
-
-
-        val chipsMap = mapOf<Int, Chip>(
-            homeAddStagesName[0].id to binding.homeAddTypeSelect1,
-            homeAddStagesName[1].id to binding.homeAddTypeSelect2,
-            homeAddStagesName[2].id to binding.homeAddTypeSelect3,
-            homeAddStagesName[3].id to binding.homeAddTypeSelect4,
-            homeAddStagesName[4].id to binding.homeAddTypeSelect5,
-            homeAddStagesName[5].id to binding.homeAddTypeSelect6,
-            homeAddStagesName[6].id to binding.homeAddTypeSelect7,
-            homeAddStagesName[7].id to binding.homeAddTypeSelect8,
-        )
+                c.setOnCheckedChangeListener { compoundButton, checked ->
+                    setOnCheckedChip(compoundButton, checked, c)
+                }
+            }
+        }
 
 
         if (!flag) {
-            binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)
-            }
-
-            binding.homeAddTypeSelect2.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect2)
-            }
-
-            binding.homeAddTypeSelect3.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect3)
-            }
-
-            binding.homeAddTypeSelect4.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect4)
-            }
-
-            binding.homeAddTypeSelect5.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect5)
-            }
-
-            binding.homeAddTypeSelect6.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect6)
-            }
-
-            binding.homeAddTypeSelect7.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect7)
-            }
-
-            binding.homeAddTypeSelect8.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect8)
-            }
+//            binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)
+//            }
+//
+//            binding.homeAddTypeSelect2.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect2)
+//            }
+//
+//            binding.homeAddTypeSelect3.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect3)
+//            }
+//
+//            binding.homeAddTypeSelect4.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect4)
+//            }
+//
+//            binding.homeAddTypeSelect5.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect5)
+//            }
+//
+//            binding.homeAddTypeSelect6.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect6)
+//            }
+//
+//            binding.homeAddTypeSelect7.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect7)
+//            }
+//
+//            binding.homeAddTypeSelect8.setOnCheckedChangeListener { compoundButton, checked ->
+//                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect8)
+//            }
         }
 
 
