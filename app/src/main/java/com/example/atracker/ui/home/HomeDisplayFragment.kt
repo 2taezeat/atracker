@@ -14,8 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeDisplayBinding
+import com.example.atracker.ui.AlertDialogFragment
+import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.MyPageViewModel
+import com.example.atracker.utils.AlertType
 
 class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
@@ -35,6 +38,9 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
     private val lazyContext by lazy {
         requireContext()
     }
+
+    lateinit var alertDialogFragment : AlertDialogFragment
+
 
 
     private lateinit var homeMyCurrentStateTotalCircleView : com.example.atracker.utils.MyProgress
@@ -58,7 +64,18 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
-
+        alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+                override fun onCenterClick() {
+                }
+                override fun onRightClick() {
+                }
+            },
+            AlertType.TYPE14,
+            null
+        )
 
 
 
@@ -159,12 +176,17 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         val applyId = homeViewModel.homeDisplayArrayList.value!![position].applyId
 
         homeViewModel.getApplyDetail(applyIds = arrayOf(applyId), includeContent = true)
-
         homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
-            val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
-                progressIndex = applyId,
-                displayListPosition = position)
-            findNavController().navigate(action)
+
+            if (it.apply_id != -1) {
+                val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
+                    progressIndex = applyId,
+                    displayListPosition = position)
+                findNavController().navigate(action)
+            } else {
+                parentActivity.showAlertInstance(alertDialogFragment)
+            }
+
         })
 
 

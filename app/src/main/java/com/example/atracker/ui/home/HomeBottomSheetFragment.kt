@@ -71,6 +71,15 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
             showAlert(AlertType.TYPE12)
         }
 
+        homeViewModel.deleteApplyFail.observe(viewLifecycleOwner, Observer {
+            Log.d("test123", "test123")
+            if (it == true) {
+                val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+                dismiss()
+                //homeViewModel.switchFlagNull(homeViewModel._postApplyFlag)
+            }
+        })
+
 
 
         return binding.root
@@ -95,7 +104,7 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
                                     dismiss()
                                     navController.popBackStack()
 
-                                    homeViewModel.switchFlagNull()
+                                    homeViewModel.switchFlagNull(homeViewModel._postApplyFlag)
                                 }
                             })
                         }

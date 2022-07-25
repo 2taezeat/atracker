@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             null
         )
 
-
 //        ApiExceptionUtil.apiExceptionFlag.observe(this, androidx.lifecycle.Observer {
 //            it.getContentIfNotHandled()?.let { boolean ->
 //                if (boolean) {
@@ -88,13 +87,14 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
 
+
         navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_blog -> {
                 }
                 R.id.navigation_home -> {
-                    if (myPageViewModel.userNickName.value == "" || homeViewModel.homeAddStagesContent.value!!.isEmpty()){
-                        //showAlert(AlertType.TYPE14)
+
+                    if ( checkApiException() ){
                         showAlertInstance(alertDialogFragment)
                     }
 
@@ -109,8 +109,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-
 
         homeViewModel.getStage()
         myPageViewModel.getMyPage()
@@ -164,10 +162,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun showAlertInstance(alert : AlertDialogFragment){
+    fun showAlertInstance(alert : AlertDialogFragment){
         if (!alert.isAdded) { // fragment already added 처리 해야됨
             alert.show(supportFragmentManager, AlertDialogFragment.TAG)
         }
+    }
+
+    private fun checkApiException() : Boolean{
+        //return myPageViewModel.userNickName.value == "" || homeViewModel.homeAddStagesContent.value!!.isEmpty() || homeViewModel.homeApplyIdContent.value!!.apply_id == -1
+        return myPageViewModel.userNickName.value == "" || homeViewModel.homeAddStagesContent.value!!.isEmpty()
     }
 
 

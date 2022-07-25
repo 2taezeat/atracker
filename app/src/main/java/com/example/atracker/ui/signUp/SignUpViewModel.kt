@@ -1,21 +1,12 @@
 package com.example.atracker.ui.signUp
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.atracker.model.dto.CalendarEvent
-import com.example.atracker.model.dto.ExperienceType
 import com.example.atracker.model.dto.SignRequest
 import com.example.atracker.model.repository.RepositoryLogin
-import com.example.atracker.model.repository.RepositoryMyPage
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZonedDateTime
-import java.util.*
 
 class SignUpViewModel : ViewModel() {
 
@@ -48,9 +39,9 @@ class SignUpViewModel : ViewModel() {
 
 
 
+
     fun setUserCareerPosition(position : Int) {
         _signUpCareer.value = careerAgeItems.value!![position]
-
     }
 
 
@@ -67,6 +58,8 @@ class SignUpViewModel : ViewModel() {
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()
+
+            } else {
 
             }
 

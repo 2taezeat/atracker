@@ -60,6 +60,19 @@ class HomeDetailFragment : Fragment() {
         homeDetailTabLayout = binding.homeDetailTabLayout
 
 
+//        if (homeViewModel.homeApplyIdContent.value!!.apply_id == -1) {
+//            Log.d("test222", "test222")
+//            parentActivity.onBackPressed()
+//        }
+//
+////        homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
+////            Log.d("test222", "test222")
+////            if (it.apply_id == -1) {
+////                parentActivity.onBackPressed()
+////            }
+////        })
+
+
         homeViewModel.homeProgressNameDetail.observe(viewLifecycleOwner, Observer {
             val ori = it.getContentIfNotHandled()
             if (ori != null) {
@@ -124,7 +137,11 @@ class HomeDetailFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         Log.d("HomeDetailFragment","onStop")
-        progressNameList = homeViewModel.homeProgressNameWrite.value!!
+
+        if (homeViewModel.homeApplyIdContent.value!!.apply_id != -1) {
+            progressNameList = homeViewModel.homeProgressNameWrite.value!!
+        }
+
 
     }
 
