@@ -184,7 +184,6 @@ class HomeViewModel : ViewModel() {
         _trueChipSet.value = mutableSetOf<Int>()
         val newOriChip = _oriChipSet.value!!.toMutableSet()
         _falseChipSet.value = newOriChip
-        Log.d("refresh", "${_falseChipSet.value}, ${_oriChipSet.value}")
     }
 
 
@@ -537,6 +536,9 @@ class HomeViewModel : ViewModel() {
         _positionWord.value = ""
         _companyWord.value = ""
         _companyList.value = listOf()
+
+        _trueChipSet.value = mutableSetOf()
+        _falseChipSet.value = mutableSetOf()
     }
 
     fun setHomeEdit(){
