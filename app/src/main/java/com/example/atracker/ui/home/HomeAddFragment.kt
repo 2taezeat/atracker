@@ -3,9 +3,12 @@ package com.example.atracker.ui.home
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -25,6 +28,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
+import com.example.atracker.utils.ChangeUIState
 
 
 class HomeAddFragment : Fragment() {
@@ -100,6 +104,8 @@ class HomeAddFragment : Fragment() {
             binding.homeAddTypeSelect7,
             binding.homeAddTypeSelect8,
         )
+
+
 
 
         binding.homeAddNext.setOnClickListener { view ->
@@ -279,14 +285,16 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        binding.homeAddACTV.setOnFocusChangeListener { view, isFocuse ->
-            if (isFocuse) {
-                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
-                homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
-            } else {
-                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
-            }
-        }
+//        binding.homeAddACTV.setOnFocusChangeListener { view, isFocuse ->
+//            if (isFocuse) {
+//                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
+//                homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
+//            } else {
+//                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
+//                homeCompanySearchFragment.dialog!!.dismiss()
+//            }
+//        }
+
 
         binding.homeAddApplyFieldET.setOnFocusChangeListener { view, isFocuse ->
             if (isFocuse)
@@ -298,12 +306,15 @@ class HomeAddFragment : Fragment() {
 
         binding.homeAddACTV.setOnClickListener {
             homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
+            binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
         }
+
+
+
 
         homeViewModel.companyId.observe(viewLifecycleOwner, Observer {
             binding.homeAddACTV.setText(homeViewModel.companyWord.value)
         })
-
 
 
         homeViewModel.trueChipSet.observe(viewLifecycleOwner, Observer {
@@ -368,6 +379,12 @@ class HomeAddFragment : Fragment() {
         )
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
+
+
+    fun setViewGray(){
+        binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
+    }
+
 
 
 }

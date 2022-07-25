@@ -1,5 +1,6 @@
 package com.example.atracker.ui.home
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -73,6 +74,11 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                 if (charSequence!!.length >= 2) {
                     homeViewModel.getCompanyInfo(charSequence.toString())
                 }
+
+                if (charSequence.toString() != homeViewModel.companyWord.value) {
+                    homeViewModel.clearCompanyValue()
+                }
+
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -104,6 +110,12 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
         homeViewModel.setCompanyNameID(position)
         binding.homeCompanySearchCompanyET.setText(viewTag)
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        val homeAddFragment = requireParentFragment().childFragmentManager.fragments[0] as HomeAddFragment
+        homeAddFragment.setViewGray()
+        super.onDismiss(dialog)
     }
 
 }

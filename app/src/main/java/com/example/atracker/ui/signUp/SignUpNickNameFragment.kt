@@ -77,10 +77,6 @@ class SignUpNickNameFragment : Fragment() {
             }
         })
 
-        binding.signUpNickNameNickNameET.addTextChangedListener(
-
-        )
-
 
 
 

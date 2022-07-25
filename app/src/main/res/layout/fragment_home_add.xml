@@ -103,7 +103,7 @@
 
 <!--            </EditText>-->
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/homeAddCompanyTitle"
@@ -118,7 +118,7 @@
                 android:textColor="@color/atracker_white"
                 android:theme="@style/MyEditTextTheme"
                 >
-            </EditText>
+            </TextView>
 
 
             <View
