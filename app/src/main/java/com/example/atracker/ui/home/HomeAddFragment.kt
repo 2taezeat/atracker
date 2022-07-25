@@ -44,15 +44,9 @@ class HomeAddFragment : Fragment() {
 
     private val args : HomeAddFragmentArgs by navArgs()
 
-    private val checkedChipIdList by lazy {
-        arrayListOf<Int>()
-    }
 
     lateinit var homeCompanySearchFragment: HomeCompanySearchFragment
 
-
-    lateinit var qweqwe : MutableSet<Int>
-    lateinit var qweqwe2 : MutableSet<Int>
 
     lateinit var chipsMap : MutableMap<Int, Chip>
     lateinit var chipsList : ArrayList<Chip>
@@ -96,10 +90,6 @@ class HomeAddFragment : Fragment() {
         homeCompanySearchFragment = HomeCompanySearchFragment()
 
 
-        qweqwe = homeViewModel.trueChipSet.value!!
-        qweqwe2 = homeViewModel.falseChipSet.value!!
-
-
         chipsList = arrayListOf(
             binding.homeAddTypeSelect1,
             binding.homeAddTypeSelect2,
@@ -113,46 +103,35 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddNext.setOnClickListener { view ->
-            Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.positionWord.value!!}")
+            Log.d("home_add_value_check", "${homeViewModel.companyWord.value!!}, ${homeViewModel.companyId.value!!}")
 
             var checkNext = true
 
-            if (homeViewModel.companyWord.value.isNullOrBlank()) {
-                showAlert(AlertType.TYPE5)
+            if (homeViewModel.companyWord.value.isNullOrBlank() || homeViewModel.companyId.value == 0) {
+                showAlert(AlertType.TYPE5, null)
                 checkNext = false
             }
             if (homeViewModel.positionWord.value.isNullOrBlank()) {
-                showAlert(AlertType.TYPE6)
+                showAlert(AlertType.TYPE6, null)
                 checkNext = false
             }
             if (homeViewModel.workTypeSelection.value == -1) {
-                showAlert(AlertType.TYPE9)
+                showAlert(AlertType.TYPE9, null)
                 checkNext = false
             }
-            if (qweqwe.size < 2) {
-                showAlert(AlertType.TYPE7)
+
+            val posList = homeViewModel.trueChipSet.value!!.toList()
+
+            if (posList.size < 2) {
+                showAlert(AlertType.TYPE7, null)
                 checkNext = false
             } else {
                 val checkedChipStage = arrayListOf<Stage>()
                 val checkedChipAddProgress = arrayListOf<HomeAddProgress>()
 
-//                for (idx in 0 until checkedChipIdList.size) {
-//                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
-//
-//                    checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
-//
-//                    val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
-//                    checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
-//                }
-//
-//                if (args.progressIndex != 0) {
-//                    homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
-//                    homeViewModel.setSelectedChipName(checkedChipAddProgress)
-//                }
 
-
-                for (idx in qweqwe.toList().indices) {
-                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(qweqwe.toList()[idx])
+                for (idx in posList.indices) {
+                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(posList[idx])
 
                     checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
 
@@ -162,7 +141,7 @@ class HomeAddFragment : Fragment() {
 
                 Log.d("asdasd", "${checkedChipStage}, ${checkedChipAddProgress}")
 
-                if (args.progressIndex != 0) {
+                if (args.progressIndex != 0) { // edit 일때
 //                    homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
 //                    homeViewModel.setSelectedChipName(checkedChipAddProgress)
                 }
@@ -171,13 +150,10 @@ class HomeAddFragment : Fragment() {
 
             }
 
-
             if (checkNext) {
                 val action = HomeAddFragmentDirections.actionNavigationHomeAddToNavigationHomeAddCalendar(args.progressIndex)
                 view.findNavController().navigate(action)
-                //view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
-                checkedChipIdList.clear()
-                Log.d("checkNext", "${checkedChipIdList}")
+                //checkedChipIdList.clear()
             }
 
         }
@@ -193,31 +169,10 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddRefreshIV.setOnClickListener {
-//            val copyCheckedChipIdList = ArrayList(checkedChipIdList)
-//            for (idx in 0 until copyCheckedChipIdList.size) {
-//                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(copyCheckedChipIdList[idx])
-//                checkedChip.isChecked = false
-//            }
-
             homeViewModel.refreshChip()
-
         }
 
         val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
-
-//        if (!flag) {
-//            for (idx in homeAddStagesName.indices) {
-//                val h = homeAddStagesName[idx]
-//                val c = chipsList[idx]
-//                c.text = h.title
-//                homeViewModel.setOriChipId(c.id)
-//                h.id to c
-//
-//                c.setOnCheckedChangeListener { compoundButton, checked ->
-//                    setOnCheckedChip(compoundButton, checked, c)
-//                }
-//            }
-//        }
 
         for (idx in homeAddStagesName.indices) {
             val h = homeAddStagesName[idx]
@@ -231,15 +186,6 @@ class HomeAddFragment : Fragment() {
             }
         }
 
-//        binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-//            Log.d("checkedChipIdList","${checkedChipIdList}")
-//            for (idx in 0 until checkedChipIdList.size) {
-//                val checkedChip =
-//                    binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
-//                checkedChip.checkedIcon = numberDrawableList[idx]
-//            }
-//        }
-
 
 
         if (args.progressIndex != 0) { // 편집인 경우
@@ -250,9 +196,10 @@ class HomeAddFragment : Fragment() {
             for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
                 val selectedChip = chipsMap[stageId]
+
+
                 selectedChip!!.isChecked = true
             }
-
         }
 
 
@@ -355,9 +302,6 @@ class HomeAddFragment : Fragment() {
             homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
         }
 
-
-
-
         homeViewModel.companyId.observe(viewLifecycleOwner, Observer {
             binding.homeAddACTV.setText(homeViewModel.companyWord.value)
         })
@@ -366,12 +310,11 @@ class HomeAddFragment : Fragment() {
 
         homeViewModel.trueChipSet.observe(viewLifecycleOwner, Observer {
             val chipCheckIdList = homeViewModel.trueChipSet.value!!.toList()
-            Log.d("chipCheckIdList22", "${homeViewModel.trueChipSet.value}, ${homeViewModel.falseChipSet.value}")
+            Log.d("chipCheckIdList", "${homeViewModel.trueChipSet.value}, ${homeViewModel.falseChipSet.value}")
 
             for (idx in chipCheckIdList.indices) {
                 val chipId = chipCheckIdList[idx]
                 val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
-
                 checkedChip.checkedIcon = numberDrawableList[idx]
                 checkedChip.chipStrokeWidth = 4f
                 checkedChip.setChipStrokeColorResource(R.color.progress_color_7)
@@ -379,36 +322,13 @@ class HomeAddFragment : Fragment() {
 
         })
 
-
         homeViewModel.falseChipSet.observe(viewLifecycleOwner, Observer {
-            val negList = homeViewModel.falseChipSet.value!!.toList()
-            for (idx in 0 until negList.size) {
-                val chipId = negList[idx]
-                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
-                checkedChip.isChecked = false
-                checkedChip.chipStrokeWidth = 0f
+            for (chipId in homeViewModel.falseChipSet.value!!.toList()) {
+                val notCheckedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
+                notCheckedChip.isChecked = false
+                notCheckedChip.chipStrokeWidth = 0f
             }
         })
-
-
-
-
-
-//        homeViewModel.tmp.observe(viewLifecycleOwner, Observer {
-//            val chipCheckIdList = homeViewModel.tmp.value!!.toList()
-//            Log.d("chipCheckIdList", "${chipCheckIdList}")
-//
-//
-//            val negList = homeViewModel.tmp2.value!!.toList()
-//            for (idx in 0 until negList.size) {
-//                val chipId = chipCheckIdList[idx]
-//                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
-//
-//                checkedChip.chipStrokeWidth = 0f
-//
-//            }
-//
-//        })
 
 
 
@@ -418,44 +338,17 @@ class HomeAddFragment : Fragment() {
 
 
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
-        if (qweqwe.size >= 7 && checked) {
-            showAlert(AlertType.TYPE8)
-            //chip.isCheckable = false
+        if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) {
+            showAlert(AlertType.TYPE8, compoundButton.id)
             binding.homeAddRefreshIV.callOnClick()
-            //chip.isCheckable = true
+        } else {
+            homeViewModel.setChipSet(checked, compoundButton.id)
         }
-        Log.d("count123123", "${checkedChipIdList}")
-
-//        if (checked) {
-//            checkedChipIdList.add(compoundButton.id)
-//            chip.chipStrokeWidth = 4f
-//            chip.setChipStrokeColorResource(R.color.progress_color_7)
-//            //Log.d("count123123", "${count}")
-//            //chip.checkedIcon = numberDrawableList[checkedChipIdList.size - 1]
-//
-//            count += 1
-//
-//        } else {
-//            checkedChipIdList.remove(compoundButton.id)
-//            chip.chipStrokeWidth = 0f
-//
-//            count -= 1
-//        }
-
-
-        //homeViewModel.asd(checked, compoundButton.tag.toString().toInt())
-
-        //checkedChip.checkedIcon = numberDrawableList[idx]
-
-        homeViewModel.pos(checked, compoundButton.id)
-
-
-
 
     }
 
 
-    private fun showAlert(alertType: AlertType ){
+    private fun showAlert(alertType: AlertType, chipId: Int? ){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
                 override fun onLeftClick() {
@@ -464,6 +357,7 @@ class HomeAddFragment : Fragment() {
                 override fun onCenterClick() {
                     when (alertType) {
                         AlertType.TYPE8 -> {
+                            homeViewModel.setChipSet(false, chipId!!)
                         }
                     }
                 }
@@ -474,7 +368,6 @@ class HomeAddFragment : Fragment() {
             alertType,
             null
         )
-
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 
