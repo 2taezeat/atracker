@@ -25,6 +25,7 @@ import android.text.TextWatcher
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.example.atracker.R.id.home
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
 
@@ -53,6 +54,13 @@ class HomeAddFragment : Fragment() {
     }
 
     lateinit var homeCompanySearchFragment: HomeCompanySearchFragment
+
+    private var flag = false
+
+
+    lateinit var qweqwe : MutableSet<Int>
+    lateinit var qweqwe2 : MutableSet<Int>
+
 
 
 
@@ -91,7 +99,8 @@ class HomeAddFragment : Fragment() {
         homeCompanySearchFragment = HomeCompanySearchFragment()
 
 
-        Log.d("HomeAddFragment", "${args.progressIndex}")
+        qweqwe = homeViewModel.tmp.value!!
+        qweqwe2 = homeViewModel.tmp2.value!!
 
 
         binding.homeAddNext.setOnClickListener { view ->
@@ -111,31 +120,52 @@ class HomeAddFragment : Fragment() {
                 showAlert(AlertType.TYPE9)
                 checkNext = false
             }
-            if (checkedChipIdList.size < 2) {
+            if (qweqwe.size < 2) {
                 showAlert(AlertType.TYPE7)
                 checkNext = false
             } else {
                 val checkedChipStage = arrayListOf<Stage>()
                 val checkedChipAddProgress = arrayListOf<HomeAddProgress>()
 
-                for (idx in 0 until checkedChipIdList.size) {
-                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
+//                for (idx in 0 until checkedChipIdList.size) {
+//                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
+//
+//                    checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
+//
+//                    val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
+//                    checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
+//                }
+//
+//                if (args.progressIndex != 0) {
+//                    homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
+//                    homeViewModel.setSelectedChipName(checkedChipAddProgress)
+//                }
+
+
+                for (idx in qweqwe.toList().indices) {
+                    val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(qweqwe.toList()[idx])
+
                     checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
 
                     val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
                     checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
                 }
 
+                Log.d("asdasd", "${checkedChipStage}, ${checkedChipAddProgress}")
+
+                if (args.progressIndex != 0) {
+//                    homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
+//                    homeViewModel.setSelectedChipName(checkedChipAddProgress)
+                }
                 homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
                 homeViewModel.setSelectedChipName(checkedChipAddProgress)
+
             }
 
 
             if (checkNext) {
-
                 val action = HomeAddFragmentDirections.actionNavigationHomeAddToNavigationHomeAddCalendar(args.progressIndex)
                 view.findNavController().navigate(action)
-
                 //view.findNavController().navigate(R.id.action_navigation_home_add_to_navigation_home_add_calendar)
                 checkedChipIdList.clear()
                 Log.d("checkNext", "${checkedChipIdList}")
@@ -154,11 +184,14 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddRefreshIV.setOnClickListener {
-            val copyCheckedChipIdList = ArrayList(checkedChipIdList)
-            for (idx in 0 until copyCheckedChipIdList.size) {
-                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(copyCheckedChipIdList[idx])
-                checkedChip.isChecked = false
-            }
+//            val copyCheckedChipIdList = ArrayList(checkedChipIdList)
+//            for (idx in 0 until copyCheckedChipIdList.size) {
+//                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(copyCheckedChipIdList[idx])
+//                checkedChip.isChecked = false
+//            }
+
+            homeViewModel.refresh()
+
         }
 
 
@@ -175,6 +208,27 @@ class HomeAddFragment : Fragment() {
         binding.homeAddTypeSelect8.text = homeAddStagesName[7].title
 
 
+//        binding.homeAddTypeSelect1.tag = homeAddStagesName[0].id
+//        binding.homeAddTypeSelect2.tag = homeAddStagesName[1].id
+//        binding.homeAddTypeSelect3.tag = homeAddStagesName[2].id
+//        binding.homeAddTypeSelect4.tag = homeAddStagesName[3].id
+//        binding.homeAddTypeSelect5.tag = homeAddStagesName[4].id
+//        binding.homeAddTypeSelect6.tag = homeAddStagesName[5].id
+//        binding.homeAddTypeSelect7.tag = homeAddStagesName[6].id
+//        binding.homeAddTypeSelect8.tag = homeAddStagesName[7].id
+
+        homeViewModel.setId(binding.homeAddTypeSelect1.id)
+        homeViewModel.setId(binding.homeAddTypeSelect2.id)
+        homeViewModel.setId(binding.homeAddTypeSelect3.id)
+        homeViewModel.setId(binding.homeAddTypeSelect4.id)
+        homeViewModel.setId(binding.homeAddTypeSelect5.id)
+        homeViewModel.setId(binding.homeAddTypeSelect6.id)
+        homeViewModel.setId(binding.homeAddTypeSelect7.id)
+        homeViewModel.setId(binding.homeAddTypeSelect8.id)
+
+
+
+
         val chipsMap = mapOf<Int, Chip>(
             homeAddStagesName[0].id to binding.homeAddTypeSelect1,
             homeAddStagesName[1].id to binding.homeAddTypeSelect2,
@@ -186,47 +240,51 @@ class HomeAddFragment : Fragment() {
             homeAddStagesName[7].id to binding.homeAddTypeSelect8,
         )
 
-        binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)
-        }
 
-        binding.homeAddTypeSelect2.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect2)
-        }
+        if (!flag) {
+            binding.homeAddTypeSelect1.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect1)
+            }
 
-        binding.homeAddTypeSelect3.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect3)
-        }
+            binding.homeAddTypeSelect2.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect2)
+            }
 
-        binding.homeAddTypeSelect4.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect4)
-        }
+            binding.homeAddTypeSelect3.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect3)
+            }
 
-        binding.homeAddTypeSelect5.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect5)
-        }
+            binding.homeAddTypeSelect4.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect4)
+            }
 
-        binding.homeAddTypeSelect6.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect6)
-        }
+            binding.homeAddTypeSelect5.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect5)
+            }
 
-        binding.homeAddTypeSelect7.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect7)
-        }
+            binding.homeAddTypeSelect6.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect6)
+            }
 
-        binding.homeAddTypeSelect8.setOnCheckedChangeListener { compoundButton, checked ->
-            setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect8)
-        }
+            binding.homeAddTypeSelect7.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect7)
+            }
 
-
-        binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            Log.d("checkedChipIdList","${checkedChipIdList}")
-            for (idx in 0 until checkedChipIdList.size) {
-                val checkedChip =
-                    binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
-                checkedChip.checkedIcon = numberDrawableList[idx]
+            binding.homeAddTypeSelect8.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, binding.homeAddTypeSelect8)
             }
         }
+
+
+
+//        binding.homeAddTypeSelectChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+//            Log.d("checkedChipIdList","${checkedChipIdList}")
+//            for (idx in 0 until checkedChipIdList.size) {
+//                val checkedChip =
+//                    binding.homeAddTypeSelectChipGroup.findViewById<Chip>(checkedChipIdList[idx])
+//                checkedChip.checkedIcon = numberDrawableList[idx]
+//            }
+//        }
 
 
 
@@ -296,8 +354,6 @@ class HomeAddFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
 
-                Log.d("test22222", "${position}")
-
                 when (position) {
                     0 -> {
                         spinnerSelectedPosition = position
@@ -354,39 +410,103 @@ class HomeAddFragment : Fragment() {
 
 
 
+        homeViewModel.tmp.observe(viewLifecycleOwner, Observer {
+            val chipCheckIdList = homeViewModel.tmp.value!!.toList()
+            Log.d("chipCheckIdList22", "${homeViewModel.tmp.value}, ${homeViewModel.tmp2.value}")
+
+            for (idx in 0 until chipCheckIdList.size) {
+                val chipId = chipCheckIdList[idx]
+                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
+
+                checkedChip.checkedIcon = numberDrawableList[idx]
+                checkedChip.chipStrokeWidth = 4f
+                checkedChip.setChipStrokeColorResource(R.color.progress_color_7)
+            }
+
+        })
+
+
+        homeViewModel.tmp2.observe(viewLifecycleOwner, Observer {
+            val negList = homeViewModel.tmp2.value!!.toList()
+            for (idx in 0 until negList.size) {
+                val chipId = negList[idx]
+                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
+                checkedChip.chipStrokeWidth = 0f
+                checkedChip.isChecked = false
+            }
+        })
+
+
+
+
+
+//        homeViewModel.tmp.observe(viewLifecycleOwner, Observer {
+//            val chipCheckIdList = homeViewModel.tmp.value!!.toList()
+//            Log.d("chipCheckIdList", "${chipCheckIdList}")
+//
+//
+//            val negList = homeViewModel.tmp2.value!!.toList()
+//            for (idx in 0 until negList.size) {
+//                val chipId = chipCheckIdList[idx]
+//                val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(chipId)
+//
+//                checkedChip.chipStrokeWidth = 0f
+//
+//            }
+//
+//        })
+
+
 
         return root
     }
 
 
+    override fun onStop() {
+        flag = true
+        super.onStop()
+    }
+
+
 
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
-        if (checkedChipIdList.size >= 7 && checked) {
+        if (qweqwe.size >= 7 && checked) {
             showAlert(AlertType.TYPE8)
-            chip.isCheckable = false
+            //chip.isCheckable = false
             binding.homeAddRefreshIV.callOnClick()
-            chip.isCheckable = true
+            //chip.isCheckable = true
         }
         Log.d("count123123", "${checkedChipIdList}")
 
-        if (checked) {
-            checkedChipIdList.add(compoundButton.id)
-            chip.chipStrokeWidth = 4f
-            chip.setChipStrokeColorResource(R.color.progress_color_7)
-            //Log.d("count123123", "${count}")
+//        if (checked) {
+//            checkedChipIdList.add(compoundButton.id)
+//            chip.chipStrokeWidth = 4f
+//            chip.setChipStrokeColorResource(R.color.progress_color_7)
+//            //Log.d("count123123", "${count}")
+//            //chip.checkedIcon = numberDrawableList[checkedChipIdList.size - 1]
+//
+//            count += 1
+//
+//        } else {
+//            checkedChipIdList.remove(compoundButton.id)
+//            chip.chipStrokeWidth = 0f
+//
+//            count -= 1
+//        }
 
-            //chip.checkedIcon = numberDrawableList[checkedChipIdList.size - 1]
 
-            count += 1
-
-        } else {
-            checkedChipIdList.remove(compoundButton.id)
-            chip.chipStrokeWidth = 0f
-
-            count -= 1
-        }
+        //homeViewModel.asd(checked, compoundButton.tag.toString().toInt())
 
         //checkedChip.checkedIcon = numberDrawableList[idx]
+
+        homeViewModel.pos(checked, compoundButton.id)
+
+
+//        if (checked) {
+//            homeViewModel.pos(checked, compoundButton.id)
+//        } else {
+//            homeViewModel.neg(checked, compoundButton.id)
+//        }
 
 
     }

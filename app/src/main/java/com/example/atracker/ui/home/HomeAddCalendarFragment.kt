@@ -161,7 +161,12 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
         binding.homeAddCalendarBottomCL.setOnClickListener { view ->
             if (args.progressIndex != 0) { // 편집인 경우, update
+                Log.d("qweqwe" ,"${homeViewModel.homeAddSelectedStage.value}")
+
+
                 homeViewModel.updateApply(args.progressIndex)
+
+
             } else { // 그냥 homdAdd 추가인 경우 post
                 homeViewModel.postApply()
             }
