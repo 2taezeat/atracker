@@ -176,16 +176,17 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         val applyId = homeViewModel.homeDisplayArrayList.value!![position].applyId
 
         homeViewModel.getApplyDetail(applyIds = arrayOf(applyId), includeContent = true)
-        homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
 
+        homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
             if (it.apply_id != -1) {
                 val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
                     progressIndex = applyId,
                     displayListPosition = position)
                 findNavController().navigate(action)
-            } else {
-                parentActivity.showAlertInstance(alertDialogFragment)
             }
+//            else {
+//                parentActivity.showAlertInstance(alertDialogFragment)
+//            }
 
         })
 

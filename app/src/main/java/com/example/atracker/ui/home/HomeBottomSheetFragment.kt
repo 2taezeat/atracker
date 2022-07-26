@@ -16,6 +16,7 @@ import com.example.atracker.databinding.FragmentHomeBottomSheetBinding
 import com.example.atracker.ui.AlertDialogFragment
 import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.AlertType
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -36,6 +37,8 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
         this.displayListPosition = displayListPosition
     }
 
+    lateinit var alertDialogFragment : AlertDialogFragment
+
 
 
     override fun onCreateView(
@@ -46,6 +49,19 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
         _binding = FragmentHomeBottomSheetBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+
+        alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+                override fun onCenterClick() {
+                }
+                override fun onRightClick() {
+                }
+            },
+            AlertType.TYPE14,
+            null
+        )
 
 
         binding.homeBottomSheetReviewEditCL.setOnClickListener {
@@ -70,15 +86,6 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
         binding.homeBottomSheetReviewDeleteCL.setOnClickListener {
             showAlert(AlertType.TYPE12)
         }
-
-        homeViewModel.deleteApplyFail.observe(viewLifecycleOwner, Observer {
-            Log.d("test123", "test123")
-            if (it == true) {
-                val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
-                dismiss()
-                //homeViewModel.switchFlagNull(homeViewModel._postApplyFlag)
-            }
-        })
 
 
 
@@ -117,8 +124,15 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
                             val applyId = homeViewModel.homeDisplayArrayList.value!![displayListPosition!!].applyId
                             val deleteIds = arrayOf(applyId)
                             homeViewModel.deleteApply(deleteIds)
-
-                            showAlert(AlertType.TYPE13)
+                            homeViewModel.deleteApplyFail.observe(viewLifecycleOwner, Observer {
+                                Log.d("deleteApplyFail", "${it}")
+                                it.getContentIfNotHandled()?.let { boolean ->
+                                    if( boolean)
+                                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+                                    else
+                                        showAlert(AlertType.TYPE13)
+                                }
+                            })
                         }
                     }
 

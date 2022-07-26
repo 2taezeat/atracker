@@ -45,7 +45,7 @@ class MyPageViewModel : ViewModel() {
 
     fun getMyPage() {
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDMiLCJpYXQiOjE2NTg3NDM4NzgsImV4cCI6MTY1ODc0NzQ3OH0.KxJdv7IQmi-FXbbcgKFLm4l6_JX8wZHPX0jriAiC7yQ")
+            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer 1234eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDQiLCJpYXQiOjE2NTg3OTk0ODksImV4cCI6MTY1ODgwMzA4OX0._Guc-BrE_Qgc02_hgIdKtVvWNID_-hOtWVa93d7KvY0")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()
@@ -58,7 +58,7 @@ class MyPageViewModel : ViewModel() {
                     ExperienceType.NOT_EXPERIENCED.toString() -> _userExperienceType.value = "신입"
                 }
             } else {
-                _userNickName.value = ""
+                _userNickName.value = " "
             }
 
         }

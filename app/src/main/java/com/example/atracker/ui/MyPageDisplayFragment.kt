@@ -15,6 +15,7 @@ import com.example.atracker.R
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
 import com.example.atracker.ui.login.LoginActivity
 import com.example.atracker.ui.signUp.SignUpViewModel
+import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.AlertType
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -38,11 +39,6 @@ class MyPageDisplayFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     private lateinit var binding: FragmentMyPageDisplayBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -58,7 +54,9 @@ class MyPageDisplayFragment : Fragment() {
             container,
             false)
 
-        if (myPageViewModel.userNickName.value == "") {
+        if (myPageViewModel.userNickName.value == " ") {
+            parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+
             val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
             navController.navigate(R.id.navigation_home)
         }
