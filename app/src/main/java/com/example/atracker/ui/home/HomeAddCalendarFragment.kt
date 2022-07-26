@@ -123,8 +123,6 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //        })
 
 
-
-
         return root
     }
 

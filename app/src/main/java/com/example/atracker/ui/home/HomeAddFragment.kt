@@ -57,6 +57,10 @@ class HomeAddFragment : Fragment() {
     lateinit var chipsMap : MutableMap<Int, Chip>
     lateinit var chipsList : ArrayList<Chip>
 
+    var flag = true
+//    companion object {
+//        var flag = true
+//    }
 
 
 
@@ -106,6 +110,8 @@ class HomeAddFragment : Fragment() {
             binding.homeAddTypeSelect7,
             binding.homeAddTypeSelect8,
         )
+
+        Log.d("test123", "${flag}")
 
         val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
@@ -197,22 +203,26 @@ class HomeAddFragment : Fragment() {
 
 
 
-
-
-        if (args.progressIndex != 0) { // 편집인 경우
+        if (args.progressIndex != 0 ) { // 편집인 경우
             binding.homeAddHeaderTitle.text = "지원 현황 편집"
             spinnerSelectedPosition = homeViewModel.setWorkTypeSpinnerPosition()
             homeViewModel.setHomeEdit()
 
-            Log.d("test123", "${homeViewModel.homeAddSelectedStage.value} , ${chipsMap}")
+            Log.d("test12345", "${homeViewModel.homeAddSelectedStage.value} , ${chipsMap}")
+
+            for (c in chipsList) {
+                c.visibility = View.GONE
+            }
+
 
             for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
-                val selectedChip = chipsMap[stageId]
+                val selectedChip = chipsMap[stageId]!!
 
-
-                selectedChip!!.isChecked = true
+                selectedChip.visibility = View.VISIBLE
+                selectedChip.isChecked = true
             }
+            flag = true
         }
 
 
@@ -312,6 +322,22 @@ class HomeAddFragment : Fragment() {
                 binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
         }
 
+        binding.homeAddApplyFieldET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (charSequence.toString().isNotBlank())
+                    binding.homeAddApplyFieldCancelIV.visibility = View.VISIBLE
+                else
+                    binding.homeAddApplyFieldCancelIV.visibility = View.INVISIBLE
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+
+
 
         binding.homeAddACTV.setOnClickListener {
             homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
@@ -349,6 +375,9 @@ class HomeAddFragment : Fragment() {
         })
 
 
+        binding.homeAddApplyFieldCancelIV.setOnClickListener {
+            binding.homeAddApplyFieldET.setText("")
+        }
 
         return root
     }
@@ -356,11 +385,21 @@ class HomeAddFragment : Fragment() {
 
 
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
-        if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) {
+//        if (homeViewModel.trueChipSet.value!!.size >= 7 && checked && flag) {
+//            showAlert(AlertType.TYPE8, compoundButton.id)
+//            binding.homeAddRefreshIV.callOnClick()
+//        } else {
+//            homeViewModel.setChipSet(checked, compoundButton.id)
+//        }
+
+        if (homeViewModel.trueChipSet.value!!.size < 7 || !checked) {
+            homeViewModel.setChipSet(checked, compoundButton.id)
+
+        } else {
+            //homeViewModel.setChipSet(checked, compoundButton.id)
+
             showAlert(AlertType.TYPE8, compoundButton.id)
             binding.homeAddRefreshIV.callOnClick()
-        } else {
-            homeViewModel.setChipSet(checked, compoundButton.id)
         }
 
     }
@@ -394,6 +433,17 @@ class HomeAddFragment : Fragment() {
         binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
     }
 
+    override fun onStop() {
+        super.onStop()
+        Log.d("homeadd_onStop","onStop")
+
+        flag = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("homeadd_onDestory","onDestory")
+    }
 
 
 }

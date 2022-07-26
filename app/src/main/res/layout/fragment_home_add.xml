@@ -150,6 +150,23 @@
 
             </EditText>
 
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/homeAddApplyFieldCancelIV"
+                android:src="@drawable/ic_cancel_text_icon_raw"
+                app:layout_constraintBottom_toTopOf="@+id/homeAddView2"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:visibility="invisible"
+                >
+
+
+
+            </ImageView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
