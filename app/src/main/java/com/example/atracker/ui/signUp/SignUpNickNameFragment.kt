@@ -71,11 +71,21 @@ class SignUpNickNameFragment : Fragment() {
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 ChangeUIState(lazyContext).viewEnable(binding.signUpNickNameNext, charSequence!!.isNotBlank() )
+
+                if (charSequence.toString().isNotBlank())
+                    binding.signUpNickNameCancelIV.visibility = View.VISIBLE
+                else
+                    binding.signUpNickNameCancelIV.visibility = View.INVISIBLE
             }
 
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+
+
+        binding.signUpNickNameCancelIV.setOnClickListener {
+            binding.signUpNickNameNickNameET.setText("")
+        }
 
 
 

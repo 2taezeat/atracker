@@ -90,11 +90,21 @@ class SignUpPositionFragment : Fragment() {
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 ChangeUIState(lazyContext).viewEnable(binding.signUpPositionNext, charSequence!!.isNotBlank(), spinnerSelectedPosition > -1)
+
+                if (charSequence.toString().isNotBlank())
+                    binding.signUpPositionCancelIV.visibility = View.VISIBLE
+                else
+                    binding.signUpPositionCancelIV.visibility = View.INVISIBLE
             }
 
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+
+
+        binding.signUpPositionCancelIV.setOnClickListener {
+            binding.signUpPositionPositionET.setText("")
+        }
 
 
 
