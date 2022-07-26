@@ -57,7 +57,7 @@ class HomeDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val homeProgress = homeViewModel.homeDisplayArrayList.value!![args.displayListPosition]
+        val homeProgress = homeViewModel.homeDisplayArrayList_tmp.value!![args.displayListPosition]
         homeDetailTabLayout = binding.homeDetailTabLayout
 
 

@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task
 
 import com.google.android.gms.tasks.OnCompleteListener
 import android.R.attr.data
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.Scope
 
@@ -46,6 +47,8 @@ class LoginActivity : AppCompatActivity() {
 
 
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
 
 //        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

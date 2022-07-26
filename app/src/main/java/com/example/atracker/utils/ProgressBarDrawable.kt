@@ -56,7 +56,7 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
         val segmentWidth = (b.width() - (numSegments - 1)).toFloat() / numSegments
         mSegment[0f, 0f, segmentWidth] = b.height().toFloat()
         mSegmentMiniCircle.left = mSegment.left / (numSegments )
-        mSegmentMiniCircle.right = mSegment.right / (5 )
+        mSegmentMiniCircle.right = mSegment.right / ( 5 )
         mSegmentMiniCircle.top = mSegment.top
         mSegmentMiniCircle.bottom = mSegment.bottom
 

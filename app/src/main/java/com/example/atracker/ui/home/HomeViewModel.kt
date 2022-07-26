@@ -132,6 +132,14 @@ class HomeViewModel : ViewModel() {
     val homeDisplayArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeDisplayArrayList
 
 
+    private val _homeDisplayArrayList_tmp = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
+        value = arrayListOf()
+    }
+
+    val homeDisplayArrayList_tmp : LiveData<ArrayList<HomeProgressItem>> = _homeDisplayArrayList_tmp
+
+
+
 
 //    private val _homeWriteProgressSelectArrayList = MutableLiveData<ArrayList<ArrayList<String>>>().apply {
 //        value = arrayListOf(
@@ -410,6 +418,7 @@ class HomeViewModel : ViewModel() {
                 Log.d("getResult22", "${getResult}")
 
                 val newArrayList = arrayListOf<HomeProgressItem>()
+                val detailArrayList = arrayListOf<HomeProgressItem>()
 
                 for (apply in getResult){
                     var myProgress = 0
@@ -420,12 +429,17 @@ class HomeViewModel : ViewModel() {
                     val jobType = apply.job_position
                     val totalProgress = stageProgress.size
 
+                    var detailMyProgress = 0
+                    val detailSuccess = true
+
                     for (stage in stageProgress) {
                         if (stage.status == IsPassingTmp.FAIL.toString() && success)
                             success = false
 
                         if (stage.status == IsPassingTmp.PASS.toString())
                             myProgress += 1
+
+                        detailMyProgress += 1
                     }
                     newArrayList.add(HomeProgressItem(
                         companyTitle = companyTitle,
@@ -436,9 +450,18 @@ class HomeViewModel : ViewModel() {
                         applyId = applyId
                         )
                     )
+                    detailArrayList.add(HomeProgressItem(
+                        companyTitle = companyTitle,
+                        jobType = jobType,
+                        myProgress = detailMyProgress,
+                        totalProgress = totalProgress,
+                        success = detailSuccess,
+                        applyId = applyId
+                    )
+                    )
                 }
                 _homeDisplayArrayList.value = newArrayList
-
+                _homeDisplayArrayList_tmp.value = detailArrayList
             } else {
 
             }

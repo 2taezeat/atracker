@@ -44,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/blogDisplayHeaderCL"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/myPageMainCL"
+        android:background="@color/background_gray"
 
         >
 
@@ -51,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/blogDisplayWebView"
+            android:background="@color/background_gray"
 
             >
 
