@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeCompanySearchBinding
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.utils.AlertApiObject
 
 
 class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListener {
@@ -99,7 +100,17 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
 
         binding.homeCompanySearchButton2.setOnClickListener {
             homeViewModel.addCompanyInfo()
-            dismiss()
+
+            homeViewModel.addCompanyFail.observe(viewLifecycleOwner, Observer {
+                Log.d("addCompanyFail", "${it}")
+                it.getContentIfNotHandled()?.let { boolean ->
+                    if( boolean) {
+                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+                    } else {
+                        dismiss()
+                    }
+                }
+            })
         }
 
 
