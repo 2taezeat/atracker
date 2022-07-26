@@ -80,11 +80,22 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                     homeViewModel.clearCompanyValue()
                 }
 
+                if (charSequence.toString().isNotBlank())
+                    binding.homeCompanySearchCancelIV.visibility = View.VISIBLE
+                else
+                    binding.homeCompanySearchCancelIV.visibility = View.INVISIBLE
             }
 
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+
+        binding.homeCompanySearchCancelIV.setOnClickListener {
+            binding.homeCompanySearchCompanyET.setText("")
+            homeViewModel.setClearCompanyList()
+            homeViewModel.clearCompanyValue()
+        }
+
 
         homeViewModel.companyList.observe(viewLifecycleOwner, Observer {
             val companyNameList = homeViewModel.companyList.value

@@ -96,7 +96,7 @@
         <entry key="app/src/main/res/layout/fragment_home_add_date.xml" value="0.23369565217391305" />
         <entry key="app/src/main/res/layout/fragment_home_add_date_create.xml" value="0.31535087719298244" />
         <entry key="app/src/main/res/layout/fragment_home_bottom_sheet.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/fragment_home_company_search.xml" value="0.2995614035087719" />
+        <entry key="app/src/main/res/layout/fragment_home_company_search.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home_company_search_sheet.xml" value="0.2956140350877193" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.5202821869488536" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.45" />
