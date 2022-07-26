@@ -77,7 +77,6 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                         homeViewModel.companyResponse.observe(viewLifecycleOwner, Observer {
                             Log.d("lastVisibled_2", "${homeViewModel.companyResponse.value}")
 
-
                             if (homeViewModel.companyResponse.value != null ){
                                 if (homeViewModel.companyResponse.value!!.has_next)
                                     homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = homeViewModel.companyResponse.value!!.next_page_no + 1, size = 10)
@@ -150,7 +149,6 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                 }
             })
         }
-
 
 
         return binding.root

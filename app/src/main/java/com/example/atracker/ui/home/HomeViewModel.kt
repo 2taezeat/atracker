@@ -115,9 +115,6 @@ class HomeViewModel : ViewModel() {
     val updateApplyFail : LiveData<Event<Boolean>> = _updateApplyFail
 
 
-    private val _getCompanyFail = MutableLiveData<Boolean?>()
-    val getCompanyFail : LiveData<Boolean?> = _getCompanyFail
-
 
 
 
@@ -206,7 +203,6 @@ class HomeViewModel : ViewModel() {
         _trueChipSet.value = mutableSetOf()
         _falseChipSet.value = mutableSetOf()
         _oriChipSet.value = mutableSetOf()
-        _getCompanyFail.value = null
         _companyResponse.value = null
     }
 
@@ -306,7 +302,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyInfo (searchWord : String, page : Int, size : Int = 10) { // 예외 처리 보류 (220726)
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer 1234eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -314,8 +310,7 @@ class HomeViewModel : ViewModel() {
                 size = size
             )
 
-
-            if (apiResult.code() == 200 && _getCompanyFail.value != null) {
+            if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 Log.d("companySearchContents", "${getResult}")
 
@@ -323,14 +318,11 @@ class HomeViewModel : ViewModel() {
                 new.addAll(getResult.companySearchContents)
                 _companyList.value = new
 
-
                 val newCompanyResponse : CompanySearchResponse = getResult
                 _companyResponse.value = newCompanyResponse
 
-                switch(_getCompanyFail)
-                //tmp()
             } else {
-                switch(_getCompanyFail)
+
             }
 
         }
@@ -622,6 +614,7 @@ class HomeViewModel : ViewModel() {
 
     fun setClearCompanyList(){
         _companyList.value = listOf()
+        //_companyResponse.value = null
     }
 
     fun setHomeEdit(){
