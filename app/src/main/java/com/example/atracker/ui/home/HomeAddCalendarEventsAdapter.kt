@@ -2,6 +2,7 @@ package com.example.atracker.ui.home
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -58,7 +59,6 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAddCalendarEventsViewHolder {
-
         return HomeAddCalendarEventsViewHolder(
             HomeAddCalendarEventItemViewBinding.inflate(parent.context.layoutInflater,
                 parent,
@@ -96,6 +96,8 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
             binding.itemEventProgressText.text = addProgress.progressName
             binding.itemEventCircle.background = mForegroundColorList!![bindingAdapterPosition]
 
+            Log.d("zonedTime","${zonedTime}")
+
 
             if (zonedTime == null) {
                 binding.itemEventPlusTV.visibility = View.VISIBLE
@@ -103,9 +105,7 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
                 binding.itemEventTime.text = selectionTimeFormatter.format(zonedTime.toLocalTime())
                 binding.itemEventDate.text = selectionDateFormatter.format(zonedTime.toLocalDate())
                 binding.itemEventPlusTV.visibility = View.INVISIBLE
-
             }
-
 
         }
 

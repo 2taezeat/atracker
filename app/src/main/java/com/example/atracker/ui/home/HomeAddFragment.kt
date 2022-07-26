@@ -8,7 +8,6 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -29,8 +28,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
 import com.example.atracker.utils.AlertApiObject
-import com.example.atracker.utils.ApiExceptionUtil
-import com.example.atracker.utils.ChangeUIState
 
 
 class HomeAddFragment : Fragment() {
@@ -57,10 +54,7 @@ class HomeAddFragment : Fragment() {
     lateinit var chipsMap : MutableMap<Int, Chip>
     lateinit var chipsList : ArrayList<Chip>
 
-    var flag = true
-//    companion object {
-//        var flag = true
-//    }
+    var firstCreate = true
 
 
 
@@ -74,6 +68,7 @@ class HomeAddFragment : Fragment() {
         val numberDrawable5 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_5_raw)
         val numberDrawable6 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_6_raw)
         val numberDrawable7 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_7_raw)
+        val numberDrawable8 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_1_raw)
 
         numberDrawableList = arrayListOf(
             numberDrawable1,
@@ -83,6 +78,7 @@ class HomeAddFragment : Fragment() {
             numberDrawable5,
             numberDrawable6,
             numberDrawable7,
+            numberDrawable8
             )
 
         chipsMap = mutableMapOf()
@@ -111,7 +107,7 @@ class HomeAddFragment : Fragment() {
             binding.homeAddTypeSelect8,
         )
 
-        Log.d("test123", "${flag}")
+        Log.d("homeadd_onCreateView", "${firstCreate}")
 
         val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
@@ -214,7 +210,6 @@ class HomeAddFragment : Fragment() {
                 c.visibility = View.GONE
             }
 
-
             for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
                 val selectedChip = chipsMap[stageId]!!
@@ -222,7 +217,7 @@ class HomeAddFragment : Fragment() {
                 selectedChip.visibility = View.VISIBLE
                 selectedChip.isChecked = true
             }
-            flag = true
+            //flag = true
         }
 
 
@@ -364,6 +359,8 @@ class HomeAddFragment : Fragment() {
                 checkedChip.setChipStrokeColorResource(R.color.progress_color_7)
             }
 
+
+
         })
 
         homeViewModel.falseChipSet.observe(viewLifecycleOwner, Observer {
@@ -385,23 +382,22 @@ class HomeAddFragment : Fragment() {
 
 
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
-//        if (homeViewModel.trueChipSet.value!!.size >= 7 && checked && flag) {
-//            showAlert(AlertType.TYPE8, compoundButton.id)
-//            binding.homeAddRefreshIV.callOnClick()
-//        } else {
-//            homeViewModel.setChipSet(checked, compoundButton.id)
-//        }
-
-        if (homeViewModel.trueChipSet.value!!.size < 7 || !checked) {
-            homeViewModel.setChipSet(checked, compoundButton.id)
-
+        if (firstCreate) {
+            if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) {
+                showAlert(AlertType.TYPE8, compoundButton.id)
+                binding.homeAddRefreshIV.callOnClick()
+            } else {
+                homeViewModel.setChipSet(checked, compoundButton.id)
+            }
         } else {
-            //homeViewModel.setChipSet(checked, compoundButton.id)
+            if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) { // fix 해야 됨, 7개 이상이고 뒤로 가기 일때,
+                showAlert(AlertType.TYPE8, compoundButton.id)
+                binding.homeAddRefreshIV.callOnClick()
+            } else {
+                homeViewModel.setChipSet(checked, compoundButton.id)
+            }
 
-            showAlert(AlertType.TYPE8, compoundButton.id)
-            binding.homeAddRefreshIV.callOnClick()
         }
-
     }
 
 
@@ -437,7 +433,7 @@ class HomeAddFragment : Fragment() {
         super.onStop()
         Log.d("homeadd_onStop","onStop")
 
-        flag = false
+        firstCreate = false
     }
 
     override fun onDestroy() {
