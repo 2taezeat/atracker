@@ -107,14 +107,19 @@ class HomeAddFragment : Fragment() {
             binding.homeAddTypeSelect8,
         )
 
-//        ApiExceptionUtil.apiExceptionFlag.observe(this, androidx.lifecycle.Observer {
-//            it.getContentIfNotHandled()?.let { boolean ->
-//                if (boolean) {
-//                    showAlert(AlertType.TYPE14, null)
-//                    binding.homeAddBackButton.callOnClick()
-//                }
-//            }
-//        })
+        val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
+
+        for (idx in homeAddStagesName.indices) {
+            val h = homeAddStagesName[idx]
+            val c = chipsList[idx]
+            c.text = h.title
+            homeViewModel.setOriChipId(c.id)
+            chipsMap[h.id] = c
+
+            c.setOnCheckedChangeListener { compoundButton, checked ->
+                setOnCheckedChip(compoundButton, checked, c)
+            }
+        }
 
         binding.homeAddBackButton.setOnClickListener { view ->
             parentActivity.mainBottomNavigationAppear()
@@ -190,19 +195,7 @@ class HomeAddFragment : Fragment() {
             homeViewModel.refreshChip()
         }
 
-        val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
-        for (idx in homeAddStagesName.indices) {
-            val h = homeAddStagesName[idx]
-            val c = chipsList[idx]
-            c.text = h.title
-            homeViewModel.setOriChipId(c.id)
-            h.id to c
-
-            c.setOnCheckedChangeListener { compoundButton, checked ->
-                setOnCheckedChip(compoundButton, checked, c)
-            }
-        }
 
 
 
@@ -210,6 +203,8 @@ class HomeAddFragment : Fragment() {
             binding.homeAddHeaderTitle.text = "지원 현황 편집"
             spinnerSelectedPosition = homeViewModel.setWorkTypeSpinnerPosition()
             homeViewModel.setHomeEdit()
+
+            Log.d("test123", "${homeViewModel.homeAddSelectedStage.value} , ${chipsMap}")
 
             for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
