@@ -18,6 +18,7 @@ import com.example.atracker.ui.AlertDialogFragment
 import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.MyPageViewModel
+import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.AlertType
 
 class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
@@ -39,7 +40,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         requireContext()
     }
 
-    lateinit var alertDialogFragment : AlertDialogFragment
 
 
 
@@ -64,18 +64,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
-        alertDialogFragment = AlertDialogFragment.instance(
-            object : AlertDialogListener {
-                override fun onLeftClick() {
-                }
-                override fun onCenterClick() {
-                }
-                override fun onRightClick() {
-                }
-            },
-            AlertType.TYPE14,
-            null
-        )
 
 
 
@@ -178,15 +166,24 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         homeViewModel.getApplyDetail(applyIds = arrayOf(applyId), includeContent = true)
 
         homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
-            if (it.apply_id != -1) {
-                val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
-                    progressIndex = applyId,
-                    displayListPosition = position)
-                findNavController().navigate(action)
-            }
-//            else {
-//                parentActivity.showAlertInstance(alertDialogFragment)
-//            }
+
+            Log.d("test123" , "${homeViewModel.homeApplyIdContent.value!!.apply_id}")
+
+
+            homeViewModel.getApplyDetailFail.observe(viewLifecycleOwner, Observer {
+                Log.d("getApplyDetailFail", "${it}")
+                it.getContentIfNotHandled()?.let { boolean ->
+                    if( boolean) {
+                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+                    } else {
+                        val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
+                            progressIndex = applyId,
+                            displayListPosition = position)
+                        findNavController().navigate(action)
+                    }
+                }
+            })
+
 
         })
 

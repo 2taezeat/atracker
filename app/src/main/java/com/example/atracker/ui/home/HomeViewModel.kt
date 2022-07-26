@@ -95,10 +95,15 @@ class HomeViewModel : ViewModel() {
     val postApplyFlag : LiveData<Boolean?> = _postApplyFlag
 
 
-    val _deleteApplyFail = MutableLiveData<Event<Boolean>>().apply {
-
-    }
+    private val _deleteApplyFail = MutableLiveData<Event<Boolean>>()
     val deleteApplyFail : LiveData<Event<Boolean>> = _deleteApplyFail
+
+
+    private val _getApplyDetailFail = MutableLiveData<Event<Boolean>>()
+    val getApplyDetailFail : LiveData<Event<Boolean>> = _getApplyDetailFail
+
+    private val _addCompanyFail = MutableLiveData<Event<Boolean>>()
+    val addCompanyFail : LiveData<Event<Boolean>> = _addCompanyFail
 
 
 
@@ -297,7 +302,7 @@ class HomeViewModel : ViewModel() {
 
     fun addCompanyInfo () {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDQiLCJpYXQiOjE2NTg3OTk0ODksImV4cCI6MTY1ODgwMzA4OX0._Guc-BrE_Qgc02_hgIdKtVvWNID_-hOtWVa93d7KvY0",
+            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer 1234eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDQiLCJpYXQiOjE2NTg3OTk0ODksImV4cCI6MTY1ODgwMzA4OX0._Guc-BrE_Qgc02_hgIdKtVvWNID_-hOtWVa93d7KvY0",
                 createCompanyRequest = listOf(CreateCompanyRequestItem(name = _companyWord.value!!))
             )
 
@@ -306,8 +311,9 @@ class HomeViewModel : ViewModel() {
                 Log.d("addCompanyInfo", "${getResult}")
                 _companyId.value = getResult[0].id
                 _companyWord.value = getResult[0].name
+                _addCompanyFail.value = Event(false)
             } else {
-
+                _addCompanyFail.value = Event(true)
             }
         }
     }
@@ -377,15 +383,13 @@ class HomeViewModel : ViewModel() {
 
     fun deleteApply(deleteIds : Array<Int>) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer 1234eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDQiLCJpYXQiOjE2NTg3OTk0ODksImV4cCI6MTY1ODgwMzA4OX0._Guc-BrE_Qgc02_hgIdKtVvWNID_-hOtWVa93d7KvY0", ids = deleteIds )
+            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDQiLCJpYXQiOjE2NTg3OTk0ODksImV4cCI6MTY1ODgwMzA4OX0._Guc-BrE_Qgc02_hgIdKtVvWNID_-hOtWVa93d7KvY0", ids = deleteIds )
             Log.d("deleteApply", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
                 _deleteApplyFail.value = Event(false)
-
             } else {
                 //switch(_deleteApplyFail)
-
                 _deleteApplyFail.value = Event(true)
             }
 
@@ -463,26 +467,10 @@ class HomeViewModel : ViewModel() {
                 _homeProgressNameDetail.value = Event(newStageTitleArrayList)
                 Log.d("_homeApplyIdContent" ,"${_homeProgressNameDetail.value}")
                 //ApiExceptionUtil._apiExceptionFlag.value = Event(true)
+                _getApplyDetailFail.value = Event(false)
 
             } else {
-//                viewModelScope.launch {
-//                    _homeApplyIdContent.postValue( Apply(apply_id = -1,
-//                        company_id = 0,
-//                        company_name = "",
-//                        job_position = "",
-//                        job_type = "",
-//                        stage_progress = listOf())
-//                    )
-//                }
-
-                _homeApplyIdContent.value = ( Apply(apply_id = -1,
-                    company_id = 0,
-                    company_name = "",
-                    job_position = "",
-                    job_type = "",
-                    stage_progress = listOf())
-                )
-
+                _getApplyDetailFail.value = Event(true)
             }
         }
 

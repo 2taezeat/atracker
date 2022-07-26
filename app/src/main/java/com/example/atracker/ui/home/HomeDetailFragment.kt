@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
+import com.example.atracker.utils.AlertApiObject
 import com.google.android.material.tabs.TabLayout
 
 
@@ -123,6 +125,21 @@ class HomeDetailFragment : Fragment() {
         homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
             binding.homeDetailCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
         })
+
+
+//        homeViewModel.getApplyDetailFail.observe(viewLifecycleOwner, Observer {
+//            Log.d("getApplyDetailFail", "${it}")
+//            it.getContentIfNotHandled()?.let { boolean ->
+//                if( boolean) {
+//                    parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+//                } else {
+//                    val action = HomeDisplayFragmentDirections.actionNavigationHomeToNavigationHomeDetail(
+//                        progressIndex = applyId,
+//                        displayListPosition = position)
+//                    findNavController().navigate(action)
+//                }
+//            }
+//        })
 
 
         return root
