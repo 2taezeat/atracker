@@ -79,14 +79,6 @@ class MainActivity : AppCompatActivity() {
             null
         )
 
-//        ApiExceptionUtil.apiExceptionFlag.observe(this, androidx.lifecycle.Observer {
-//            it.getContentIfNotHandled()?.let { boolean ->
-//                if (boolean) {
-//                    showAlert(AlertType.TYPE14)
-//                }
-//            }
-//        })
-
 
 //        navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
 //            when (destination.id) {
@@ -124,10 +116,6 @@ class MainActivity : AppCompatActivity() {
                     mainBottomNavigationAppear()
                 }
                 R.id.navigation_home -> {
-//                    if ( checkApiException() ){
-//                        showAlertInstance(alertDialogFragment)
-//                    }
-
                     mainBottomNavigationAppear()
                     homeViewModel.clearHomeAddText()
                 }
@@ -173,12 +161,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-    private fun checkApiException() : Boolean{
-        //return myPageViewModel.userNickName.value == "" || homeViewModel.homeAddStagesContent.value!!.isEmpty() || homeViewModel.homeApplyIdContent.value!!.apply_id == -1
-        return  myPageViewModel.userNickName.value == "," || homeViewModel.homeAddStagesContent.value!!.isEmpty()
-    }
 
 
 

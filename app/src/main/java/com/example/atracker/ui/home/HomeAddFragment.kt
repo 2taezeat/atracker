@@ -28,6 +28,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
+import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.ApiExceptionUtil
 import com.example.atracker.utils.ChangeUIState
 
@@ -122,9 +123,8 @@ class HomeAddFragment : Fragment() {
             homeViewModel.clearHomeAddText()
         }
 
-
         if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){ // api 예외 처리
-            parentActivity.mainBottomNavigationAppear()
+            parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
             parentActivity.onBackPressed()
         }
 
