@@ -269,7 +269,7 @@
                 android:layout_marginStart="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"
-                app:chipSpacingHorizontal="16dp"
+                app:chipSpacingHorizontal="18dp"
                 >
 
                 <com.google.android.material.chip.Chip

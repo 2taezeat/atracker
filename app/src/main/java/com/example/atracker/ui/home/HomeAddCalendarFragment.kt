@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -163,18 +164,26 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
             if (args.progressIndex != 0) { // 편집인 경우, update
                 Log.d("qweqwe" ,"${homeViewModel.homeAddSelectedStage.value}")
 
-
                 homeViewModel.updateApply(args.progressIndex)
-
-
             } else { // 그냥 homdAdd 추가인 경우 post
                 homeViewModel.postApply()
             }
 
+
             //homeViewModel.postApply()
 
+            homeViewModel.updateApplyFail.observe(viewLifecycleOwner, Observer {
+                it.getContentIfNotHandled()?.let { boolean ->
+                    Log.d("updateApplyFail_2", "${boolean}")
+                    if (boolean) { // postApply 실패
+                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+                    }
+                }
+            })
+
+
             homeViewModel.postApplyFlag.observe(viewLifecycleOwner, Observer {
-                if (it == true){
+                if (it == true){ // postApply 성공시
                     homeViewModel.clearHomeAddText()
                     homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
 
@@ -183,8 +192,8 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
                     homeViewModel.switchFlagNull(homeViewModel._postApplyFlag)
                 }
-
             })
+
         }
 
 

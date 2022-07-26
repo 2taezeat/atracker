@@ -167,9 +167,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         homeViewModel.homeApplyIdContent.observe(viewLifecycleOwner, Observer {
 
-            Log.d("test123" , "${homeViewModel.homeApplyIdContent.value!!.apply_id}")
-
-
             homeViewModel.getApplyDetailFail.observe(viewLifecycleOwner, Observer {
                 Log.d("getApplyDetailFail", "${it}")
                 it.getContentIfNotHandled()?.let { boolean ->

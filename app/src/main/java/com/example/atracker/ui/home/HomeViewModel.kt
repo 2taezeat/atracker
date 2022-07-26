@@ -106,6 +106,10 @@ class HomeViewModel : ViewModel() {
     val addCompanyFail : LiveData<Event<Boolean>> = _addCompanyFail
 
 
+    private val _updateApplyFail = MutableLiveData<Event<Boolean>>()
+    val updateApplyFail : LiveData<Event<Boolean>> = _updateApplyFail
+
+
 
 
 //    private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
@@ -361,8 +365,9 @@ class HomeViewModel : ViewModel() {
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
+                _updateApplyFail.value = Event(false)
             } else {
-
+                _updateApplyFail.value = Event(true)
             }
         }
     }

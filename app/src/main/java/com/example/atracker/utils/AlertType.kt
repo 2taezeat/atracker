@@ -16,7 +16,7 @@ enum class AlertType {
     TYPE11, // myPage, 회원 탈퇴
 
     TYPE12, // homeBottom
-    TYPE13, // homeBottom
+    TYPE13, // homeBottom, delete apply
 
     TYPE14 // api Exception
 
