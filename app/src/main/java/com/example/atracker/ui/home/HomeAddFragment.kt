@@ -28,6 +28,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
 import com.example.atracker.utils.AlertApiObject
+import java.time.ZonedDateTime
+
+import kotlin.collections.ArrayList
 
 
 class HomeAddFragment : Fragment() {
@@ -115,6 +118,7 @@ class HomeAddFragment : Fragment() {
             val h = homeAddStagesName[idx]
             val c = chipsList[idx]
             c.text = h.title
+            c.tag = h.id
             homeViewModel.setOriChipId(c.id)
             chipsMap[h.id] = c
 
@@ -134,7 +138,6 @@ class HomeAddFragment : Fragment() {
             parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
             parentActivity.onBackPressed()
         }
-
 
 
         binding.homeAddNext.setOnClickListener { view ->
@@ -164,12 +167,23 @@ class HomeAddFragment : Fragment() {
                 val checkedChipStage = arrayListOf<Stage>()
                 val checkedChipAddProgress = arrayListOf<HomeAddProgress>()
 
-
                 for (idx in posList.indices) {
                     val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(posList[idx])
-                    checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), null))
+                    var zonedDateTime : ZonedDateTime? = null
+
+                    homeViewModel.homeAddSelectedStage.value?.let{ value ->
+                        val eventDateString : String? = value.find { it.stage_id == checkedChip.tag }!!.event_at
+                        eventDateString?.let {
+                            zonedDateTime = ZonedDateTime.parse(eventDateString)
+                        }
+
+                        Log.d("eventDateString", "${value}, ${checkedChip.tag}, ${zonedDateTime}")
+                    }
+
+
+                    checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), zonedDateTime))
                     val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
-                    checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
+                    checkedChipStage.add(Stage(event_at = zonedDateTime.toString(), order = idx, stage_id = stageId))
                 }
 
                 Log.d("asdasd", "${checkedChipStage}, ${checkedChipAddProgress}")
@@ -200,11 +214,13 @@ class HomeAddFragment : Fragment() {
 
 
         if (args.progressIndex != 0 ) { // 편집인 경우, mvp 이후 fix 필요
+
+            Log.d("homeAddSelectedStage", "${homeViewModel.homeAddSelectedStage.value} , ${spinnerSelectedPosition}")
+
+
             binding.homeAddHeaderTitle.text = "지원 현황 편집"
             spinnerSelectedPosition = homeViewModel.setWorkTypeSpinnerPosition()
             homeViewModel.setHomeEdit()
-
-            Log.d("test12345", "${homeViewModel.homeAddSelectedStage.value} , ${chipsMap}")
 
             for (c in chipsList) {
                 c.visibility = View.GONE
@@ -217,7 +233,6 @@ class HomeAddFragment : Fragment() {
                 selectedChip.visibility = View.VISIBLE
                 selectedChip.isChecked = true
             }
-            //firstCreate = false
         }
 
 
@@ -359,8 +374,6 @@ class HomeAddFragment : Fragment() {
                 checkedChip.setChipStrokeColorResource(R.color.progress_color_7)
             }
 
-
-
         })
 
         homeViewModel.falseChipSet.observe(viewLifecycleOwner, Observer {
@@ -382,7 +395,7 @@ class HomeAddFragment : Fragment() {
 
 
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) { // edit 시 fix 필요, mvp 이후, 로직 변경 필요
-        Log.d("test333", "${firstCreate}, ${homeViewModel.trueChipSet.value!!.size}")
+        Log.d("setOnCheckedChip", "${firstCreate}, ${homeViewModel.trueChipSet.value!!.size}")
 
         if (firstCreate) {
             if (homeViewModel.trueChipSet.value!!.size >= 7 && checked ) {

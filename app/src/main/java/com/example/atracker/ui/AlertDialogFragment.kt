@@ -302,7 +302,7 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
             }
 
 
-            AlertType.TYPE11 -> { // 회원 탈퇴
+            AlertType.TYPE11 -> { // 회원 탈퇴 부분
 
             }
 
