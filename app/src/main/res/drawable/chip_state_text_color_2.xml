@@ -1,7 +1,8 @@
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true"
-        android:color="@color/progress_color_7" />
+        android:color="@color/progress_color_7"
+        />
     <item android:state_checked="false"
         android:color="@color/atracker_gray_3" />
 

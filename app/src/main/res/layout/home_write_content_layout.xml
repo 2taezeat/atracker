@@ -132,6 +132,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="10dp"
                         android:visibility="invisible"
+                        android:textAppearance="@style/CustomChipChoiceText"
+
                         >
 
 
@@ -224,7 +226,7 @@
                             android:checkable="true"
                             android:clickable="true"
                             android:focusable="true"
-
+                            android:textAppearance="@style/CustomChipChoiceText"
 
                             >
                         </com.google.android.material.chip.Chip>
@@ -241,7 +243,7 @@
                             android:checkable="true"
                             android:clickable="true"
                             android:focusable="true"
-
+                            android:textAppearance="@style/CustomChipChoiceText"
                             >
                         </com.google.android.material.chip.Chip>
 
@@ -257,6 +259,7 @@
                             android:checkable="true"
                             android:clickable="true"
                             android:focusable="true"
+                            android:textAppearance="@style/CustomChipChoiceText"
 
                             >
                         </com.google.android.material.chip.Chip>

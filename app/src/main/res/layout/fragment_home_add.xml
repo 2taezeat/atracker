@@ -301,6 +301,7 @@
                     style="@style/CustomChipChoice3"
                     app:chipIconSize="14dp"
                     android:layoutDirection="rtl"
+                    android:textAppearance="@style/CustomChipChoiceText"
                     >
                 </com.google.android.material.chip.Chip>
 
@@ -318,6 +319,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
 
                     >
 
@@ -337,6 +340,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
 
                     >
                 </com.google.android.material.chip.Chip>
@@ -356,6 +361,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
 
                     >
                 </com.google.android.material.chip.Chip>
@@ -374,6 +381,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
                     >
                 </com.google.android.material.chip.Chip>
 
@@ -391,6 +400,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
                     >
                 </com.google.android.material.chip.Chip>
 
@@ -408,6 +419,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
                     >
                 </com.google.android.material.chip.Chip>
 
@@ -425,6 +438,8 @@
                     android:layoutDirection="rtl"
                     app:chipIconSize="14dp"
                     style="@style/CustomChipChoice3"
+                    android:textAppearance="@style/CustomChipChoiceText"
+
                     >
                 </com.google.android.material.chip.Chip>
 
