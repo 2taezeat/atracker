@@ -63,6 +63,8 @@
             android:textSize="16sp"
             android:textColorHint="@color/atracker_white"
             android:theme="@style/MyEditTextTheme"
+            android:fontFamily="@font/roboto_font"
+
             >
         </EditText>
 

@@ -72,6 +72,8 @@
                 android:textColor="@color/atracker_white"
                 android:textColorHint="@color/atracker_gray_3"
                 android:theme="@style/MyEditTextTheme"
+                android:fontFamily="@font/roboto_font"
+
 
                 >
             </EditText>
@@ -117,6 +119,8 @@
                 android:textSize="16sp"
                 android:textColor="@color/atracker_white"
                 android:textColorHint="@color/atracker_gray_3"
+                android:fontFamily="@font/roboto_font"
+
                 >
             </EditText>
 
@@ -148,6 +152,8 @@
                 android:textColor="@color/atracker_gray_2"
                 android:textColorHint="@color/atracker_gray_3"
                 android:theme="@style/MyEditTextTheme"
+                android:fontFamily="@font/roboto_font"
+
                 >
             </EditText>
 

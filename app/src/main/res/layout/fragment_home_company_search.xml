@@ -43,6 +43,8 @@
                 android:theme="@style/MyEditTextTheme"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@={homeVM._companyWord}"
+                android:fontFamily="@font/roboto_font"
+
                 >
 
             </EditText>

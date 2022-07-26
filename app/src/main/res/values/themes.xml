@@ -74,21 +74,19 @@
         <item name="android:textColor">@drawable/chip_state_text_color_2</item>
     </style>
 
-    <style name="CustomChipChoice3" parent="TextAppearance.MaterialComponents.Chip">
+    <style name="CustomChipChoiceText" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/roboto_font</item>
-        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
-        <item name="android:textColor">@drawable/chip_state_text_color_3</item>
     </style>
 
 
-    <!--    <style name="CustomChipChoice3" parent="@style/Widget.MaterialComponents.Chip.Action">-->
-    <!--        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>-->
-    <!--        <item name="android:textColor">@drawable/chip_state_text_color_3</item>-->
-    <!--        <item name="android:fontFamily">@font/roboto_font</item>-->
-    <!--        <item name="fontFamily">@font/roboto_font</item>-->
-    <!--        <item name="android:textAppearance">@font/roboto_font</item>-->
-    <!--    </style>-->
+    <style name="CustomChipChoice3" parent="@style/Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
+        <item name="android:textColor">@drawable/chip_state_text_color_3</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
+        <item name="fontFamily">@font/roboto_font</item>
+        <item name="android:textAppearance">@font/roboto_font</item>
+    </style>
 
 
     <style name="CustomBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">

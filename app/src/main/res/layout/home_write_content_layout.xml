@@ -100,6 +100,7 @@
                                     android:textColor="@color/atracker_white"
                                     android:textSize="16sp"
                                     android:textColorHint="@color/atracker_white"
+                                    android:fontFamily="@font/roboto_font"
 
                                     >
                                 </EditText>

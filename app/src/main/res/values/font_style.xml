@@ -22,4 +22,8 @@
         <item name="android:fontFamily">@font/roboto_font</item>
     </style>
 
+    <style name="customEditFontStyleTmp" parent="@android:style/Widget.EditText">
+        <item name="android:fontFamily">@font/roboto_font</item>
+    </style>
+
 </resources>
