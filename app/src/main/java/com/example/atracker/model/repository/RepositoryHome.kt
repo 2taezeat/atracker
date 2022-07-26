@@ -20,8 +20,8 @@ class RepositoryHome {
             homeService.companySearchPostApi(
                 accessToken = accessToken,
                 companySearchRequest = companySearchRequest,
-                page = 1,
-                size = 10)
+                page = page,
+                size = size)
         }.await()
 
         return apiResponse

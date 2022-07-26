@@ -37,6 +37,10 @@ class HomeViewModel : ViewModel() {
     }
     val companyList : LiveData<List<CompanySearchContent>> = _companyList
 
+    val _companyResponse = MutableLiveData<CompanySearchResponse?>()
+    val companyResponse : LiveData<CompanySearchResponse?> = _companyResponse
+
+
 
     val _companyWord = MutableLiveData<String>().apply {
         value = ""
@@ -48,6 +52,7 @@ class HomeViewModel : ViewModel() {
         value = 0
     }
     val companyId : LiveData<Int> = _companyId
+
 
 
     val _positionWord = MutableLiveData<String>().apply {
@@ -108,6 +113,10 @@ class HomeViewModel : ViewModel() {
 
     private val _updateApplyFail = MutableLiveData<Event<Boolean>>()
     val updateApplyFail : LiveData<Event<Boolean>> = _updateApplyFail
+
+
+    private val _getCompanyFail = MutableLiveData<Boolean?>()
+    val getCompanyFail : LiveData<Boolean?> = _getCompanyFail
 
 
 
@@ -187,6 +196,21 @@ class HomeViewModel : ViewModel() {
     val oriChipSet : LiveData<MutableSet<Int>> = _oriChipSet
 
 
+
+
+    init {
+        val instant = Instant.now()
+        _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
+        workTypeItems.value = listOf("PERMANENT", "TEMPORARY", "INTERN")
+        initTimeDateCurrent()
+        _trueChipSet.value = mutableSetOf()
+        _falseChipSet.value = mutableSetOf()
+        _oriChipSet.value = mutableSetOf()
+        _getCompanyFail.value = null
+        _companyResponse.value = null
+    }
+
+
     fun setChipSet(boolean: Boolean, num : Int){
         val trueNew = _trueChipSet.value!!
         val falseNew = _falseChipSet.value!!
@@ -216,16 +240,6 @@ class HomeViewModel : ViewModel() {
         _oriChipSet.value!!.add(chipId)
     }
 
-
-    init {
-        val instant = Instant.now()
-        _zonedDateTime.value = instant.atZone(TimeZone.getDefault().toZoneId())
-        workTypeItems.value = listOf("PERMANENT", "TEMPORARY", "INTERN")
-        initTimeDateCurrent()
-        _trueChipSet.value = mutableSetOf()
-        _falseChipSet.value = mutableSetOf()
-        _oriChipSet.value = mutableSetOf()
-    }
 
 
 
@@ -290,31 +304,42 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    fun getCompanyInfo (searchWord : String) { // 예외 처리 보류 (220726)
+    fun getCompanyInfo (searchWord : String, page : Int, size : Int = 10) { // 예외 처리 보류 (220726)
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
-                page = 1,
-                size = 10
+                page = page,
+                size = size
             )
 
-            if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!.companySearchContents
-                Log.d("getResult", "${getResult}")
-                _companyList.value = getResult
 
+            if (apiResult.code() == 200 && _getCompanyFail.value != null) {
+                val getResult = apiResult.body()!!
+                Log.d("companySearchContents", "${getResult}")
+
+                val new = _companyList.value!!.toMutableList()
+                new.addAll(getResult.companySearchContents)
+                _companyList.value = new
+
+
+                val newCompanyResponse : CompanySearchResponse = getResult
+                _companyResponse.value = newCompanyResponse
+
+                switch(_getCompanyFail)
+                //tmp()
             } else {
-
+                switch(_getCompanyFail)
             }
+
         }
     }
 
 
     fun addCompanyInfo () {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk",
+            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw",
                 createCompanyRequest = listOf(CreateCompanyRequestItem(name = _companyWord.value!!))
             )
 
@@ -334,7 +359,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -361,7 +386,7 @@ class HomeViewModel : ViewModel() {
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk", createApplyRequest = createApplyRequest )
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw", createApplyRequest = createApplyRequest )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -382,7 +407,7 @@ class HomeViewModel : ViewModel() {
         Log.d("updateApplyRequest", "${updateApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk", updateApplyRequest = updateApplyRequest )
+            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw", updateApplyRequest = updateApplyRequest )
             Log.d("getResult_33", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -397,7 +422,7 @@ class HomeViewModel : ViewModel() {
 
     fun deleteApply(deleteIds : Array<Int>) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk", ids = deleteIds )
+            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw", ids = deleteIds )
             Log.d("deleteApply", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -415,7 +440,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = false) { // 예외 처리 보류 (220725)
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -479,7 +504,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDetail(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNDgiLCJpYXQiOjE2NTg4MTYxMDgsImV4cCI6MTY1ODgxOTcwOH0.pFAr72vRU2pcsC3Sstyys2gzpfA7ea7lCI18lbr3SHk",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTAiLCJpYXQiOjE2NTg4MjM0ODYsImV4cCI6MTY1ODgyNzA4Nn0.AhhDDa4uDiOb9rs05lyk46SxSXgp3icUJax37DK8bTw",
                 applyIds = applyIds,
                 includeContent = includeContent)
 

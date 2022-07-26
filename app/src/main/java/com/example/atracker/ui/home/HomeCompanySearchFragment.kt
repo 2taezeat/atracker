@@ -15,7 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentHomeCompanySearchBinding
 import com.example.atracker.ui.MainActivity
@@ -62,7 +64,32 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
             it.layoutManager = LinearLayoutManager(parentActivity, LinearLayoutManager.VERTICAL, false)
             it.setHasFixedSize(false)
             it.adapter = homeCompanySearchAdapter
+            it.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val layoutManager =
+                        LinearLayoutManager::class.java.cast(recyclerView.layoutManager)
+                    val totalItemCount = layoutManager.itemCount
+                    val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
+
+                    if (lastVisible >= totalItemCount - 1) {
+                        homeViewModel.companyResponse.observe(viewLifecycleOwner, Observer {
+                            Log.d("lastVisibled_2", "${homeViewModel.companyResponse.value}")
+
+
+                            if (homeViewModel.companyResponse.value != null ){
+                                if (homeViewModel.companyResponse.value!!.has_next)
+                                    homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = homeViewModel.companyResponse.value!!.next_page_no + 1, size = 10)
+                            }
+                        })
+
+                    }
+                }
+            }
+            )
         }
+
 
 
 
@@ -73,7 +100,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.d("onTextChanged", "${charSequence},${p1},${p2},${p3}")
                 if (charSequence!!.length >= 2) {
-                    homeViewModel.getCompanyInfo(charSequence.toString())
+                    homeViewModel.getCompanyInfo(charSequence.toString(), 1, 10)
                 }
 
                 if (charSequence.toString() != homeViewModel.companyWord.value) {
@@ -126,8 +153,6 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
 
 
 
-
-
         return binding.root
     }
 
@@ -141,5 +166,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
         homeAddFragment.setViewGray()
         super.onDismiss(dialog)
     }
+
+
 
 }
