@@ -41,6 +41,8 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
     }
 
 
+    var flag = true
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,18 +76,16 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                     val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
 
                     if (lastVisible >= totalItemCount - 1) {
-                        homeViewModel.companyResponse.observe(viewLifecycleOwner, Observer {
-                            Log.d("lastVisibled_2", "${homeViewModel.companyResponse.value}")
+                        homeViewModel.companyResponse.observe(viewLifecycleOwner, Observer { value ->
+                            Log.d("lastVisibled", "${value}")
 
-                            if (homeViewModel.companyResponse.value != null ){
-                                if (homeViewModel.companyResponse.value!!.has_next)
-                                    homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = homeViewModel.companyResponse.value!!.next_page_no + 1, size = 10)
+                            value?.let{
+                                if (value.has_next)
+                                    homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = homeViewModel.companyResponse.value!!.next_page_no + 1, size = 10, true)
                             }
                         })
-
                     }
-                }
-            }
+                } }
             )
         }
 
@@ -93,26 +93,37 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
 
 
         binding.homeCompanySearchCompanyET.addTextChangedListener(object : TextWatcher {
+            var beforeString = ""
+            var onString = ""
+
+
             override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                Log.d("test333_$4", "${charSequence}")
+                beforeString = charSequence.toString()
             }
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.d("onTextChanged", "${charSequence},${p1},${p2},${p3}")
-                if (charSequence!!.length >= 2) {
-                    homeViewModel.getCompanyInfo(charSequence.toString(), 1, 10)
-                }
+                onString = charSequence.toString()
+                flag = true
 
                 if (charSequence.toString() != homeViewModel.companyWord.value) {
                     homeViewModel.clearCompanyValue()
                 }
 
-                if (charSequence.toString().isNotBlank())
+                if (charSequence.toString().isNotEmpty())
                     binding.homeCompanySearchCancelIV.visibility = View.VISIBLE
                 else
                     binding.homeCompanySearchCancelIV.visibility = View.INVISIBLE
             }
 
-            override fun afterTextChanged(p0: Editable?) {
+            override fun afterTextChanged(editable: Editable?) {
+                Log.d("test3333333", "${beforeString}, ${editable}, ${onString}")
+
+                if (editable!!.length >= 2 && onString.isNotEmpty() && flag) {
+                    homeViewModel.getCompanyInfo(homeViewModel.companyWord.value!!, 1, 10, false)
+                    flag = false
+                }
             }
         })
 
@@ -155,6 +166,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
+        flag = false
         homeViewModel.setCompanyNameID(position)
         binding.homeCompanySearchCompanyET.setText(viewTag)
     }
