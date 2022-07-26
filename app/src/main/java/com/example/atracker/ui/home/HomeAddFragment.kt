@@ -199,7 +199,7 @@ class HomeAddFragment : Fragment() {
 
 
 
-        if (args.progressIndex != 0 ) { // 편집인 경우
+        if (args.progressIndex != 0 ) { // 편집인 경우, mvp 이후 fix 필요
             binding.homeAddHeaderTitle.text = "지원 현황 편집"
             spinnerSelectedPosition = homeViewModel.setWorkTypeSpinnerPosition()
             homeViewModel.setHomeEdit()
@@ -217,7 +217,7 @@ class HomeAddFragment : Fragment() {
                 selectedChip.visibility = View.VISIBLE
                 selectedChip.isChecked = true
             }
-            //flag = true
+            //firstCreate = false
         }
 
 
@@ -381,9 +381,11 @@ class HomeAddFragment : Fragment() {
 
 
 
-    private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) {
+    private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) { // edit 시 fix 필요, mvp 이후, 로직 변경 필요
+        Log.d("test333", "${firstCreate}, ${homeViewModel.trueChipSet.value!!.size}")
+
         if (firstCreate) {
-            if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) {
+            if (homeViewModel.trueChipSet.value!!.size >= 7 && checked ) {
                 showAlert(AlertType.TYPE8, compoundButton.id)
                 binding.homeAddRefreshIV.callOnClick()
             } else {
