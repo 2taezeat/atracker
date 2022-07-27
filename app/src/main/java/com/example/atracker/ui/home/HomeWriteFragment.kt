@@ -120,7 +120,7 @@ class HomeWriteFragment : Fragment() {
                     val previousState = progressIsPassingMap[previousTabPosition]
                     val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
 
-                    if (previousTabPosition < tab.position && (previousState != IsPassing.SUCCESS || selectedMinusOneState != IsPassing.SUCCESS)) {
+                    if (previousTabPosition < tab.position && (previousState != IsPassing.PASS || selectedMinusOneState != IsPassing.PASS)) {
                         showAlert(AlertType.TYPE2 , tab,null)
                         binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                     } else {
@@ -404,47 +404,57 @@ class HomeWriteFragment : Fragment() {
                 }
             }
 
-            if (itemType == ProgressItemBodyType.FREE) { // free
-                val addLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
-                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-                )
-                params.setMargins(0,20,0,10)
-                addLayout.layoutParams = params
-                addLayout.id = View.generateViewId()
-                homeWriteLL.addView(addLayout)
-
-                val homeWriteFreeET = addLayout.findViewById<EditText>(R.id.homeWriteFreeET)
-                homeWriteFreeET.setText(freeBody)
-                val homeWriteFreeTitle = addLayout.findViewById<EditText>(R.id.homeWriteFreeTitle)
-                homeWriteFreeTitle.setText(freeTitle)
 
 
-                freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
-            } else if (itemType == ProgressItemBodyType.QNA) { // qna
-                val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
-                val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-                )
-                params.setMargins(0,20,0,10)
-                addLayout.layoutParams = params
-                addLayout.id = View.generateViewId()
-                homeWriteLL.addView(addLayout)
+            when (itemType) {
+                ProgressItemBodyType.FREE_FORM -> { // free
+                    val addLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
+                    val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+                    )
+                    params.setMargins(0,20,0,10)
+                    addLayout.layoutParams = params
+                    addLayout.id = View.generateViewId()
+                    homeWriteLL.addView(addLayout)
 
-                val homeWriteQuestionTV = addLayout.findViewById<EditText>(R.id.homeWriteQuestionTV)
-                homeWriteQuestionTV.setText(questionBody)
-                val homeWriteAnswerET = addLayout.findViewById<EditText>(R.id.homeWriteAnswerET)
-                homeWriteAnswerET.setText(answerBody)
-                val homeWriteQnaOfReviewET = addLayout.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
-                homeWriteQnaOfReviewET.setText(qnaReviewBody)
+                    val homeWriteFreeET = addLayout.findViewById<EditText>(R.id.homeWriteFreeET)
+                    homeWriteFreeET.setText(freeBody)
+                    val homeWriteFreeTitle = addLayout.findViewById<EditText>(R.id.homeWriteFreeTitle)
+                    homeWriteFreeTitle.setText(freeTitle)
 
-                qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
 
-            } else if (itemType == ProgressItemBodyType.REVIEW) {
-                homeWriteReviewET.setText(totalReviewBody)
+                    freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
+                }
+                ProgressItemBodyType.QNA -> { // qna
+                    val addLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
+                    val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+                    )
+                    params.setMargins(0,20,0,10)
+                    addLayout.layoutParams = params
+                    addLayout.id = View.generateViewId()
+                    homeWriteLL.addView(addLayout)
 
+                    val homeWriteQuestionTV = addLayout.findViewById<EditText>(R.id.homeWriteQuestionTV)
+                    homeWriteQuestionTV.setText(questionBody)
+                    val homeWriteAnswerET = addLayout.findViewById<EditText>(R.id.homeWriteAnswerET)
+                    homeWriteAnswerET.setText(answerBody)
+                    val homeWriteQnaOfReviewET = addLayout.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
+                    homeWriteQnaOfReviewET.setText(qnaReviewBody)
+
+                    qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
+
+                }
+                ProgressItemBodyType.OVERALL -> {
+                    homeWriteReviewET.setText(totalReviewBody)
+
+                }
+//                ProgressItemBodyType.NOT_DEFINED -> {
+//                    homeWriteReviewET.setText(totalReviewBody)
+//
+//                }
             }
         }
     }

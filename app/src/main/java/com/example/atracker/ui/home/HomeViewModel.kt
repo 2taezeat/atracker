@@ -131,7 +131,7 @@ class HomeViewModel : ViewModel() {
     private val _homeDetailContents = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
         value = mutableMapOf(
             3039 to arrayListOf<HomeDetailItem>(
-                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
+                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
                 HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
                 HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
             )
@@ -514,7 +514,7 @@ class HomeViewModel : ViewModel() {
             val _tmp = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
                 value = mutableMapOf(
                     3039 to arrayListOf<HomeDetailItem>(
-                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
+                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
                         HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
                         HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
                     )
@@ -547,16 +547,16 @@ class HomeViewModel : ViewModel() {
                         // QNA = "{ \"q\": \"질문1\", \"a\": \"답변1\", \"f\": \"피드백\",}" /// FREE_FORM => "{ \"t\": \"자유 예시 타이틀\", \b\": \"자유 예시 컨텐츠\"}", OVERALL => "종합후기 예시 텍스트1"
 
                         when (contentContentType) {
-                            ProgressItemBodyTypeTmp.OVERALL.toString() -> {
+                            ProgressItemBodyType.OVERALL.toString() -> {
 
                             }
-                            ProgressItemBodyTypeTmp.QNA.toString() -> {
+                            ProgressItemBodyType.QNA.toString() -> {
 
                             }
-                            ProgressItemBodyTypeTmp.FREE_FORM.toString() -> {
+                            ProgressItemBodyType.FREE_FORM.toString() -> {
 
                             }
-                            ProgressItemBodyTypeTmp.NOT_DEFINED.toString() -> {
+                            ProgressItemBodyType.NOT_DEFINED.toString() -> {
                                 forDetailDisplayArrayList.add(HomeDetailItem(progressType = 0,
                                     progressName = "",
                                     itemType =,

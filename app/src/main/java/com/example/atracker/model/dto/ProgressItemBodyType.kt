@@ -1,7 +1,12 @@
 package com.example.atracker.model.dto
 
 enum class ProgressItemBodyType {
-    REVIEW,
-    QNA,
-    FREE
+    FREE_FORM, // FREE
+    NOT_DEFINED,
+    OVERALL, // REVIEW
+    QNA
 }
+
+//REVIEW,
+//QNA,
+//FREE
