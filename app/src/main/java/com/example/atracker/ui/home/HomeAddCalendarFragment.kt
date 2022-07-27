@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -154,7 +153,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
         binding.homeAddCalendarBackButton.setOnClickListener { view ->
             val navController = view.findNavController()
-            homeViewModel.switch(homeViewModel._tmp)
+            homeViewModel.switch(homeViewModel._addCalendarToAddFlag)
             navController.popBackStack()
         }
 

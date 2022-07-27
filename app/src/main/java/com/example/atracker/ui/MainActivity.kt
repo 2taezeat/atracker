@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("onBackPressed_destination", "${navDisplayController.currentDestination}, ${navDisplayController.graph.startDestDisplayName}")
 
         if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add_calendar) {
-            homeViewModel.switch(homeViewModel._tmp)
+            homeViewModel.switch(homeViewModel._addCalendarToAddFlag)
         }
 
 //        navDisplayController.addOnDestinationChangedListener{ navController, destination, args -> // onBack 될때만 호출되는게 아닌거 같다  * Rna 필요

@@ -117,8 +117,8 @@ class HomeViewModel : ViewModel() {
     private val _updateApplyFail = MutableLiveData<Event<Boolean>>()
     val updateApplyFail : LiveData<Event<Boolean>> = _updateApplyFail
 
-    val _tmp = MutableLiveData<Boolean?>()
-    val tmp : LiveData<Boolean?> = _tmp
+    val _addCalendarToAddFlag = MutableLiveData<Boolean?>()
+    val addCalendarToAddFlag : LiveData<Boolean?> = _addCalendarToAddFlag
 
 
 
@@ -207,7 +207,7 @@ class HomeViewModel : ViewModel() {
         _falseChipSet.value = mutableSetOf()
         _oriChipSet.value = mutableSetOf()
         _companyResponse.value = null
-        _tmp.value = null
+        _addCalendarToAddFlag.value = null
     }
 
 
@@ -638,7 +638,7 @@ class HomeViewModel : ViewModel() {
         _trueChipSet.value = mutableSetOf()
         _falseChipSet.value = mutableSetOf()
 
-        _tmp.value = null
+        _addCalendarToAddFlag.value = null
     }
 
     fun setClearCompanyList(){
@@ -665,16 +665,6 @@ class HomeViewModel : ViewModel() {
 
     fun setEditPositionWord() {
         _positionWord.value = _homeApplyIdContent.value!!.job_position
-    }
-
-    fun setNull() {
-        _tmp.value = null
-        Log.d("test_null", "${_tmp.value}")
-    }
-
-    fun back() {
-        Log.d("test_back", "test")
-        switch(_tmp)
     }
 
     fun setWorkTypeSpinnerPosition() : Int{

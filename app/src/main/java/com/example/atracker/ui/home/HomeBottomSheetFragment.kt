@@ -76,7 +76,7 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
         binding.homeBottomSheetProgressEditCL.setOnClickListener {
             val action = HomeDetailFragmentDirections.actionNavigationHomeDetailToNavigationHomeAdd(progressIndex!!)
             val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
-            homeViewModel.switchFlagNull(homeViewModel._tmp) // homeAdd position 편집시를 위한 초기화
+            homeViewModel.switchFlagNull(homeViewModel._addCalendarToAddFlag) // homeAdd position 편집시를 위한 초기화
             navController.navigate(action)
             parentActivity.mainBottomNavigationDisappear()
             dismiss()

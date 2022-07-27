@@ -211,7 +211,7 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        Log.d("homeAddCalendar_back", "${homeViewModel.tmp.value}")
+        Log.d("homeAddCalendar_back", "${homeViewModel.addCalendarToAddFlag.value}")
 
 
         if (args.progressIndex != 0 ) { // 편집인 경우, mvp 이후 fix 필요
@@ -233,7 +233,7 @@ class HomeAddFragment : Fragment() {
             }
         }
 
-        if (homeViewModel.tmp.value == null && args.progressIndex != 0) {
+        if (homeViewModel.addCalendarToAddFlag.value == null && args.progressIndex != 0) {
             homeViewModel.setEditPositionWord()
         }
 
