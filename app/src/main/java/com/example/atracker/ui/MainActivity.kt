@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                     mainBottomNavigationAppear()
                 }
                 R.id.navigation_home_detail -> {
-                    mainBottomNavigationAppear()
+                    mainBottomNavigationDisappear() // display -> detail 시 disapper 시켜야 오류가 안난다고 판단
                 }
                 R.id.navigation_my_page_display -> {
                     mainBottomNavigationAppear()
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        Log.d("onBackPressed_destination", "${navDisplayController.currentDestination}, ${navDisplayController.graph.startDestDisplayName}")
+        Log.d("onBackPresed_destination", "${navDisplayController.currentDestination}, ${navDisplayController.graph.startDestDisplayName}")
 
         if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add_calendar) {
             homeViewModel.switch(homeViewModel._addCalendarToAddFlag)

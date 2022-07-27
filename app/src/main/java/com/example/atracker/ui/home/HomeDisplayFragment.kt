@@ -177,6 +177,8 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
                             progressIndex = applyId,
                             displayListPosition = position)
                         findNavController().navigate(action)
+
+                        //parentActivity.mainBottomNavigationDisappear() // 없어도 navController 리스너가 해줌.
                     }
                 }
             })
