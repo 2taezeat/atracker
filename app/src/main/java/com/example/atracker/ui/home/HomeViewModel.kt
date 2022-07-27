@@ -348,19 +348,33 @@ class HomeViewModel : ViewModel() {
 
         val allParsedContentStringList = arrayListOf<String?>(null, null, null, null, null, null, null)
 
+        val dropString = contentContentString.drop(1).dropLast(1) // "{,}" 날리기
+        val splitList = dropString.split(',') // ',' 제거
+
         when (decidedContentContentType) {
             ProgressItemBodyType.NOT_DEFINED -> {
 
             }
             ProgressItemBodyType.FREE_FORM -> {
-                for (s in contentContentString) {
-
-
+                for (s in splitList) {
+                    val standard = s[2]
+                    val finalContentString = s.substring(7,s.lastIndex)
+                    when (standard) {
+                        't' -> allParsedContentStringList[0] = finalContentString
+                        'b' -> allParsedContentStringList[1] = finalContentString
+                    }
                 }
             }
             ProgressItemBodyType.QNA -> {
-
-
+                for (s in splitList) {
+                    val standard = s[2]
+                    val finalContentString = s.substring(7,s.lastIndex)
+                    when (standard) {
+                        'q' -> allParsedContentStringList[3] = finalContentString
+                        'a' -> allParsedContentStringList[4] = finalContentString
+                        'f' -> allParsedContentStringList[5] = finalContentString
+                    }
+                }
             }
             ProgressItemBodyType.OVERALL -> {
                 allParsedContentStringList[2] = contentContentString
@@ -563,16 +577,6 @@ class HomeViewModel : ViewModel() {
                 accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNjEiLCJpYXQiOjE2NTg5MjAxOTUsImV4cCI6MTY1ODkyMzc5NX0.ZjdvkYBxQckVyHJRdj2XG8XuZAFlpRhsiyrp5RkXMr0",
                 applyIds = applyIds,
                 includeContent = includeContent)
-
-            val _tmp = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
-                value = mutableMapOf(
-                    3039 to arrayListOf<HomeDetailItem>(
-                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
-                        HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
-                        HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
-                    )
-                )
-            }
 
             if (apiResult.code() == 200) {
                 val newStageTitleArrayList = arrayListOf<String>()
