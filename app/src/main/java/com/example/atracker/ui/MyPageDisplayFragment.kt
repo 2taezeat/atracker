@@ -86,6 +86,21 @@ class MyPageDisplayFragment : Fragment() {
             }
         }
 
+
+
+        binding.myPageAccountWithdrawalTV.setOnClickListener {
+//            FirebaseAuth.getInstance().signOut()
+//            googleSignInClient.signOut().addOnCompleteListener {
+//                //activity!!.finish()
+//                //startLogin()
+//                showAlert(AlertType.TYPE10)
+//            }
+            showAlert(AlertType.TYPE11)
+        }
+
+
+
+
         binding.myPageNickNameTV.text = myPageViewModel.userNickName.value
         binding.myPagePositionTV.text = myPageViewModel.userJobPosition.value
         binding.myPageCareerAgeTV.text = myPageViewModel.userExperienceType.value
@@ -144,6 +159,9 @@ class MyPageDisplayFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE10 -> {
+                            startLogin()
+                        }
+                        AlertType.TYPE11 -> {
                             startLogin()
                         }
                     }

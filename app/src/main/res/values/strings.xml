@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">atracker</string>
+    <string name="app_name_korean">어트래커</string>
     <string name="title_home">홈</string>
     <string name="title_blog">블로그</string>
     <string name="title_search">탐색</string>

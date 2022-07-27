@@ -273,7 +273,7 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
             }
 
 
-            AlertType.TYPE10 -> {
+            AlertType.TYPE10 -> { // 로그 아웃
                 binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
 
 
@@ -303,6 +303,31 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
 
 
             AlertType.TYPE11 -> { // 회원 탈퇴 부분
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                val testString1 = "정말 탈퇴 하시겠습니까?"
+                val ssb = SpannableStringBuilder(testString1)
+                ssb.setSpan(ForegroundColorSpan(Color.parseColor("#7EFBDC")), 3, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.alertDialogTV1.text = ssb
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "이 작업은 취소하실 수 없습니다."
+
+                binding.alertDialogButton1.text = "취소"
+                binding.alertDialogButton2.text = "탈퇴"
+                binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
 
             }
 
