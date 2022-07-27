@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
@@ -41,7 +40,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
     }
 
 
-    var flag = true
+    var clickNotDuplicatedFlag = true
 
 
     override fun onCreateView(
@@ -78,9 +77,12 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                     if (lastVisible >= totalItemCount - 1 && !it.canScrollVertically(1)) {
                         Log.d("scrollBottom", "scrollBottom")
 
-                        val companyResponse = homeViewModel.companyResponse.value!!
-                        if (companyResponse.has_next) {
-                            homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = companyResponse.next_page_no + 1, size = 10, true)
+                        val companyResponse = homeViewModel.companyResponse.value
+
+                        companyResponse?.let { value ->
+                            if (value.has_next) {
+                                homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = value.next_page_no + 1, size = 10, true)
+                            }
                         }
                     }
 
@@ -98,7 +100,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.d("onTextChanged", "${charSequence},${p1},${p2},${p3}")
-                flag = true
+                clickNotDuplicatedFlag = true
 
                 if (charSequence.toString() != homeViewModel.companyWord.value) {
                     homeViewModel.clearCompanyValue()
@@ -111,9 +113,9 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
             }
 
             override fun afterTextChanged(editable: Editable?) {
-                if (editable!!.length >= 2  && flag) {
+                if (editable!!.length >= 2  && clickNotDuplicatedFlag) {
                     homeViewModel.getCompanyInfo(homeViewModel.companyWord.value!!, 1, 10, false)
-                    flag = false
+                    clickNotDuplicatedFlag = false
                 }
             }
         })
@@ -157,7 +159,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
     }
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String) {
-        flag = false
+        clickNotDuplicatedFlag = false
         homeViewModel.setCompanyNameID(position)
         binding.homeCompanySearchCompanyET.setText(viewTag)
     }

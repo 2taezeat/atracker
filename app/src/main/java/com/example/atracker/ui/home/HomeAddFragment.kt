@@ -172,35 +172,34 @@ class HomeAddFragment : Fragment() {
                     var zonedDateTime : ZonedDateTime? = null
 
                     homeViewModel.homeAddSelectedStage.value?.let{ value ->
-                        val eventDateString : String? = value.find { it.stage_id == checkedChip.tag }!!.event_at
-                        eventDateString?.let {
-                            zonedDateTime = ZonedDateTime.parse(eventDateString)
-                        }
+                        var eventDateString : String? = null
+                        value.find { it.stage_id == checkedChip.tag }?.let { it -> eventDateString = it.event_at }
+                        eventDateString?.let { it -> zonedDateTime = ZonedDateTime.parse(it) }
 
                         Log.d("eventDateString", "${value}, ${checkedChip.tag}, ${zonedDateTime}")
                     }
 
-
                     checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), zonedDateTime))
                     val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
-                    checkedChipStage.add(Stage(event_at = zonedDateTime.toString(), order = idx, stage_id = stageId))
+                    if (zonedDateTime == null) {
+                        checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
+                    } else {
+                        checkedChipStage.add(Stage(event_at = zonedDateTime.toString(), order = idx, stage_id = stageId))
+                    }
                 }
 
-                Log.d("asdasd", "${checkedChipStage}, ${checkedChipAddProgress}")
+                Log.d("checkedChipStage", "${checkedChipStage}, ${checkedChipAddProgress}")
 
-                if (args.progressIndex != 0) { // edit 일때
-//                    homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
-//                    homeViewModel.setSelectedChipName(checkedChipAddProgress)
-                }
+//                if (args.progressIndex != 0) { // edit 일때, mvp 이후 한번 살펴 볼 필요가 있음.
+//
+//                }
                 homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
                 homeViewModel.setSelectedChipName(checkedChipAddProgress)
-
             }
 
             if (checkNext) {
                 val action = HomeAddFragmentDirections.actionNavigationHomeAddToNavigationHomeAddCalendar(args.progressIndex)
                 view.findNavController().navigate(action)
-                //checkedChipIdList.clear()
             }
 
         }
@@ -212,11 +211,11 @@ class HomeAddFragment : Fragment() {
         }
 
 
+        Log.d("homeAddCalendar_back", "${homeViewModel.tmp.value}")
+
 
         if (args.progressIndex != 0 ) { // 편집인 경우, mvp 이후 fix 필요
-
             Log.d("homeAddSelectedStage", "${homeViewModel.homeAddSelectedStage.value} , ${spinnerSelectedPosition}")
-
 
             binding.homeAddHeaderTitle.text = "지원 현황 편집"
             spinnerSelectedPosition = homeViewModel.setWorkTypeSpinnerPosition()
@@ -229,12 +228,14 @@ class HomeAddFragment : Fragment() {
             for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
                 val selectedChip = chipsMap[stageId]!!
-
                 selectedChip.visibility = View.VISIBLE
                 selectedChip.isChecked = true
             }
         }
 
+        if (homeViewModel.tmp.value == null && args.progressIndex != 0) {
+            homeViewModel.setEditPositionWord()
+        }
 
 
         val workTypeItems: List<String> = listOf("정규직", "계약직", "인턴")
@@ -447,7 +448,6 @@ class HomeAddFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         Log.d("homeadd_onStop","onStop")
-
         firstCreate = false
     }
 

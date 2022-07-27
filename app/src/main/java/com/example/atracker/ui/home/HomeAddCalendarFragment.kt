@@ -154,21 +154,21 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
         binding.homeAddCalendarBackButton.setOnClickListener { view ->
             val navController = view.findNavController()
+            homeViewModel.switch(homeViewModel._tmp)
             navController.popBackStack()
         }
 
 
         binding.homeAddCalendarBottomCL.setOnClickListener { view ->
-            if (args.progressIndex != 0) { // 편집인 경우, update
-                Log.d("qweqwe" ,"${homeViewModel.homeAddSelectedStage.value}")
+            Log.d("homeAddSelectedStage" ,"${homeViewModel.homeAddSelectedStage.value}")
 
+
+            if (args.progressIndex != 0) { // 편집인 경우, update
                 homeViewModel.updateApply(args.progressIndex)
             } else { // 그냥 homdAdd 추가인 경우 post
                 homeViewModel.postApply()
             }
 
-
-            //homeViewModel.postApply()
 
             homeViewModel.updateApplyFail.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled()?.let { boolean ->

@@ -2,6 +2,7 @@ package com.example.atracker.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -86,38 +87,7 @@ class MainActivity : AppCompatActivity() {
             null
         )
 
-
-//        navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
-//            when (destination.id) {
-//                R.id.navigation_blog -> {
-//                }
-//                R.id.navigation_home -> {
-//
-//                    if ( checkApiException() ){
-//                        showAlertInstance(alertDialogFragment)
-//                    }
-//
-//                }
-//                R.id.navigation_calendar -> {
-//                }
-//                R.id.navigation_home_detail -> {
-//                }
-//                R.id.navigation_my_page_display -> {
-//                }
-//                else -> {
-//                }
-//            }
-//        }
-
-        homeViewModel.getStage()
-        myPageViewModel.getMyPage()
-        homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
-
-    }
-
-
-    override fun onBackPressed() {
-        navDisplayController.addOnDestinationChangedListener{ _, destination, _ ->
+        navDisplayController.addOnDestinationChangedListener{ navController, destination, args -> // onBack 될때만 호출되는게 아닌거 같다  * Rna 필요
             when (destination.id) {
                 R.id.navigation_blog -> {
                     mainBottomNavigationAppear()
@@ -135,10 +105,57 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_my_page_display -> {
                     mainBottomNavigationAppear()
                 }
+                R.id.navigation_home_add -> { //
+
+                }
                 else -> {
+
                 }
             }
         }
+
+        homeViewModel.getStage()
+        myPageViewModel.getMyPage()
+        homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+
+    }
+
+
+    override fun onBackPressed() {
+        Log.d("onBackPressed_destination", "${navDisplayController.currentDestination}, ${navDisplayController.graph.startDestDisplayName}")
+
+        if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add_calendar) {
+            homeViewModel.switch(homeViewModel._tmp)
+        }
+
+//        navDisplayController.addOnDestinationChangedListener{ navController, destination, args -> // onBack 될때만 호출되는게 아닌거 같다  * Rna 필요
+//            if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add ) {
+//                Log.d("test123", " ${navController.currentDestination}, ${destination}")
+//            }
+//            when (destination.id) {
+//                R.id.navigation_blog -> {
+//                    mainBottomNavigationAppear()
+//                }
+//                R.id.navigation_home -> {
+//                    mainBottomNavigationAppear()
+//                    homeViewModel.clearHomeAddText()
+//                }
+//                R.id.navigation_calendar -> {
+//                    mainBottomNavigationAppear()
+//                }
+//                R.id.navigation_home_detail -> {
+//                    mainBottomNavigationAppear()
+//                }
+//                R.id.navigation_my_page_display -> {
+//                    mainBottomNavigationAppear()
+//                }
+//                R.id.navigation_home_add -> { //
+//                    //homeViewModel.back()
+//                }
+//                else -> {
+//                }
+//            }
+//        }
 
 
         super.onBackPressed()

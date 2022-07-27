@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.atracker.utils.ProgressBarDrawable
 import com.example.atracker.databinding.FragmentHomeDetailBinding
 import com.example.atracker.ui.MainActivity
-import com.example.atracker.utils.AlertApiObject
 import com.google.android.material.tabs.TabLayout
 
 
@@ -57,7 +56,7 @@ class HomeDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val homeProgress = homeViewModel.homeDisplayArrayList_tmp.value!![args.displayListPosition]
+        val homeProgress = homeViewModel.homeDetailArrayList.value!![args.displayListPosition]
         homeDetailTabLayout = binding.homeDetailTabLayout
 
 
