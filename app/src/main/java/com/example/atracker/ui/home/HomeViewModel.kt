@@ -612,6 +612,19 @@ class HomeViewModel : ViewModel() {
         mutableLiveData.value = if(mutableLiveData.value == null) true else !mutableLiveData.value!!
     }
 
+    fun setHomeAddDateSelectTime(position: Int?) {
+        val selectedZoneTime = _homeAddSelectedProgress.value!![position!!].zonedDateTime
+
+        selectedZoneTime?.let {
+            year.value = it.year
+            month.value = it.monthValue - 1
+            day.value = it.dayOfMonth
+            hour.value = it.hour
+            minute.value = it.minute
+        }
+
+    }
+
     fun clearHomeAddText(){
         clearCompanyValue()
 
