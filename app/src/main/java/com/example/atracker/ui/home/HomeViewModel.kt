@@ -317,6 +317,46 @@ class HomeViewModel : ViewModel() {
     fun switchFlagNull(mutableLiveData: MutableLiveData<Boolean?>){
         mutableLiveData.value = null
     }
+
+    fun decideIsPassing(stageStatusString : String) : IsPassing {
+        when (stageStatusString) {
+            IsPassing.PASS.toString() -> return IsPassing.PASS
+            IsPassing.FAIL.toString() -> return IsPassing.FAIL
+            IsPassing.NOT_STARTED.toString() -> return IsPassing.NOT_STARTED
+            IsPassing.IN_PROGRESS.toString() -> return IsPassing.IN_PROGRESS
+            else -> return IsPassing.NOT_STARTED
+        }
+    }
+
+    fun decideProgressItemBodyType(contentContentTypeString : String) : ProgressItemBodyType {
+        when (contentContentTypeString) {
+            ProgressItemBodyType.NOT_DEFINED.toString() -> return ProgressItemBodyType.NOT_DEFINED
+            ProgressItemBodyType.FREE_FORM.toString() -> return ProgressItemBodyType.FREE_FORM
+            ProgressItemBodyType.QNA.toString() -> return ProgressItemBodyType.QNA
+            ProgressItemBodyType.OVERALL.toString() -> return ProgressItemBodyType.OVERALL
+            else -> return ProgressItemBodyType.NOT_DEFINED
+        }
+    }
+
+    fun stageContentParsing(contentContentString : String, decidedContentContentType : ProgressItemBodyType)  {
+        when (decidedContentContentType) {
+            ProgressItemBodyType.NOT_DEFINED -> {
+
+            }
+            ProgressItemBodyType.FREE_FORM -> {
+
+            }
+            ProgressItemBodyType.QNA -> {
+
+            }
+            ProgressItemBodyType.OVERALL -> {
+
+            }
+        }
+
+
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -532,19 +572,24 @@ class HomeViewModel : ViewModel() {
                 for (stage in stageProgress) { // 단위는 stage 당 (서류 당, 1차 면접 당...)
                     //val stageEventAt = stage.event_at // mvp 안쓰임
                     val stageOrder = stage.order
-                    val stageStatus = stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
+                    val stageStatus = stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지, 서버에서 받아 올때는 String 임.
                     val stageTitle = stage.stage_title
                     val stageContents = stage.stage_contents
                     val stageRealId = stage.id // 그 stage 의 실질 살아있는 id
                     val stageTheId = stage.stage_id // '서류' 그 자체 id ( 10000, 10001 ... )
 
+                    val decidedStageStatus = decideIsPassing(stageStatus)
 
                     for (sContent in stageContents) {
                         val contentOrder = sContent.order
                         val contentId = sContent.id
-                        val contentContentType = sContent.content_type // FREE_FORM, NOT_DEFINED, OVERALL, QNA
+                        val contentContentType = sContent.content_type // FREE_FORM, NOT_DEFINED, OVERALL, QNA, 서버로 받아 올때는 string 임
                         val contentContent = sContent.content // * contentContentType 에 따른 문자열 처리 해주어야함,
                         // QNA = "{ \"q\": \"질문1\", \"a\": \"답변1\", \"f\": \"피드백\",}" /// FREE_FORM => "{ \"t\": \"자유 예시 타이틀\", \b\": \"자유 예시 컨텐츠\"}", OVERALL => "종합후기 예시 텍스트1"
+
+                        val decidedContentContentType = decideProgressItemBodyType(contentContentType)
+                        val parsedContentContent = ""
+                        val parsedContentContent_tmp = stageContentParsing(contentContent, decidedContentContentType )
 
                         when (contentContentType) {
                             ProgressItemBodyType.OVERALL.toString() -> {
@@ -557,21 +602,20 @@ class HomeViewModel : ViewModel() {
 
                             }
                             ProgressItemBodyType.NOT_DEFINED.toString() -> {
-                                forDetailDisplayArrayList.add(HomeDetailItem(progressType = 0,
-                                    progressName = "",
-                                    itemType =,
+                                forDetailDisplayArrayList.add(HomeDetailItem(
+                                    progressType = stageOrder,
+                                    progressName = stageTitle,
+                                    itemType = ProgressItemBodyType.NOT_DEFINED,
                                     freeTitle = null,
                                     freeBody = null,
                                     totalReviewBody = null,
                                     questionBody = null,
                                     answerBody = null,
                                     qnaReviewBody = null,
-                                    progressIsPassing = null
+                                    progressIsPassing = decidedStageStatus
                                 ))
-
                             }
                         }
-
 
                         ///////////////////////////////////////////////////
                         newStageTitleArrayList.add(stageTitle)
