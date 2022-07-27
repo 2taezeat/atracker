@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
-class RepositoryLogin {
+class RepositorySign {
 
     private val signService : SignService = RetrofitClient.getClient(BuildConfig.BASE_URL).create(SignService::class.java)
 

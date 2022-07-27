@@ -9,6 +9,7 @@ import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.model.dto.ExperienceType
 import com.example.atracker.model.repository.RepositoryHome
 import com.example.atracker.model.repository.RepositoryMyPage
+import com.example.atracker.model.repository.RepositorySign
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
@@ -19,6 +20,8 @@ import java.util.*
 class MyPageViewModel : ViewModel() {
 
     val repositoryMyPage = RepositoryMyPage()
+    val repositorySign = RepositorySign()
+
 
     private val _userNickName = MutableLiveData<String>().apply {
         value = ""
@@ -63,6 +66,10 @@ class MyPageViewModel : ViewModel() {
 
         }
     }
+
+
+
+
 
 
 

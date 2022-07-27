@@ -17,7 +17,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.atracker.R
-import com.example.atracker.databinding.FragmentSignUpNickNameBinding
 import com.example.atracker.databinding.FragmentSignUpPositionBinding
 import com.example.atracker.utils.ChangeUIState
 
@@ -70,7 +69,7 @@ class SignUpPositionFragment : Fragment() {
         }
 
         binding.signUpPositionNext.setOnClickListener { view ->
-            signUpViewModel.postSign()
+            signUpViewModel.postSignUp()
 
 
             view.findNavController().navigate(R.id.action_navigation_sign_up_position_to_navigation_sign_up_complete)

@@ -19,6 +19,7 @@ import androidx.navigation.findNavController
 import com.example.atracker.BuildConfig
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
+import com.example.atracker.model.local.App
 import com.example.atracker.ui.login.LoginActivity
 import com.example.atracker.ui.signUp.SignUpViewModel
 import com.example.atracker.utils.AlertApiObject
@@ -41,8 +42,6 @@ class MyPageDisplayFragment : Fragment() {
     }
 
     private val myPageViewModel: MyPageViewModel by activityViewModels()
-
-
 
 
     private lateinit var binding: FragmentMyPageDisplayBinding
@@ -97,8 +96,6 @@ class MyPageDisplayFragment : Fragment() {
 //            }
             showAlert(AlertType.TYPE11)
         }
-
-
 
 
         binding.myPageNickNameTV.text = myPageViewModel.userNickName.value
@@ -158,10 +155,19 @@ class MyPageDisplayFragment : Fragment() {
 
                 override fun onRightClick() {
                     when (alertType) {
-                        AlertType.TYPE10 -> {
+                        AlertType.TYPE10 -> { // 로그 아웃
                             startLogin()
+
+                            // at, rt 로컬에서 삭제해야 함.
+                            App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+                            App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
                         }
-                        AlertType.TYPE11 -> {
+                        AlertType.TYPE11 -> { // 회원 탈퇴
+
+                            // at, rt 로컬에서 삭제해야 함.
+                            App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+                            App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
                             startLogin()
                         }
                     }

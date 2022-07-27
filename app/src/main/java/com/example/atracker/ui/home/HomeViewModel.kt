@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
+import com.example.atracker.model.repository.RepositorySign
 import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -19,6 +20,7 @@ import kotlin.collections.ArrayList
 
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
+    val repositorySign = RepositorySign()
 
 
     var _zonedDateTime = MutableLiveData<ZonedDateTime>()
