@@ -361,6 +361,10 @@ class HomeWriteFragment : Fragment() {
             val answerBody = homeDetailItem.answerBody
             val qnaReviewBody = homeDetailItem.qnaReviewBody
             val progressIsPassing = homeDetailItem.progressIsPassing
+            /////////////////////////////////////////////////////////////////////
+            val contentOrder = homeDetailItem.contentOrder
+            val contentId = homeDetailItem.contentId
+            ////////////////////////////////////////////////////////////////////
 
             progressIsPassingMap[progressType] = progressIsPassing
             val dynamicHomeWriteCL = dynamicLayoutMap[progressName]

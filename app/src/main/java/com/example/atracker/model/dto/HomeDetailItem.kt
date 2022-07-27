@@ -10,5 +10,8 @@ data class HomeDetailItem(
     val questionBody : String?,
     val answerBody : String?,
     val qnaReviewBody : String?,
-    val progressIsPassing : IsPassing?
+    val progressIsPassing : IsPassing?,
+
+    val contentOrder : Int,
+    val contentId : Int
 )
