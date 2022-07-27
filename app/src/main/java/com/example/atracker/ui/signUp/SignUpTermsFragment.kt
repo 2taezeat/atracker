@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.atracker.BuildConfig
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpNickNameBinding
 import com.example.atracker.databinding.FragmentSignUpTermsBinding
@@ -89,11 +90,11 @@ class SignUpTermsFragment : Fragment() {
 
 
         binding.signUpTermsServiceIV.setOnClickListener {
-            showWebViewDialog("https://atracker-web.netlify.app/terms/user", getString(R.string.terms_service_confirm_title), binding.signUpTermsServiceCheckBox)
+            showWebViewDialog(BuildConfig.TERSMS_SERVICE_WEB_URL, getString(R.string.terms_service_confirm_title), binding.signUpTermsServiceCheckBox)
         }
 
         binding.signUpTermsPrivacyIV.setOnClickListener {
-            showWebViewDialog("https://atracker-web.netlify.app/terms", getString(R.string.terms_privacy_title), binding.signUpTermsPrivacyCheckBox)
+            showWebViewDialog(BuildConfig.TERSMS_PRIVACY_WEB_URL, getString(R.string.terms_privacy_title), binding.signUpTermsPrivacyCheckBox)
         }
 
 

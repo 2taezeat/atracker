@@ -557,7 +557,7 @@ class HomeViewModel : ViewModel() {
     fun setCompanyNameID(position: Int) {
         _companyWord.value = _companyList.value!![position].name
         _companyId.value = _companyList.value!![position].id
-        Log.d("tttt123444", "${_companyWord.value}")
+        Log.d("setCompanyNameID", "${_companyWord.value}")
     }
 
 
@@ -565,7 +565,7 @@ class HomeViewModel : ViewModel() {
 
     fun setSelectedChipStage(addCheckedStage : ArrayList<Stage>) {
         _homeAddSelectedStage.value = addCheckedStage
-        Log.d("tttt123", "${_homeAddSelectedStage.value}")
+        Log.d("setSelectedChipStage", "${_homeAddSelectedStage.value}")
     }
 
 
@@ -605,7 +605,7 @@ class HomeViewModel : ViewModel() {
         _homeAddSelectedProgress.value!![position!!].zonedDateTime = _zonedDateTime.value
 
         switch(_homeAddDateSelectFlag)
-        Log.d("tttt2", "${_homeAddSelectedStage.value}")
+        Log.d("setZonedHomeAddProgress", "${_homeAddSelectedStage.value}")
     }
 
     fun switch(mutableLiveData: MutableLiveData<Boolean?>){

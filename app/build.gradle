@@ -21,6 +21,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL",localProperties['baseUrl']
+        buildConfigField "String", "TEST_BASE_URL",localProperties['testBaseUrl']
+
+        buildConfigField "String", "FROM_GOOGLE_ACCESS_TOKEN",localProperties['fromGoogleAccessToken']
+        buildConfigField "String", "ACCESS_LOCAL_TOKEN",localProperties['accessLocalToken']
+        buildConfigField "String", "REFRESH_LOCAL_TOKEN",localProperties['refreshLocalToken']
+
+        buildConfigField "String", "BLOG_WEB_URL",localProperties['blogWebUrl']
+        buildConfigField "String", "TERSMS_SERVICE_WEB_URL",localProperties['termsServiceWebUrl']
+        buildConfigField "String", "TERSMS_PRIVACY_WEB_URL",localProperties['termsPrivacyWebUrl']
+
 
     }
 

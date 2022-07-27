@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.atracker.BuildConfig
 import com.example.atracker.databinding.FragmentBlogDisplayBinding
 
 class BlogDisplayFragment : Fragment() {
@@ -17,7 +18,8 @@ class BlogDisplayFragment : Fragment() {
     private lateinit var blogViewModel: BlogViewModel
     private var _binding: FragmentBlogDisplayBinding? = null
     private val binding get() = _binding!!
-    private val blogWebURL = "https://atracker-web.netlify.app/"
+    private val blogWebURL = BuildConfig.BLOG_WEB_URL
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
