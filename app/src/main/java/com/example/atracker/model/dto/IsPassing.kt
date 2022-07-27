@@ -1,9 +1,12 @@
 package com.example.atracker.model.dto
 
 enum class IsPassing {
-    WAITING,
+    NOT_STARTED, // Waitiing
+    PASS,
     FAIL,
-    SUCCESS
+    IN_PROGRESS
+
+    // WAITING
 }
 
 

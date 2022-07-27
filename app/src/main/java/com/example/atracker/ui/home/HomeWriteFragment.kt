@@ -380,8 +380,14 @@ class HomeWriteFragment : Fragment() {
             val homeWriteTypeSelect2 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect2)
             val homeWriteTypeSelect3 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect3)
 
+
             when (progressIsPassing) {
-                IsPassing.WAITING -> {
+                IsPassing.NOT_STARTED -> {
+                    homeWriteTypeSelect1.isChecked = true
+                    homeWriteTypeSelect1.chipStrokeWidth = 4f
+                    homeWriteTypeSelect1.setChipStrokeColorResource(R.color.atracker_white)
+                }
+                IsPassing.IN_PROGRESS -> {
                     homeWriteTypeSelect1.isChecked = true
                     homeWriteTypeSelect1.chipStrokeWidth = 4f
                     homeWriteTypeSelect1.setChipStrokeColorResource(R.color.atracker_white)
@@ -391,7 +397,7 @@ class HomeWriteFragment : Fragment() {
                     homeWriteTypeSelect2.chipStrokeWidth = 4f
                     homeWriteTypeSelect2.setChipStrokeColorResource(R.color.atracker_white)
                 }
-                IsPassing.SUCCESS -> {
+                IsPassing.PASS -> {
                     homeWriteTypeSelect3.isChecked = true
                     homeWriteTypeSelect3.chipStrokeWidth = 4f
                     homeWriteTypeSelect3.setChipStrokeColorResource(R.color.progress_color_7)

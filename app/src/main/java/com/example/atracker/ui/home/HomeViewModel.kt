@@ -131,9 +131,9 @@ class HomeViewModel : ViewModel() {
     private val _homeDetailContents = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
         value = mutableMapOf(
             3039 to arrayListOf<HomeDetailItem>(
-                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.SUCCESS),
-                HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
-                HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
+                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
+                HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
+                HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
             )
         )
     }
@@ -482,10 +482,10 @@ class HomeViewModel : ViewModel() {
                         val stageStatus = stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
 
                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        if (stageStatus == IsPassingTmp.FAIL.toString() && success) // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
+                        if (stageStatus == IsPassing.FAIL.toString() && success) // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
                             success = false
 
-                        if (stageStatus == IsPassingTmp.PASS.toString())
+                        if (stageStatus == IsPassing.PASS.toString())
                             myProgress += 1
 
                         detailMyProgress += 1
@@ -514,9 +514,9 @@ class HomeViewModel : ViewModel() {
             val _tmp = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
                 value = mutableMapOf(
                     3039 to arrayListOf<HomeDetailItem>(
-                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.SUCCESS),
-                        HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
-                        HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.SUCCESS),
+                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.REVIEW, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
+                        HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
+                        HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
                     )
                 )
             }
@@ -531,12 +531,13 @@ class HomeViewModel : ViewModel() {
 
                 for (stage in stageProgress) { // 단위는 stage 당 (서류 당, 1차 면접 당...)
                     //val stageEventAt = stage.event_at // mvp 안쓰임
-                    val stageTheId = stage.id // '서류' 그 자체 id ( 10000, 10001 ... )
                     val stageOrder = stage.order
                     val stageStatus = stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
                     val stageTitle = stage.stage_title
                     val stageContents = stage.stage_contents
-                    val stageRealId = stage.stage_id // 그 stage 의 실질 살아있는 id
+                    val stageRealId = stage.id // 그 stage 의 실질 살아있는 id
+                    val stageTheId = stage.stage_id // '서류' 그 자체 id ( 10000, 10001 ... )
+
 
                     for (sContent in stageContents) {
                         val contentOrder = sContent.order
