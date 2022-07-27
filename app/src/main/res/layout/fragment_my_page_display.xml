@@ -321,6 +321,64 @@
             </View>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView6"
+                android:text="@string/terms_service_confirm_title_ori"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageTermsServiceTV"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+                >
+
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageTermsServiceTV"
+                android:background="@color/background_light_gray"
+                android:id="@+id/myPageView7"
+                android:layout_marginTop="13dp"
+                >
+            </View>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/myPageView7"
+                android:text="@string/terms_privacy_title_ori"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/myPageTermsPrivacyTV"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/atracker_gray_3"
+                android:textSize="14sp"
+                >
+
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/myPageTermsPrivacyTV"
+                android:background="@color/background_light_gray"
+                android:id="@+id/myPageView8"
+                android:layout_marginTop="13dp"
+                >
+            </View>
+
+
+
+
+
+
+
+
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="24dp"

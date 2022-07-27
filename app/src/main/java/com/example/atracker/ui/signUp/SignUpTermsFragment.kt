@@ -139,7 +139,5 @@ class SignUpTermsFragment : Fragment() {
             show()
         }
 
-
-
     }
 }

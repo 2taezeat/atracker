@@ -1,16 +1,22 @@
 package com.example.atracker.ui
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.CheckBox
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.example.atracker.BuildConfig
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentMyPageDisplayBinding
 import com.example.atracker.ui.login.LoginActivity
@@ -105,6 +111,15 @@ class MyPageDisplayFragment : Fragment() {
         binding.myPageView1.background = gradientDrawable
 
 
+        binding.myPageTermsServiceTV.setOnClickListener {
+            showWebViewDialog(BuildConfig.TERSMS_SERVICE_WEB_URL, getString(R.string.terms_service_confirm_title_ori))
+        }
+
+        binding.myPageTermsPrivacyTV.setOnClickListener {
+            showWebViewDialog(BuildConfig.TERSMS_PRIVACY_WEB_URL, getString(R.string.terms_privacy_title_ori))
+        }
+
+
 
         return binding.root
     }
@@ -139,6 +154,31 @@ class MyPageDisplayFragment : Fragment() {
         )
 
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
+    }
+
+    private fun showWebViewDialog(url: String?, headTitle : String) {
+        val webView = WebView(lazyContext).apply {
+            loadUrl(url!!)
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                    view!!.loadUrl(url!!)
+                    return true
+                }
+            }.apply {
+                settings.javaScriptEnabled = true
+                settings.cacheMode = WebSettings.LOAD_DEFAULT
+            }
+        }
+        val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(lazyContext, R.style.AppCompatAlertDialog)
+        alertDialogBuilder.apply {
+            setTitle(headTitle)
+            setView(webView)
+            setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+            }
+            show()
+        }
+
     }
 
 }
