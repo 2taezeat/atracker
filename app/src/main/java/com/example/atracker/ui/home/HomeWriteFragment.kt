@@ -44,10 +44,7 @@ class HomeWriteFragment : Fragment() {
 
 
     companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeWriteFragment().apply {
-            }
+
     }
 
     private lateinit var homeWriteTabLayout : TabLayout
@@ -58,13 +55,8 @@ class HomeWriteFragment : Fragment() {
     private lateinit var dynamicLayoutMap : MutableMap<String, ConstraintLayout>
     private var previousTabPosition = 0
     private var previousTabName = ""
-
-
     private var editBooleanMap = mutableMapOf<String, Boolean>()
-
-
     private lateinit var progressIsPassingMap : MutableMap<Int, IsPassing?>
-
 
 
     private val freeLayoutListMap by lazy {
@@ -82,9 +74,6 @@ class HomeWriteFragment : Fragment() {
     private val qnaRemoveLayoutListMap by lazy {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -187,7 +176,10 @@ class HomeWriteFragment : Fragment() {
     private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
         val homeWriteProgressSelected = homeViewModel.homeProgressNameWrite.value
 
-        val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
+        //val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
+
+
+        val homeDetailContents = homeViewModel.homeDetailContentForDisplay.value
         var idx = 0
 
 
