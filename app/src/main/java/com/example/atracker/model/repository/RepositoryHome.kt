@@ -103,5 +103,18 @@ class RepositoryHome {
     }
 
 
+    suspend fun deleteStageProgressCall (accessToken : String, ids : Array<Int> ) : retrofit2.Response<Void> {
+        val apiResponse = CoroutineScope(Dispatchers.IO).async{
+            homeService.deleteApplyApi(
+                accessToken = accessToken,
+                ids = ids
+            )
+        }.await()
+
+        return apiResponse
+    }
+
+
+
 
 }

@@ -129,32 +129,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 //        navDisplayController.addOnDestinationChangedListener{ navController, destination, args -> // onBack 될때만 호출되는게 아닌거 같다  * Rna 필요
-//            if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add ) {
-//                Log.d("test123", " ${navController.currentDestination}, ${destination}")
-//            }
-//            when (destination.id) {
-//                R.id.navigation_blog -> {
-//                    mainBottomNavigationAppear()
-//                }
-//                R.id.navigation_home -> {
-//                    mainBottomNavigationAppear()
-//                    homeViewModel.clearHomeAddText()
-//                }
-//                R.id.navigation_calendar -> {
-//                    mainBottomNavigationAppear()
-//                }
-//                R.id.navigation_home_detail -> {
-//                    mainBottomNavigationAppear()
-//                }
-//                R.id.navigation_my_page_display -> {
-//                    mainBottomNavigationAppear()
-//                }
-//                R.id.navigation_home_add -> { //
-//                    //homeViewModel.back()
-//                }
-//                else -> {
-//                }
-//            }
+
 //        }
 
 

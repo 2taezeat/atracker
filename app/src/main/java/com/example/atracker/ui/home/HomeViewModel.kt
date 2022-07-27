@@ -20,7 +20,6 @@ import kotlin.collections.ArrayList
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
 
-    private val zonedDateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME
 
     var _zonedDateTime = MutableLiveData<ZonedDateTime>()
     var zonedDateTime : LiveData<ZonedDateTime> = _zonedDateTime
@@ -121,25 +120,6 @@ class HomeViewModel : ViewModel() {
     val addCalendarToAddFlag : LiveData<Boolean?> = _addCalendarToAddFlag
 
 
-
-
-//    private val _homeProgressArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
-//        value = arrayListOf(
-//            HomeProgressItem(companyTitle = "0", jobType = "qwe", myProgress = 2, totalProgress = 2, true),
-//            HomeProgressItem(companyTitle = "1", jobType = "asd", myProgress = 3, totalProgress = 3, true),
-//            HomeProgressItem(companyTitle = "2", jobType = "asd", myProgress = 7, totalProgress = 7, true),
-//            HomeProgressItem(companyTitle = "3", jobType = "asd", myProgress = 4, totalProgress = 5, true),
-//            HomeProgressItem(companyTitle = "4", jobType = "asd", myProgress = 1, totalProgress = 4, true),
-//            HomeProgressItem(companyTitle = "5", jobType = "asd", myProgress = 1, totalProgress = 7, true),
-//            HomeProgressItem(companyTitle = "6", jobType = "asd", myProgress = 2, totalProgress = 7, true),
-//            HomeProgressItem(companyTitle = "7", jobType = "asd", myProgress = 6, totalProgress = 6, true),
-//            )
-//    }
-//
-//    val homeProgressArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeProgressArrayList
-
-
-
     private val _homeDisplayArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply {
         value = arrayListOf()
     }
@@ -154,27 +134,15 @@ class HomeViewModel : ViewModel() {
     val homeDetailArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeDetailArrayList
 
 
-
-//    private val _homeWriteProgressSelectArrayList = MutableLiveData<ArrayList<ArrayList<String>>>().apply {
-//        value = arrayListOf(
-//            arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접",  "6차 면접", ),
-//            arrayListOf("1차 면접", "2차 면접", "3차 면접" ),
-//            arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접" )
+//    private val _homeWriteProgressSelectedMap = MutableLiveData<MutableMap<Int, ArrayList<String>>>().apply {
+//        value = mutableMapOf(
+//            3039 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접",  "6차 면접"),
+//            1 to arrayListOf("1차 면접", "2차 면접", "3차 면접" ),
+//            2 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접" )
 //        )
 //    }
 //
-//    val homeWriteProgressSelectArrayList : LiveData<ArrayList<ArrayList<String>>> = _homeWriteProgressSelectArrayList
-
-
-    private val _homeWriteProgressSelectedMap = MutableLiveData<MutableMap<Int, ArrayList<String>>>().apply {
-        value = mutableMapOf(
-            3039 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접",  "6차 면접"),
-            1 to arrayListOf("1차 면접", "2차 면접", "3차 면접" ),
-            2 to arrayListOf("1차 면접", "2차 면접", "3차 면접", "4차 면접", "5차 면접" )
-        )
-    }
-
-    val homeWriteProgressSelectedMap : LiveData<MutableMap<Int, ArrayList<String>>> = _homeWriteProgressSelectedMap
+//    val homeWriteProgressSelectedMap : LiveData<MutableMap<Int, ArrayList<String>>> = _homeWriteProgressSelectedMap
 
 
     private val _homeProgressNameDetail = MutableLiveData<Event<ArrayList<String>>>()
@@ -468,7 +436,7 @@ class HomeViewModel : ViewModel() {
                     val detailSuccess = true
 
                     for (stage in stageProgress) {
-                        if (stage.status == IsPassingTmp.FAIL.toString() && success)
+                        if (stage.status == IsPassingTmp.FAIL.toString() && success) // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
                             success = false
 
                         if (stage.status == IsPassingTmp.PASS.toString())
@@ -542,15 +510,42 @@ class HomeViewModel : ViewModel() {
 //        viewModelScope.launch {
 //            val apiResult = repositoryHome.updateStageProgressCall(
 //                accessToken = "",
-//                stageProgressRequest = applyIds,
+//                stageProgressRequest = qwe,
 //           )
 //
 //            if (apiResult.code() == 200) {
 //                val getResult = apiResult.body()!!
 //
+//            } else {
+//
 //            }
 //        }
 //    }
+
+
+
+    fun deleteStageProgress(deleteIds : Array<Int>){
+        viewModelScope.launch {
+            val apiResult = repositoryHome.deleteStageProgressCall(
+                accessToken = "",
+                ids = deleteIds
+            )
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!
+
+            } else {
+
+            }
+        }
+    }
+
+
+
+
+
+
+
 
 
     fun setWorkTypePosition(position : Int) {
