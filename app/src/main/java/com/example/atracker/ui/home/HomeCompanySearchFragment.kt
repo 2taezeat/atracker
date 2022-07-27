@@ -75,36 +75,14 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
                     val totalItemCount = layoutManager.itemCount
                     val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
 
-//                    if (lastVisible >= totalItemCount - 1) {
-//                        Log.d("lastVisibled_1", "1111")
-//
-////                        homeViewModel.companyResponse.observe(viewLifecycleOwner, Observer { value ->
-////                            Log.d("lastVisibled_2", "${value}")
-////
-////                            value?.let{
-////                                if (value.has_next && lastVisible >= totalItemCount - 1)
-////                                    homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = homeViewModel.companyResponse.value!!.next_page_no + 1, size = 10, true)
-////                            }
-////                        })
-//                    }
+                    if (lastVisible >= totalItemCount - 1 && !it.canScrollVertically(1)) {
+                        Log.d("scrollBottom", "scrollBottom")
 
-
-//                    if(!it.canScrollVertically(1)){
-//                        Log.d("lastVisibled_3", "33333")
-//
-//                    } else if (!it.canScrollVertically(-1) && dy < 0) {
-//
-//                    }
-
-                    homeViewModel.companyResponse.observe(viewLifecycleOwner, Observer { value ->
-                        Log.d("lastVisibled_2", "${value}")
-
-                        value?.let{
-                            if (value.has_next && lastVisible >= totalItemCount - 1)
-                                homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = value.next_page_no + 1, size = 10, true)
+                        val companyResponse = homeViewModel.companyResponse.value!!
+                        if (companyResponse.has_next) {
+                            homeViewModel.getCompanyInfo(searchWord = homeViewModel.companyWord.value!!, page = companyResponse.next_page_no + 1, size = 10, true)
                         }
-                    })
-
+                    }
 
                 } }
             )
@@ -114,18 +92,12 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
 
 
         binding.homeCompanySearchCompanyET.addTextChangedListener(object : TextWatcher {
-            var beforeString = ""
-            var onString = ""
-
 
             override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.d("test333_$4", "${charSequence}")
-                beforeString = charSequence.toString()
             }
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.d("onTextChanged", "${charSequence},${p1},${p2},${p3}")
-                onString = charSequence.toString()
                 flag = true
 
                 if (charSequence.toString() != homeViewModel.companyWord.value) {
@@ -139,10 +111,7 @@ class HomeCompanySearchFragment : DialogFragment(),HomeCompanySearchOnclickListe
             }
 
             override fun afterTextChanged(editable: Editable?) {
-
-                if (editable!!.length >= 2 && onString.isNotEmpty() && flag) {
-                    Log.d("test3333333", "${beforeString}, ${editable}, ${onString}")
-
+                if (editable!!.length >= 2  && flag) {
                     homeViewModel.getCompanyInfo(homeViewModel.companyWord.value!!, 1, 10, false)
                     flag = false
                 }
