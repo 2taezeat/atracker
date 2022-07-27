@@ -58,10 +58,19 @@ class HomeDetailAdapter :
                     LayoutInflater.from(parent.context), parent, false
                 ), parent.context)
             }
-            else -> { // Free, 2
+            2 -> { // Free, 2
                 return HomeDetailFreeViewHolder(HomeDetailFreeItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 ), parent.context)
+            }
+            else -> { // 3, NOT_DEFINED
+//                return HomeDetailFreeViewHolder(HomeDetailFreeItemBinding.inflate(
+//                    LayoutInflater.from(parent.context), parent, false
+//                ), parent.context)
+                return HomeDetailFreeViewHolder(HomeDetailFreeItemBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                ), parent.context)
+
             }
         }
     }
@@ -83,9 +92,12 @@ class HomeDetailAdapter :
                 val homeDetailItem = getItem(position) as HomeDetailItem
                 holder.bind(homeDetailItem)
             }
+            3 -> { // NOT_DEFINED
+//                holder as HomeDetailFreeViewHolder
+//                val homeDetailItem = getItem(position) as HomeDetailItem
+//                holder.bind(homeDetailItem)
+            }
         }
-
-
     }
 
     inner class HomeDetailReviewViewHolder(

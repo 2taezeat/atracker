@@ -364,6 +364,7 @@ class HomeWriteFragment : Fragment() {
             /////////////////////////////////////////////////////////////////////
             val contentOrder = homeDetailItem.contentOrder
             val contentId = homeDetailItem.contentId
+            val stageRealId = homeDetailItem.stageRealId
             ////////////////////////////////////////////////////////////////////
 
             progressIsPassingMap[progressType] = progressIsPassing

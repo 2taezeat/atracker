@@ -131,9 +131,9 @@ class HomeViewModel : ViewModel() {
     private val _homeDetailContents = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
         value = mutableMapOf(
             3039 to arrayListOf<HomeDetailItem>(
-                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
-                HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
-                HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
+                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
+                HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
+                HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
             )
         )
     }
@@ -338,23 +338,36 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun stageContentParsing(contentContentString : String, decidedContentContentType : ProgressItemBodyType)  {
+    fun stageContentParsing(contentContentString : String, decidedContentContentType : ProgressItemBodyType) : ArrayList<String?>  {
+        var freeTitle : String? = null // FREE_FORM
+        var freeBody : String? = null // FREE_FORM
+        var totalReviewBody : String? = null // OVERALL
+        var questionBody : String? = null // QNA
+        var answerBody : String? = null // QNA
+        var qnaReviewBody : String? = null // QNA
+
+        val allParsedContentStringList = arrayListOf<String?>(null, null, null, null, null, null, null)
+
         when (decidedContentContentType) {
             ProgressItemBodyType.NOT_DEFINED -> {
 
             }
             ProgressItemBodyType.FREE_FORM -> {
+                for (s in contentContentString) {
 
+
+                }
             }
             ProgressItemBodyType.QNA -> {
 
+
             }
             ProgressItemBodyType.OVERALL -> {
-
+                allParsedContentStringList[2] = contentContentString
             }
         }
 
-
+        return allParsedContentStringList
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -554,9 +567,9 @@ class HomeViewModel : ViewModel() {
             val _tmp = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
                 value = mutableMapOf(
                     3039 to arrayListOf<HomeDetailItem>(
-                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS),
-                        HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
-                        HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS),
+                        HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
+                        HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
+                        HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
                     )
                 )
             }
@@ -588,44 +601,65 @@ class HomeViewModel : ViewModel() {
                         // QNA = "{ \"q\": \"질문1\", \"a\": \"답변1\", \"f\": \"피드백\",}" /// FREE_FORM => "{ \"t\": \"자유 예시 타이틀\", \b\": \"자유 예시 컨텐츠\"}", OVERALL => "종합후기 예시 텍스트1"
 
                         val decidedContentContentType = decideProgressItemBodyType(contentContentType)
-                        val parsedContentContent = ""
-                        val parsedContentContent_tmp = stageContentParsing(contentContent, decidedContentContentType )
+                        val allParsedContentStringList = stageContentParsing(contentContent, decidedContentContentType)
 
                         when (contentContentType) {
                             ProgressItemBodyType.OVERALL.toString() -> {
-
+                                forDetailDisplayArrayList.add(HomeDetailItem(
+                                    progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.OVERALL,
+                                    freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1],
+                                    totalReviewBody = allParsedContentStringList[2],
+                                    questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5],
+                                    progressIsPassing = decidedStageStatus,
+                                    contentOrder = contentOrder, contentId = contentId,
+                                    stageRealId = stageRealId
+                                ))
                             }
                             ProgressItemBodyType.QNA.toString() -> {
-
+                                forDetailDisplayArrayList.add(HomeDetailItem(
+                                    progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.QNA,
+                                    freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1],
+                                    totalReviewBody = allParsedContentStringList[2],
+                                    questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5],
+                                    progressIsPassing = decidedStageStatus,
+                                    contentOrder = contentOrder, contentId = contentId,
+                                    stageRealId = stageRealId
+                                ))
                             }
                             ProgressItemBodyType.FREE_FORM.toString() -> {
-
+                                forDetailDisplayArrayList.add(HomeDetailItem(
+                                    progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.FREE_FORM,
+                                    freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1],
+                                    totalReviewBody = allParsedContentStringList[2],
+                                    questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5],
+                                    progressIsPassing = decidedStageStatus,
+                                    contentOrder = contentOrder, contentId = contentId,
+                                    stageRealId = stageRealId
+                                ))
                             }
                             ProgressItemBodyType.NOT_DEFINED.toString() -> {
                                 forDetailDisplayArrayList.add(HomeDetailItem(
-                                    progressType = stageOrder,
-                                    progressName = stageTitle,
-                                    itemType = ProgressItemBodyType.NOT_DEFINED,
-                                    freeTitle = null,
-                                    freeBody = null,
-                                    totalReviewBody = null,
-                                    questionBody = null,
-                                    answerBody = null,
-                                    qnaReviewBody = null,
-                                    progressIsPassing = decidedStageStatus
+                                    progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.NOT_DEFINED,
+                                    freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1],
+                                    totalReviewBody = allParsedContentStringList[2],
+                                    questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5],
+                                    progressIsPassing = decidedStageStatus,
+                                    contentOrder = contentOrder, contentId = contentId,
+                                    stageRealId = stageRealId
                                 ))
                             }
                         }
 
-                        ///////////////////////////////////////////////////
-                        newStageTitleArrayList.add(stageTitle)
                     }
 
-
-                    _homeProgressNameDetail.value = Event(newStageTitleArrayList)
-                    Log.d("_homeApplyIdContent" ,"${_homeProgressNameDetail.value}")
-                    _getApplyDetailFail.value = Event(false)
+                    newStageTitleArrayList.add(stageTitle)
                 }
+                _homeProgressNameDetail.value = Event(newStageTitleArrayList)
+                Log.d("_homeApplyIdContent" ,"${_homeProgressNameDetail.value}")
+
+                _homeDetailContentForDisplay.value = forDetailDisplayArrayList
+
+                _getApplyDetailFail.value = Event(false)
             } else {
                 _getApplyDetailFail.value = Event(true)
             }

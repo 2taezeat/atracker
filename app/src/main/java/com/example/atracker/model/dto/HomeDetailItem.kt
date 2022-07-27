@@ -13,5 +13,6 @@ data class HomeDetailItem(
     val progressIsPassing : IsPassing?,
 
     val contentOrder : Int,
-    val contentId : Int
+    val contentId : Int,
+    val stageRealId : Int
 )
