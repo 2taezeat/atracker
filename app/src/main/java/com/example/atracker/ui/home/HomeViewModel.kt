@@ -7,17 +7,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
-import com.example.atracker.utils.ApiExceptionUtil
 import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
+
+    private val zonedDateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME
 
     var _zonedDateTime = MutableLiveData<ZonedDateTime>()
     var zonedDateTime : LiveData<ZonedDateTime> = _zonedDateTime
@@ -299,7 +302,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyInfo (searchWord : String, page : Int, size : Int = 10, isScroll : Boolean) { // 예외 처리 보류 (220726)
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -336,7 +339,7 @@ class HomeViewModel : ViewModel() {
 
     fun addCompanyInfo () {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM",
+            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI",
                 createCompanyRequest = listOf(CreateCompanyRequestItem(name = _companyWord.value!!))
             )
 
@@ -356,7 +359,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -383,7 +386,7 @@ class HomeViewModel : ViewModel() {
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM", createApplyRequest = createApplyRequest )
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI", createApplyRequest = createApplyRequest )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -404,7 +407,7 @@ class HomeViewModel : ViewModel() {
         Log.d("updateApplyRequest", "${updateApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM", updateApplyRequest = updateApplyRequest )
+            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI", updateApplyRequest = updateApplyRequest )
             Log.d("getResult_33", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -419,7 +422,7 @@ class HomeViewModel : ViewModel() {
 
     fun deleteApply(deleteIds : Array<Int>) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM", ids = deleteIds )
+            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI", ids = deleteIds )
             Log.d("deleteApply", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -437,7 +440,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = false) { // 예외 처리 보류 (220725)
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -505,7 +508,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDetail(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTYiLCJpYXQiOjE2NTg4NzYwNDgsImV4cCI6MTY1ODg3OTY0OH0.ecYpsymMPT_P-0E-wv11XBt4aoiQHyX0l0ZVrIV2FaM",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNTciLCJpYXQiOjE2NTg4Nzk5OTcsImV4cCI6MTY1ODg4MzU5N30.gYgOYvgUThkuzOvV6giqZSvqKQ6u9oGv8DacHupzqLI",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -597,18 +600,12 @@ class HomeViewModel : ViewModel() {
 
 
     fun setZonedHomeAddProgress(position: Int?) {
-
-        Log.d("tttt1", "${_zonedDateTime.value}")
-
-
-
-        _homeAddSelectedStage.value!![position!!].event_at = _zonedDateTime.value.toString()
+        val zoneToLocal = _zonedDateTime.value!!.toLocalDateTime()
+        _homeAddSelectedStage.value!![position!!].event_at = zoneToLocal.toString()+'Z' // time 값을 정확히 맞추기 위함.
         _homeAddSelectedProgress.value!![position!!].zonedDateTime = _zonedDateTime.value
-
 
         switch(_homeAddDateSelectFlag)
         Log.d("tttt2", "${_homeAddSelectedStage.value}")
-
     }
 
     fun switch(mutableLiveData: MutableLiveData<Boolean?>){
