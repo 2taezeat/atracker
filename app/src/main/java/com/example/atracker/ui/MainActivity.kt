@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         navDisplayController.navigate(R.id.navigation_home)
         navView.setupWithNavController(navDisplayController)
 
+
         alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
                 override fun onLeftClick() {

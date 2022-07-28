@@ -155,8 +155,6 @@ class MyPageDisplayFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE10 -> { // 로그 아웃
-
-
                             // * at, rt 로컬에서 삭제해야 함. 비동기 처리 finish(), ondestory 처리 해야됨.
                             //App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
                             //App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)

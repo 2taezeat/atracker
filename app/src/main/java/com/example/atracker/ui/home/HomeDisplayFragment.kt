@@ -65,6 +65,8 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 //            textView.text = it
 //        })
 
+        Log.d("HomeDisplayFragment", "onCreateView")
+
 
 
         homeMyCurrentStateTotalCircleView = binding.homeMyCurrentStateTotalCircleView
@@ -166,15 +168,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         homeMyCurrentStateTotalCircleView.secondaryProgress = progress1 + progress2
         homeMyCurrentStateTotalCircleView.thirdProgress = progress1 + progress2 + progress3
     }
-
-
-//    fun ScrollView.smoothScrollToView(view: View) {
-//        val y = computeDistanceToView(view)
-//        ObjectAnimator.ofInt(this, "scrollY", y).apply {
-//            duration = 1000L // 스크롤이 지속되는 시간을 설정한다. (1000 밀리초 == 1초)
-//        }.start()
-//    }
-
 
 
     override fun onDestroyView() {

@@ -9,17 +9,21 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivityLoginBinding
 import com.example.atracker.databinding.ActivitySignUpBinding
 import com.example.atracker.ui.home.HomeViewModel
+import com.example.atracker.ui.login.LoginActivity
+import com.example.atracker.utils.StartActivityUtil
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
 
     val signUpViewModel: SignUpViewModel by lazy { ViewModelProvider(this).get(SignUpViewModel::class.java) }
+    lateinit var navDisplayController: NavController
 
 
 
@@ -35,7 +39,10 @@ class SignUpActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_sign_Up)
+        //val navController = findNavController(R.id.nav_host_fragment_activity_sign_Up)
+        navDisplayController = findNavController(R.id.nav_host_fragment_activity_sign_Up)
+
+
     }
 
     // id가 명시되어있지 않은 다른 부분을 터치했을 때 키보드가 보여져있는 상태면 키보드를 내림.
@@ -59,8 +66,23 @@ class SignUpActivity : AppCompatActivity() {
     }
 
 
+    override fun onBackPressed() {
+        Log.d("onBackPresed_destination_signUp", "${navDisplayController.currentDestination}, ${navDisplayController.graph.startDestDisplayName}")
+        if (navDisplayController.currentDestination!!.id == R.id.navigation_sign_up_terms) {
+            StartActivityUtil.callActivity( this@SignUpActivity, LoginActivity())
+            this.finish()
+        }
+
+        super.onBackPressed()
+    }
+
+
+
+
     override fun onDestroy() {
         Log.d("test_onDestory", "SignUpActivity")
         super.onDestroy()
     }
+
+
 }

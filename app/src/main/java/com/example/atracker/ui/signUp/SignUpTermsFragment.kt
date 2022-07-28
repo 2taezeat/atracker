@@ -21,6 +21,7 @@ import com.example.atracker.databinding.FragmentSignUpTermsBinding
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.login.LoginActivity
 import com.example.atracker.utils.ChangeUIState
+import com.example.atracker.utils.StartActivityUtil
 
 class SignUpTermsFragment : Fragment() {
 
@@ -51,7 +52,8 @@ class SignUpTermsFragment : Fragment() {
         }
 
         binding.signUpTermsBackIV.setOnClickListener { view ->
-            startLogin()
+            StartActivityUtil.callActivity( parentActivity, LoginActivity())
+            parentActivity.finish()
         }
 
 
@@ -98,17 +100,9 @@ class SignUpTermsFragment : Fragment() {
         }
 
 
-
-
         return binding.root
     }
 
-
-    private fun startLogin() {
-        val intent = Intent(parentActivity, LoginActivity::class.java)
-        ContextCompat.startActivity(parentActivity, intent, null)
-        parentActivity.finish()
-    }
 
 
     private fun showWebViewDialog(url: String?, headTitle : String, checkBox: CheckBox) {
