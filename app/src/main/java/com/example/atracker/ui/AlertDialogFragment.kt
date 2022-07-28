@@ -464,11 +464,7 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                     alertDialogListener.onRightClick()
                     dismiss()
                 }
-                this.isCancelable = false
             }
-
-
-
         }
 
         return root

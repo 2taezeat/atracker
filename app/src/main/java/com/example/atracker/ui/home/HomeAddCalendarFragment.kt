@@ -10,6 +10,7 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -53,6 +54,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 
     private val args : HomeAddCalendarFragmentArgs by navArgs()
 
+    lateinit var navDisplayController: NavController
 
     //private val homeAddCalendarEventsAdapter = HomeAddCalendarEventsAdapter(this, homeViewModel)
 
@@ -125,6 +127,8 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
 //        })
 
 
+        navDisplayController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+
         return root
     }
 
@@ -189,9 +193,9 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                     homeViewModel.getMyApplyPfratio()
 
                     if (args.progressIndex != 0) { // 편집인 경우, update, edit
-                        showAlert(AlertType.TYPE15)
+                        showAlert(AlertType.TYPE15, navDisplayController)
                     } else { // 추가 인 경우, add
-                        showAlert(AlertType.TYPE16)
+                        showAlert(AlertType.TYPE16, navDisplayController)
                     }
 
 //                    val navController = view.findNavController()
@@ -459,10 +463,9 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
         }
     }
 
-    private fun showAlert(alertType: AlertType){
+    private fun showAlert(alertType: AlertType, navController : NavController){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
-                val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
 
                 override fun onLeftClick() {
                 }

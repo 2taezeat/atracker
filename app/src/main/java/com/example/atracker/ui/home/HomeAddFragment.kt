@@ -24,6 +24,7 @@ import com.google.android.material.chip.Chip
 
 import android.widget.*
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.model.dto.HomeAddProgress
 import com.example.atracker.model.dto.Stage
@@ -58,6 +59,8 @@ class HomeAddFragment : Fragment() {
     lateinit var chipsList : ArrayList<Chip>
 
     var firstCreate = true
+
+    lateinit var navDisplayController: NavController
 
 
 
@@ -98,6 +101,7 @@ class HomeAddFragment : Fragment() {
         var spinnerSelectedPosition : Int = -1
         homeCompanySearchFragment = HomeCompanySearchFragment()
 
+        navDisplayController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
 
         chipsList = arrayListOf(
             binding.homeAddTypeSelect1,
@@ -128,10 +132,12 @@ class HomeAddFragment : Fragment() {
         }
 
         binding.homeAddBackButton.setOnClickListener { view ->
-            parentActivity.mainBottomNavigationAppear()
-            val navController = view.findNavController()
-            navController.popBackStack()
-            homeViewModel.clearHomeAddText()
+//            parentActivity.mainBottomNavigationAppear()
+//            val navController = view.findNavController()
+//            navController.popBackStack()
+//            homeViewModel.clearHomeAddText()
+
+            showAlert(AlertType.TYPE17, null, navDisplayController)
         }
 
         if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){ // api 예외 처리
@@ -146,22 +152,22 @@ class HomeAddFragment : Fragment() {
             var checkNext = true
 
             if (homeViewModel.companyWord.value.isNullOrBlank() || homeViewModel.companyId.value == 0) {
-                showAlert(AlertType.TYPE5, null)
+                showAlert(AlertType.TYPE5, null, navDisplayController)
                 checkNext = false
             }
             if (homeViewModel.positionWord.value.isNullOrBlank()) {
-                showAlert(AlertType.TYPE6, null)
+                showAlert(AlertType.TYPE6, null, navDisplayController)
                 checkNext = false
             }
             if (homeViewModel.workTypeSelection.value == -1) {
-                showAlert(AlertType.TYPE9, null)
+                showAlert(AlertType.TYPE9, null, navDisplayController)
                 checkNext = false
             }
 
             val posList = homeViewModel.trueChipSet.value!!.toList()
 
             if (posList.size < 2) {
-                showAlert(AlertType.TYPE7, null)
+                showAlert(AlertType.TYPE7, null, navDisplayController)
                 checkNext = false
             } else {
                 val checkedChipStage = arrayListOf<Stage>()
@@ -400,14 +406,14 @@ class HomeAddFragment : Fragment() {
 
         if (firstCreate) {
             if (homeViewModel.trueChipSet.value!!.size >= 7 && checked ) {
-                showAlert(AlertType.TYPE8, compoundButton.id)
+                showAlert(AlertType.TYPE8, compoundButton.id, navDisplayController)
                 binding.homeAddRefreshIV.callOnClick()
             } else {
                 homeViewModel.setChipSet(checked, compoundButton.id)
             }
         } else {
             if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) { // fix 해야 됨, 7개 이상이고 뒤로 가기 일때,
-                showAlert(AlertType.TYPE8, compoundButton.id)
+                showAlert(AlertType.TYPE8, compoundButton.id, navDisplayController)
                 binding.homeAddRefreshIV.callOnClick()
             } else {
                 homeViewModel.setChipSet(checked, compoundButton.id)
@@ -417,10 +423,11 @@ class HomeAddFragment : Fragment() {
     }
 
 
-    private fun showAlert(alertType: AlertType, chipId: Int? ){
+    private fun showAlert(alertType: AlertType, chipId: Int?, navController : NavController ){
         val alertDialogFragment = AlertDialogFragment.instance(
             object : AlertDialogListener {
                 override fun onLeftClick() {
+
                 }
 
                 override fun onCenterClick() {
@@ -432,6 +439,13 @@ class HomeAddFragment : Fragment() {
                 }
 
                 override fun onRightClick() {
+                    when (alertType) {
+                        AlertType.TYPE17 -> {
+                            parentActivity.mainBottomNavigationAppear()
+                            navController.popBackStack()
+                            homeViewModel.clearHomeAddText()
+                        }
+                    }
                 }
             },
             alertType,

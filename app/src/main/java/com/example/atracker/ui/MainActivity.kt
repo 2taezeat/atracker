@@ -130,15 +130,46 @@ class MainActivity : AppCompatActivity() {
 
         if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add_calendar) {
             homeViewModel.switch(homeViewModel._addCalendarToAddFlag)
+            super.onBackPressed()
+        } else if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add){
+            showAlert(AlertType.TYPE17)
+            return
+        } else {
+            super.onBackPressed()
         }
 
 //        navDisplayController.addOnDestinationChangedListener{ navController, destination, args -> // onBack 될때만 호출되는게 아닌거 같다  * Rna 필요
-
 //        }
 
-
-        super.onBackPressed()
+        //super.onBackPressed()
     }
+
+    private fun showAlert(alertType: AlertType ){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                override fun onLeftClick() {
+                }
+
+                override fun onCenterClick() {
+                }
+
+                override fun onRightClick() {
+                    when (alertType) {
+                        AlertType.TYPE17 -> {
+                            mainBottomNavigationAppear()
+                            navDisplayController.popBackStack()
+                            //navController.popBackStack()
+                            homeViewModel.clearHomeAddText()
+                        }
+                    }
+                }
+            },
+            alertType,
+            null
+        )
+        alertDialogFragment.show(supportFragmentManager, AlertDialogFragment.TAG)
+    }
+
 
 
     fun mainBottomNavigationDisappear() {
