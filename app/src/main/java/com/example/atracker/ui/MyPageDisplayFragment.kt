@@ -168,7 +168,7 @@ class MyPageDisplayFragment : Fragment() {
                             //App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
                             //App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
 
-
+                            myPageViewModel.signOutPost()
                             startLogin()
                         }
                     }

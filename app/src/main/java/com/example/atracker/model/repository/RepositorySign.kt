@@ -31,6 +31,13 @@ class RepositorySign {
     }
 
 
+    suspend fun signOutPostCall (accessToken : String) : retrofit2.Response<Void> {
+        val apiResponse = CoroutineScope(Dispatchers.IO).async{
+            signService.signOutPostApi(accessToken = accessToken)
+        }.await()
+
+        return apiResponse
+    }
 
 
 

@@ -5,6 +5,7 @@ import com.example.atracker.model.dto.SignResponse
 import com.example.atracker.model.dto.TokenRefreshRequest
 import com.example.atracker.model.dto.TokenRefreshResponse
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface SignService {
@@ -16,13 +17,18 @@ interface SignService {
     ) : retrofit2.Response<SignResponse>
 
 
-
-
     @POST("/api/v1/auth/refresh/")
     suspend fun refreshTokenPostApi(
         @Body tokenRefreshRequest: TokenRefreshRequest
 
     ) : retrofit2.Response<TokenRefreshResponse>
+
+    @POST("/api/v1/auth/signout/")
+    suspend fun signOutPostApi(
+        @Header("Authorization") accessToken : String
+    ) : retrofit2.Response<Void>
+
+
 
 
 }

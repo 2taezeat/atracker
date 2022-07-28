@@ -48,7 +48,7 @@ class MyPageViewModel : ViewModel() {
 
     fun getMyPage() {
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNjciLCJpYXQiOjE2NTg5ODUyODAsImV4cCI6MTY1ODk4ODg4MH0.UUUF8PgYwkrrKBMeMA_WT9mFbwfaObxUGZCfMw9Bnoo")
+            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNjgiLCJpYXQiOjE2NTg5ODcwODEsImV4cCI6MTY1ODk5MDY4MX0.8c8tVPKN4vMyM7tUrZ9YxgDgVVP2knmvBwItsWlSE_8")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()
@@ -67,6 +67,20 @@ class MyPageViewModel : ViewModel() {
         }
     }
 
+
+    fun signOutPost() {
+        viewModelScope.launch {
+            val apiResult = repositorySign.signOutPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNjgiLCJpYXQiOjE2NTg5ODcwODEsImV4cCI6MTY1ODk5MDY4MX0.8c8tVPKN4vMyM7tUrZ9YxgDgVVP2knmvBwItsWlSE_8")
+            
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()
+                Log.d("getMyPage", "${getResult}")
+
+            } else {
+
+            }
+        }
+    }
 
 
 
