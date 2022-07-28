@@ -120,7 +120,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             homeProgressAdapter.submitList(it.toMutableList())
         })
 
-        setProgress(30, 20, 10)
 
 
 
@@ -131,6 +130,16 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             binding.homeMyNickNameTV.text = myPageViewModel.userNickName.value
         })
 
+
+
+        homeViewModel.portfolioNum1.observe(viewLifecycleOwner, Observer {
+            Log.d("test123", "test123")
+            binding.homeMyCurrentStatePercentTV1.text = homeViewModel.portfolioNum1.value.toString()
+
+        })
+
+
+        setProgress(30, 20, 10)
 
 
 

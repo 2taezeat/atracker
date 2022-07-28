@@ -214,7 +214,7 @@
                     app:layout_constraintVertical_bias="0.2"
                     android:layout_marginStart="30dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="59"
+                    tools:text="59"
                     android:textSize="20sp"
                     android:textColor="@color/atracker_white"
                     >
@@ -253,7 +253,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="서류"
+                    android:text="@string/portfolio_1_title"
                     android:id="@+id/homeMyCurrentStateTV1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView1"
@@ -273,7 +273,6 @@
                     android:layout_marginStart="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView1"
                     android:layout_marginTop="4dp"
-                    android:text="75"
                     android:textColor="@color/atracker_white"
                     tools:text="82"
                     android:textSize="24sp"
@@ -299,7 +298,7 @@
                     android:id="@+id/homeMyCurrentStateCircleView2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.52"
+                    app:layout_constraintHorizontal_bias="0.53"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.33"
@@ -310,7 +309,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1차 면접"
+                    android:text="@string/portfolio_2_title"
                     android:id="@+id/homeMyCurrentStateTV2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView2"
@@ -330,7 +329,7 @@
                     android:layout_marginStart="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView2"
                     android:layout_marginTop="4dp"
-                    android:text="50"
+                    tools:text="50"
                     android:textSize="24sp"
                     android:textColor="@color/atracker_white"
                     >
@@ -368,7 +367,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2차 면접"
+                    android:text="@string/portfolio_3_title"
                     android:id="@+id/homeMyCurrentStateTV3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStateCircleView3"
@@ -388,7 +387,7 @@
                     android:layout_marginStart="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView3"
                     android:layout_marginTop="4dp"
-                    android:text="25"
+                    tools:text="25"
                     android:textSize="24sp"
                     android:textColor="@color/atracker_white"
                     >

@@ -107,6 +107,7 @@ class HomeBottomSheetFragment(progressIndex : Int, displayListPosition : Int) : 
 
                                 if (it == true) {
                                     homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+                                    homeViewModel.getMyApplyPfratio()
 
                                     val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
                                     dismiss()

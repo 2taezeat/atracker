@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         homeViewModel.getStage()
         myPageViewModel.getMyPage()
         homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
-
+        homeViewModel.getMyApplyPfratio()
     }
 
 

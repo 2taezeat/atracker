@@ -183,6 +183,7 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                 if (it == true){ // postApply 성공시
                     homeViewModel.clearHomeAddText()
                     homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+                    homeViewModel.getMyApplyPfratio()
 
                     view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
                     parentActivity.mainBottomNavigationAppear()

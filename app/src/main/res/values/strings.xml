@@ -138,5 +138,9 @@
     <string name="server_client_id">937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com</string>
 
 
+    <string name="portfolio_1_title">서류전형</string>
+    <string name="portfolio_2_title">면접전형</string>
+    <string name="portfolio_3_title">최종전형</string>
+
 
 </resources>
