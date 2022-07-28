@@ -390,9 +390,7 @@ class HomeViewModel : ViewModel() {
                             'b' -> allParsedContentStringList[1] = finalContentString
                         }
                     }
-
                 }
-
             }
             ProgressItemBodyType.QNA -> {
                 splitList?.let { spList ->
