@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.BuildConfig
+import com.example.atracker.model.dto.ExperienceType
 import com.example.atracker.model.dto.SignRequest
 import com.example.atracker.model.dto.TokenRefreshRequest
 import com.example.atracker.model.local.App
@@ -43,6 +44,10 @@ class SignUpViewModel : ViewModel() {
 
     fun setUserCareerPosition(position : Int) {
         _signUpCareer.value = careerAgeItems.value!![position]
+        when (_signUpCareer.value) {
+            "경력" -> _signUpCareer.value = "EXPERIENCED"
+            "신입" -> _signUpCareer.value = "NOT_EXPERIENCED"
+        }
     }
 
 
