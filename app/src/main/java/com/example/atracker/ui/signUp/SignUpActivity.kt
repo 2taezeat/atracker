@@ -69,11 +69,15 @@ class SignUpActivity : AppCompatActivity() {
     override fun onBackPressed() {
         Log.d("onBackPresed_destination_signUp", "${navDisplayController.currentDestination}, ${navDisplayController.graph.startDestDisplayName}")
         if (navDisplayController.currentDestination!!.id == R.id.navigation_sign_up_terms) {
+            super.onBackPressed()
+
             StartActivityUtil.callActivity( this@SignUpActivity, LoginActivity())
             this.finish()
+        } else if (navDisplayController.currentDestination!!.id == R.id.navigation_sign_up_complete) { // signUp_complete 화면에서 onbackpressed 불가능하게함.
+            return
+        } else {
+            super.onBackPressed()
         }
-
-        super.onBackPressed()
     }
 
 
