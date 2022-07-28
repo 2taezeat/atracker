@@ -730,11 +730,15 @@ class HomeViewModel : ViewModel() {
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 Log.d("getMyApplyPfratio", "${getResult}")
-
                 _portfolioNum1.value = getResult.pf1
                 _portfolioNum2.value = getResult.pf2
                 _portfolioNum3.value = getResult.pf3
                 _portfolioNumTotal.value = getResult.pf_total
+
+//                _portfolioNum1.value = 10
+//                _portfolioNum2.value = 20
+//                _portfolioNum3.value = 30
+//                _portfolioNumTotal.value = 40
             } else {
 
             }

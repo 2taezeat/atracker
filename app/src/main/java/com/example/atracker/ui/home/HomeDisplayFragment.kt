@@ -133,13 +133,27 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
 
         homeViewModel.portfolioNum1.observe(viewLifecycleOwner, Observer {
-            Log.d("test123", "test123")
-            binding.homeMyCurrentStatePercentTV1.text = homeViewModel.portfolioNum1.value.toString()
+            binding.homeMyCurrentStatePercentTV1.text = it.toString()
+        })
+
+        homeViewModel.portfolioNum2.observe(viewLifecycleOwner, Observer {
+            binding.homeMyCurrentStatePercentTV2.text = it.toString()
 
         })
 
+        homeViewModel.portfolioNum3.observe(viewLifecycleOwner, Observer {
+            binding.homeMyCurrentStatePercentTV3.text = it.toString()
+        })
 
-        setProgress(30, 20, 10)
+        homeViewModel.portfolioNumTotal.observe(viewLifecycleOwner, Observer {
+            Log.d("portfolioNumTotal", "${it}")
+            binding.homeMyCurrentStateTotalPassRateTV.text = it.toString()
+            setProgress(homeViewModel.portfolioNum1.value!!, homeViewModel.portfolioNum2.value!!, homeViewModel.portfolioNum3.value!!)
+        })
+
+
+
+        //setProgress(homeViewModel.portfolioNum1.value!!, homeViewModel.portfolioNum2.value!!, homeViewModel.portfolioNum3.value!!)
 
 
 
