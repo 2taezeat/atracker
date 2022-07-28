@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,8 @@ import com.example.atracker.databinding.Example3CalendarDayBinding
 import com.example.atracker.databinding.Example3CalendarHeaderBinding
 import com.example.atracker.databinding.FragmentHomeAddCalendarBinding
 import com.example.atracker.model.dto.CalendarEvent
+import com.example.atracker.ui.AlertDialogFragment
+import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.calendar.*
 import com.example.atracker.utils.*
@@ -185,14 +188,16 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                     homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
                     homeViewModel.getMyApplyPfratio()
 
-                    val navController = view.findNavController()
+                    if (args.progressIndex != 0) { // 편집인 경우, update, edit
+                        showAlert(AlertType.TYPE15)
+                    } else { // 추가 인 경우, add
+                        showAlert(AlertType.TYPE16)
+                    }
 
-                    navController.navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+//                    val navController = view.findNavController()
+//                    navController.navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
 
-                    //navController.clearBackStack(R.id.navigation_home)
-
-
-                    parentActivity.mainBottomNavigationAppear()
+//                    parentActivity.mainBottomNavigationAppear()
                     homeViewModel.switchFlagNull(homeViewModel._postApplyFlag)
                 }
             })
@@ -452,10 +457,39 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                 }
             }
         }
-
-
-
     }
+
+    private fun showAlert(alertType: AlertType){
+        val alertDialogFragment = AlertDialogFragment.instance(
+            object : AlertDialogListener {
+                val navController = parentActivity.findNavController(R.id.navHostFragmentActivityMain)
+
+                override fun onLeftClick() {
+                }
+
+                override fun onCenterClick() {
+                    when (alertType) {
+                        AlertType.TYPE15 -> {
+                            navController.navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+                            parentActivity.mainBottomNavigationAppear()
+                        }
+                        AlertType.TYPE16 -> {
+                            navController.navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+                            parentActivity.mainBottomNavigationAppear()
+                        }
+                    }
+
+                }
+
+                override fun onRightClick() {
+                }
+            },
+            alertType,
+            null
+        )
+        alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
+    }
+
 
     override fun onClickContainerView(view: View, position: Int, viewTag: String, calendarEvent: CalendarEvent?) {
         HomeAddDateFragment(position).show(parentFragmentManager, HomeAddDateFragment.TAG)

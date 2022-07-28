@@ -399,6 +399,73 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                     dismiss()
                 }
             }
+            AlertType.TYPE15 -> { // 편집이 완료 되었습니다. apply Edit, 오직, 확인
+                binding.alertDialogIV.setImageResource(R.drawable.ic_check_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "지현 현황 편집이 완료되었습니다!"
+                binding.alertDialogTV1.setTextColor(mForegroundSuccess7)
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "지원현황에서 확인해 보세요."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+                this.isCancelable = false
+
+            }
+            AlertType.TYPE16 -> { // 추가가 완료 되었습니다. apply Add, 오직, 확인
+                binding.alertDialogIV.setImageResource(R.drawable.ic_check_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "지원 현황 추가가 완료되었습니다!"
+                binding.alertDialogTV1.setTextColor(mForegroundSuccess7)
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "지원현황에서 확인해 보세요."
+
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
+
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
+                    dismiss()
+                }
+                this.isCancelable = false
+
+            }
+            AlertType.TYPE17 -> { // 취소하고 나가시겠습니까?. apply Edit, Add 둘다 적용
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "취소하고 나가시겠습니까?"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "작성하던 내용이 저장되지 않습니다."
+
+                binding.alertDialogButton1.text = "취소"
+                binding.alertDialogButton2.text = "나가기"
+                binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
+                this.isCancelable = false
+            }
 
 
 
