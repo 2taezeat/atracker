@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.atracker.model.dto.*
 import com.example.atracker.model.repository.RepositoryHome
+import com.example.atracker.model.repository.RepositoryMyPage
 import com.example.atracker.model.repository.RepositorySign
 import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
@@ -20,6 +21,7 @@ import kotlin.collections.ArrayList
 class HomeViewModel : ViewModel() {
     val repositoryHome = RepositoryHome()
     val repositorySign = RepositorySign()
+    val repositoryMyPage = RepositoryMyPage()
 
     var _zonedDateTime = MutableLiveData<ZonedDateTime>()
     var zonedDateTime : LiveData<ZonedDateTime> = _zonedDateTime
@@ -339,12 +341,12 @@ class HomeViewModel : ViewModel() {
     }
 
     fun stageContentParsing(contentContentString : String, decidedContentContentType : ProgressItemBodyType) : ArrayList<String?>  {
-        var freeTitle : String? = null // FREE_FORM
-        var freeBody : String? = null // FREE_FORM
-        var totalReviewBody : String? = null // OVERALL
-        var questionBody : String? = null // QNA
-        var answerBody : String? = null // QNA
-        var qnaReviewBody : String? = null // QNA
+//        var freeTitle : String? = null // FREE_FORM
+//        var freeBody : String? = null // FREE_FORM
+//        var totalReviewBody : String? = null // OVERALL
+//        var questionBody : String? = null // QNA
+//        var answerBody : String? = null // QNA
+//        var qnaReviewBody : String? = null // QNA
 
         val allParsedContentStringList = arrayListOf<String?>(null, null, null, null, null, null, null)
 
@@ -702,5 +704,23 @@ class HomeViewModel : ViewModel() {
 //            }
 //        }
 //    }
+
+
+    fun getMyApplyPfratio() {
+        viewModelScope.launch {
+            val apiResult = repositoryMyPage.myApplyPfratioGetCall(accessToken = "")
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()
+                Log.d("getMyPage", "${getResult}")
+
+
+
+            } else {
+
+            }
+
+        }
+    }
+
 
 }
