@@ -138,7 +138,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
 
         homeViewModel.portfolioNum2.observe(viewLifecycleOwner, Observer {
             binding.homeMyCurrentStatePercentTV2.text = it.toString()
-
         })
 
         homeViewModel.portfolioNum3.observe(viewLifecycleOwner, Observer {

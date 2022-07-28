@@ -28,15 +28,12 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
         Log.d("test_onCreate", "SignUpActivity")
 
 
 
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
-
 
         val navController = findNavController(R.id.nav_host_fragment_activity_sign_Up)
     }

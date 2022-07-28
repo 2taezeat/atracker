@@ -69,18 +69,13 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginButtonFL.setOnClickListener {
-//            finish()
-//            startMain()
-
             StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
             finish()
         }
 
         binding.loginTmpButton.setOnClickListener {
-//            val intent = Intent(this, SignUpActivity::class.java)
-//            ContextCompat.startActivity(this, intent, null)
-
             StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+            finish()
         }
 
         ///////////

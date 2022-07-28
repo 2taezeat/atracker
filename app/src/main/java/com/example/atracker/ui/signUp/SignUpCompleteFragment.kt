@@ -48,20 +48,14 @@ class SignUpCompleteFragment : Fragment() {
 
         val mHandler = Handler(Looper.getMainLooper())
         mHandler.postDelayed({
-            StartActivityUtil.callActivity(parentActivity, LoginActivity())
+            StartActivityUtil.callActivity(parentActivity, MainActivity())
             parentActivity.finish()
 
-            //startMain()
         }, 3000)
 
 
         return binding.root
     }
 
-    private fun startMain() {
-        val intent = Intent(parentActivity, MainActivity::class.java)
-        ContextCompat.startActivity(parentActivity, intent, null)
-        parentActivity.finish()
 
-    }
 }

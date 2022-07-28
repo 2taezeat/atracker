@@ -24,6 +24,7 @@ import com.example.atracker.ui.login.LoginActivity
 import com.example.atracker.ui.signUp.SignUpViewModel
 import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.AlertType
+import com.example.atracker.utils.StartActivityUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -137,9 +138,8 @@ class MyPageDisplayFragment : Fragment() {
     }
 
     fun startLogin() {
-        val intent = Intent(lazyContext, LoginActivity::class.java)
-        ContextCompat.startActivity(lazyContext, intent, null)
-        activity!!.finish()
+        StartActivityUtil.callActivity(parentActivity, LoginActivity())
+        parentActivity.finish()
     }
 
 
@@ -150,24 +150,27 @@ class MyPageDisplayFragment : Fragment() {
                 }
 
                 override fun onCenterClick() {
-
                 }
 
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE10 -> { // 로그 아웃
+
+
+                            // * at, rt 로컬에서 삭제해야 함. 비동기 처리 finish(), ondestory 처리 해야됨.
+                            //App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+                            //App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+
                             startLogin()
-
-                            // at, rt 로컬에서 삭제해야 함.
-                            App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
-                            App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
-
                         }
                         AlertType.TYPE11 -> { // 회원 탈퇴
 
                             // at, rt 로컬에서 삭제해야 함.
-                            App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
-                            App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+                            //App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+                            //App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+
                             startLogin()
                         }
                     }
