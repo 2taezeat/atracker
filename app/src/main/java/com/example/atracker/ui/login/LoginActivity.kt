@@ -1,32 +1,23 @@
 package com.example.atracker.ui.login
 
-import android.R.attr
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivityLoginBinding
-import com.example.atracker.databinding.ActivityMainBinding
-import com.example.atracker.databinding.ActivitySplashBinding
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.signUp.SignUpActivity
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.tasks.Task
 
-import com.google.android.gms.tasks.OnCompleteListener
-import android.R.attr.data
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.atracker.utils.StartActivityUtil
 import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.Scope
 
@@ -49,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
+        Log.d("test_onCreate", "LoginActivity")
 
 //        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 //            .requestIdToken(getString(R.string.default_web_client_id))
@@ -78,14 +69,18 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginButtonFL.setOnClickListener {
-            startMain()
+//            finish()
+//            startMain()
+
+            StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+            finish()
         }
 
         binding.loginTmpButton.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            ContextCompat.startActivity(this, intent, null)
-            //finish()
+//            val intent = Intent(this, SignUpActivity::class.java)
+//            ContextCompat.startActivity(this, intent, null)
 
+            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
         }
 
         ///////////
@@ -160,19 +155,17 @@ class LoginActivity : AppCompatActivity() {
 //    }
 
 
-    private fun startMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        ContextCompat.startActivity(this, intent, null)
-        finish()
-    }
-
-
 
 
     private fun signOut() {
 
     }
 
+
+    override fun onDestroy() {
+        Log.d("test_onDestory", "LoginActivity")
+        super.onDestroy()
+    }
 
 
 

@@ -15,6 +15,8 @@ import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpCompleteBinding
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.home.HomeViewModel
+import com.example.atracker.ui.login.LoginActivity
+import com.example.atracker.utils.StartActivityUtil
 
 
 class SignUpCompleteFragment : Fragment() {
@@ -46,7 +48,10 @@ class SignUpCompleteFragment : Fragment() {
 
         val mHandler = Handler(Looper.getMainLooper())
         mHandler.postDelayed({
-            startMain()
+            StartActivityUtil.callActivity(parentActivity, LoginActivity())
+            parentActivity.finish()
+
+            //startMain()
         }, 3000)
 
 

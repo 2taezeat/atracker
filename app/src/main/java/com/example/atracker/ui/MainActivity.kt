@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
 
+        Log.d("test_onCreate", "MainActivity")
+
+
         //datapicker 한글화
         val locale = Locale.KOREA
         Locale.setDefault(locale)
@@ -180,7 +183,10 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-
+    override fun onDestroy() {
+        Log.d("test_onDestory", "MainActivity")
+        super.onDestroy()
+    }
 
 
 }

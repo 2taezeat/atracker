@@ -2,6 +2,7 @@ package com.example.atracker.ui.signUp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -29,6 +30,8 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+        Log.d("test_onCreate", "SignUpActivity")
 
 
 
@@ -58,4 +61,9 @@ class SignUpActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
+
+    override fun onDestroy() {
+        Log.d("test_onDestory", "SignUpActivity")
+        super.onDestroy()
+    }
 }

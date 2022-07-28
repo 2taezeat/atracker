@@ -185,9 +185,14 @@ class HomeAddCalendarFragment : Fragment(), CalendarEventOnclickListener {
                     homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
                     homeViewModel.getMyApplyPfratio()
 
-                    view.findNavController().navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
-                    parentActivity.mainBottomNavigationAppear()
+                    val navController = view.findNavController()
 
+                    navController.navigate(R.id.action_navigation_home_add_calendar_to_navigation_home)
+
+                    //navController.clearBackStack(R.id.navigation_home)
+
+
+                    parentActivity.mainBottomNavigationAppear()
                     homeViewModel.switchFlagNull(homeViewModel._postApplyFlag)
                 }
             })
