@@ -43,10 +43,6 @@ class HomeWriteFragment : Fragment() {
     }
 
 
-    companion object {
-
-    }
-
     private lateinit var homeWriteTabLayout : TabLayout
     private val args : HomeWriteFragmentArgs by navArgs()
     private val homeViewModel: HomeViewModel by activityViewModels()
@@ -177,8 +173,6 @@ class HomeWriteFragment : Fragment() {
         val homeWriteProgressSelected = homeViewModel.homeProgressNameWrite.value
 
         //val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
-
-
         val homeDetailContents = homeViewModel.homeDetailContentForDisplay.value
         var idx = 0
 

@@ -147,6 +147,25 @@ class HomeViewModel : ViewModel() {
 
     val homeDetailContentForDisplay : LiveData<ArrayList<HomeDetailItem>> = _homeDetailContentForDisplay
 
+
+    private val _stageProgressRequest = MutableLiveData<StageProgressRequest>()
+    val stageProgressRequest : LiveData<StageProgressRequest> = _stageProgressRequest
+
+    private val _arrayListStageProgresse = MutableLiveData<ArrayList<StageProgresse>>()
+    val arrayListStageProgresse : LiveData<ArrayList<StageProgresse>> = _arrayListStageProgresse
+
+    private val _arrayListDeletedContent = MutableLiveData<ArrayList<DeletedContent>>()
+    val arrayListDeletedContent : LiveData<ArrayList<DeletedContent>> = _arrayListDeletedContent
+
+    private val _arrayListNewContent = MutableLiveData<ArrayList<NewContent>>()
+    val arrayListNewContent : LiveData<ArrayList<NewContent>> = _arrayListNewContent
+
+    private val _arrayListUpdatedContent = MutableLiveData<ArrayList<UpdatedContent>>()
+    val arrayListUpdatedContent : LiveData<ArrayList<UpdatedContent>> = _arrayListUpdatedContent
+
+
+
+
     private val _homeApplyIdContent = MutableLiveData<Apply>().apply {
         value = Apply(apply_id = -1, company_id = 0, company_name = "", job_position = "", job_type = "", stage_progress = listOf())
     }
@@ -701,21 +720,21 @@ class HomeViewModel : ViewModel() {
 
     }
 
-//    fun updateStageProgress(){
-//        viewModelScope.launch {
-//            val apiResult = repositoryHome.updateStageProgressCall(
-//                accessToken = "",
-//                stageProgressRequest = qwe,
-//           )
-//
-//            if (apiResult.code() == 200) {
-//                val getResult = apiResult.body()!!
-//
-//            } else {
-//
-//            }
-//        }
-//    }
+    fun updateStageProgress(){
+        viewModelScope.launch {
+            val apiResult = repositoryHome.updateStageProgressCall(
+                accessToken = "",
+                stageProgressRequest = _stageProgressRequest.value!!,
+           )
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!
+
+            } else {
+
+            }
+        }
+    }
 
 
 
