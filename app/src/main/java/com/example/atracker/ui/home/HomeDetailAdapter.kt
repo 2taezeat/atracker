@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.R
 import com.example.atracker.databinding.HomeDetailFreeItemBinding
+import com.example.atracker.databinding.HomeDetailNotdefinedItemBinding
 import com.example.atracker.databinding.HomeDetailQnaItemBinding
 import com.example.atracker.databinding.HomeDetailReviewItemBinding
 import com.example.atracker.model.dto.HomeDetailItem
@@ -67,7 +68,7 @@ class HomeDetailAdapter :
 //                return HomeDetailFreeViewHolder(HomeDetailFreeItemBinding.inflate(
 //                    LayoutInflater.from(parent.context), parent, false
 //                ), parent.context)
-                return HomeDetailFreeViewHolder(HomeDetailFreeItemBinding.inflate(
+                return HomeDetailNotDefinedViewHolder(HomeDetailNotdefinedItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 ), parent.context)
 
@@ -93,9 +94,9 @@ class HomeDetailAdapter :
                 holder.bind(homeDetailItem)
             }
             3 -> { // NOT_DEFINED
-//                holder as HomeDetailFreeViewHolder
-//                val homeDetailItem = getItem(position) as HomeDetailItem
-//                holder.bind(homeDetailItem)
+                holder as HomeDetailNotDefinedViewHolder
+                val homeDetailItem = getItem(position) as HomeDetailItem
+                holder.bind(homeDetailItem)
             }
         }
     }
@@ -167,7 +168,14 @@ class HomeDetailAdapter :
             if (bindingAdapterPosition == currentList.size - 1) {
                 setBottomViewColor(homeDetailFreeItemBinding.homeDetailItemFreeBottomView, homeDetailItem, context)
             }
+        }
+    }
 
+    inner class HomeDetailNotDefinedViewHolder(
+        val homeDetailNotdefinedItemBinding: HomeDetailNotdefinedItemBinding, val context: Context
+    ) : RecyclerView.ViewHolder(homeDetailNotdefinedItemBinding.root) {
+
+        fun bind(homeDetailItem: HomeDetailItem) {
 
         }
     }
@@ -183,9 +191,6 @@ class HomeDetailAdapter :
             5 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_6)
             6 -> bottomView.background = ContextCompat.getDrawable(context, R.drawable.progress_type_7)
         }
-
-
     }
-
 
 }
