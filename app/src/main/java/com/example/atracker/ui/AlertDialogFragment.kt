@@ -142,19 +142,16 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                 binding.alertDialogTV3.visibility = View.INVISIBLE
                 binding.alertDialogTV2.text = "지원현황에서 확인해 보세요."
 
-                binding.alertDialogButton1.text = "계속 수정"
-                binding.alertDialogButton2.text = "나가기"
-                binding.alertDialogButton3.visibility = View.INVISIBLE
+                binding.alertDialogButton3.text = "확인"
+                binding.alertDialogButton1.visibility = View.INVISIBLE
+                binding.alertDialogButton2.visibility = View.INVISIBLE
 
-                binding.alertDialogButton1.setOnClickListener {
-                    alertDialogListener.onLeftClick()
+                binding.alertDialogButton3.setOnClickListener {
+                    alertDialogListener.onCenterClick()
                     dismiss()
                 }
+                this.isCancelable = false
 
-                binding.alertDialogButton2.setOnClickListener {
-                    alertDialogListener.onRightClick()
-                    dismiss()
-                }
             }
 
             AlertType.TYPE5 -> {

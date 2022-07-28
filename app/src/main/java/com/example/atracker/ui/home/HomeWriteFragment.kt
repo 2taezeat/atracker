@@ -114,19 +114,11 @@ class HomeWriteFragment : Fragment() {
 
             for (progressName in homeProgressNameWrite) {
                 Log.d("qwe_progressName", "${progressName}")
-
                 Log.d("qwe_freeLayoutListMap", "${freeLayoutListMap[progressName]}" )
-
                 Log.d("qwe_qnaLayoutListMap", "${qnaLayoutListMap[progressName]}" )
-
                 Log.d("qwe_overAllLayoutListMap", "${overAllLayoutListMap[progressName]}" )
-
                 Log.d("qwe_freeRemoveLayoutListMap", "${freeRemoveLayoutListMap[progressName]}" )
-
                 Log.d("qwe_qnaRemoveLayoutListMap", "${qnaRemoveLayoutListMap[progressName]}" )
-
-
-
 
                 val cl = chipLayoutListMap[progressName]!!
                 Log.d("qwe_chip", "${cl[0].isChecked} , ${cl[1].isChecked}, ${cl[2].isChecked}" )
@@ -619,13 +611,18 @@ class HomeWriteFragment : Fragment() {
                         AlertType.TYPE3 -> {
                             binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                         }
-                        AlertType.TYPE4 -> {
 
-                        }
                     }
                 }
 
                 override fun onCenterClick() {
+                    when (alertType) {
+                        AlertType.TYPE4 -> {
+                            findNavController().popBackStack()
+                            parentActivity.mainBottomNavigationAppear()
+                        }
+                    }
+
 
                 }
 
@@ -666,10 +663,7 @@ class HomeWriteFragment : Fragment() {
                             previousTabName = tab!!.tag.toString()
                             changeView(tab!!.tag.toString())
                         }
-                        AlertType.TYPE4 -> {
-                            findNavController().popBackStack()
-                            parentActivity.mainBottomNavigationAppear()
-                        }
+
                     }
                 }
             },
