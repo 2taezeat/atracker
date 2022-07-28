@@ -19,6 +19,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.R
+import com.example.atracker.model.dto.DeletedContent
 import com.example.atracker.model.dto.IsPassing
 import com.example.atracker.model.dto.ProgressItemBodyType
 import com.example.atracker.ui.AlertDialogFragment
@@ -63,6 +64,10 @@ class HomeWriteFragment : Fragment() {
         mutableMapOf<String, List<ConstraintLayout>>()
     }
 
+    private val overAllLayoutListMap by lazy {
+        mutableMapOf<String, List<ConstraintLayout>>()
+    }
+
     private val freeRemoveLayoutListMap by lazy {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
@@ -71,11 +76,16 @@ class HomeWriteFragment : Fragment() {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+    private val overAllRemoveLayoutListMap by lazy { // 종합 후기는 절대 삭제 될 수 없음. 고로 쓰이지 않음. // 근데 ,mvp 라면?
+        mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
+
+    private val chipLayoutListMap by lazy {
+        mutableMapOf<String, ArrayList<Chip>>()
+    }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,6 +109,36 @@ class HomeWriteFragment : Fragment() {
 
         binding.homeWriteBottomCL.setOnClickListener {
             showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
+
+            val homeProgressNameWrite = homeViewModel.homeProgressNameWrite.value!!
+
+            for (progressName in homeProgressNameWrite) {
+                Log.d("qwe_progressName", "${progressName}")
+
+                Log.d("qwe_freeLayoutListMap", "${freeLayoutListMap[progressName]}" )
+
+                Log.d("qwe_qnaLayoutListMap", "${qnaLayoutListMap[progressName]}" )
+
+                Log.d("qwe_overAllLayoutListMap", "${overAllLayoutListMap[progressName]}" )
+
+                Log.d("qwe_freeRemoveLayoutListMap", "${freeRemoveLayoutListMap[progressName]}" )
+
+                Log.d("qwe_qnaRemoveLayoutListMap", "${qnaRemoveLayoutListMap[progressName]}" )
+
+
+
+
+                val cl = chipLayoutListMap[progressName]!!
+                Log.d("qwe_chip", "${cl[0].isChecked} , ${cl[1].isChecked}, ${cl[2].isChecked}" )
+
+
+                Log.d("qwe_", "-------------------------------------------------------------" )
+
+
+
+                homeViewModel.isPassingFun(progressName = progressName, inProgressIsChecked = cl[0].isChecked, failIsChecked = cl[1].isChecked, passIsChecked = cl[2].isChecked)
+            }
+
         }
 
         binding.homeWriteCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
@@ -117,8 +157,8 @@ class HomeWriteFragment : Fragment() {
                     val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
 
                     if (previousTabPosition < tab.position && (previousState != IsPassing.PASS || selectedMinusOneState != IsPassing.PASS)) {
-                        showAlert(AlertType.TYPE2 , tab,null)
-                        binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                        //showAlert(AlertType.TYPE2 , tab,null)
+                        //binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                     } else {
                         previousTabPosition = tab.position
                         previousTabName = tab.tag.toString()
@@ -179,12 +219,12 @@ class HomeWriteFragment : Fragment() {
 
         //dynamicLayoutList = arrayListOf<ConstraintLayout>()
         previousTabName = homeWriteProgressSelected!![0]
-
         dynamicLayoutMap = mutableMapOf()
         progressIsPassingMap = mutableMapOf()
 
         for (progressName in homeWriteProgressSelected) {
             homeWriteTabLayout.addTab(homeWriteTabLayout.newTab().setText(progressName).setId(View.generateViewId()).setTag(progressName))
+
 
             homeWriteContentLayout = this.layoutInflater.inflate(R.layout.home_write_content_layout, null) as ConstraintLayout // inflating view from xml
             val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
@@ -193,8 +233,13 @@ class HomeWriteFragment : Fragment() {
             )
 
             editBooleanMap[progressName] = false
+
             freeRemoveLayoutListMap[progressName] = arrayListOf()
             qnaRemoveLayoutListMap[progressName] = arrayListOf()
+            chipLayoutListMap[progressName] = arrayListOf()
+
+            val contentIdForTag = homeDetailContents!!.find {it.progressName == progressName}!!.contentId
+            Log.d("contentIdForTag", "${contentIdForTag}")
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -215,11 +260,26 @@ class HomeWriteFragment : Fragment() {
             val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
             val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
 
+
+            homeWriteTypeSelect1.tag = progressName
+            homeWriteTypeSelect2.tag = progressName
+            homeWriteTypeSelect3.tag = progressName
+
+
+            chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect1)
+            chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect2)
+            chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect3)
+
+
+
             homeWriteContentLayout.layoutParams = params
 
-            setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
-            setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
-            setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValue = R.color.progress_color_7)
+//            setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
+//            setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
+//            setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValue = R.color.progress_color_7)
+
+            setChiptmp(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValueWhite = R.color.atracker_white, colorValueGreen = R.color.progress_color_7 )
+
 
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
             setPlusButton(homeWritePlusButton2, R.layout.home_write_free_layout, homeWriteLL, progressName)
@@ -237,7 +297,7 @@ class HomeWriteFragment : Fragment() {
 
                 val freeLayoutList = freeLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
-
+                val overAllLayoutList = overAllLayoutListMap[progressName]
 
 //                homeWriteReviewCheckBox.visibility = View.VISIBLE
 //                val set = ConstraintSet()
@@ -256,6 +316,8 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(freeLayout)
                     freeDeleteCheckBox.isChecked = false
 
+                    freeLayout.tag = contentIdForTag
+
                     freeDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
                             freeRemoveLayoutListMap[progressName]!!.add(freeLayout)
@@ -273,6 +335,8 @@ class HomeWriteFragment : Fragment() {
                     set.connect(homeWriteQnaMainCL.id,ConstraintSet.START, qnaDeleteCheckBox.id , ConstraintSet.END, 20)
                     set.applyTo(qnaLayout)
                     qnaDeleteCheckBox.isChecked = false
+
+                    qnaLayout.tag = contentIdForTag
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -303,6 +367,7 @@ class HomeWriteFragment : Fragment() {
 
                 val freeLayoutList = freeLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
+                val overAllLayoutList = overAllLayoutListMap[progressName]
 
                 for (freeLayout in freeLayoutList.orEmpty()) {
                     freeLayout.getViewById(R.id.homeWriteFreeCheckBox).visibility = View.GONE
@@ -450,10 +515,9 @@ class HomeWriteFragment : Fragment() {
                     homeWriteReviewET.setText(totalReviewBody)
 
                 }
-//                ProgressItemBodyType.NOT_DEFINED -> {
-//                    homeWriteReviewET.setText(totalReviewBody)
-//
-//                }
+                ProgressItemBodyType.NOT_DEFINED -> {
+
+                }
             }
         }
     }
@@ -465,8 +529,45 @@ class HomeWriteFragment : Fragment() {
                 chip1.setChipStrokeColorResource(colorValue)
                 chip2.chipStrokeWidth = 0f
                 chip3.chipStrokeWidth = 0f
+
+                //homeViewModel.isPassingFun()
             } else {
                 chip1.chipStrokeWidth = 0f
+            }
+        }
+    }
+
+    private fun setChiptmp(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorValueWhite: Int, colorValueGreen : Int){
+        chip1.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                chip1.chipStrokeWidth = 4f
+                chip1.setChipStrokeColorResource(colorValueWhite)
+                chip2.chipStrokeWidth = 0f
+                chip3.chipStrokeWidth = 0f
+            } else {
+                chip1.chipStrokeWidth = 0f
+            }
+        }
+
+        chip2.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                chip2.chipStrokeWidth = 4f
+                chip2.setChipStrokeColorResource(colorValueWhite)
+                chip3.chipStrokeWidth = 0f
+                chip1.chipStrokeWidth = 0f
+            } else {
+                chip2.chipStrokeWidth = 0f
+            }
+        }
+
+        chip3.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                chip3.chipStrokeWidth = 4f
+                chip3.setChipStrokeColorResource(colorValueGreen)
+                chip2.chipStrokeWidth = 0f
+                chip1.chipStrokeWidth = 0f
+            } else {
+                chip3.chipStrokeWidth = 0f
             }
         }
     }
@@ -483,13 +584,16 @@ class HomeWriteFragment : Fragment() {
             addLayout.layoutParams = params
             addLayout.id = View.generateViewId()
 
+            addLayout.tag = 1234
+
             linearLayout.addView(addLayout)
 
             if (layoutInt == R.layout.home_write_free_layout) {
                 freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
-
             } else if (layoutInt == R.layout.home_write_qna_layout) {
                 qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
+            } else if (layoutInt == R.layout.home_write_review_layout) { // overAll
+                overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
             }
         }
     }
@@ -528,15 +632,33 @@ class HomeWriteFragment : Fragment() {
                 override fun onRightClick() {
                     when (alertType) {
                         AlertType.TYPE1 -> {
-                            for (l in freeRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
+                            val progressName = tab!!.tag.toString()
+
+                            for (l in freeRemoveLayoutListMap[progressName].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
-                            for (l in qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty()) {
+                            for (l in qnaRemoveLayoutListMap[progressName].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
 
-                            freeRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
-                            qnaRemoveLayoutListMap[tab!!.tag.toString()]!!.clear()
+
+
+                            val frll = freeRemoveLayoutListMap[progressName]!!
+                            val qrll = qnaRemoveLayoutListMap[progressName]!!
+
+
+                            for (cf in frll) { // stage for 문
+                                Log.d("qwe_frll", "${frll}, ${cf.tag.toString().toInt()}")
+                                homeViewModel.deleteFun(progressName, DeletedContent(cf.tag.toString().toInt()))
+                            }
+
+                            for (cq in frll) { // stage for 문
+                                Log.d("qwe_qrll", "${frll}, ${cq.tag.toString().toInt()}")
+                                homeViewModel.deleteFun(progressName, DeletedContent(cq.tag.toString().toInt()))
+                            }
+
+                            freeRemoveLayoutListMap[progressName]!!.clear()
+                            qnaRemoveLayoutListMap[progressName]!!.clear()
 
                         }
                         AlertType.TYPE3 -> {
