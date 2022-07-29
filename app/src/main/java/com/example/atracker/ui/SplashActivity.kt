@@ -8,10 +8,13 @@ import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import com.example.atracker.BuildConfig
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivitySplashBinding
+import com.example.atracker.model.local.App
 import com.example.atracker.ui.login.LoginActivity
 import com.example.atracker.utils.StartActivityUtil
+import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {
 
@@ -37,6 +40,18 @@ class SplashActivity : AppCompatActivity() {
 //                startLogin()
 //            }, 1000)
 //        }
+
+
+//
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+            val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+            Log.d("test_splash", "${at}, ${rt}")
+        }
+
+
 
         val mHandler = Handler(Looper.getMainLooper())
         mHandler.postDelayed({

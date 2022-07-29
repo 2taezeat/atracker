@@ -1,9 +1,6 @@
 package com.example.atracker.model.api
 
-import com.example.atracker.model.dto.SignRequest
-import com.example.atracker.model.dto.SignResponse
-import com.example.atracker.model.dto.TokenRefreshRequest
-import com.example.atracker.model.dto.TokenRefreshResponse
+import com.example.atracker.model.dto.*
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -29,6 +26,12 @@ interface SignService {
     ) : retrofit2.Response<Void>
 
 
+    ////////////////////////////////////////////////////// test api //////////////////////////////
+
+    @POST("/api/v1/auth/test/sign")
+    suspend fun testSignApi(
+        @Body testSignApiRequest: TestSignApiRequest
+    ) : retrofit2.Response<TestSignApiResponse>
 
 
 }

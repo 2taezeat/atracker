@@ -17,6 +17,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
+import com.example.atracker.ui.signUp.SignUpViewModel
 import com.example.atracker.utils.StartActivityUtil
 import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.Scope
@@ -29,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 1001
     private var googleSignInClient : GoogleSignInClient? = null
     //private var firebaseAuth : FirebaseAuth? = null
+
+    val loginViewModel: LoginViewModel by lazy { ViewModelProvider(this).get(LoginViewModel::class.java) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +81,12 @@ class LoginActivity : AppCompatActivity() {
             StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             finish()
         }
+
+///////////////////////////////////////////////////////////////////////////////////
+        binding.testSignApiButton.setOnClickListener {
+            loginViewModel.testSign()
+        }
+
 
         ///////////
 //        GoogleSignIn.silentSignIn()
