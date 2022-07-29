@@ -49,7 +49,7 @@ class HomeDetailAdapter :
         context = parent.context
 
         when (viewType) {
-            0 -> { // Review
+            0 -> { // Review, OVERALL
                 return HomeDetailReviewViewHolder(HomeDetailReviewItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 ), parent.context)
@@ -78,7 +78,7 @@ class HomeDetailAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (currentList[position].itemType.ordinal) {
-            0 -> { // Review
+            0 -> { // Review, , OVERALL
                 holder as HomeDetailReviewViewHolder
                 val homeDetailItem = getItem(position) as HomeDetailItem
                 holder.bind(homeDetailItem)

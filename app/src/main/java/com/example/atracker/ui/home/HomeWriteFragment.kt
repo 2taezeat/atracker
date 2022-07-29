@@ -19,9 +19,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.atracker.R
-import com.example.atracker.model.dto.DeletedContent
-import com.example.atracker.model.dto.IsPassing
-import com.example.atracker.model.dto.ProgressItemBodyType
+import com.example.atracker.model.dto.*
 import com.example.atracker.ui.AlertDialogFragment
 import com.example.atracker.ui.AlertDialogListener
 import com.example.atracker.utils.AlertType
@@ -85,6 +83,14 @@ class HomeWriteFragment : Fragment() {
     }
 
 
+    fun parsedQna(q : String, a : String, f : String) : String {
+        return ""
+    }
+
+    fun parsedFree(f: String, b: String) : String {
+        return ""
+    }
+
 
 
     override fun onCreateView(
@@ -109,7 +115,6 @@ class HomeWriteFragment : Fragment() {
 
         binding.homeWriteBottomCL.setOnClickListener {
             showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
-
             val homeProgressNameWrite = homeViewModel.homeProgressNameWrite.value!!
 
             for (progressName in homeProgressNameWrite) {
@@ -117,14 +122,81 @@ class HomeWriteFragment : Fragment() {
                 Log.d("qwe_freeLayoutListMap", "${freeLayoutListMap[progressName]}" )
                 Log.d("qwe_qnaLayoutListMap", "${qnaLayoutListMap[progressName]}" )
                 Log.d("qwe_overAllLayoutListMap", "${overAllLayoutListMap[progressName]}" )
-                Log.d("qwe_freeRemoveLayoutListMap", "${freeRemoveLayoutListMap[progressName]}" )
-                Log.d("qwe_qnaRemoveLayoutListMap", "${qnaRemoveLayoutListMap[progressName]}" )
-                Log.d("qwe_overAllRemoveLayoutListMap", "${overAllRemoveLayoutListMap[progressName]}" )
+
+                val fm = freeLayoutListMap[progressName]?.let {it}
+                val qm = qnaLayoutListMap[progressName]?.let {it}
+                val om = overAllLayoutListMap[progressName]?.let {it}
+
+                fm?.let { it
+                    for (fll in it) {
+                        val freeTitleET = fll.findViewById<EditText>(R.id.homeWriteFreeTitle)
+                        val freeBodyET = fll.findViewById<EditText>(R.id.homeWriteFreeET)
+                        val freeTitleString = freeTitleET.toString()
+                        val freeBodyString = freeBodyET.toString()
+
+                        val freeFinalParsedString = parsedFree(freeTitleString, freeBodyString)
+
+                        Log.d("qwe_fll", "${freeFinalParsedString}, ${fll.tag}")
+
+                        val contentId = fll.tag.toString().toInt()
+                        if (contentId == 123456789) { // 새로 추가되는 것
+                            val newContent = NewContent(content = freeFinalParsedString, content_type = "FREE_FORM", order = 0)
+                            homeViewModel.newFun(progressName = progressName, newContent = newContent)
+
+                        } else { // 서버에 있는 것을 클라에서 업데이트
+                            val updatedContent = UpdatedContent(content = freeFinalParsedString, id = contentId, order = 0)
+                            homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
+                        }
+
+                    }
+                }
+
+                qm?.let { it
+                    for (qll in it) {
+                        val qnaQuestionET = qll.findViewById<EditText>(R.id.homeWriteQuestionTV)
+                        val qnaAnswerET = qll.findViewById<EditText>(R.id.homeWriteAnswerET)
+                        val qnaReviewET = qll.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
+
+                        val qnaQuestionString = qnaQuestionET.toString()
+                        val qnaAnswerString = qnaAnswerET.toString()
+                        val qnaReviewString = qnaReviewET.toString() // feedback, f
+
+                        val qnaFinalParsedString = parsedQna(qnaQuestionString, qnaAnswerString, qnaReviewString)
+
+                        Log.d("qwe_qll", "${qnaFinalParsedString}, ${qll.tag}")
+
+                        val contentId = qll.tag.toString().toInt()
+                        if (contentId == 123456789) { // 새로 추가되는 것
+                            val newContent = NewContent(content = qnaFinalParsedString, content_type = "QNA", order = 0)
+                            homeViewModel.newFun(progressName = progressName, newContent = newContent)
+
+                        } else { // 서버에 있는 것을 클라에서 업데이트
+                            val updatedContent = UpdatedContent(content = qnaFinalParsedString, id = contentId, order = 0)
+                            homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
+                        }
+                    }
+                }
+
+                om?.let { it
+                    for (oll in it) {
+                        val homeWriteReviewET = oll.findViewById<EditText>(R.id.homeWriteReviewET)
+                        val overAllReviewBodyString = homeWriteReviewET.toString()
+                        Log.d("qwe_oll", "${overAllReviewBodyString}, ${oll.tag}")
+
+                        val contentId = oll.tag.toString().toInt()
+                        if (contentId == 123456789) { // 새로 추가되는 것
+                            val newContent = NewContent(content = overAllReviewBodyString, content_type = "OVERALL", order = 0)
+                            homeViewModel.newFun(progressName = progressName, newContent = newContent)
+
+                        } else { // 서버에 있는 것을 클라에서 업데이트
+                            val updatedContent = UpdatedContent(content = homeWriteReviewET.text.toString(), id = contentId, order = 0)
+                            homeViewModel.updateFun(progressName = overAllReviewBodyString, updatedContent = updatedContent)
+                        }
+                    }
+                }
+
 
                 val cl = chipLayoutListMap[progressName]!!
-                Log.d("qwe_chip", "${cl[0].isChecked} , ${cl[1].isChecked}, ${cl[2].isChecked}" )
-
-
                 Log.d("qwe_", "-------------------------------------------------------------" )
 
 
@@ -253,7 +325,6 @@ class HomeWriteFragment : Fragment() {
             val homeWritePlusButton3 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton3)
 
 
-
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
             val homeWriteEditButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditButton)
             val homeWriteEditCompleteButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditCompleteButton)
@@ -276,7 +347,6 @@ class HomeWriteFragment : Fragment() {
             chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect1)
             chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect2)
             chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect3)
-
 
 
             homeWriteContentLayout.layoutParams = params
@@ -386,8 +456,6 @@ class HomeWriteFragment : Fragment() {
                             overAllRemoveLayoutListMap[progressName]!!.remove(overAllLayout)
                     }
                 }
-
-
 
             }
 
@@ -643,7 +711,7 @@ class HomeWriteFragment : Fragment() {
             addLayout.layoutParams = params
             addLayout.id = View.generateViewId()
 
-            addLayout.tag = 1234
+            addLayout.tag = 1234565789
 
             linearLayout.addView(addLayout)
 
@@ -746,7 +814,6 @@ class HomeWriteFragment : Fragment() {
                             freeRemoveLayoutListMap[progressName]!!.clear()
                             qnaRemoveLayoutListMap[progressName]!!.clear()
                             overAllRemoveLayoutListMap[progressName]!!.clear()
-
 
                         }
                         AlertType.TYPE3 -> {
