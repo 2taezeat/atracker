@@ -22,7 +22,8 @@ enum class AlertType {
 
     TYPE15, // 편집이 완료 되었습니다. apply Edit, 오직, 확인
     TYPE16, // 추가가 완료 되었습니다. apply Add, 오직, 확인
-    TYPE17, // 취소하고 나가시겠습니까?. apply Edit, Add 둘다 적용
+    TYPE17, // 취소하고 나가시겠습니까?. apply Edit, Add 둘다  , homeAdd APPLY
+    TYPE18, // 취소하고 나가시겠습니까?. apply Edit, Add 둘다 적용, homeWrite stageProgress
 
 
 }

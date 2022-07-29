@@ -138,6 +138,9 @@ class MainActivity : AppCompatActivity() {
             } else { // api 통신 실페 일때
                 super.onBackPressed()
             }
+        } else if (navDisplayController.currentDestination!!.id == R.id.navigation_home_write) {
+            showAlert(AlertType.TYPE18)
+            return
         } else {
             super.onBackPressed()
         }
@@ -164,6 +167,11 @@ class MainActivity : AppCompatActivity() {
                             navDisplayController.popBackStack()
                             //navController.popBackStack()
                             homeViewModel.clearHomeAddText()
+                        }
+
+                        AlertType.TYPE18 -> {
+                            navDisplayController.popBackStack()
+                            //navController.popBackStack()
                         }
                     }
                 }

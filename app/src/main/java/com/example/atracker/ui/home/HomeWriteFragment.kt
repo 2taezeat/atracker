@@ -168,9 +168,11 @@ class HomeWriteFragment : Fragment() {
         addTabItem(args.progressIndex, container)
 
         binding.homeWriteBackButton.setOnClickListener { view ->
-            val navController = view.findNavController()
-            navController.popBackStack()
-            parentActivity.mainBottomNavigationAppear()
+            //val navController = view.findNavController()
+            //navController.popBackStack()
+            //parentActivity.mainBottomNavigationAppear()
+
+            showAlert(AlertType.TYPE18, homeWriteTabLayout.getTabAt(previousTabPosition), null)
         }
 
         binding.homeWriteBottomCL.setOnClickListener {
@@ -859,6 +861,11 @@ class HomeWriteFragment : Fragment() {
                             previousTabPosition = tab!!.position
                             previousTabName = tab!!.tag.toString()
                             changeView(tab!!.tag.toString())
+                        }
+
+                        AlertType.TYPE18 -> {
+                            findNavController().popBackStack()
+                            //homeViewModel.clearStageProgress()
                         }
                     }
                 }

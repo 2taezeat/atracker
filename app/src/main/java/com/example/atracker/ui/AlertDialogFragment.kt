@@ -462,6 +462,30 @@ class AlertDialogFragment(private val alertDialogListener: AlertDialogListener, 
                     dismiss()
                 }
             }
+            AlertType.TYPE18 -> { // 취소하고 나가시겠습니까?.
+                binding.alertDialogIV.setImageResource(R.drawable.ic_exclamation_icon_raw)
+
+                binding.alertDialogTV0.visibility = View.INVISIBLE
+                binding.alertDialogTV1.text = "취소하고 나가시겠습니까?"
+                binding.alertDialogTV1.setTextColor(ContextCompat.getColor(lazyContext, R.color.atracker_white))
+
+                binding.alertDialogTV3.visibility = View.INVISIBLE
+                binding.alertDialogTV2.text = "작성하던 내용이 저장되지 않습니다."
+
+                binding.alertDialogButton1.text = "취소"
+                binding.alertDialogButton2.text = "나가기"
+                binding.alertDialogButton3.visibility = View.INVISIBLE
+
+                binding.alertDialogButton1.setOnClickListener {
+                    alertDialogListener.onLeftClick()
+                    dismiss()
+                }
+
+                binding.alertDialogButton2.setOnClickListener {
+                    alertDialogListener.onRightClick()
+                    dismiss()
+                }
+            }
         }
 
         return root
