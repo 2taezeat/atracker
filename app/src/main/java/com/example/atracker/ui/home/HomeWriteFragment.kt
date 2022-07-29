@@ -265,8 +265,10 @@ class HomeWriteFragment : Fragment() {
                     Log.d("stageProgressesPutFail", "${boolean}")
                     if (boolean) { // 실패
                         parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
-                    } else {
+                    } else { // 성공
                         homeViewModel.clearStageProgress()
+                        homeViewModel.getApplyDisplay(applyIds = null, includeContent = false)
+                        homeViewModel.getMyApplyPfratio()
                         showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
                     }
                 }
