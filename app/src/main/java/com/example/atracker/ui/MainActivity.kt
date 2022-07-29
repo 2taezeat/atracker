@@ -135,12 +135,9 @@ class MainActivity : AppCompatActivity() {
             if (homeViewModel.homeAddStagesContent.value!!.isNotEmpty()) {
                 showAlert(AlertType.TYPE17)
                 return
-                //super.onBackPressed()
-            } else {
+            } else { // api 통신 실페 일때
                 super.onBackPressed()
-
             }
-            //return
         } else {
             super.onBackPressed()
         }

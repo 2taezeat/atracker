@@ -241,7 +241,8 @@ class HomeWriteFragment : Fragment() {
             chipLayoutListMap[progressName] = arrayListOf()
 
             val contentIdForTag = homeDetailContents!!.find {it.progressName == progressName}!!.contentId
-            Log.d("contentIdForTag", "${contentIdForTag}")
+            val contentType = homeDetailContents!!.find {it.progressName == progressName}!!.itemType
+            Log.d("contentIdForTag", "${contentIdForTag}, ${contentType}")
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -324,7 +325,12 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(freeLayout)
                     freeDeleteCheckBox.isChecked = false
 
-                    freeLayout.tag = contentIdForTag
+                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
+                        freeLayout.tag = 123456789
+                    } else {
+                        freeLayout.tag = contentIdForTag
+                    }
+
 
                     freeDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -344,7 +350,11 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(qnaLayout)
                     qnaDeleteCheckBox.isChecked = false
 
-                    qnaLayout.tag = contentIdForTag
+                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
+                        qnaLayout.tag = 123456789
+                    } else {
+                        qnaLayout.tag = contentIdForTag
+                    }
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -363,7 +373,11 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(overAllLayout)
                     overAllDeleteCheckBox.isChecked = false
 
-                    overAllLayout.tag = contentIdForTag
+                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
+                        overAllLayout.tag = 123456789
+                    } else {
+                        overAllLayout.tag = contentIdForTag
+                    }
 
                     overAllDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -707,18 +721,26 @@ class HomeWriteFragment : Fragment() {
 
                             for (cf in frll) { // stage for 문
                                 Log.d("qwe_frll", "${frll}, ${cf.tag.toString().toInt()}")
-                                homeViewModel.deleteFun(progressName, DeletedContent(cf.tag.toString().toInt()))
+                                val deletedContentId = cf.tag.toString().toInt()
+                                if (deletedContentId != 123456789) {
+                                    homeViewModel.deleteFun(progressName, DeletedContent(deletedContentId))
+                                }
+
                             }
 
                             for (cq in qrll) { // stage for 문
                                 Log.d("qwe_qrll", "${frll}, ${cq.tag.toString().toInt()}")
-                                homeViewModel.deleteFun(progressName, DeletedContent(cq.tag.toString().toInt()))
-                            }
+                                val deletedContentId = cq.tag.toString().toInt()
+                                if (deletedContentId != 123456789) {
+                                    homeViewModel.deleteFun(progressName, DeletedContent(deletedContentId))
+                                }                             }
 
                             for (co in orll) { // stage for 문
                                 Log.d("qwe_qrll", "${frll}, ${co.tag.toString().toInt()}")
-                                homeViewModel.deleteFun(progressName, DeletedContent(co.tag.toString().toInt()))
-                            }
+                                val deletedContentId = co.tag.toString().toInt()
+                                if (deletedContentId != 123456789) {
+                                    homeViewModel.deleteFun(progressName, DeletedContent(deletedContentId))
+                                }                             }
 
 
                             freeRemoveLayoutListMap[progressName]!!.clear()
