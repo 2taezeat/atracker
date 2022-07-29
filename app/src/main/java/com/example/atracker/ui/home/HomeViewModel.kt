@@ -130,21 +130,10 @@ class HomeViewModel : ViewModel() {
     private val _oriChipSet = MutableLiveData<MutableSet<Int>>()
     val oriChipSet : LiveData<MutableSet<Int>> = _oriChipSet
 
-    private val _homeDetailContents = MutableLiveData<MutableMap<Int, ArrayList<HomeDetailItem>>>().apply {
-        value = mutableMapOf(
-            3039 to arrayListOf<HomeDetailItem>(
-                HomeDetailItem(progressType = 0,progressName = "서류", itemType = ProgressItemBodyType.OVERALL, freeTitle = "freetitle1", freeBody = "free1", totalReviewBody = "hello_0##################$$$$$$$$$$##########%%%%%%%%%", questionBody = null, answerBody = null, qnaReviewBody = null, progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
-                HomeDetailItem(progressType = 1,progressName = "사전 과제", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
-                HomeDetailItem(progressType = 1,progressName = "포트폴리오", itemType = ProgressItemBodyType.QNA, freeTitle = null, freeBody = null, totalReviewBody = "hello_1", questionBody = "q2", answerBody = "a2", qnaReviewBody = "qnaReview2", progressIsPassing = IsPassing.PASS, contentOrder = 0, contentId = 0, stageRealId = 0),
-            )
-        )
-    }
-    val homeDetailContents : LiveData<MutableMap<Int, ArrayList<HomeDetailItem>>> = _homeDetailContents
 
     private val _homeDetailContentForDisplay = MutableLiveData<ArrayList<HomeDetailItem>>().apply { // map 아님 주의
         arrayListOf<HomeDetailItem>()
     }
-
     val homeDetailContentForDisplay : LiveData<ArrayList<HomeDetailItem>> = _homeDetailContentForDisplay
 
 
@@ -162,7 +151,6 @@ class HomeViewModel : ViewModel() {
 //
 //    private val _arrayListUpdatedContent = MutableLiveData<ArrayList<UpdatedContent>>()
 //    val arrayListUpdatedContent : LiveData<ArrayList<UpdatedContent>> = _arrayListUpdatedContent
-
 
 
 
@@ -711,14 +699,11 @@ class HomeViewModel : ViewModel() {
                                 ))
                             }
                         }
-
                     }
 
                     newStageTitleArrayList.add(stageTitle)
                 }
                 _homeProgressNameDetail.value = Event(newStageTitleArrayList)
-                Log.d("_homeApplyIdContent" ,"${_homeProgressNameDetail.value}")
-
                 _homeDetailContentForDisplay.value = forDetailDisplayArrayList
 
                 _getApplyDetailFail.value = Event(false)
@@ -758,27 +743,25 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    fun deleteFun(progressName : String, deletedContent : DeletedContent) {
+    fun deletedContentUpdate(progressName : String, deletedContent : DeletedContent) {
         for (sp in _arrayListStageProgresse.value!!) {
             val stageRealId = sp.id
             if (stageRealId == progressNameToStageRealId(progressName)) {
                 sp.deleted_contents.add(deletedContent)
             }
         }
-
     }
 
-    fun newFun(progressName : String, newContent : NewContent) {
+    fun newContentUpdate(progressName : String, newContent : NewContent) {
         for (sp in _arrayListStageProgresse.value!!) {
             val stageRealId = sp.id
             if (stageRealId == progressNameToStageRealId(progressName)) {
                 sp.new_contents.add(newContent)
             }
         }
-
     }
 
-    fun updateFun(progressName : String, updatedContent : UpdatedContent) {
+    fun updateContentsUpdate(progressName : String, updatedContent : UpdatedContent) {
         for (sp in _arrayListStageProgresse.value!!) {
             val stageRealId = sp.id
             if (stageRealId == progressNameToStageRealId(progressName)) {
@@ -787,7 +770,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun isPassingFun(progressName : String, inProgressIsChecked : Boolean, failIsChecked: Boolean, passIsChecked : Boolean ) {
+    fun isPassingUpdate(progressName : String, inProgressIsChecked : Boolean, failIsChecked: Boolean, passIsChecked : Boolean ) {
         val finalStatus : String
         when {
             inProgressIsChecked -> finalStatus = "IN_PROGRESS"
@@ -802,8 +785,6 @@ class HomeViewModel : ViewModel() {
                 sp.status = finalStatus
             }
         }
-
-        Log.d("qwe_test123", "${_arrayListStageProgresse.value}, ${finalStatus}")
     }
 
 
@@ -812,25 +793,22 @@ class HomeViewModel : ViewModel() {
         Log.d("qwe_final_stageProgressRequest", "${_stageProgressRequest.value}")
     }
 
-
     fun updateStageProgress(){
-
         viewModelScope.launch {
             val apiResult = repositoryHome.updateStageProgressCall(
                 accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU",
                 stageProgressRequest = _stageProgressRequest.value!!,
            )
-
             if (apiResult.code() == 200) {
-
+                clearStageProgress()
             } else {
 
             }
         }
     }
 
-
     fun clearStageProgress() {
+        Log.d("qwe_clear", "qwe_clear")
         _arrayListStageProgresse.value = arrayListOf()
         _stageProgressRequest.value = StageProgressRequest(stage_progresses = arrayListOf())
     }

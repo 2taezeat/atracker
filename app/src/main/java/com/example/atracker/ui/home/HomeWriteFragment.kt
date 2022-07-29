@@ -185,6 +185,25 @@ class HomeWriteFragment : Fragment() {
                 val qm = qnaLayoutListMap[progressName]?.let {it}
                 val om = overAllLayoutListMap[progressName]?.let {it}
 
+                om?.let { it
+                    for (oll in it) {
+                        val homeWriteReviewET = oll.findViewById<EditText>(R.id.homeWriteReviewET)
+                        val overAllReviewBodyString = homeWriteReviewET.text.toString()
+                        Log.d("qwe_final_oll", "${overAllReviewBodyString}, ${oll.tag}")
+
+                        val contentId = oll.tag.toString().toInt()
+                        if (contentId == 123456789) { // 새로 추가되는 것
+                            val newContent = NewContent(content = overAllReviewBodyString, content_type = "OVERALL", order = oll.id)
+                            homeViewModel.newContentUpdate(progressName = progressName, newContent = newContent)
+
+                        } else { // 서버에 있는 것을 클라에서 업데이트
+                            val updatedContent = UpdatedContent(content = overAllReviewBodyString, id = contentId, order = oll.id)
+                            homeViewModel.updateContentsUpdate(progressName = progressName, updatedContent = updatedContent)
+                        }
+                    }
+                }
+
+
                 fm?.let { it
                     for (fll in it) {
                         val freeTitleET = fll.findViewById<EditText>(R.id.homeWriteFreeTitle)
@@ -198,13 +217,12 @@ class HomeWriteFragment : Fragment() {
                         val contentId = fll.tag.toString().toInt()
                         if (contentId == 123456789) { // 새로 추가되는 것
                             val newContent = NewContent(content = freeFinalParsedString, content_type = "FREE_FORM", order = fll.id)
-                            homeViewModel.newFun(progressName = progressName, newContent = newContent)
+                            homeViewModel.newContentUpdate(progressName = progressName, newContent = newContent)
 
                         } else { // 서버에 있는 것을 클라에서 업데이트
                             val updatedContent = UpdatedContent(content = freeFinalParsedString, id = contentId, order = fll.id)
-                            homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
+                            homeViewModel.updateContentsUpdate(progressName = progressName, updatedContent = updatedContent)
                         }
-
                     }
                 }
 
@@ -224,43 +242,22 @@ class HomeWriteFragment : Fragment() {
                         val contentId = qll.tag.toString().toInt()
                         if (contentId == 123456789) { // 새로 추가되는 것
                             val newContent = NewContent(content = qnaFinalParsedString, content_type = "QNA", order = qll.id)
-                            homeViewModel.newFun(progressName = progressName, newContent = newContent)
+                            homeViewModel.newContentUpdate(progressName = progressName, newContent = newContent)
 
                         } else { // 서버에 있는 것을 클라에서 업데이트
                             val updatedContent = UpdatedContent(content = qnaFinalParsedString, id = contentId, order = qll.id)
-                            homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
-                        }
-                    }
-                }
-
-                om?.let { it
-                    for (oll in it) {
-                        val homeWriteReviewET = oll.findViewById<EditText>(R.id.homeWriteReviewET)
-                        val overAllReviewBodyString = homeWriteReviewET.text.toString()
-                        Log.d("qwe_final_oll", "${overAllReviewBodyString}, ${oll.tag}")
-
-                        val contentId = oll.tag.toString().toInt()
-                        if (contentId == 123456789) { // 새로 추가되는 것
-                            val newContent = NewContent(content = overAllReviewBodyString, content_type = "OVERALL", order = oll.id)
-                            homeViewModel.newFun(progressName = progressName, newContent = newContent)
-
-                        } else { // 서버에 있는 것을 클라에서 업데이트
-                            val updatedContent = UpdatedContent(content = overAllReviewBodyString, id = contentId, order = oll.id)
-                            homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
+                            homeViewModel.updateContentsUpdate(progressName = progressName, updatedContent = updatedContent)
                         }
                     }
                 }
 
                 val cl = chipLayoutListMap[progressName]!!
+                homeViewModel.isPassingUpdate(progressName = progressName, inProgressIsChecked = cl[0].isChecked, failIsChecked = cl[1].isChecked, passIsChecked = cl[2].isChecked)
+                Log.d("qwe_final_arrayListStageProgresse", "${homeViewModel.arrayListStageProgresse.value}")
                 Log.d("qwe_", "-------------------------------------------------------------" )
 
-
-                homeViewModel.isPassingFun(progressName = progressName, inProgressIsChecked = cl[0].isChecked, failIsChecked = cl[1].isChecked, passIsChecked = cl[2].isChecked)
-
-                Log.d("qwe_final_arrayListStageProgresse", "${homeViewModel.arrayListStageProgresse.value}")
             }
             homeViewModel.setStageProgressRequest()
-
             homeViewModel.updateStageProgress()
         }
 
@@ -356,7 +353,6 @@ class HomeWriteFragment : Fragment() {
             val homeWritePlusButton2 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton2)
             val homeWritePlusButton3 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton3)
 
-
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
             val homeWriteEditButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditButton)
             val homeWriteEditCompleteButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditCompleteButton)
@@ -370,27 +366,21 @@ class HomeWriteFragment : Fragment() {
 //            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
 //            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
 
-
             homeWriteTypeSelect1.tag = progressName
             homeWriteTypeSelect2.tag = progressName
             homeWriteTypeSelect3.tag = progressName
-
 
             chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect1)
             chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect2)
             chipLayoutListMap[progressName]!!.add(homeWriteTypeSelect3)
 
-
             homeWriteContentLayout.layoutParams = params
 
-
             setChipListener(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValueWhite = R.color.atracker_white, colorValueGreen = R.color.progress_color_7 )
-
 
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
             setPlusButton(homeWritePlusButton2, R.layout.home_write_free_layout, homeWriteLL, progressName)
             setPlusButton(homeWritePlusButton3, R.layout.home_write_review_layout, homeWriteLL, progressName)
-
 
             homeWriteEditButton.setOnClickListener { // '삭제' 버튼 클릭시
                 homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
@@ -399,7 +389,6 @@ class HomeWriteFragment : Fragment() {
                 homeWriteDeleteChip.visibility = View.VISIBLE
                 homeWritePlusButton1.visibility = View.INVISIBLE
                 homeWritePlusButton2.visibility = View.INVISIBLE
-
                 homeWritePlusButton3.visibility = View.INVISIBLE
 
                 saveViewDisappear()
@@ -409,13 +398,6 @@ class HomeWriteFragment : Fragment() {
                 val freeLayoutList = freeLayoutListMap[progressName]
                 val qnaLayoutList = qnaLayoutListMap[progressName]
                 val overAllLayoutList = overAllLayoutListMap[progressName]
-
-//                homeWriteReviewCheckBox.visibility = View.VISIBLE
-//                val set = ConstraintSet()
-//                set.clone(homeWriteReviewWholeCL)
-//                set.connect(homeWriteReviewMainCL.id,ConstraintSet.START, homeWriteReviewCheckBox.id , ConstraintSet.END, 20)
-//                set.applyTo(homeWriteReviewWholeCL)
-
 
                 for (freeLayout in freeLayoutList.orEmpty()) {
                     freeLayout.getViewById(R.id.homeWriteFreeCheckBox).visibility = View.VISIBLE
@@ -432,7 +414,6 @@ class HomeWriteFragment : Fragment() {
                     } else {
                         freeLayout.tag = contentIdForTag
                     }
-
 
                     freeDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean)
@@ -488,7 +469,6 @@ class HomeWriteFragment : Fragment() {
                             overAllRemoveLayoutListMap[progressName]!!.remove(overAllLayout)
                     }
                 }
-
             }
 
             homeWriteDeleteChip.setOnClickListener {
@@ -507,7 +487,6 @@ class HomeWriteFragment : Fragment() {
                 homeWriteEditButton.visibility = View.VISIBLE
                 homeWritePlusButton1.visibility = View.VISIBLE
                 homeWritePlusButton2.visibility = View.VISIBLE
-
                 homeWritePlusButton3.visibility = View.VISIBLE
 
                 saveViewAppear()
@@ -749,7 +728,6 @@ class HomeWriteFragment : Fragment() {
             )
             params.setMargins(0,20,0,10)
             addLayout.layoutParams = params
-
             addLayout.id = View.generateViewId()
             addLayout.tag = 123456789
 
@@ -791,7 +769,6 @@ class HomeWriteFragment : Fragment() {
                         AlertType.TYPE3 -> {
                             binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                         }
-
                     }
                 }
 
@@ -802,7 +779,6 @@ class HomeWriteFragment : Fragment() {
                             parentActivity.mainBottomNavigationAppear()
                         }
                     }
-
                 }
 
                 override fun onRightClick() {
@@ -820,47 +796,43 @@ class HomeWriteFragment : Fragment() {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
 
-
                             val frll = freeRemoveLayoutListMap[progressName]!!
                             val qrll = qnaRemoveLayoutListMap[progressName]!!
                             val orll = overAllRemoveLayoutListMap[progressName]!!
-
 
                             for (cf in frll) { // stage for 문
                                 Log.d("qwe_frll", "${frll}, ${cf.tag.toString().toInt()}")
                                 val deletedContentId = cf.tag.toString().toInt()
                                 if (deletedContentId != 123456789) {
-                                    homeViewModel.deleteFun(progressName, DeletedContent(deletedContentId))
+                                    homeViewModel.deletedContentUpdate(progressName, DeletedContent(deletedContentId))
                                 }
-
                             }
 
                             for (cq in qrll) { // stage for 문
                                 Log.d("qwe_qrll", "${frll}, ${cq.tag.toString().toInt()}")
                                 val deletedContentId = cq.tag.toString().toInt()
                                 if (deletedContentId != 123456789) {
-                                    homeViewModel.deleteFun(progressName, DeletedContent(deletedContentId))
-                                }                             }
+                                    homeViewModel.deletedContentUpdate(progressName, DeletedContent(deletedContentId))
+                                }
+                            }
 
                             for (co in orll) { // stage for 문
                                 Log.d("qwe_qrll", "${frll}, ${co.tag.toString().toInt()}")
                                 val deletedContentId = co.tag.toString().toInt()
                                 if (deletedContentId != 123456789) {
-                                    homeViewModel.deleteFun(progressName, DeletedContent(deletedContentId))
-                                }                             }
-
+                                    homeViewModel.deletedContentUpdate(progressName, DeletedContent(deletedContentId))
+                                }
+                            }
 
                             freeRemoveLayoutListMap[progressName]!!.clear()
                             qnaRemoveLayoutListMap[progressName]!!.clear()
                             overAllRemoveLayoutListMap[progressName]!!.clear()
-
                         }
                         AlertType.TYPE3 -> {
                             previousTabPosition = tab!!.position
                             previousTabName = tab!!.tag.toString()
                             changeView(tab!!.tag.toString())
                         }
-
                     }
                 }
             },
@@ -885,7 +857,6 @@ class HomeWriteFragment : Fragment() {
     fun saveViewAppear() {
         binding.homeWriteBottomCL.visibility = View.VISIBLE
         binding.homeWriteBottomView.visibility = View.VISIBLE
-
 //        val lp = binding.homeWriteNestedSV.layoutParams
 //        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT
 //        binding.homeWriteNestedSV.layoutParams = lp

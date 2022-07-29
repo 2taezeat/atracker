@@ -102,7 +102,12 @@ class HomeDetailFragment : Fragment() {
 
 
         //homeDetailAdapter.submitList(homeViewModel.homeDetailContents.value!![args.progressIndex])
-        homeDetailAdapter.submitList(homeViewModel.homeDetailContentForDisplay.value!!)
+
+
+        homeViewModel.homeDetailContentForDisplay.observe(viewLifecycleOwner, Observer {
+            Log.d("homeDetailContentForDisplay", "${homeViewModel.homeDetailContentForDisplay.value}")
+            homeDetailAdapter.submitList(homeViewModel.homeDetailContentForDisplay.value!!)
+        })
 
 
         binding.homeDetailRV.also{
@@ -110,7 +115,6 @@ class HomeDetailFragment : Fragment() {
             it.setHasFixedSize(false)
             it.adapter = homeDetailAdapter
         }
-
 
         val bgProgress = ProgressBarDrawable( lazyContext,homeProgress.totalProgress,homeProgress.myProgress, true)
         binding.homeDetailProgressView.progressDrawable = bgProgress
@@ -142,8 +146,6 @@ class HomeDetailFragment : Fragment() {
         if (homeViewModel.homeApplyIdContent.value!!.apply_id != -1) {
             progressNameList = homeViewModel.homeProgressNameWrite.value!!
         }
-
-
     }
 
 
