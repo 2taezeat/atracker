@@ -173,7 +173,6 @@ class HomeWriteFragment : Fragment() {
             parentActivity.mainBottomNavigationAppear()
         }
 
-
         binding.homeWriteBottomCL.setOnClickListener {
             val homeProgressNameWrite = homeViewModel.homeProgressNameWrite.value!!
 
@@ -261,16 +260,17 @@ class HomeWriteFragment : Fragment() {
             homeViewModel.updateStageProgress()
 
 
-            showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
-
-//            homeViewModel.stageProgressesPutFail.observe(viewLifecycleOwner, Observer {
-//                it.getContentIfNotHandled()?.let { boolean ->
-//                    Log.d("stageProgressesPutFail", "${boolean}")
-//                    if (boolean) { // postApply 실패
-//                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
-//                    }
-//                }
-//            })
+            homeViewModel.stageProgressesPutFail.observe(viewLifecycleOwner, Observer {
+                it.getContentIfNotHandled()?.let { boolean ->
+                    Log.d("stageProgressesPutFail", "${boolean}")
+                    if (boolean) { // 실패
+                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+                    } else {
+                        homeViewModel.clearStageProgress()
+                        showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
+                    }
+                }
+            })
         }
 
         binding.homeWriteCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
@@ -781,8 +781,6 @@ class HomeWriteFragment : Fragment() {
                 override fun onCenterClick() {
                     when (alertType) {
                         AlertType.TYPE4 -> {
-                            //findNavController().popBackStack()
-                            //parentActivity.mainBottomNavigationAppear()
                             findNavController().navigate(R.id.action_navigation_home_write_to_navigation_home)
                         }
                     }

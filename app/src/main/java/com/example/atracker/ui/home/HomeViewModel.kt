@@ -797,11 +797,9 @@ class HomeViewModel : ViewModel() {
                 stageProgressRequest = _stageProgressRequest.value!!,
            )
             if (apiResult.code() == 200) {
-                clearStageProgress()
                 _stageProgressesPutFail.value = Event(false)
             } else {
                 _stageProgressesPutFail.value = Event(true)
-
             }
         }
     }
