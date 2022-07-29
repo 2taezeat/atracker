@@ -41,7 +41,6 @@ class HomeWriteFragment : Fragment() {
         activity as MainActivity
     }
 
-
     private lateinit var homeWriteTabLayout : TabLayout
     private val args : HomeWriteFragmentArgs by navArgs()
     private val homeViewModel: HomeViewModel by activityViewModels()
@@ -84,11 +83,71 @@ class HomeWriteFragment : Fragment() {
 
 
     fun parsedQna(q : String, a : String, f : String) : String {
-        return ""
+        var formedString = "{"
+        formedString += '\"'
+        formedString += 'q'
+        formedString += '\"'
+
+        formedString += ':'
+
+        formedString += '\"'
+        formedString += q
+        formedString += '\"'
+
+        formedString += ','
+
+        formedString += '\"'
+        formedString += 'a'
+        formedString += '\"'
+
+        formedString += ':'
+
+        formedString += '\"'
+        formedString += a
+        formedString += '\"'
+
+        formedString += ','
+
+        formedString += '\"'
+        formedString += 'f'
+        formedString += '\"'
+
+        formedString += ':'
+
+        formedString += '\"'
+        formedString += f
+        formedString += '\"'
+
+        formedString += "}"
+        return formedString
     }
 
-    fun parsedFree(f: String, b: String) : String {
-        return ""
+    fun parsedFree(t: String, b: String) : String {
+        var formedString = "{"
+        formedString += '\"'
+        formedString += 't'
+        formedString += '\"'
+
+        formedString += ':'
+
+        formedString += '\"'
+        formedString += t
+        formedString += '\"'
+
+        formedString += ','
+
+        formedString += '\"'
+        formedString += 'b'
+        formedString += '\"'
+
+        formedString += ':'
+
+        formedString += '\"'
+        formedString += b
+        formedString += '\"'
+
+        formedString += "}"
+        return formedString
     }
 
 
@@ -118,7 +177,6 @@ class HomeWriteFragment : Fragment() {
             val homeProgressNameWrite = homeViewModel.homeProgressNameWrite.value!!
 
             for (progressName in homeProgressNameWrite) {
-                Log.d("qwe_progressName", "${progressName}")
                 Log.d("qwe_freeLayoutListMap", "${freeLayoutListMap[progressName]}" )
                 Log.d("qwe_qnaLayoutListMap", "${qnaLayoutListMap[progressName]}" )
                 Log.d("qwe_overAllLayoutListMap", "${overAllLayoutListMap[progressName]}" )
@@ -131,20 +189,19 @@ class HomeWriteFragment : Fragment() {
                     for (fll in it) {
                         val freeTitleET = fll.findViewById<EditText>(R.id.homeWriteFreeTitle)
                         val freeBodyET = fll.findViewById<EditText>(R.id.homeWriteFreeET)
-                        val freeTitleString = freeTitleET.toString()
-                        val freeBodyString = freeBodyET.toString()
+                        val freeTitleString = freeTitleET.text.toString()
+                        val freeBodyString = freeBodyET.text.toString()
 
                         val freeFinalParsedString = parsedFree(freeTitleString, freeBodyString)
-
-                        Log.d("qwe_fll", "${freeFinalParsedString}, ${fll.tag}")
+                        Log.d("qwe_final_fll", "${freeFinalParsedString}, ${fll.tag}")
 
                         val contentId = fll.tag.toString().toInt()
                         if (contentId == 123456789) { // 새로 추가되는 것
-                            val newContent = NewContent(content = freeFinalParsedString, content_type = "FREE_FORM", order = 0)
+                            val newContent = NewContent(content = freeFinalParsedString, content_type = "FREE_FORM", order = fll.id)
                             homeViewModel.newFun(progressName = progressName, newContent = newContent)
 
                         } else { // 서버에 있는 것을 클라에서 업데이트
-                            val updatedContent = UpdatedContent(content = freeFinalParsedString, id = contentId, order = 0)
+                            val updatedContent = UpdatedContent(content = freeFinalParsedString, id = contentId, order = fll.id)
                             homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
                         }
 
@@ -157,21 +214,20 @@ class HomeWriteFragment : Fragment() {
                         val qnaAnswerET = qll.findViewById<EditText>(R.id.homeWriteAnswerET)
                         val qnaReviewET = qll.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
 
-                        val qnaQuestionString = qnaQuestionET.toString()
-                        val qnaAnswerString = qnaAnswerET.toString()
-                        val qnaReviewString = qnaReviewET.toString() // feedback, f
+                        val qnaQuestionString = qnaQuestionET.text.toString()
+                        val qnaAnswerString = qnaAnswerET.text.toString()
+                        val qnaReviewString = qnaReviewET.text.toString() // feedback, f
 
                         val qnaFinalParsedString = parsedQna(qnaQuestionString, qnaAnswerString, qnaReviewString)
 
-                        Log.d("qwe_qll", "${qnaFinalParsedString}, ${qll.tag}")
-
+                        Log.d("qwe_final_qll", "${qnaFinalParsedString}, ${qll.tag}")
                         val contentId = qll.tag.toString().toInt()
                         if (contentId == 123456789) { // 새로 추가되는 것
-                            val newContent = NewContent(content = qnaFinalParsedString, content_type = "QNA", order = 0)
+                            val newContent = NewContent(content = qnaFinalParsedString, content_type = "QNA", order = qll.id)
                             homeViewModel.newFun(progressName = progressName, newContent = newContent)
 
                         } else { // 서버에 있는 것을 클라에서 업데이트
-                            val updatedContent = UpdatedContent(content = qnaFinalParsedString, id = contentId, order = 0)
+                            val updatedContent = UpdatedContent(content = qnaFinalParsedString, id = contentId, order = qll.id)
                             homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
                         }
                     }
@@ -180,33 +236,35 @@ class HomeWriteFragment : Fragment() {
                 om?.let { it
                     for (oll in it) {
                         val homeWriteReviewET = oll.findViewById<EditText>(R.id.homeWriteReviewET)
-                        val overAllReviewBodyString = homeWriteReviewET.toString()
-                        Log.d("qwe_oll", "${overAllReviewBodyString}, ${oll.tag}")
+                        val overAllReviewBodyString = homeWriteReviewET.text.toString()
+                        Log.d("qwe_final_oll", "${overAllReviewBodyString}, ${oll.tag}")
 
                         val contentId = oll.tag.toString().toInt()
                         if (contentId == 123456789) { // 새로 추가되는 것
-                            val newContent = NewContent(content = overAllReviewBodyString, content_type = "OVERALL", order = 0)
+                            val newContent = NewContent(content = overAllReviewBodyString, content_type = "OVERALL", order = oll.id)
                             homeViewModel.newFun(progressName = progressName, newContent = newContent)
 
                         } else { // 서버에 있는 것을 클라에서 업데이트
-                            val updatedContent = UpdatedContent(content = homeWriteReviewET.text.toString(), id = contentId, order = 0)
-                            homeViewModel.updateFun(progressName = overAllReviewBodyString, updatedContent = updatedContent)
+                            val updatedContent = UpdatedContent(content = overAllReviewBodyString, id = contentId, order = oll.id)
+                            homeViewModel.updateFun(progressName = progressName, updatedContent = updatedContent)
                         }
                     }
                 }
-
 
                 val cl = chipLayoutListMap[progressName]!!
                 Log.d("qwe_", "-------------------------------------------------------------" )
 
 
                 homeViewModel.isPassingFun(progressName = progressName, inProgressIsChecked = cl[0].isChecked, failIsChecked = cl[1].isChecked, passIsChecked = cl[2].isChecked)
-            }
 
+                Log.d("qwe_final_arrayListStageProgresse", "${homeViewModel.arrayListStageProgresse.value}")
+            }
+            homeViewModel.setStageProgressRequest()
+
+            homeViewModel.updateStageProgress()
         }
 
         binding.homeWriteCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
-
 
 
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -248,32 +306,6 @@ class HomeWriteFragment : Fragment() {
             }
         })
 
-
-//        binding.homeWritePlusButton1.setOnClickListener{
-//            val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
-//            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-//                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-//            )
-//            params.setMargins(0,20,0,10)
-//            homeWriteQnaLayout.layoutParams = params
-//            homeWriteQnaLayout.id = View.generateViewId()
-//
-//            binding.homeWriteLL.addView(homeWriteQnaLayout)
-//        }
-//
-//        binding.homeWritePlusButton2.setOnClickListener{
-//            val homeWriteFreeLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
-//            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-//                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-//            )
-//            params.setMargins(0,20,0,10)
-//            homeWriteFreeLayout.layoutParams = params
-//            homeWriteFreeLayout.id = View.generateViewId()
-//
-//            binding.homeWriteLL.addView(homeWriteFreeLayout)
-//        }
 
 
 
@@ -515,8 +547,6 @@ class HomeWriteFragment : Fragment() {
                     set.connect(homeWriteOverAllMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
                     set.applyTo(overAllLayout)
                 }
-
-
             }
 
             homeWriteContentLayout.id = View.generateViewId()
@@ -562,10 +592,10 @@ class HomeWriteFragment : Fragment() {
             val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
 
 
-            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
-            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
-            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
-            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
+//            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
+//            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+//            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+//            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
 
             val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
@@ -609,13 +639,17 @@ class HomeWriteFragment : Fragment() {
                     )
                     params.setMargins(0,20,0,10)
                     addLayout.layoutParams = params
-                    addLayout.id = View.generateViewId()
+                    //addLayout.id = View.generateViewId()
+                    addLayout.id = contentOrder
                     homeWriteLL.addView(addLayout)
 
                     val homeWriteFreeET = addLayout.findViewById<EditText>(R.id.homeWriteFreeET)
                     homeWriteFreeET.setText(freeBody)
                     val homeWriteFreeTitle = addLayout.findViewById<EditText>(R.id.homeWriteFreeTitle)
                     homeWriteFreeTitle.setText(freeTitle)
+
+
+                    addLayout.tag = contentId
 
 
                     freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
@@ -627,8 +661,8 @@ class HomeWriteFragment : Fragment() {
                         ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
                     )
                     params.setMargins(0,20,0,10)
-                    addLayout.layoutParams = params
-                    addLayout.id = View.generateViewId()
+                    //addLayout.layoutParams = params
+                    addLayout.id = contentOrder
                     homeWriteLL.addView(addLayout)
 
                     val homeWriteQuestionTV = addLayout.findViewById<EditText>(R.id.homeWriteQuestionTV)
@@ -638,8 +672,10 @@ class HomeWriteFragment : Fragment() {
                     val homeWriteQnaOfReviewET = addLayout.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
                     homeWriteQnaOfReviewET.setText(qnaReviewBody)
 
-                    qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
+                    addLayout.tag = contentId
 
+
+                    qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
                 }
                 ProgressItemBodyType.OVERALL -> {
                     val addLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
@@ -649,15 +685,19 @@ class HomeWriteFragment : Fragment() {
                     )
                     params.setMargins(0,20,0,10)
                     addLayout.layoutParams = params
-                    addLayout.id = View.generateViewId()
+                    //addLayout.id = View.generateViewId()
+                    addLayout.id = contentOrder
                     homeWriteLL.addView(addLayout)
 
                     val homeWriteReviewET = addLayout.findViewById<EditText>(R.id.homeWriteReviewET)
                     homeWriteReviewET.setText(totalReviewBody)
-                    overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
 
+                    addLayout.tag = contentId
+
+                    overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
                 }
                 ProgressItemBodyType.NOT_DEFINED -> {
+
                 }
             }
         }
@@ -709,9 +749,9 @@ class HomeWriteFragment : Fragment() {
             )
             params.setMargins(0,20,0,10)
             addLayout.layoutParams = params
-            addLayout.id = View.generateViewId()
 
-            addLayout.tag = 1234565789
+            addLayout.id = View.generateViewId()
+            addLayout.tag = 123456789
 
             linearLayout.addView(addLayout)
 
@@ -762,7 +802,6 @@ class HomeWriteFragment : Fragment() {
                             parentActivity.mainBottomNavigationAppear()
                         }
                     }
-
 
                 }
 

@@ -154,14 +154,14 @@ class HomeViewModel : ViewModel() {
     private val _arrayListStageProgresse = MutableLiveData<ArrayList<StageProgresse>>()
     val arrayListStageProgresse : LiveData<ArrayList<StageProgresse>> = _arrayListStageProgresse
 
-    private val _arrayListDeletedContent = MutableLiveData<ArrayList<DeletedContent>>()
-    val arrayListDeletedContent : LiveData<ArrayList<DeletedContent>> = _arrayListDeletedContent
-
-    private val _arrayListNewContent = MutableLiveData<ArrayList<NewContent>>()
-    val arrayListNewContent : LiveData<ArrayList<NewContent>> = _arrayListNewContent
-
-    private val _arrayListUpdatedContent = MutableLiveData<ArrayList<UpdatedContent>>()
-    val arrayListUpdatedContent : LiveData<ArrayList<UpdatedContent>> = _arrayListUpdatedContent
+//    private val _arrayListDeletedContent = MutableLiveData<ArrayList<DeletedContent>>()
+//    val arrayListDeletedContent : LiveData<ArrayList<DeletedContent>> = _arrayListDeletedContent
+//
+//    private val _arrayListNewContent = MutableLiveData<ArrayList<NewContent>>()
+//    val arrayListNewContent : LiveData<ArrayList<NewContent>> = _arrayListNewContent
+//
+//    private val _arrayListUpdatedContent = MutableLiveData<ArrayList<UpdatedContent>>()
+//    val arrayListUpdatedContent : LiveData<ArrayList<UpdatedContent>> = _arrayListUpdatedContent
 
 
 
@@ -212,6 +212,7 @@ class HomeViewModel : ViewModel() {
         _portfolioNumTotal.value = 0
 
         _arrayListStageProgresse.value = arrayListOf()
+        _stageProgressRequest.value = StageProgressRequest(stage_progresses = arrayListOf())
     }
 
     fun setWorkTypePosition(position : Int) {
@@ -404,8 +405,8 @@ class HomeViewModel : ViewModel() {
             ProgressItemBodyType.FREE_FORM -> {
                 splitList?.let { spList ->
                     for (s in spList) {
-                        val standard = s[2]
-                        val finalContentString = s.substring(7,s.lastIndex)
+                        val standard = s[1]
+                        val finalContentString = s.substring(5,s.lastIndex)
                         when (standard) {
                             't' -> allParsedContentStringList[0] = finalContentString
                             'b' -> allParsedContentStringList[1] = finalContentString
@@ -416,8 +417,8 @@ class HomeViewModel : ViewModel() {
             ProgressItemBodyType.QNA -> {
                 splitList?.let { spList ->
                     for (s in spList) {
-                        val standard = s[2]
-                        val finalContentString = s.substring(7,s.lastIndex)
+                        val standard = s[1]
+                        val finalContentString = s.substring(5,s.lastIndex)
                         when (standard) {
                             'q' -> allParsedContentStringList[3] = finalContentString
                             'a' -> allParsedContentStringList[4] = finalContentString
@@ -439,7 +440,7 @@ class HomeViewModel : ViewModel() {
 
     fun getCompanyInfo (searchWord : String, page : Int, size : Int = 10, isScroll : Boolean) { // 예외 처리 보류 (220726)
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk",
+            val apiResult = repositoryHome.companySearchPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU",
                 companySearchRequest = CompanySearchRequest(
                 title = searchWord,
                 userDefined = true),
@@ -473,7 +474,7 @@ class HomeViewModel : ViewModel() {
 
     fun addCompanyInfo () {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk",
+            val apiResult = repositoryHome.companyAddPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU",
                 createCompanyRequest = listOf(CreateCompanyRequestItem(name = _companyWord.value!!))
             )
 
@@ -492,7 +493,7 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk")
+            val apiResult = repositoryHome.stageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU")
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -519,7 +520,7 @@ class HomeViewModel : ViewModel() {
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk", createApplyRequest = createApplyRequest )
+            val apiResult = repositoryHome.createApplyPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU", createApplyRequest = createApplyRequest )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -540,7 +541,7 @@ class HomeViewModel : ViewModel() {
         Log.d("updateApplyRequest", "${updateApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk", updateApplyRequest = updateApplyRequest )
+            val apiResult = repositoryHome.updateApplyPutCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU", updateApplyRequest = updateApplyRequest )
             Log.d("getResult_33", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -554,7 +555,7 @@ class HomeViewModel : ViewModel() {
 
     fun deleteApply(deleteIds : Array<Int>) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk", ids = deleteIds )
+            val apiResult = repositoryHome.deleteApplyCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU", ids = deleteIds )
             Log.d("deleteApply", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -563,7 +564,6 @@ class HomeViewModel : ViewModel() {
                 //switch(_deleteApplyFail)
                 _deleteApplyFail.value = Event(true)
             }
-
         }
     }
 
@@ -571,7 +571,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDisplay(applyIds : Array<Int>? = null, includeContent : Boolean? = false) { // 예외 처리 보류 (220725)
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -597,7 +597,6 @@ class HomeViewModel : ViewModel() {
 
                     for (stage in stageProgress) {
                         val stageStatus = stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
-
                         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         if (stageStatus == IsPassing.FAIL.toString() && success) // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
                             success = false
@@ -624,7 +623,7 @@ class HomeViewModel : ViewModel() {
     fun getApplyDetail(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
         viewModelScope.launch {
             val apiResult = repositoryHome.applyGetCall(
-                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk",
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU",
                 applyIds = applyIds,
                 includeContent = includeContent)
 
@@ -731,106 +730,10 @@ class HomeViewModel : ViewModel() {
 
     }
 
-    fun progressNameToStageRealId(progressName : String) : Int {
-        return _homeDetailContentForDisplay.value!!.find { it.progressName == progressName }!!.stageRealId
-    }
-
-
-    fun deleteFun(progressName : String, deletedContent : DeletedContent) {
-
-        for (sp in _arrayListStageProgresse.value!!) {
-            val stageRealId = sp.id
-            if (stageRealId == progressNameToStageRealId(progressName)) {
-                sp.deleted_contents.add(deletedContent)
-            }
-        }
-
-    }
-
-    fun newFun(progressName : String, newContent : NewContent) {
-
-        for (sp in _arrayListStageProgresse.value!!) {
-            val stageRealId = sp.id
-            if (stageRealId == progressNameToStageRealId(progressName)) {
-                sp.new_contents.add(newContent)
-            }
-        }
-
-    }
-
-    fun updateFun(progressName : String, updatedContent : UpdatedContent) {
-
-        for (sp in _arrayListStageProgresse.value!!) {
-            val stageRealId = sp.id
-            if (stageRealId == progressNameToStageRealId(progressName)) {
-                sp.updated_contents.add(updatedContent)
-            }
-        }
-
-    }
-
-    fun isPassingFun(progressName : String, inProgressIsChecked : Boolean, failIsChecked: Boolean, passIsChecked : Boolean ) {
-        val finalStatus : String
-
-        when {
-            inProgressIsChecked -> finalStatus = "IN_PROGRESS"
-            failIsChecked -> finalStatus = "FAIL"
-            passIsChecked -> finalStatus = "PASS"
-            else -> finalStatus = "NOT_STARTED"
-        }
-
-        for (sp in _arrayListStageProgresse.value!!) {
-            val stageRealId = sp.id
-            if (stageRealId == progressNameToStageRealId(progressName)) {
-                sp.status = finalStatus
-            }
-        }
-
-        Log.d("qwe_test123", "${_arrayListStageProgresse.value}, ${finalStatus}")
-
-    }
-
-
-
-
-
-
-
-    fun updateStageProgress(){
-        viewModelScope.launch {
-            val apiResult = repositoryHome.updateStageProgressCall(
-                accessToken = "",
-                stageProgressRequest = _stageProgressRequest.value!!,
-           )
-
-            if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!
-
-            } else {
-
-            }
-        }
-    }
-
-
-
-//    fun deleteStageProgress(deleteIds : Array<Int>){ // mvp 에 안쓰임
-//        viewModelScope.launch {
-//            val apiResult = repositoryHome.deleteStageProgressCall(
-//                accessToken = "",
-//                ids = deleteIds
-//            )
-//            if (apiResult.code() == 200) {
-//                val getResult = apiResult.body()!!
-//            } else {
-//            }
-//        }
-//    }
-
 
     fun getMyApplyPfratio() { // getApplyDisplay 와 같은 이유로 일단 예외 처리 보류
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myApplyPfratioGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODEiLCJpYXQiOjE2NTkwNTc0ODgsImV4cCI6MTY1OTA2MTA4OH0.gWxnQFSsUnI67n2eUlDVFuKhM0d-7eQ5CuIS-SKXHEk")
+            val apiResult = repositoryMyPage.myApplyPfratioGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU")
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 Log.d("getMyApplyPfratio", "${getResult}")
@@ -846,9 +749,93 @@ class HomeViewModel : ViewModel() {
             } else {
 
             }
-
         }
     }
+
+
+    fun progressNameToStageRealId(progressName : String) : Int {
+        return _homeDetailContentForDisplay.value!!.find { it.progressName == progressName }!!.stageRealId
+    }
+
+
+    fun deleteFun(progressName : String, deletedContent : DeletedContent) {
+        for (sp in _arrayListStageProgresse.value!!) {
+            val stageRealId = sp.id
+            if (stageRealId == progressNameToStageRealId(progressName)) {
+                sp.deleted_contents.add(deletedContent)
+            }
+        }
+
+    }
+
+    fun newFun(progressName : String, newContent : NewContent) {
+        for (sp in _arrayListStageProgresse.value!!) {
+            val stageRealId = sp.id
+            if (stageRealId == progressNameToStageRealId(progressName)) {
+                sp.new_contents.add(newContent)
+            }
+        }
+
+    }
+
+    fun updateFun(progressName : String, updatedContent : UpdatedContent) {
+        for (sp in _arrayListStageProgresse.value!!) {
+            val stageRealId = sp.id
+            if (stageRealId == progressNameToStageRealId(progressName)) {
+                sp.updated_contents.add(updatedContent)
+            }
+        }
+    }
+
+    fun isPassingFun(progressName : String, inProgressIsChecked : Boolean, failIsChecked: Boolean, passIsChecked : Boolean ) {
+        val finalStatus : String
+        when {
+            inProgressIsChecked -> finalStatus = "IN_PROGRESS"
+            failIsChecked -> finalStatus = "FAIL"
+            passIsChecked -> finalStatus = "PASS"
+            else -> finalStatus = "NOT_STARTED"
+        }
+
+        for (sp in _arrayListStageProgresse.value!!) {
+            val stageRealId = sp.id
+            if (stageRealId == progressNameToStageRealId(progressName)) {
+                sp.status = finalStatus
+            }
+        }
+
+        Log.d("qwe_test123", "${_arrayListStageProgresse.value}, ${finalStatus}")
+    }
+
+
+    fun setStageProgressRequest() {
+        _stageProgressRequest.value!!.stage_progresses = _arrayListStageProgresse.value!!
+        Log.d("qwe_final_stageProgressRequest", "${_stageProgressRequest.value}")
+    }
+
+
+    fun updateStageProgress(){
+
+        viewModelScope.launch {
+            val apiResult = repositoryHome.updateStageProgressCall(
+                accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiODMiLCJpYXQiOjE2NTkwNjk1MDEsImV4cCI6MTY1OTA3MzEwMX0.uipgjjRHbHBU7gx3E4EY1GmIMGgiAth8wgnlcCDbZOU",
+                stageProgressRequest = _stageProgressRequest.value!!,
+           )
+
+            if (apiResult.code() == 200) {
+
+            } else {
+
+            }
+        }
+    }
+
+
+    fun clearStageProgress() {
+        _arrayListStageProgresse.value = arrayListOf()
+        _stageProgressRequest.value = StageProgressRequest(stage_progresses = arrayListOf())
+    }
+
+
 
 
 }
