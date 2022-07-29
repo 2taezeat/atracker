@@ -236,6 +236,8 @@ class HomeWriteFragment : Fragment() {
 
             freeRemoveLayoutListMap[progressName] = arrayListOf()
             qnaRemoveLayoutListMap[progressName] = arrayListOf()
+            overAllRemoveLayoutListMap[progressName] = arrayListOf()
+
             chipLayoutListMap[progressName] = arrayListOf()
 
             val contentIdForTag = homeDetailContents!!.find {it.progressName == progressName}!!.contentId
@@ -247,6 +249,10 @@ class HomeWriteFragment : Fragment() {
             val homeWriteLL = homeWriteNestedSV.findViewById<LinearLayout>(R.id.homeWriteLL)
             val homeWritePlusButton1 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton1)
             val homeWritePlusButton2 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton2)
+            val homeWritePlusButton3 = homeWriteMainCL.findViewById<TextView>(R.id.homeWritePlusButton3)
+
+
+
             val homeWriteTypeSelectChipGroup = homeWriteMainCL.findViewById<ChipGroup>(R.id.homeWriteTypeSelectChipGroup)
             val homeWriteEditButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditButton)
             val homeWriteEditCompleteButton = homeWriteMainCL.findViewById<TextView>(R.id.homeWriteEditCompleteButton)
@@ -280,6 +286,7 @@ class HomeWriteFragment : Fragment() {
 
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
             setPlusButton(homeWritePlusButton2, R.layout.home_write_free_layout, homeWriteLL, progressName)
+            setPlusButton(homeWritePlusButton3, R.layout.home_write_review_layout, homeWriteLL, progressName)
 
 
             homeWriteEditButton.setOnClickListener {
@@ -289,6 +296,8 @@ class HomeWriteFragment : Fragment() {
                 homeWriteDeleteChip.visibility = View.VISIBLE
                 homeWritePlusButton1.visibility = View.INVISIBLE
                 homeWritePlusButton2.visibility = View.INVISIBLE
+
+                homeWritePlusButton3.visibility = View.INVISIBLE
 
                 editBooleanMap[progressName] = true
 
@@ -342,6 +351,28 @@ class HomeWriteFragment : Fragment() {
                             qnaRemoveLayoutListMap[progressName]!!.remove(qnaLayout)
                     }
                 }
+                for (overAllLayout in overAllLayoutList.orEmpty()) {
+                    overAllLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.VISIBLE
+                    val homeWriteOverAllMainCL = overAllLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+                    val overAllDeleteCheckBox = overAllLayout.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+                    val set = ConstraintSet()
+                    set.clone(overAllLayout)
+                    set.connect(homeWriteOverAllMainCL.id,ConstraintSet.START, overAllDeleteCheckBox.id , ConstraintSet.END, 20)
+                    set.applyTo(overAllLayout)
+                    overAllDeleteCheckBox.isChecked = false
+
+                    overAllLayout.tag = contentIdForTag
+
+                    overAllDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
+                        if (boolean)
+                            overAllRemoveLayoutListMap[progressName]!!.add(overAllLayout)
+                        else
+                            overAllRemoveLayoutListMap[progressName]!!.remove(overAllLayout)
+                    }
+                }
+
+
+
             }
 
             homeWriteDeleteChip.setOnClickListener {
@@ -359,6 +390,8 @@ class HomeWriteFragment : Fragment() {
                 homeWriteEditButton.visibility = View.VISIBLE
                 homeWritePlusButton1.visibility = View.VISIBLE
                 homeWritePlusButton2.visibility = View.VISIBLE
+
+                homeWritePlusButton3.visibility = View.VISIBLE
 
                 editBooleanMap[progressName] = false
 
