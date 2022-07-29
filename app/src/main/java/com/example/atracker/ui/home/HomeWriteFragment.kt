@@ -347,9 +347,20 @@ class HomeWriteFragment : Fragment() {
 
             chipLayoutListMap[progressName] = arrayListOf()
 
-            val contentIdForTag = homeDetailContents!!.find {it.progressName == progressName}!!.contentId
-            val contentType = homeDetailContents!!.find {it.progressName == progressName}!!.itemType
-            Log.d("contentIdForTag", "${contentIdForTag}, ${contentType}")
+
+
+//            val contentIdForTag = homeDetailContents!!.find {it.progressName == progressName}!!.contentId
+//            val contentType = homeDetailContents!!.find {it.progressName == progressName}!!.itemType
+//
+//            val contentIdForTagList = homeDetailContents!!.filter {it.progressName == progressName}
+//            val contentTypeList = homeDetailContents!!.filter {it.progressName == progressName}
+//
+//            val homeDetail = homeDetailContents.filter {it.progressName == progressName}
+//            //val homeDetailItemBodyType = homeDetail!!.itemType
+//
+//            Log.d("contentIdForTag", "${contentIdForTag}, ${contentType}")
+//            Log.d("contentIdForTagList", "${contentIdForTagList} ")
+//            Log.d("contentIdForTag--", "=====================================================")
 
 
             val homeWriteNestedSV = homeWriteContentLayout.getViewById(R.id.homeWriteNestedSV)
@@ -415,11 +426,11 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(freeLayout)
                     freeDeleteCheckBox.isChecked = false
 
-                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
-                        freeLayout.tag = 123456789
-                    } else {
-                        freeLayout.tag = contentIdForTag
-                    }
+//                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
+//                        freeLayout.tag = 123456789
+//                    } else {
+//                        freeLayout.tag = contentIdForTag
+//                    }
 
                     freeDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean) {
@@ -443,11 +454,11 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(qnaLayout)
                     qnaDeleteCheckBox.isChecked = false
 
-                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
-                        qnaLayout.tag = 123456789
-                    } else {
-                        qnaLayout.tag = contentIdForTag
-                    }
+//                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
+//                        qnaLayout.tag = 123456789
+//                    } else {
+//                        qnaLayout.tag = contentIdForTag
+//                    }
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean) {
@@ -469,11 +480,11 @@ class HomeWriteFragment : Fragment() {
                     set.applyTo(overAllLayout)
                     overAllDeleteCheckBox.isChecked = false
 
-                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
-                        overAllLayout.tag = 123456789
-                    } else {
-                        overAllLayout.tag = contentIdForTag
-                    }
+//                    if (contentType == ProgressItemBodyType.NOT_DEFINED) {
+//                        overAllLayout.tag = 123456789
+//                    } else {
+//                        overAllLayout.tag = contentIdForTag
+//                    }
 
                     overAllDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
                         if (boolean) {
@@ -580,12 +591,13 @@ class HomeWriteFragment : Fragment() {
             val stageRealId = homeDetailItem.stageRealId
             ////////////////////////////////////////////////////////////////////
 
+            Log.d("qwe_contentId_forfor", "${itemType},${contentId}")
+
             progressIsPassingMap[progressType] = progressIsPassing
             val dynamicHomeWriteCL = dynamicLayoutMap[progressName]
 
             val homeWriteNestedSV = dynamicHomeWriteCL!!.getViewById(R.id.homeWriteNestedSV)
             val homeWriteMainCL = homeWriteNestedSV.findViewById<ConstraintLayout>(R.id.homeWriteMainCL)
-
 
 //            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
 //            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
@@ -624,7 +636,6 @@ class HomeWriteFragment : Fragment() {
                 }
             }
 
-
             when (itemType) {
                 ProgressItemBodyType.FREE_FORM -> { // free
                     val addLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
@@ -646,7 +657,6 @@ class HomeWriteFragment : Fragment() {
 
                     addLayout.tag = contentId
 
-
                     freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
                 }
                 ProgressItemBodyType.QNA -> { // qna
@@ -666,6 +676,7 @@ class HomeWriteFragment : Fragment() {
                     homeWriteAnswerET.setText(answerBody)
                     val homeWriteQnaOfReviewET = addLayout.findViewById<EditText>(R.id.homeWriteQnaOfReviewET)
                     homeWriteQnaOfReviewET.setText(qnaReviewBody)
+
 
                     addLayout.tag = contentId
 
@@ -688,7 +699,6 @@ class HomeWriteFragment : Fragment() {
                     homeWriteReviewET.setText(totalReviewBody)
 
                     addLayout.tag = contentId
-
                     overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
                 }
                 ProgressItemBodyType.NOT_DEFINED -> {
@@ -824,7 +834,7 @@ class HomeWriteFragment : Fragment() {
                             }
 
                             for (cq in qrll) { // stage for 문
-                                Log.d("qwe_qrll", "${frll}, ${cq.tag.toString().toInt()}")
+                                Log.d("qwe_qrll", "${qrll}, ${cq.tag.toString().toInt()}")
                                 val deletedContentId = cq.tag.toString().toInt()
                                 if (deletedContentId != 123456789) {
                                     homeViewModel.deletedContentUpdate(progressName, DeletedContent(deletedContentId))
@@ -832,9 +842,11 @@ class HomeWriteFragment : Fragment() {
                             }
 
                             for (co in orll) { // stage for 문
-                                Log.d("qwe_qrll", "${frll}, ${co.tag.toString().toInt()}")
+                                Log.d("qwe_orll", "${orll}, ${co.tag.toString().toInt()}")
                                 val deletedContentId = co.tag.toString().toInt()
                                 if (deletedContentId != 123456789) {
+
+                                    Log.d("qwe_delete", "${deletedContentId}")
                                     homeViewModel.deletedContentUpdate(progressName, DeletedContent(deletedContentId))
                                 }
                             }
