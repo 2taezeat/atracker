@@ -3,6 +3,8 @@ package com.example.atracker.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.atracker.R
@@ -18,6 +20,8 @@ import com.google.android.gms.tasks.Task
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import com.example.atracker.BuildConfig
+import com.example.atracker.model.local.App
 import com.example.atracker.ui.signUp.SignUpViewModel
 import com.example.atracker.utils.StartActivityUtil
 import com.google.android.gms.common.Scopes
@@ -42,6 +46,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
+
+        val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+        val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+        Log.d("at_rt_token_login", "${at}, ${rt}")
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         Log.d("test_onCreate", "LoginActivity")
@@ -72,8 +81,16 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        binding.loginButtonFL.setOnClickListener {
-            StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+        binding.loginButtonFL.setOnClickListener { // real login button
+
+            if (at != "") { // 토큰이 있으면
+                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+            } else { // 토큰이 없으면 회원 가입을 해야 됨.
+                StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+
+            }
+
+            //StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
             finish()
         }
 
@@ -158,13 +175,6 @@ class LoginActivity : AppCompatActivity() {
 //            }
 //
 //    }
-
-
-
-
-    private fun signOut() {
-
-    }
 
 
     override fun onDestroy() {

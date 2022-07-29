@@ -55,7 +55,7 @@ class SplashActivity : AppCompatActivity() {
         val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
         val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
 
-        Log.d("at_rt_token", "${at}, ${rt}")
+        Log.d("at_rt_token_splash", "${at}, ${rt}")
 
         if (at != "") { // 토큰이 있으면
             val mHandler = Handler(Looper.getMainLooper())
