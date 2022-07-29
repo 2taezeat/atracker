@@ -11,12 +11,15 @@ import com.example.atracker.model.dto.SignRequest
 import com.example.atracker.model.dto.TokenRefreshRequest
 import com.example.atracker.model.local.App
 import com.example.atracker.model.repository.RepositorySign
+import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
 
     val repositorySign = RepositorySign()
 
+    private val _testSignLoginFail = MutableLiveData<Event<Boolean>>()
+    val testSignLoginFail : LiveData<Event<Boolean>> = _testSignLoginFail
 
     fun testSignInLogin(email : String) {
         Log.d("test_sign", "Login")
@@ -24,8 +27,8 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             val apiResult = repositorySign.testSignCall(
                 email = email,
-                experience_type = "EXPERIENCED",
-                job_position = "개발",
+                experience_type = "NOT_EXPERIENCED",
+                job_position = "개발자",
                 nick_name = "닉네임1"
 
             )
@@ -37,8 +40,10 @@ class LoginViewModel : ViewModel() {
 
                 App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
                 App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨
-            } else {
 
+                _testSignLoginFail.value = Event(false)
+            } else {
+                _testSignLoginFail.value = Event(true)
             }
 
         }

@@ -94,7 +94,7 @@ class MyPageViewModel : ViewModel() {
         viewModelScope.launch {
             val apiResult = repositorySign.testSignCall(
                 email = App.prefs.getValue(BuildConfig.EMAIL)!!,
-                experience_type = "EXPERIENCED",
+                experience_type = "NOT_EXPERIENCED",
                 job_position = "개발자",
                 nick_name = "닉네임1"
             )
