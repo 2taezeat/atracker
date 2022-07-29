@@ -98,25 +98,24 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButtonFL.setOnClickListener { // real login button
             googleSignInClient!!.revokeAccess()
 
-            if (at != "") { // 토큰이 있으면
+            if (at != "") { // 토큰이 있으면, case1
                 StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
                 finish()
             } else { // 토큰이 없으면 회원 가입을 해야 됨.
-                if (App.prefs.getValue(BuildConfig.EMAIL) != "") { // 토큰은 없는데 이메일은 있음, 로그아웃
+                if (App.prefs.getValue(BuildConfig.EMAIL) != "") { // 토큰은 없는데 이메일은 있음, 로그아웃, case2
                     loginViewModel.testSignInLogin(App.prefs.getValue(BuildConfig.EMAIL)!!)
 
                     val mHandler = Handler(Looper.getMainLooper())
                     mHandler.postDelayed({
                         StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
                         finish()
-                    }, 500)
+                    }, 300)
 
-                } else { // 토큰은 없는데, 이메일도 없음
+                } else { // 토큰은 없는데, 이메일도 없음, case3
                     val signInIntent = googleSignInClient?.signInIntent
                     startActivityForResult(signInIntent, RC_SIGN_IN)
                     Log.d("google_serverClientId", "${gso.serverClientId}")
                     Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
-
                 }
                 //StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             }
@@ -187,7 +186,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        googleSignInClient!!.revokeAccess()
 
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
