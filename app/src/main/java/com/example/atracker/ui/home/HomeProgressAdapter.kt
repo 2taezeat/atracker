@@ -76,10 +76,7 @@ class HomeProgressAdapter(homeProgressOnclickListener: HomeProgressOnclickListen
         fun bind(homeProgressItem: HomeProgressItem) {
 
 
-            val bgProgress = ProgressBarDrawable(context = context!!,
-                homeProgressItem.totalProgress,
-                homeProgressItem.myProgress,
-                homeProgressItem.success)
+            val bgProgress = ProgressBarDrawable(context = context!!, homeProgressItem.totalProgress, homeProgressItem.myProgress, homeProgressItem.success)
 
             homeProgressItemBinding.homeMainProgressBar.progressDrawable = bgProgress
             homeProgressItemBinding.homeProgressCompanyTitleTV.text = homeProgressItem.companyTitle

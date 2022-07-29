@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atracker.databinding.HomeCompanySearchItemBinding
-import com.example.atracker.utils.ProgressBarDrawable
-import com.example.atracker.databinding.HomeProgressItemBinding
 import com.example.atracker.model.dto.CompanySearchContent
-import com.example.atracker.model.dto.HomeProgressItem
 
 class HomeCompanySearchAdapter(homeCompanySearchOnclickListener: HomeCompanySearchOnclickListener) :
     androidx.recyclerview.widget.ListAdapter<CompanySearchContent, RecyclerView.ViewHolder>(

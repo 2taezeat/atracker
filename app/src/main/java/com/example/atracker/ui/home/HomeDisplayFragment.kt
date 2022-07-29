@@ -123,16 +123,11 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         })
 
 
-
-
-
         myPageViewModel.userExperienceType.observe(viewLifecycleOwner, Observer {
             binding.homeExperienceTypeTV.text = myPageViewModel.userExperienceType.value
             binding.homeMyTitleTV.text = myPageViewModel.userJobPosition.value
             binding.homeMyNickNameTV.text = myPageViewModel.userNickName.value
         })
-
-
 
         homeViewModel.portfolioNum1.observe(viewLifecycleOwner, Observer {
             binding.homeMyCurrentStatePercentTV1.text = it.toString()
@@ -151,8 +146,6 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
             binding.homeMyCurrentStateTotalPassRateTV.text = it.toString()
             setProgress(homeViewModel.portfolioNum1.value!!, homeViewModel.portfolioNum2.value!!, homeViewModel.portfolioNum3.value!!)
         })
-
-
 
         //setProgress(homeViewModel.portfolioNum1.value!!, homeViewModel.portfolioNum2.value!!, homeViewModel.portfolioNum3.value!!)
 

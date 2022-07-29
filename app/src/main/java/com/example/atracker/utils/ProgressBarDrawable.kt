@@ -23,6 +23,15 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
     private val mForegroundSuccess6 = ContextCompat.getColor(context, R.color.progress_color_6)
     private val mForegroundSuccess7 = ContextCompat.getColor(context, R.color.progress_color_7)
 
+    private val mForegroundFail1 = ContextCompat.getColor(context, R.color.atracker_gray_7)
+    private val mForegroundFail2 = ContextCompat.getColor(context, R.color.atracker_gray_6)
+    private val mForegroundFail3 = ContextCompat.getColor(context, R.color.atracker_gray_5)
+    private val mForegroundFail4 = ContextCompat.getColor(context, R.color.atracker_gray_4)
+    private val mForegroundFail5 = ContextCompat.getColor(context, R.color.atracker_gray_3)
+    private val mForegroundFail6 = ContextCompat.getColor(context, R.color.atracker_gray_2)
+    private val mForegroundFail7 = ContextCompat.getColor(context, R.color.atracker_gray_1)
+
+
     var mForegroundColorList : ArrayList<Int>? = null
 
     companion object {
@@ -38,16 +47,30 @@ internal class ProgressBarDrawable(val context: Context, private val numSegments
     override fun getOpacity(): Int {
         return PixelFormat.TRANSLUCENT
     }
+
     init {
-        when (numSegments) {
-            1 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess7 )
-            2 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess7 )
-            3 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess4, mForegroundSuccess7 )
-            4 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess3, mForegroundSuccess5, mForegroundSuccess7 )
-            5 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
-            6 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
-            7 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess6, mForegroundSuccess7 )
+        if (success) {
+            when (numSegments) {
+                1 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess7 )
+                2 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess7 )
+                3 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess4, mForegroundSuccess7 )
+                4 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess3, mForegroundSuccess5, mForegroundSuccess7 )
+                5 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
+                6 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess7 )
+                7 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundSuccess1, mForegroundSuccess2, mForegroundSuccess3, mForegroundSuccess4, mForegroundSuccess5, mForegroundSuccess6, mForegroundSuccess7 )
+            }
+        } else {
+            when (numSegments) {
+                1 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail7 )
+                2 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail1, mForegroundFail7 )
+                3 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail1, mForegroundFail4, mForegroundFail7 )
+                4 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail1, mForegroundFail3, mForegroundFail5, mForegroundFail7 )
+                5 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail1, mForegroundFail2, mForegroundFail4, mForegroundFail5, mForegroundFail7 )
+                6 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail1, mForegroundFail2, mForegroundFail3, mForegroundFail4, mForegroundFail5, mForegroundFail7 )
+                7 -> mForegroundColorList = arrayListOf<Int>(mBackground, mForegroundFail1, mForegroundFail2, mForegroundFail3, mForegroundFail4, mForegroundFail5, mForegroundFail6, mForegroundFail7 )
+            }
         }
+
     }
 
 
