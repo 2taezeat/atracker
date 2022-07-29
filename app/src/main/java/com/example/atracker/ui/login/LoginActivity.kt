@@ -163,6 +163,8 @@ class LoginActivity : AppCompatActivity() {
             StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             finish()
         } catch (e: ApiException) {
+
+            App.prefs.setValue(BuildConfig.EMAIL, Math.random().toString())
             StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             finish()
 
