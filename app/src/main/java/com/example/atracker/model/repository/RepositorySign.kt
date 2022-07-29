@@ -42,11 +42,11 @@ class RepositorySign {
 
     //////////////////////////////////////////////
 
-    suspend fun testSignCall () : retrofit2.Response<TestSignApiResponse> {
+    suspend fun testSignCall() : retrofit2.Response<TestSignApiResponse> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{
             signService.testSignApi(
                 testSignApiRequest = TestSignApiRequest(
-                    email = "test_1@gmail.com",
+                    email = "test_2@gmail.com",
                     experience_type = "EXPERIENCED",
                     job_position = "개발자",
                     nick_name = "닉네임1",

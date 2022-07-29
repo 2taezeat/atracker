@@ -44,20 +44,35 @@ class SplashActivity : AppCompatActivity() {
 
 //
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
-            val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+//            val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+//
+//            Log.d("test_splash", "${at}, ${rt}")
+//        }
 
-            Log.d("test_splash", "${at}, ${rt}")
+
+        val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+        val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+        Log.d("at_rt_token", "${at}, ${rt}")
+
+        if (at != "") { // 토큰이 있으면
+            val mHandler = Handler(Looper.getMainLooper())
+            mHandler.postDelayed({
+                StartActivityUtil.callActivity(this@SplashActivity, MainActivity())
+                finish()
+            }, 1000)
+
+        } else {
+            val mHandler = Handler(Looper.getMainLooper())
+            mHandler.postDelayed({
+                StartActivityUtil.callActivity(this@SplashActivity, LoginActivity())
+                finish()
+            }, 1000)
+
         }
 
-
-
-        val mHandler = Handler(Looper.getMainLooper())
-        mHandler.postDelayed({
-            StartActivityUtil.callActivity(this@SplashActivity, LoginActivity())
-            finish()
-        }, 1000)
 
     }
 

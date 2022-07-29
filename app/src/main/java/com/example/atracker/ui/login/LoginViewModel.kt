@@ -40,28 +40,6 @@ class LoginViewModel : ViewModel() {
 
     }
 
-    fun refreshToken() { // refresh token 호출
-        viewModelScope.launch {
-
-            val apiResult = repositorySign.refreshTokenCall(
-                tokenRefreshRequest = TokenRefreshRequest( App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!! )
-            )
-
-
-            if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!
-                val at = getResult.access_token
-
-                // new access_token 받아서 update
-                //val tokenDrop = bodyToken.drop(1).dropLast(1)
-                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
-
-            } else {
-
-            }
-
-        }
-    }
 
 
 

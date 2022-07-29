@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.atracker.BuildConfig
 import com.example.atracker.model.dto.CalendarEvent
 import com.example.atracker.model.dto.ExperienceType
+import com.example.atracker.model.local.App
 import com.example.atracker.model.repository.RepositoryHome
 import com.example.atracker.model.repository.RepositoryMyPage
 import com.example.atracker.model.repository.RepositorySign
@@ -48,7 +50,8 @@ class MyPageViewModel : ViewModel() {
 
     fun getMyPage() {
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myPageGetCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNjgiLCJpYXQiOjE2NTg5ODcwODEsImV4cCI6MTY1ODk5MDY4MX0.8c8tVPKN4vMyM7tUrZ9YxgDgVVP2knmvBwItsWlSE_8")
+            val apiResult = repositoryMyPage.myPageGetCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!)
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()
@@ -70,7 +73,8 @@ class MyPageViewModel : ViewModel() {
 
     fun signOutPost() {
         viewModelScope.launch {
-            val apiResult = repositorySign.signOutPostCall(accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHJrLWFjY2Vzc1Rva2VuIiwidG9rZW5fdHlwZSI6IkFDQ0VTU19UT0tFTiIsImlkIjoiNjgiLCJpYXQiOjE2NTg5ODcwODEsImV4cCI6MTY1ODk5MDY4MX0.8c8tVPKN4vMyM7tUrZ9YxgDgVVP2knmvBwItsWlSE_8")
+            val apiResult = repositorySign.signOutPostCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!)
             
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()
