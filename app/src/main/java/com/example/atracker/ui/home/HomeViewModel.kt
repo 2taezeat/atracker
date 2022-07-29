@@ -102,6 +102,9 @@ class HomeViewModel : ViewModel() {
     private val _updateApplyFail = MutableLiveData<Event<Boolean>>()
     val updateApplyFail : LiveData<Event<Boolean>> = _updateApplyFail
 
+    private val _stageProgressesPutFail = MutableLiveData<Event<Boolean>>()
+    val stageProgressesPutFail : LiveData<Event<Boolean>> = _stageProgressesPutFail
+
     val _addCalendarToAddFlag = MutableLiveData<Boolean?>()
     val addCalendarToAddFlag : LiveData<Boolean?> = _addCalendarToAddFlag
 
@@ -129,7 +132,6 @@ class HomeViewModel : ViewModel() {
 
     private val _oriChipSet = MutableLiveData<MutableSet<Int>>()
     val oriChipSet : LiveData<MutableSet<Int>> = _oriChipSet
-
 
     private val _homeDetailContentForDisplay = MutableLiveData<ArrayList<HomeDetailItem>>().apply { // map 아님 주의
         arrayListOf<HomeDetailItem>()
@@ -311,7 +313,6 @@ class HomeViewModel : ViewModel() {
         _homeProgressNameWrite.value = ori
     }
 
-
     fun clearCompanyValue(){
         _companyWord.value = ""
         _companyId.value = 0
@@ -379,12 +380,8 @@ class HomeViewModel : ViewModel() {
         val allParsedContentStringList = arrayListOf<String?>(null, null, null, null, null, null, null)
 
         val dropString = contentContentString?.let {it.drop(1).dropLast(1)} // "{,}" 날리기 및 null 처리
-//        val dropString = contentContentString.drop(1).dropLast(1) // "{,}" 날리기
         val splitList = dropString?.let { it.split(',') } // ',' 제거 및 null 처리
-
-
         Log.d("stageContentParsing", "${dropString}, ${splitList}")
-
 
         when (decidedContentContentType) {
             ProgressItemBodyType.NOT_DEFINED -> {
@@ -801,7 +798,9 @@ class HomeViewModel : ViewModel() {
            )
             if (apiResult.code() == 200) {
                 clearStageProgress()
+                _stageProgressesPutFail.value = Event(false)
             } else {
+                _stageProgressesPutFail.value = Event(true)
 
             }
         }

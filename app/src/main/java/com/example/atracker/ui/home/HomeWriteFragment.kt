@@ -15,6 +15,7 @@ import com.example.atracker.ui.MainActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -22,6 +23,7 @@ import com.example.atracker.R
 import com.example.atracker.model.dto.*
 import com.example.atracker.ui.AlertDialogFragment
 import com.example.atracker.ui.AlertDialogListener
+import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -173,7 +175,6 @@ class HomeWriteFragment : Fragment() {
 
 
         binding.homeWriteBottomCL.setOnClickListener {
-            showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
             val homeProgressNameWrite = homeViewModel.homeProgressNameWrite.value!!
 
             for (progressName in homeProgressNameWrite) {
@@ -202,7 +203,6 @@ class HomeWriteFragment : Fragment() {
                         }
                     }
                 }
-
 
                 fm?.let { it
                     for (fll in it) {
@@ -259,6 +259,18 @@ class HomeWriteFragment : Fragment() {
             }
             homeViewModel.setStageProgressRequest()
             homeViewModel.updateStageProgress()
+
+
+            showAlert(AlertType.TYPE4, homeWriteTabLayout.getTabAt(previousTabPosition), null)
+
+//            homeViewModel.stageProgressesPutFail.observe(viewLifecycleOwner, Observer {
+//                it.getContentIfNotHandled()?.let { boolean ->
+//                    Log.d("stageProgressesPutFail", "${boolean}")
+//                    if (boolean) { // postApply 실패
+//                        parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
+//                    }
+//                }
+//            })
         }
 
         binding.homeWriteCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
@@ -297,14 +309,10 @@ class HomeWriteFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 Log.d("onTabReselected","${tab!!.position}")
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 Log.d("onTabUnselected","${tab!!.position}")
             }
         })
-
-
-
 
         return root
 
@@ -312,8 +320,6 @@ class HomeWriteFragment : Fragment() {
 
     private fun addTabItem(progressIndex: Int, container: ViewGroup?) {
         val homeWriteProgressSelected = homeViewModel.homeProgressNameWrite.value
-
-        //val homeDetailContents = homeViewModel.homeDetailContents.value!![progressIndex]
         val homeDetailContents = homeViewModel.homeDetailContentForDisplay.value
         var idx = 0
 
@@ -775,8 +781,9 @@ class HomeWriteFragment : Fragment() {
                 override fun onCenterClick() {
                     when (alertType) {
                         AlertType.TYPE4 -> {
-                            findNavController().popBackStack()
-                            parentActivity.mainBottomNavigationAppear()
+                            //findNavController().popBackStack()
+                            //parentActivity.mainBottomNavigationAppear()
+                            findNavController().navigate(R.id.action_navigation_home_write_to_navigation_home)
                         }
                     }
                 }
@@ -838,7 +845,6 @@ class HomeWriteFragment : Fragment() {
             },
             alertType,
             freeRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + overAllRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size
-
         )
 
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
