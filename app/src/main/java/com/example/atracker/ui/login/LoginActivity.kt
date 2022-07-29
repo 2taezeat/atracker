@@ -145,35 +145,44 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        Log.d("google_handle", "CAll")
+        val account = completedTask.getResult(ApiException::class.java)
+        val email = account.email
 
-        try {
-            val account = completedTask.getResult(ApiException::class.java)
-            val authCode = account.serverAuthCode
-            val idToken = account.idToken
+        App.prefs.setValue(BuildConfig.EMAIL, email)
+        Log.d("google_handle", "${email}")
 
-            Log.d("google_login_idToken","${idToken}")
-            Log.d("google_login_authCode","${authCode}")
-            Log.d("google_login_authCode","${account.email}")
 
-            App.prefs.setValue(BuildConfig.EMAIL, account.email)
+        StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+        finish()
 
-//            val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
-//            val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+//        try {
+//            val account = completedTask.getResult(ApiException::class.java)
+//            val authCode = account.serverAuthCode
+//            val idToken = account.idToken
 //
+//            Log.d("google_login_idToken","${idToken}")
+//            Log.d("google_login_authCode","${authCode}")
+//            Log.d("google_login_authCode","${account.email}")
 //
-//            if (at != "") { // 토큰이 있으면
-//                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
-//            } else { // 토큰이 없으면 회원 가입을 해야 됨.
-//                StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
-//            }
-
-            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
-            finish()
-
-        } catch (e: ApiException) {
-            Log.w("google_login", "handleSignInResult:error", e)
-        }
+//            App.prefs.setValue(BuildConfig.EMAIL, account.email)
+//
+////            val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+////            val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+////
+////
+////            if (at != "") { // 토큰이 있으면
+////                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+////            } else { // 토큰이 없으면 회원 가입을 해야 됨.
+////                StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+////            }
+//
+//            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+//            finish()
+//
+//        } catch (e: ApiException) {
+//            Log.w("google_login", "handleSignInResult:error", e)
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
