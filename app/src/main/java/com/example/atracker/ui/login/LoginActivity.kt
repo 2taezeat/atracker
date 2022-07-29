@@ -1,11 +1,13 @@
 package com.example.atracker.ui.login
 
+import android.R.attr
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.atracker.R
 import com.example.atracker.databinding.ActivityLoginBinding
@@ -26,15 +28,18 @@ import com.example.atracker.ui.signUp.SignUpViewModel
 import com.example.atracker.utils.StartActivityUtil
 import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.Scope
+import android.R.attr.data
+
+
+
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private val RC_SIGN_IN = 1001
+    private val RC_SIGN_IN = 0
     private var googleSignInClient : GoogleSignInClient? = null
-    //private var firebaseAuth : FirebaseAuth? = null
 
     val loginViewModel: LoginViewModel by lazy { ViewModelProvider(this).get(LoginViewModel::class.java) }
 
@@ -55,54 +60,78 @@ class LoginActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         Log.d("test_onCreate", "LoginActivity")
 
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-           // .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
-            .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
-            //.requestScopes(Scope(Scopes.EMAIL))
-            .requestServerAuthCode("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
-            //.requestServerAuthCode("683196079012-c7qhe8vef6i4a3ml09ttj3gvaa2fdhri.apps.googleusercontent.com")
+            //.requestIdToken("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
+            //.requestIdToken("937085987148-atb62pmmmb8o68rkcdfhroof5t5la4uf.apps.googleusercontent.com")
+            //.requestIdToken("937085987148-aap5uf6v0g5e68nmdck4paalhle1h1ha.apps.googleusercontent.com")
+            .requestIdToken("1078541661137-85s6qfa3ik8l30poccpuf3qr38jidtij.apps.googleusercontent.com")
+            //.requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+            //.requestServerAuthCode("937085987148-atb62pmmmb8o68rkcdfhroof5t5la4uf.apps.googleusercontent.com")
+            //.requestServerAuthCode("937085987148-aap5uf6v0g5e68nmdck4paalhle1h1ha.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        //firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.loginGoogleButton.setOnClickListener {
-            val signInIntent = googleSignInClient?.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
-            Log.d("asd", "${gso.serverClientId}")
-            Log.d("asd2", "${gso.isIdTokenRequested}")
-        }
+//        binding.loginGoogleButton.setOnClickListener {
+//            googleSignInClient!!.revokeAccess()
+//
+//            val signInIntent = googleSignInClient?.signInIntent
+//            startActivityForResult(signInIntent, RC_SIGN_IN)
+//
+//
+////            if (googleSignInClient != null) {
+////                googleSignInClient!!.revokeAccess()
+////            }
+//
+//            Log.d("google_serverClientId", "${gso.serverClientId}")
+//            Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
+//
+////            val signInIntent = googleSignInClient?.signInIntent
+////            childForResult.launch(signInIntent)
+////            Log.d("asd", "${gso.serverClientId}")
+////            Log.d("asd2", "${gso.isIdTokenRequested}")
+//        }
 
 
         binding.loginButtonFL.setOnClickListener { // real login button
+            googleSignInClient!!.revokeAccess()
 
             if (at != "") { // 토큰이 있으면
                 StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+                finish()
             } else { // 토큰이 없으면 회원 가입을 해야 됨.
-                StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+                if (App.prefs.getValue(BuildConfig.EMAIL) != "") { // 토큰은 없는데 이메일은 있음, 로그아웃
+                    loginViewModel.testSignInLogin(App.prefs.getValue(BuildConfig.EMAIL)!!)
 
+                    val mHandler = Handler(Looper.getMainLooper())
+                    mHandler.postDelayed({
+                        StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+                        finish()
+                    }, 500)
+
+                } else { // 토큰은 없는데, 이메일도 없음
+                    val signInIntent = googleSignInClient?.signInIntent
+                    startActivityForResult(signInIntent, RC_SIGN_IN)
+                    Log.d("google_serverClientId", "${gso.serverClientId}")
+                    Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
+
+                }
+                //StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             }
-
-            //StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
-            finish()
+            //finish()
         }
 
-        binding.loginTmpButton.setOnClickListener {
-            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
-            finish()
-        }
+//        binding.loginTmpButton.setOnClickListener {
+//            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+//            finish()
+//        }
 
 ///////////////////////////////////////////////////////////////////////////////////
-        binding.testSignApiButton.setOnClickListener {
-            loginViewModel.testSign()
-        }
+//        binding.testSignApiButton.setOnClickListener {
+//            loginViewModel.testSign()
+//        }
 
 
         ///////////
@@ -116,71 +145,54 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        Log.d("google_handle", "CAll")
+
         try {
             val account = completedTask.getResult(ApiException::class.java)
             val authCode = account.serverAuthCode
             val idToken = account.idToken
-            Log.d("google_login_id","${idToken}, ${authCode}")
 
-            // todo
-            val intent = Intent(this, SignUpActivity::class.java)
-            ContextCompat.startActivity(this, intent, null)
+            Log.d("google_login_idToken","${idToken}")
+            Log.d("google_login_authCode","${authCode}")
+            Log.d("google_login_authCode","${account.email}")
 
+            App.prefs.setValue(BuildConfig.EMAIL, account.email)
 
-            //updateUI(account)
+//            val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
+//            val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+//
+//
+//            if (at != "") { // 토큰이 있으면
+//                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+//            } else { // 토큰이 없으면 회원 가입을 해야 됨.
+//                StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+//            }
+
+            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+            finish()
+
         } catch (e: ApiException) {
             Log.w("google_login", "handleSignInResult:error", e)
-            //updateUI(null)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        googleSignInClient!!.revokeAccess()
 
         if (requestCode == RC_SIGN_IN) {
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-////            val account = task.getResult(ApiException::class.java)
-////            firebaseAuthWithGoogle(account)
-
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
-
-
-//            try {
-//                val account = task.getResult(ApiException::class.java)
-//                firebaseAuthWithGoogle(account)
-//
-//            } catch (e: ApiException) {
-//                Log.d("loginError", "${e}")
-//            }
-
         }
     }
 
-//    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-//        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-//        firebaseAuth!!.signInWithCredential(credential)
-//            .addOnCompleteListener(this){
-//                if (it.isSuccessful) {
-//                    val user = firebaseAuth?.currentUser
-//                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-//                    startMain()
-//
-//                    val email = user?.email
-//
-//                } else {
-//                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-//                }
-//
-//            }
-//
-//    }
 
 
     override fun onDestroy() {
         Log.d("test_onDestory", "LoginActivity")
         super.onDestroy()
     }
+
 
 
 

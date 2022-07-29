@@ -1,5 +1,6 @@
 package com.example.atracker.ui.signUp
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -102,6 +103,37 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    fun testSignInSign() {
+        Log.d("test_sign", "SignUp")
+
+        viewModelScope.launch {
+            val apiResult = repositorySign.testSignCall(
+                email = App.prefs.getValue(BuildConfig.EMAIL)!!,
+                experience_type = _signUpCareer.value!!,
+                job_position = _signUpPosition.value!!,
+                nick_name = _signUpNickName.value!!
+            )
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!
+                val at = getResult.access_token
+                val rt = getResult.refresh_token
+
+                Log.d("test123_at", "${at}")
+                Log.d("test123_rt", "${rt}")
+
+                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
+                App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨
+            } else {
+
+            }
+
+        }
+
+    }
 
 
 

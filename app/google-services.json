@@ -1,35 +1,36 @@
 {
   "project_info": {
-    "project_number": "683196079012",
-    "project_id": "atracker-1652928904648",
-    "storage_bucket": "atracker-1652928904648.appspot.com"
+    "project_number": "680535570176",
+    "project_id": "atracker-final2",
+    "storage_bucket": "atracker-final2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:683196079012:android:d8e2d8c4efa1be5d2a7f31",
+        "mobilesdk_app_id": "1:680535570176:android:adfab3ed88f1027f33a5e5",
         "android_client_info": {
           "package_name": "com.example.atracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "683196079012-73ujl1qv3j4119366telddpf7lsahvga.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.atracker",
-            "certificate_hash": "f116525157fb7accd046085751ea5f9560c2bfdb"
-          }
+          "client_id": "680535570176-u7mtfdaa813kjfhffror0l9dqbtklr1j.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBL59yomhzFQF_PvDSkINGrtcDUT3jZB8k"
+          "current_key": "AIzaSyBDvyqRor9o6ldIDxpy-o9Iftkau8qbkLI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680535570176-u7mtfdaa813kjfhffror0l9dqbtklr1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

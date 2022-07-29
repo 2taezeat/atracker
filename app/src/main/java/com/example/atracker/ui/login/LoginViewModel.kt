@@ -18,17 +18,22 @@ class LoginViewModel : ViewModel() {
     val repositorySign = RepositorySign()
 
 
-    fun testSign() {
+    fun testSignInLogin(email : String) {
+        Log.d("test_sign", "Login")
+
         viewModelScope.launch {
-            val apiResult = repositorySign.testSignCall()
+            val apiResult = repositorySign.testSignCall(
+                email = email,
+                experience_type = "EXPERIENCED",
+                job_position = "개발",
+                nick_name = "닉네임1"
+
+            )
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 val at = getResult.access_token
                 val rt = getResult.refresh_token
-
-                Log.d("test123_at", "${at}")
-                Log.d("test123_rt", "${rt}")
 
                 App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
                 App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨

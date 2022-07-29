@@ -11,29 +11,29 @@
         >
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/loginTmpButton"
-            android:background="@color/teal_700"
-            android:text="tmpButton"
-            >
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:id="@+id/loginTmpButton"-->
+<!--            android:background="@color/teal_700"-->
+<!--            android:text="tmpButton"-->
+<!--            >-->
 
-        </Button>
+<!--        </Button>-->
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/testSignApiButton"
-            android:background="@color/teal_700"
-            android:text="testSignApi"
-            >
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:id="@+id/testSignApiButton"-->
+<!--            android:background="@color/teal_700"-->
+<!--            android:text="testSignApi"-->
+<!--            >-->
 
-        </Button>
+<!--        </Button>-->
 
 
         
@@ -129,18 +129,18 @@
 
 
 
-        <com.google.android.gms.common.SignInButton
-            android:layout_width="140dp"
-            android:layout_height="100dp"
-            android:id="@+id/loginGoogleButton"
-            android:layout_marginBottom="100dp"
+<!--        <com.google.android.gms.common.SignInButton-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:id="@+id/loginGoogleButton"-->
+<!--            android:layout_marginBottom="100dp"-->
 
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
-        </com.google.android.gms.common.SignInButton>
+<!--        </com.google.android.gms.common.SignInButton>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

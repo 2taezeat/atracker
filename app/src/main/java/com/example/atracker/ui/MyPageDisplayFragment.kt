@@ -28,8 +28,6 @@ import com.example.atracker.utils.StartActivityUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-
 
 
 
@@ -75,7 +73,7 @@ class MyPageDisplayFragment : Fragment() {
 
 
         binding.myPageLogoutTV.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            //FirebaseAuth.getInstance().signOut()
             googleSignInClient.signOut().addOnCompleteListener {
                 //activity!!.finish()
                 //startLogin()
@@ -165,6 +163,8 @@ class MyPageDisplayFragment : Fragment() {
                             // at, rt 로컬에서 삭제해야 함.
                             App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
                             App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
+
+                            App.prefs.removeValue(BuildConfig.EMAIL)
 
                             myPageViewModel.signOutPost()
                             startLogin()

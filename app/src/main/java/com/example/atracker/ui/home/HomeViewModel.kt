@@ -453,7 +453,7 @@ class HomeViewModel : ViewModel() {
                 val newCompanyResponse : CompanySearchResponse = getResult
                 _companyResponse.value = newCompanyResponse
             } else {
-
+                testSignInHome()
             }
         }
     }
@@ -473,6 +473,7 @@ class HomeViewModel : ViewModel() {
                 _addCompanyFail.value = Event(false)
             } else {
                 _addCompanyFail.value = Event(true)
+                testSignInHome()
             }
         }
     }
@@ -490,6 +491,7 @@ class HomeViewModel : ViewModel() {
 
             } else {
                 _homeAddStagesContent.value = listOf()
+                testSignInHome()
             }
 
         }
@@ -514,6 +516,7 @@ class HomeViewModel : ViewModel() {
                 _updateApplyFail.value = Event(false)
             } else {
                 _updateApplyFail.value = Event(true)
+                testSignInHome()
             }
         }
     }
@@ -535,6 +538,7 @@ class HomeViewModel : ViewModel() {
                 _updateApplyFail.value = Event(false)
             } else {
                 _updateApplyFail.value = Event(true)
+                testSignInHome()
             }
         }
     }
@@ -550,6 +554,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 //switch(_deleteApplyFail)
                 _deleteApplyFail.value = Event(true)
+                testSignInHome()
             }
         }
     }
@@ -600,7 +605,7 @@ class HomeViewModel : ViewModel() {
                 _homeDisplayArrayList.value = newArrayList
                 _homeDetailArrayList.value = detailArrayList
             } else {
-
+                testSignInHome()
             }
         }
     }
@@ -717,6 +722,7 @@ class HomeViewModel : ViewModel() {
                 _getApplyDetailFail.value = Event(false)
             } else {
                 _getApplyDetailFail.value = Event(true)
+                testSignInHome()
             }
         }
     }
@@ -733,7 +739,7 @@ class HomeViewModel : ViewModel() {
                 _portfolioNum3.value = getResult.pf3
                 _portfolioNumTotal.value = getResult.pf_total
             } else {
-
+                testSignInHome()
             }
         }
     }
@@ -814,6 +820,36 @@ class HomeViewModel : ViewModel() {
         Log.d("qwe_clear", "qwe_clear")
         _arrayListStageProgresse.value = arrayListOf()
         _stageProgressRequest.value = StageProgressRequest(stage_progresses = arrayListOf())
+    }
+
+
+    fun testSignInHome() { // refresh 역할
+        Log.d("test_sign", "homeviewmodel")
+
+        viewModelScope.launch {
+            val apiResult = repositorySign.testSignCall(
+                email = App.prefs.getValue(BuildConfig.EMAIL)!!,
+                experience_type = "EXPERIENCED",
+                job_position = "개발자",
+                nick_name = "닉네임1"
+            )
+
+            if (apiResult.code() == 200) {
+                val getResult = apiResult.body()!!
+                val at = getResult.access_token
+                val rt = getResult.refresh_token
+
+                Log.d("test123_at", "${at}")
+                Log.d("test123_rt", "${rt}")
+
+                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
+                App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨
+            } else {
+
+            }
+
+        }
+
     }
 
 

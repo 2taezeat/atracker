@@ -39,18 +39,17 @@ class RepositorySign {
         return apiResponse
     }
 
-
     //////////////////////////////////////////////
-
-    suspend fun testSignCall() : retrofit2.Response<TestSignApiResponse> {
+    suspend fun testSignCall(email : String, experience_type : String, job_position : String, nick_name : String) : retrofit2.Response<TestSignApiResponse> {
         val apiResponse = CoroutineScope(Dispatchers.IO).async{
             signService.testSignApi(
                 testSignApiRequest = TestSignApiRequest(
-                    email = "test_2@gmail.com",
-                    experience_type = "EXPERIENCED",
-                    job_position = "개발자",
-                    nick_name = "닉네임1",
-                    sso = "GOOGLE"))
+                    email = email,
+                    experience_type = experience_type,
+                    job_position = job_position,
+                    nick_name = nick_name,
+                    sso = "GOOGLE")
+            )
         }.await()
 
         return apiResponse
