@@ -289,7 +289,7 @@ class HomeWriteFragment : Fragment() {
             setPlusButton(homeWritePlusButton3, R.layout.home_write_review_layout, homeWriteLL, progressName)
 
 
-            homeWriteEditButton.setOnClickListener {
+            homeWriteEditButton.setOnClickListener { // '삭제' 버튼 클릭시
                 homeWriteTypeSelectChipGroup.visibility = View.INVISIBLE
                 homeWriteEditButton.visibility = View.INVISIBLE
                 homeWriteEditCompleteButton.visibility = View.VISIBLE
@@ -298,6 +298,8 @@ class HomeWriteFragment : Fragment() {
                 homeWritePlusButton2.visibility = View.INVISIBLE
 
                 homeWritePlusButton3.visibility = View.INVISIBLE
+
+                saveViewDisappear()
 
                 editBooleanMap[progressName] = true
 
@@ -393,6 +395,8 @@ class HomeWriteFragment : Fragment() {
                 homeWritePlusButton2.visibility = View.VISIBLE
 
                 homeWritePlusButton3.visibility = View.VISIBLE
+
+                saveViewAppear()
 
                 editBooleanMap[progressName] = false
 
@@ -738,6 +742,25 @@ class HomeWriteFragment : Fragment() {
         )
 
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
+    }
+
+
+    fun saveViewDisappear() {
+        binding.homeWriteBottomCL.visibility = View.INVISIBLE
+        binding.homeWriteBottomView.visibility = View.INVISIBLE
+//        val lp = binding.homeWriteNestedSV.layoutParams
+//        lp.height = ViewGroup.LayoutParams.MATCH_PARENT
+//        binding.homeWriteNestedSV.layoutParams = lp
+
+    }
+
+    fun saveViewAppear() {
+        binding.homeWriteBottomCL.visibility = View.VISIBLE
+        binding.homeWriteBottomView.visibility = View.VISIBLE
+
+//        val lp = binding.homeWriteNestedSV.layoutParams
+//        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//        binding.homeWriteNestedSV.layoutParams = lp
     }
 
 
