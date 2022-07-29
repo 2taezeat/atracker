@@ -168,9 +168,6 @@ class HomeWriteFragment : Fragment() {
         addTabItem(args.progressIndex, container)
 
         binding.homeWriteBackButton.setOnClickListener { view ->
-            //val navController = view.findNavController()
-            //navController.popBackStack()
-            //parentActivity.mainBottomNavigationAppear()
 
             showAlert(AlertType.TYPE18, homeWriteTabLayout.getTabAt(previousTabPosition), null)
         }
@@ -279,7 +276,6 @@ class HomeWriteFragment : Fragment() {
 
         binding.homeWriteCompanyTitle.text = homeViewModel.homeApplyIdContent.value!!.company_name
 
-
         binding.homeWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected", "${previousTabPosition}, ${tab!!.position}")
@@ -348,8 +344,6 @@ class HomeWriteFragment : Fragment() {
             overAllRemoveLayoutListMap[progressName] = arrayListOf()
 
             chipLayoutListMap[progressName] = arrayListOf()
-
-
 
 //            val contentIdForTag = homeDetailContents!!.find {it.progressName == progressName}!!.contentId
 //            val contentType = homeDetailContents!!.find {it.progressName == progressName}!!.itemType
