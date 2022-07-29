@@ -132,8 +132,15 @@ class MainActivity : AppCompatActivity() {
             homeViewModel.switch(homeViewModel._addCalendarToAddFlag)
             super.onBackPressed()
         } else if (navDisplayController.currentDestination!!.id == R.id.navigation_home_add){
-            showAlert(AlertType.TYPE17)
-            return
+            if (homeViewModel.homeAddStagesContent.value!!.isNotEmpty()) {
+                showAlert(AlertType.TYPE17)
+                return
+                //super.onBackPressed()
+            } else {
+                super.onBackPressed()
+
+            }
+            //return
         } else {
             super.onBackPressed()
         }
