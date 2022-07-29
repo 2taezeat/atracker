@@ -40,11 +40,7 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         requireContext()
     }
 
-
-
-
     private lateinit var homeMyCurrentStateTotalCircleView : com.example.atracker.utils.MyProgress
-
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val myPageViewModel: MyPageViewModel by activityViewModels()
 
@@ -144,12 +140,10 @@ class HomeDisplayFragment : Fragment(), HomeProgressOnclickListener {
         homeViewModel.portfolioNumTotal.observe(viewLifecycleOwner, Observer {
             Log.d("portfolioNumTotal", "${it}")
             binding.homeMyCurrentStateTotalPassRateTV.text = it.toString()
-            setProgress(homeViewModel.portfolioNum1.value!!, homeViewModel.portfolioNum2.value!!, homeViewModel.portfolioNum3.value!!)
+            setProgress(homeViewModel.portfolioNum1.value!! / 3, homeViewModel.portfolioNum2.value!! / 3, homeViewModel.portfolioNum3.value!! / 3)
         })
 
         //setProgress(homeViewModel.portfolioNum1.value!!, homeViewModel.portfolioNum2.value!!, homeViewModel.portfolioNum3.value!!)
-
-
 
 
         return root

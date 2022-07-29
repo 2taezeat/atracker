@@ -43,8 +43,6 @@ class MyPageDisplayFragment : Fragment() {
     }
 
     private val myPageViewModel: MyPageViewModel by activityViewModels()
-
-
     private lateinit var binding: FragmentMyPageDisplayBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -85,7 +83,6 @@ class MyPageDisplayFragment : Fragment() {
                 showAlert(AlertType.TYPE10)
             }
         }
-
 
 
         binding.myPageAccountWithdrawalTV.setOnClickListener {

@@ -290,19 +290,17 @@ class HomeWriteFragment : Fragment() {
                     val selectedMinusOneState = progressIsPassingMap[tab.position - 1]
 
                     if (previousTabPosition < tab.position && (previousState != IsPassing.PASS || selectedMinusOneState != IsPassing.PASS)) {
-                        //showAlert(AlertType.TYPE2 , tab,null)
-                        //binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                        showAlert(AlertType.TYPE2 , tab,null)
+                        binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
                         // **************************************************************************
-                        previousTabPosition = tab.position
-                        previousTabName = tab.tag.toString()
-
-                        changeView(tab.tag.toString())
+//                        previousTabPosition = tab.position
+//                        previousTabName = tab.tag.toString()
+//                        changeView(tab.tag.toString())
                         // **************************************************************************
 
                     } else {
                         previousTabPosition = tab.position
                         previousTabName = tab.tag.toString()
-
                         changeView(tab.tag.toString())
                     }
                 }
@@ -424,10 +422,14 @@ class HomeWriteFragment : Fragment() {
                     }
 
                     freeDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
-                        if (boolean)
+                        if (boolean) {
                             freeRemoveLayoutListMap[progressName]!!.add(freeLayout)
-                        else
+                            freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().minus(freeLayout)
+                        } else {
                             freeRemoveLayoutListMap[progressName]!!.remove(freeLayout)
+                            freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(freeLayout)
+                        }
+
                     }
                 }
 
@@ -448,10 +450,13 @@ class HomeWriteFragment : Fragment() {
                     }
 
                     qnaDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
-                        if (boolean)
+                        if (boolean) {
                             qnaRemoveLayoutListMap[progressName]!!.add(qnaLayout)
-                        else
+                            qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().minus(qnaLayout)
+                        } else {
                             qnaRemoveLayoutListMap[progressName]!!.remove(qnaLayout)
+                            qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(qnaLayout)
+                        }
                     }
                 }
                 for (overAllLayout in overAllLayoutList.orEmpty()) {
@@ -471,10 +476,13 @@ class HomeWriteFragment : Fragment() {
                     }
 
                     overAllDeleteCheckBox.setOnCheckedChangeListener { compoundButton, boolean ->
-                        if (boolean)
+                        if (boolean) {
                             overAllRemoveLayoutListMap[progressName]!!.add(overAllLayout)
-                        else
+                            overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().minus(overAllLayout)
+                        } else {
                             overAllRemoveLayoutListMap[progressName]!!.remove(overAllLayout)
+                            overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(overAllLayout)
+                        }
                     }
                 }
             }
