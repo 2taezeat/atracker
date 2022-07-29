@@ -173,7 +173,7 @@
 
 
                     <TextView
-                        android:layout_width="165dp"
+                        android:layout_width="115dp"
                         android:layout_height="46dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:id="@+id/homeWritePlusButton1"
@@ -189,8 +189,9 @@
 
 
                     <TextView
-                        android:layout_width="165dp"
+                        android:layout_width="115dp"
                         android:layout_height="46dp"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:id="@+id/homeWritePlusButton2"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -202,6 +203,23 @@
                         android:layout_marginBottom="10dp"
                         >
                     </TextView>
+
+                    <TextView
+                        android:layout_width="115dp"
+                        android:layout_height="46dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/homeWritePlusButton3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/plus_review"
+                        android:background="@drawable/button_round"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/atracker_white"
+                        android:layout_marginBottom="10dp"
+                        >
+                    </TextView>
+
+
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/homeWriteTypeSelectChipGroup"

@@ -100,7 +100,7 @@
         <entry key="app/src/main/res/layout/fragment_home_company_search_sheet.xml" value="0.2956140350877193" />
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.5202821869488536" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_sign_up_complete.xml" value="0.165" />

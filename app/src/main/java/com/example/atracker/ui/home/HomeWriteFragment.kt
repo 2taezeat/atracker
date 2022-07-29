@@ -151,6 +151,13 @@ class HomeWriteFragment : Fragment() {
                     if (previousTabPosition < tab.position && (previousState != IsPassing.PASS || selectedMinusOneState != IsPassing.PASS)) {
                         //showAlert(AlertType.TYPE2 , tab,null)
                         //binding.homeWriteTabLayout.getTabAt(previousTabPosition)!!.select()
+                        // **************************************************************************
+                        previousTabPosition = tab.position
+                        previousTabName = tab.tag.toString()
+
+                        changeView(tab.tag.toString())
+                        // **************************************************************************
+
                     } else {
                         previousTabPosition = tab.position
                         previousTabName = tab.tag.toString()
@@ -170,31 +177,32 @@ class HomeWriteFragment : Fragment() {
         })
 
 
-        binding.homeWritePlusButton1.setOnClickListener{
-            val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
-            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-            )
-            params.setMargins(0,20,0,10)
-            homeWriteQnaLayout.layoutParams = params
-            homeWriteQnaLayout.id = View.generateViewId()
+//        binding.homeWritePlusButton1.setOnClickListener{
+//            val homeWriteQnaLayout = this.layoutInflater.inflate(R.layout.home_write_qna_layout, null) as ConstraintLayout // inflating view from xml
+//            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+//            )
+//            params.setMargins(0,20,0,10)
+//            homeWriteQnaLayout.layoutParams = params
+//            homeWriteQnaLayout.id = View.generateViewId()
+//
+//            binding.homeWriteLL.addView(homeWriteQnaLayout)
+//        }
+//
+//        binding.homeWritePlusButton2.setOnClickListener{
+//            val homeWriteFreeLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
+//            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+//                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+//            )
+//            params.setMargins(0,20,0,10)
+//            homeWriteFreeLayout.layoutParams = params
+//            homeWriteFreeLayout.id = View.generateViewId()
+//
+//            binding.homeWriteLL.addView(homeWriteFreeLayout)
+//        }
 
-            binding.homeWriteLL.addView(homeWriteQnaLayout)
-        }
-
-        binding.homeWritePlusButton2.setOnClickListener{
-            val homeWriteFreeLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
-            val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
-                ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
-            )
-            params.setMargins(0,20,0,10)
-            homeWriteFreeLayout.layoutParams = params
-            homeWriteFreeLayout.id = View.generateViewId()
-
-            binding.homeWriteLL.addView(homeWriteFreeLayout)
-        }
 
 
         return root
@@ -266,11 +274,8 @@ class HomeWriteFragment : Fragment() {
 
             homeWriteContentLayout.layoutParams = params
 
-//            setChip(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
-//            setChip(chip1 = homeWriteTypeSelect2, chip2 = homeWriteTypeSelect1, chip3 = homeWriteTypeSelect3, colorValue = R.color.atracker_white)
-//            setChip(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValue = R.color.progress_color_7)
 
-            setChiptmp(chip1 = homeWriteTypeSelect3, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect1, colorValueWhite = R.color.atracker_white, colorValueGreen = R.color.progress_color_7 )
+            setChipListener(chip1 = homeWriteTypeSelect1, chip2 = homeWriteTypeSelect2, chip3 = homeWriteTypeSelect3, colorValueWhite = R.color.atracker_white, colorValueGreen = R.color.progress_color_7 )
 
 
             setPlusButton(homeWritePlusButton1, R.layout.home_write_qna_layout, homeWriteLL, progressName)
@@ -439,9 +444,11 @@ class HomeWriteFragment : Fragment() {
 
             when (progressIsPassing) {
                 IsPassing.NOT_STARTED -> {
-                    homeWriteTypeSelect1.isChecked = true
-                    homeWriteTypeSelect1.chipStrokeWidth = 4f
-                    homeWriteTypeSelect1.setChipStrokeColorResource(R.color.atracker_white)
+                    homeWriteTypeSelect1.isChecked = false
+                    homeWriteTypeSelect2.isChecked = false
+                    homeWriteTypeSelect3.isChecked = false
+//                    homeWriteTypeSelect1.chipStrokeWidth = 4f
+//                    homeWriteTypeSelect1.setChipStrokeColorResource(R.color.atracker_white)
                 }
                 IsPassing.IN_PROGRESS -> {
                     homeWriteTypeSelect1.isChecked = true
@@ -514,22 +521,8 @@ class HomeWriteFragment : Fragment() {
         }
     }
 
-    private fun setChip(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorValue: Int){
-        chip1.setOnClickListener {
-            if (chip1.isChecked) {
-                chip1.chipStrokeWidth = 4f
-                chip1.setChipStrokeColorResource(colorValue)
-                chip2.chipStrokeWidth = 0f
-                chip3.chipStrokeWidth = 0f
 
-                //homeViewModel.isPassingFun()
-            } else {
-                chip1.chipStrokeWidth = 0f
-            }
-        }
-    }
-
-    private fun setChiptmp(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorValueWhite: Int, colorValueGreen : Int){
+    private fun setChipListener(chip1 : Chip, chip2 : Chip, chip3 : Chip, colorValueWhite: Int, colorValueGreen : Int){
         chip1.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 chip1.chipStrokeWidth = 4f
@@ -593,6 +586,8 @@ class HomeWriteFragment : Fragment() {
 
 
     private fun changeView(layoutTagName : String) {
+        Log.d("onTabSelected_changeView", "${layoutTagName}")
+
         for(layout in dynamicLayoutMap.values){
             if (layoutTagName == layout.tag) {
                 layout.visibility = View.VISIBLE

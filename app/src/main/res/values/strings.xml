@@ -48,7 +48,7 @@
 
     <string name="plus_free"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">자유 양식</font></string>
     <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">Q&amp;A 양식</font></string>
-    <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">후기</font></string>
+    <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">종합 후기</font></string>
 
 
     <string name="percent">%</string>
