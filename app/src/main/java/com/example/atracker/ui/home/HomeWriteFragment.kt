@@ -76,7 +76,7 @@ class HomeWriteFragment : Fragment() {
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
-    private val overAllRemoveLayoutListMap by lazy { // 종합 후기는 절대 삭제 될 수 없음. 고로 쓰이지 않음. // 근데 ,mvp 라면?
+    private val overAllRemoveLayoutListMap by lazy { // 종합 후기는 절대 삭제 될 수 없음. 고로 쓰이지 않음. // 근데 ,mvp 에는 추가함, 안드로이드
         mutableMapOf<String, ArrayList<ConstraintLayout>>()
     }
 
@@ -119,13 +119,13 @@ class HomeWriteFragment : Fragment() {
                 Log.d("qwe_overAllLayoutListMap", "${overAllLayoutListMap[progressName]}" )
                 Log.d("qwe_freeRemoveLayoutListMap", "${freeRemoveLayoutListMap[progressName]}" )
                 Log.d("qwe_qnaRemoveLayoutListMap", "${qnaRemoveLayoutListMap[progressName]}" )
+                Log.d("qwe_overAllRemoveLayoutListMap", "${overAllRemoveLayoutListMap[progressName]}" )
 
                 val cl = chipLayoutListMap[progressName]!!
                 Log.d("qwe_chip", "${cl[0].isChecked} , ${cl[1].isChecked}, ${cl[2].isChecked}" )
 
 
                 Log.d("qwe_", "-------------------------------------------------------------" )
-
 
 
                 homeViewModel.isPassingFun(progressName = progressName, inProgressIsChecked = cl[0].isChecked, failIsChecked = cl[1].isChecked, passIsChecked = cl[2].isChecked)
@@ -261,10 +261,10 @@ class HomeWriteFragment : Fragment() {
             val homeWriteTypeSelect2 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect2)
             val homeWriteTypeSelect3 = homeWriteTypeSelectChipGroup.findViewById<Chip>(R.id.homeWriteTypeSelect3)
 
-            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
-            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
-            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
-            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
+//            val homeWriteReviewWholeCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewWholeCL)
+//            val homeWriteReviewMainCL = homeWriteMainCL.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+//            val homeWriteReviewCheckBox = homeWriteReviewWholeCL.findViewById<CheckBox>(R.id.homeWriteReviewCheckBox)
+//            val homeWriteReviewET = homeWriteReviewWholeCL.findViewById<EditText>(R.id.homeWriteReviewET)
 
 
             homeWriteTypeSelect1.tag = progressName
@@ -383,6 +383,7 @@ class HomeWriteFragment : Fragment() {
             homeWriteEditCompleteButton.setOnClickListener {
                 freeRemoveLayoutListMap[progressName]!!.clear()
                 qnaRemoveLayoutListMap[progressName]!!.clear()
+                overAllRemoveLayoutListMap[progressName]!!.clear()
 
                 homeWriteTypeSelectChipGroup.visibility = View.VISIBLE
                 homeWriteEditCompleteButton.visibility = View.INVISIBLE
@@ -418,6 +419,18 @@ class HomeWriteFragment : Fragment() {
                     set.connect(homeWriteQnaMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
                     set.applyTo(qnaLayout)
                 }
+
+                for (overAllLayout in overAllLayoutList.orEmpty()) {
+                    overAllLayout.getViewById(R.id.homeWriteReviewCheckBox).visibility = View.GONE
+                    val homeWriteOverAllMainCL = overAllLayout.findViewById<ConstraintLayout>(R.id.homeWriteReviewMainCL)
+                    val set = ConstraintSet()
+                    set.clone(overAllLayout)
+                    set.connect(homeWriteOverAllMainCL.id,ConstraintSet.START, ConstraintSet.PARENT_ID , ConstraintSet.START, 0 )
+                    set.connect(homeWriteOverAllMainCL.id,ConstraintSet.END, ConstraintSet.PARENT_ID , ConstraintSet.END, 0)
+                    set.applyTo(overAllLayout)
+                }
+
+
             }
 
             homeWriteContentLayout.id = View.generateViewId()
@@ -445,7 +458,7 @@ class HomeWriteFragment : Fragment() {
             val itemType = homeDetailItem.itemType
             val freeTitle =  homeDetailItem.freeTitle
             val freeBody = homeDetailItem.freeBody
-            val totalReviewBody = homeDetailItem.totalReviewBody
+            val totalReviewBody = homeDetailItem.totalReviewBody // overAll, 종합 후기
             val questionBody = homeDetailItem.questionBody
             val answerBody = homeDetailItem.answerBody
             val qnaReviewBody = homeDetailItem.qnaReviewBody
@@ -501,7 +514,6 @@ class HomeWriteFragment : Fragment() {
             }
 
 
-
             when (itemType) {
                 ProgressItemBodyType.FREE_FORM -> { // free
                     val addLayout = this.layoutInflater.inflate(R.layout.home_write_free_layout, null) as ConstraintLayout // inflating view from xml
@@ -544,11 +556,22 @@ class HomeWriteFragment : Fragment() {
 
                 }
                 ProgressItemBodyType.OVERALL -> {
+                    val addLayout = this.layoutInflater.inflate(R.layout.home_write_review_layout, null) as ConstraintLayout // inflating view from xml
+                    val params : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.MATCH_PARENT, // This will define text view width
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT // This will define text view height
+                    )
+                    params.setMargins(0,20,0,10)
+                    addLayout.layoutParams = params
+                    addLayout.id = View.generateViewId()
+                    homeWriteLL.addView(addLayout)
+
+                    val homeWriteReviewET = addLayout.findViewById<EditText>(R.id.homeWriteReviewET)
                     homeWriteReviewET.setText(totalReviewBody)
+                    overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
 
                 }
                 ProgressItemBodyType.NOT_DEFINED -> {
-
                 }
             }
         }
@@ -606,12 +629,16 @@ class HomeWriteFragment : Fragment() {
 
             linearLayout.addView(addLayout)
 
-            if (layoutInt == R.layout.home_write_free_layout) {
-                freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
-            } else if (layoutInt == R.layout.home_write_qna_layout) {
-                qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
-            } else if (layoutInt == R.layout.home_write_review_layout) { // overAll
-                overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
+            when (layoutInt) {
+                R.layout.home_write_free_layout -> {
+                    freeLayoutListMap[progressName] = freeLayoutListMap[progressName].orEmpty().plus(addLayout)
+                }
+                R.layout.home_write_qna_layout -> {
+                    qnaLayoutListMap[progressName] = qnaLayoutListMap[progressName].orEmpty().plus(addLayout)
+                }
+                R.layout.home_write_review_layout -> { // overAll
+                    overAllLayoutListMap[progressName] = overAllLayoutListMap[progressName].orEmpty().plus(addLayout)
+                }
             }
         }
     }
@@ -620,7 +647,6 @@ class HomeWriteFragment : Fragment() {
 
     private fun changeView(layoutTagName : String) {
         Log.d("onTabSelected_changeView", "${layoutTagName}")
-
         for(layout in dynamicLayoutMap.values){
             if (layoutTagName == layout.tag) {
                 layout.visibility = View.VISIBLE
@@ -665,11 +691,14 @@ class HomeWriteFragment : Fragment() {
                             for (l in qnaRemoveLayoutListMap[progressName].orEmpty()) {
                                 deleteHomeWriteLL!!.removeView(l)
                             }
-
+                            for (l in overAllRemoveLayoutListMap[progressName].orEmpty()) {
+                                deleteHomeWriteLL!!.removeView(l)
+                            }
 
 
                             val frll = freeRemoveLayoutListMap[progressName]!!
                             val qrll = qnaRemoveLayoutListMap[progressName]!!
+                            val orll = overAllRemoveLayoutListMap[progressName]!!
 
 
                             for (cf in frll) { // stage for 문
@@ -677,13 +706,21 @@ class HomeWriteFragment : Fragment() {
                                 homeViewModel.deleteFun(progressName, DeletedContent(cf.tag.toString().toInt()))
                             }
 
-                            for (cq in frll) { // stage for 문
+                            for (cq in qrll) { // stage for 문
                                 Log.d("qwe_qrll", "${frll}, ${cq.tag.toString().toInt()}")
                                 homeViewModel.deleteFun(progressName, DeletedContent(cq.tag.toString().toInt()))
                             }
 
+                            for (co in orll) { // stage for 문
+                                Log.d("qwe_qrll", "${frll}, ${co.tag.toString().toInt()}")
+                                homeViewModel.deleteFun(progressName, DeletedContent(co.tag.toString().toInt()))
+                            }
+
+
                             freeRemoveLayoutListMap[progressName]!!.clear()
                             qnaRemoveLayoutListMap[progressName]!!.clear()
+                            overAllRemoveLayoutListMap[progressName]!!.clear()
+
 
                         }
                         AlertType.TYPE3 -> {
@@ -696,7 +733,7 @@ class HomeWriteFragment : Fragment() {
                 }
             },
             alertType,
-            freeRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size
+            freeRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + qnaRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size + overAllRemoveLayoutListMap[tab!!.tag.toString()].orEmpty().size
 
         )
 
