@@ -84,11 +84,6 @@ class HomeAddCalendarEventsAdapter(calendarEventOnclickListener: CalendarEventOn
             this.calendarEventOnclickListener = calendarEventOnclickListener
         }
 
-//        init {
-//            itemView.setOnClickListener {
-//                onClick(events[bindingAdapterPosition])
-//            }
-//        }
 
         fun bind(addProgress: HomeAddProgress) {
             val zonedTime = addProgress.zonedDateTime

@@ -275,6 +275,9 @@ class HomeViewModel : ViewModel() {
         _falseChipSet.value = mutableSetOf()
 
         _addCalendarToAddFlag.value = null
+
+        _homeAddSelectedStage.value = arrayListOf()
+        _homeAddSelectedProgress.value = arrayListOf()
     }
 
     fun setClearCompanyList(){
