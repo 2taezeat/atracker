@@ -115,7 +115,7 @@
         <entry key="app/src/main/res/layout/home_detail_qna_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_detail_review_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.5151116951379764" />
-        <entry key="app/src/main/res/layout/home_write_content_layout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/home_write_content_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_write_free_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_review_layout.xml" value="0.335" />
