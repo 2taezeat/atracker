@@ -49,7 +49,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="우리 은행 인턴"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textColor="@color/atracker_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
@@ -138,7 +138,7 @@
 <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--                        android:text="@string/plus_qna"-->
 <!--                        android:background="@drawable/button_round"-->
-<!--                        android:textSize="16sp"-->
+<!--                        android:textSize="16dp"-->
 <!--                        android:gravity="center"-->
 <!--                        android:textColor="@color/atracker_white"-->
 <!--                        android:layout_marginBottom="10dp"-->
@@ -154,7 +154,7 @@
 <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--                        android:text="@string/plus_free"-->
 <!--                        android:background="@drawable/button_round"-->
-<!--                        android:textSize="16sp"-->
+<!--                        android:textSize="16dp"-->
 <!--                        android:gravity="center"-->
 <!--                        android:textColor="@color/atracker_white"-->
 <!--                        android:layout_marginBottom="10dp"-->
@@ -181,7 +181,7 @@
 <!--                            android:text="@string/waiting"-->
 <!--                            android:textAlignment="center"-->
 <!--                            app:chipStrokeWidth="0dp"-->
-<!--                            android:textSize="14sp"-->
+<!--                            android:textSize="14dp"-->
 <!--                            android:checkable="true"-->
 <!--                            android:clickable="true"-->
 <!--                            android:focusable="true"-->
@@ -198,7 +198,7 @@
 <!--                            android:text="@string/not_passing"-->
 <!--                            android:textAlignment="center"-->
 <!--                            app:chipStrokeWidth="0dp"-->
-<!--                            android:textSize="14sp"-->
+<!--                            android:textSize="14dp"-->
 <!--                            android:checkable="true"-->
 <!--                            android:clickable="true"-->
 <!--                            android:focusable="true"-->
@@ -214,7 +214,7 @@
 <!--                            android:text="@string/passing"-->
 <!--                            android:textAlignment="center"-->
 <!--                            app:chipStrokeWidth="0dp"-->
-<!--                            android:textSize="14sp"-->
+<!--                            android:textSize="14dp"-->
 <!--                            android:checkable="true"-->
 <!--                            android:clickable="true"-->
 <!--                            android:focusable="true"-->
@@ -259,7 +259,7 @@
                 android:gravity="center"
                 android:text="@string/save_title"
                 android:textColor="@color/progress_color_7"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:id="@+id/homeWriteNext"
                 >
             </TextView>

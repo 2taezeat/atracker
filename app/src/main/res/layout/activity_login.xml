@@ -57,7 +57,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/login_text_1"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:layout_marginTop="10dp"
             android:id="@+id/loginTV1"
             android:textColor="@color/atracker_gray_2"
@@ -73,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/login_text_2"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:id="@+id/loginTV2"
             android:textColor="@color/atracker_gray_2"
             >
@@ -120,7 +120,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.55"
                 android:textColor="@color/atracker_white"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 >
             </TextView>
 

@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/my_page_title"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
@@ -69,7 +69,7 @@
                 tools:text="제시카"
                 android:layout_marginStart="28dp"
                 android:textColor="@color/progress_color_7"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"
 
@@ -85,7 +85,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/myPageNickNameTV"
                 android:textColor="@color/atracker_white"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 android:layout_marginTop="30dp"
 
                 >
@@ -100,7 +100,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:layout_marginTop="26dp"
                 >
 
@@ -115,7 +115,7 @@
                 tools:text="애널리스트"
                 android:layout_marginStart="4dp"
                 android:textColor="@color/atracker_white"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_marginTop="26dp"
 
                 >
@@ -131,7 +131,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:layout_marginTop="12dp"
                 >
 
@@ -146,7 +146,7 @@
                 tools:text="신입"
                 android:layout_marginStart="4dp"
                 android:textColor="@color/atracker_white"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_marginTop="12dp"
 
                 >
@@ -176,7 +176,7 @@
                 android:layout_marginTop="42dp"
                 android:layout_marginStart="28dp"
                 android:textColor="@color/atracker_white"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 >
 
             </TextView>
@@ -204,7 +204,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
 
                 >
 
@@ -232,7 +232,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
 
                 >
 
@@ -261,7 +261,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="32dp"
                 android:textColor="@color/atracker_white"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 >
 
             </TextView>
@@ -289,7 +289,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 >
 
             </TextView>
@@ -303,7 +303,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/atracker_gray_6"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:text="@string/brianrudder_email"
                 >
 
@@ -331,7 +331,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 >
 
             </TextView>
@@ -357,7 +357,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 >
 
             </TextView>

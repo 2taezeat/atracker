@@ -36,7 +36,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textColor="@color/atracker_white"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     tools:text="7 Jan, 2019"
                     android:layout_gravity="center"
                     />
@@ -100,7 +100,7 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@color/progress_color_7"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 tools:text="06월 24 금요일"
                 app:layout_constraintTop_toBottomOf="@+id/calendarDisplayView1"
 

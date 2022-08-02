@@ -48,7 +48,7 @@
                     app:layout_constraintStart_toEndOf="@+id/homeBottomSheetReviewEditIV"
                     android:id="@+id/homeBottomSheetReviewEditTV"
                     android:textColor="@color/atracker_white"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:text="@string/review_edit_title"
                     android:layout_marginStart="20dp"
                     >
@@ -85,7 +85,7 @@
                     app:layout_constraintStart_toEndOf="@+id/homeBottomSheetProgressEditIV"
                     android:id="@+id/homeBottomSheetProgressEditTV"
                     android:textColor="@color/atracker_white"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:text="@string/progress_edit_title"
                     android:layout_marginStart="20dp"
                     >
@@ -122,7 +122,7 @@
                     app:layout_constraintStart_toEndOf="@+id/homeBottomSheetReviewDeleteIV"
                     android:id="@+id/homeBottomSheetReviewDeleteTV"
                     android:textColor="@color/atracker_white"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:text="@string/review_delete_title"
                     android:layout_marginStart="20dp"
                     >

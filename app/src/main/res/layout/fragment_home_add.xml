@@ -46,7 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/home_add_title"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
@@ -81,7 +81,7 @@
                 android:text="@string/company_name_title"
                 android:layout_marginTop="34dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 >
             </TextView>
 
@@ -95,7 +95,7 @@
                 android:id="@+id/homeAddACTV"
                 android:text="@={homeVM._companyWord}"
                 android:hint="@string/add_company_hint"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_marginTop="14dp"
                 android:textColorHint="@color/atracker_gray_6"
                 android:background="@null"
@@ -126,7 +126,7 @@
                 android:text="@string/apply_field_title"
                 android:layout_marginTop="38dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 >
             </TextView>
 
@@ -137,7 +137,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/homeAddApplyField"
                 app:layout_constraintStart_toEndOf="@+id/homeAddApplyField"
                 android:hint="@string/add_apply_hint"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_marginTop="10dp"
                 android:text="@={homeVM._positionWord}"
                 android:id="@+id/homeAddApplyFieldET"
@@ -186,7 +186,7 @@
                 android:text="@string/work_type_name_title"
                 android:layout_marginTop="38dp"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 >
             </TextView>
 
@@ -197,7 +197,7 @@
 <!--                app:layout_constraintTop_toBottomOf="@+id/homeAddWorkType"-->
 <!--                app:layout_constraintStart_toEndOf="@+id/homeAddWorkType"-->
 <!--                android:hint="예시) 애널리스트"-->
-<!--                android:textSize="14sp"-->
+<!--                android:textSize="14dp"-->
 <!--                android:layout_marginTop="10dp"-->
 <!--                android:id="@+id/homeAddPositionNameET"-->
 <!--                android:background="@null"-->
@@ -254,7 +254,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="40dp"
                 android:text="@string/total_progress"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textColor="@color/atracker_gray_3"
                 >
             </TextView>
@@ -294,7 +294,7 @@
                     android:text="@string/chip_title_1"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -312,7 +312,7 @@
                     android:text="@string/chip_title_2"
                     android:textAlignment="textStart"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -333,7 +333,7 @@
                     android:text="@string/chip_title_3"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -354,7 +354,7 @@
                     android:text="@string/chip_title_4"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -374,7 +374,7 @@
                     android:text="@string/chip_title_5"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -393,7 +393,7 @@
                     android:text="@string/chip_title_6"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -412,7 +412,7 @@
                     android:text="@string/chip_title_7"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -431,7 +431,7 @@
                     android:text="@string/chip_title_8"
                     android:textAlignment="center"
                     app:chipStrokeWidth="0dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
@@ -475,7 +475,7 @@
                 android:gravity="center"
                 android:text="@string/next_title"
                 android:textColor="@color/progress_color_7"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:id="@+id/homeAddNext"
                 >
             </TextView>

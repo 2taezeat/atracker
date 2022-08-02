@@ -82,7 +82,7 @@
 <!--                                    android:textColor="@color/atracker_gray_3"-->
 <!--                                    android:layout_marginStart="12dp"-->
 <!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:textSize="16sp"-->
+<!--                                    android:textSize="16dp"-->
 <!--                                    >-->
 <!--                                </TextView>-->
 
@@ -96,7 +96,7 @@
 <!--                                    android:padding="12dp"-->
 <!--                                    android:background="@null"-->
 <!--                                    android:textColor="@color/atracker_white"-->
-<!--                                    android:textSize="16sp"-->
+<!--                                    android:textSize="16dp"-->
 <!--                                    android:textColorHint="@color/atracker_white"-->
 <!--                                    android:fontFamily="@font/roboto_font"-->
 
@@ -123,7 +123,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/atracker_white"
                         app:chipStrokeWidth="0dp"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
@@ -146,7 +146,7 @@
                         android:id="@+id/homeWriteEditButton"
                         android:text="@string/delete"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:textColor="@color/atracker_white"
                         android:layout_marginTop="20dp"
                         app:layout_constraintTop_toTopOf="parent"
@@ -161,7 +161,7 @@
                         android:id="@+id/homeWriteEditCompleteButton"
                         android:text="@string/complete_title"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:textColor="@color/atracker_white"
                         android:layout_marginTop="20dp"
                         app:layout_constraintTop_toTopOf="parent"
@@ -178,7 +178,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:text="@string/plus_qna"
                         android:background="@drawable/button_round"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         android:gravity="center"
                         android:textColor="@color/atracker_white"
                         android:layout_marginBottom="10dp"
@@ -195,7 +195,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:text="@string/plus_free"
                         android:background="@drawable/button_round"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         android:gravity="center"
                         android:textColor="@color/atracker_white"
                         android:layout_marginBottom="10dp"
@@ -210,7 +210,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:text="@string/plus_review"
                         android:background="@drawable/button_round"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         android:gravity="center"
                         android:textColor="@color/atracker_white"
                         android:layout_marginBottom="10dp"
@@ -239,7 +239,7 @@
                             android:text="@string/waiting"
                             android:textAlignment="center"
                             app:chipStrokeWidth="0dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:checkable="true"
                             android:clickable="true"
                             android:focusable="true"
@@ -256,7 +256,7 @@
                             android:text="@string/not_passing"
                             android:textAlignment="center"
                             app:chipStrokeWidth="0dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:checkable="true"
                             android:clickable="true"
                             android:focusable="true"
@@ -272,7 +272,7 @@
                             android:text="@string/passing"
                             android:textAlignment="center"
                             app:chipStrokeWidth="0dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:checkable="true"
                             android:clickable="true"
                             android:focusable="true"

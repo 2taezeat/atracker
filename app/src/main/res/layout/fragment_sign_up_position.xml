@@ -42,7 +42,7 @@
                 android:text="@string/position_suggest_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="56dp"
                 android:textColor="@color/atracker_white"
@@ -60,7 +60,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="35dp"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textColor="@color/atracker_gray_3"
                 >
 
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/signUpPositionPosition"
                 app:layout_constraintStart_toStartOf="parent"
                 android:hint="@string/add_apply_hint"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/signUpPositionPositionET"
                 android:background="@null"
@@ -127,7 +127,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="38dp"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textColor="@color/atracker_gray_3"
                 >
 
@@ -171,7 +171,7 @@
                 android:gravity="center"
                 android:text="@string/next_title"
                 android:textColor="@color/atracker_gray_3"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:id="@+id/signUpPositionNext"
                 android:enabled="false"
 

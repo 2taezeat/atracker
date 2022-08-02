@@ -53,7 +53,7 @@
                 android:text="@string/q"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/progress_color_7"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 >
             </TextView>
 
@@ -68,7 +68,7 @@
                 android:padding="12dp"
                 android:layout_marginLeft="24dp"
                 android:background="@null"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_white"
                 android:textColorHint="@color/atracker_gray_3"
                 android:theme="@style/MyEditTextTheme"
@@ -100,7 +100,7 @@
                 android:text="@string/a"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/progress_color_7"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 >
             </TextView>
 
@@ -116,7 +116,7 @@
                 android:layout_marginLeft="24dp"
                 android:theme="@style/MyEditTextTheme"
                 android:background="@null"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_white"
                 android:textColorHint="@color/atracker_gray_3"
                 android:fontFamily="@font/roboto_font"
@@ -148,7 +148,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="12dp"
                 android:background="@null"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_gray_2"
                 android:textColorHint="@color/atracker_gray_3"
                 android:theme="@style/MyEditTextTheme"

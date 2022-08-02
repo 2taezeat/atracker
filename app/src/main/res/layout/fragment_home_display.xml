@@ -95,7 +95,7 @@
                 android:id="@+id/homeExperienceTypeTV"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="12dp"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_gray_1"
                 >
             </TextView>
@@ -109,7 +109,7 @@
                 android:id="@+id/homeMyTitleTV"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="6dp"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="@color/atracker_gray_1"
                 >
             </TextView>
@@ -127,7 +127,7 @@
                 android:layout_marginTop="4dp"
                 android:id="@+id/homeMyNickNameTV"
                 tools:text="제시카"
-                android:textSize="28sp"
+                android:textSize="28dp"
                 android:textStyle="bold"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/progress_color_7"
@@ -142,7 +142,7 @@
                 app:layout_constraintStart_toEndOf="@+id/homeMyNickNameTV"
                 android:layout_marginTop="4dp"
                 android:text="@string/님의"
-                android:textSize="28sp"
+                android:textSize="28dp"
                 android:textColor="@color/atracker_white"
                 >
             </TextView>
@@ -154,7 +154,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/homeMyNickNameTV"
                 android:text="@string/지원현황입니다"
                 android:id="@+id/homeApplyTV"
-                android:textSize="28sp"
+                android:textSize="28dp"
                 android:textColor="@color/atracker_white"
                 android:layout_marginStart="12dp"
 
@@ -201,7 +201,7 @@
                     app:layout_constraintVertical_bias="0.2"
                     android:layout_marginStart="30dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     android:textColor="@color/atracker_gray_1"
                     >
                 </TextView>
@@ -215,7 +215,7 @@
                     android:layout_marginStart="30dp"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="59"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textColor="@color/atracker_white"
                     >
                 </TextView>
@@ -227,7 +227,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTotalPassRate"
                     android:text="@string/percent"
                     android:layout_marginTop="8dp"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     android:textColor="@color/atracker_white"
                     >
 
@@ -260,7 +260,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.3"
                     android:layout_marginStart="5dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textColor="@color/atracker_gray_1"
                     >
                 </TextView>
@@ -275,7 +275,7 @@
                     android:layout_marginTop="4dp"
                     android:textColor="@color/atracker_white"
                     tools:text="82"
-                    android:textSize="24sp"
+                    android:textSize="24dp"
                     >
                 </TextView>
 
@@ -283,7 +283,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/percent"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textColor="@color/atracker_white"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStatePercentTV1"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTV1"
@@ -316,7 +316,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.3"
                     android:layout_marginStart="5dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textColor="@color/atracker_gray_1"
                     >
                 </TextView>
@@ -330,7 +330,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView2"
                     android:layout_marginTop="4dp"
                     tools:text="50"
-                    android:textSize="24sp"
+                    android:textSize="24dp"
                     android:textColor="@color/atracker_white"
                     >
                 </TextView>
@@ -340,7 +340,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/percent"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textColor="@color/atracker_white"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStatePercentTV2"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTV2"
@@ -374,7 +374,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="0.3"
                     android:layout_marginStart="5dp"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textColor="@color/atracker_gray_1"
                     >
                 </TextView>
@@ -388,7 +388,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateCircleView3"
                     android:layout_marginTop="4dp"
                     tools:text="25"
-                    android:textSize="24sp"
+                    android:textSize="24dp"
                     android:textColor="@color/atracker_white"
                     >
                 </TextView>
@@ -397,7 +397,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/percent"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textColor="@color/atracker_white"
                     app:layout_constraintStart_toEndOf="@+id/homeMyCurrentStatePercentTV3"
                     app:layout_constraintTop_toBottomOf="@+id/homeMyCurrentStateTV3"
@@ -431,7 +431,7 @@
                     android:text="@string/home_display_please_write"
                     android:id="@+id/homeDisplayPleaseWriteTV"
                     android:textColor="@color/atracker_white"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:gravity="center"
                     android:lineSpacingExtra="10dp"
                     android:visibility="invisible"
@@ -475,7 +475,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/homeDisplayScrollTopButton"
                 android:text="@string/scroll_top"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginBottom="10dp"
                 android:visibility="invisible"

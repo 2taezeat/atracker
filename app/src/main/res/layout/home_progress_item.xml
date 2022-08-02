@@ -22,7 +22,7 @@
             android:id="@+id/homeProgressCompanyTitleTV"
             android:text="123123123"
             android:layout_marginStart="12dp"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:textColor="@color/atracker_white"
             >
 
@@ -39,7 +39,7 @@
             android:id="@+id/homeProgressjobTypeTV"
             android:text="1345345345"
             android:layout_marginStart="14dp"
-            android:textSize="12sp"
+            android:textSize="12dp"
             android:textColor="@color/atracker_gray_1"
             >
 
