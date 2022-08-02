@@ -101,7 +101,7 @@
         <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.5202821869488536" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_sign_up_complete.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_sign_up_nick_name.xml" value="0.36140350877192984" />
@@ -114,7 +114,7 @@
         <entry key="app/src/main/res/layout/home_detail_notdefined_item.xml" value="0.325" />
         <entry key="app/src/main/res/layout/home_detail_qna_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_detail_review_item.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.5151116951379764" />
         <entry key="app/src/main/res/layout/home_write_content_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_write_free_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.45" />

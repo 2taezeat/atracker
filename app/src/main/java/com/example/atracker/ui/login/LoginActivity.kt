@@ -35,6 +35,8 @@ import com.example.atracker.utils.AlertApiObject
 
 class LoginActivity : AppCompatActivity() {
 
+
+    // 220802 14:30
     private lateinit var binding: ActivityLoginBinding
 
     private val RC_SIGN_IN = 0
