@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.atracker.R
 import com.example.atracker.databinding.FragmentSignUpCompleteBinding
 import com.example.atracker.ui.MainActivity
 import com.example.atracker.ui.home.HomeViewModel
 import com.example.atracker.ui.login.LoginActivity
+import com.example.atracker.utils.AlertApiObject
 import com.example.atracker.utils.StartActivityUtil
 
 
@@ -46,12 +49,20 @@ class SignUpCompleteFragment : Fragment() {
         binding.signUpCompleteNickNameTV.text = signUpViewModel.signUpNickName.value
 
 
-        val mHandler = Handler(Looper.getMainLooper())
-        mHandler.postDelayed({
-            StartActivityUtil.callActivity(parentActivity, MainActivity())
-            parentActivity.finish()
+        signUpViewModel.postSignUpFail.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { boolean ->
+                if (!boolean) { // postSignUp 성공
+                    val mHandler = Handler(Looper.getMainLooper())
+                    mHandler.postDelayed({
+                        StartActivityUtil.callActivity(parentActivity, MainActivity())
+                        parentActivity.finish()
 
-        }, 3000)
+                    }, 3000)
+                }
+            }
+        })
+
+
 
 
         return binding.root

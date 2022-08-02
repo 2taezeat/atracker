@@ -457,6 +457,7 @@ class HomeViewModel : ViewModel() {
                 _companyResponse.value = newCompanyResponse
             } else {
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -477,6 +478,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 _addCompanyFail.value = Event(true)
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -495,6 +497,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 _homeAddStagesContent.value = listOf()
                 //testSignInHome()
+                refreshTokenHome()
             }
 
         }
@@ -520,6 +523,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 _updateApplyFail.value = Event(true)
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -542,6 +546,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 _updateApplyFail.value = Event(true)
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -558,6 +563,7 @@ class HomeViewModel : ViewModel() {
                 //switch(_deleteApplyFail)
                 _deleteApplyFail.value = Event(true)
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -609,6 +615,7 @@ class HomeViewModel : ViewModel() {
                 _homeDetailArrayList.value = detailArrayList
             } else {
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -726,6 +733,7 @@ class HomeViewModel : ViewModel() {
             } else {
                 _getApplyDetailFail.value = Event(true)
                 //testSignInHome()
+                refreshTokenHome()
             }
         }
     }
@@ -832,6 +840,7 @@ class HomeViewModel : ViewModel() {
                 _stageProgressesPutFail.value = Event(false)
             } else {
                 _stageProgressesPutFail.value = Event(true)
+                refreshTokenHome()
             }
         }
     }
@@ -843,33 +852,21 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    fun testSignInHome() { // refresh 역할
-        Log.d("test_sign", "homeviewmodel")
-
+    fun refreshTokenHome() { // refresh token 호출
         viewModelScope.launch {
-            val apiResult = repositorySign.testSignCall(
-                email = App.prefs.getValue(BuildConfig.EMAIL)!!,
-                experience_type = "NOT_EXPERIENCED",
-                job_position = "개발자",
-                nick_name = "닉네임1"
+            val apiResult = repositorySign.refreshTokenCall(
+                tokenRefreshRequest = TokenRefreshRequest( App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!! )
             )
-
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 val at = getResult.access_token
-                val rt = getResult.refresh_token
 
-                Log.d("test123_at", "${at}")
-                Log.d("test123_rt", "${rt}")
-
-                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
-                App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨
+                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at")
             } else {
 
             }
 
         }
-
     }
 
 

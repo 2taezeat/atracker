@@ -11,6 +11,7 @@ import com.example.atracker.model.dto.SignRequest
 import com.example.atracker.model.dto.TokenRefreshRequest
 import com.example.atracker.model.local.App
 import com.example.atracker.model.repository.RepositorySign
+import com.example.atracker.utils.Event
 import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
@@ -35,8 +36,10 @@ class SignUpViewModel : ViewModel() {
     }
     val signUpCareer : LiveData<String> = _signUpCareer
 
-
     val careerAgeItems = MutableLiveData<List<String>>()
+
+    private val _postSignUpFail = MutableLiveData<Event<Boolean>>()
+    val postSignUpFail : LiveData<Event<Boolean>> = _postSignUpFail
 
     init {
         careerAgeItems.value = listOf("신입", "경력")
@@ -72,11 +75,12 @@ class SignUpViewModel : ViewModel() {
                 //val tokenDrop = bodyToken.drop(1).dropLast(1)
                 App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
                 App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt")
-
+                _postSignUpFail.value = Event(false)
             } else {
+                _postSignUpFail.value = Event(true)
+
 
             }
-
         }
     }
 
@@ -87,13 +91,10 @@ class SignUpViewModel : ViewModel() {
                 tokenRefreshRequest = TokenRefreshRequest( App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!! )
             )
 
-
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 val at = getResult.access_token
 
-                // new access_token 받아서 update
-                //val tokenDrop = bodyToken.drop(1).dropLast(1)
                 App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
 
             } else {
@@ -104,40 +105,6 @@ class SignUpViewModel : ViewModel() {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    fun testSignInSign() {
-        Log.d("test_sign", "SignUp")
-
-        viewModelScope.launch {
-            val apiResult = repositorySign.testSignCall(
-                email = App.prefs.getValue(BuildConfig.EMAIL)!!,
-                experience_type = _signUpCareer.value!!,
-                job_position = _signUpPosition.value!!,
-                nick_name = _signUpNickName.value!!
-            )
-
-            if (apiResult.code() == 200) {
-                val getResult = apiResult.body()!!
-                val at = getResult.access_token
-                val rt = getResult.refresh_token
-
-                Log.d("test123_at", "${at}")
-                Log.d("test123_rt", "${rt}")
-
-                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
-                App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨
-            } else {
-
-            }
-
-        }
-
-    }
-
-
-
-
 
 
 }

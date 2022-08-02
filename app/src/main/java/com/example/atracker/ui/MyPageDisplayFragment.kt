@@ -155,7 +155,6 @@ class MyPageDisplayFragment : Fragment() {
                             App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN)
                             App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN)
 
-
                             startLogin()
                         }
                         AlertType.TYPE11 -> { // 회원 탈퇴

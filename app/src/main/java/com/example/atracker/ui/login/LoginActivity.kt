@@ -71,27 +71,6 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-//        binding.loginGoogleButton.setOnClickListener {
-//            googleSignInClient!!.revokeAccess()
-//
-//            val signInIntent = googleSignInClient?.signInIntent
-//            startActivityForResult(signInIntent, RC_SIGN_IN)
-//
-//
-////            if (googleSignInClient != null) {
-////                googleSignInClient!!.revokeAccess()
-////            }
-//
-//            Log.d("google_serverClientId", "${gso.serverClientId}")
-//            Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
-//
-////            val signInIntent = googleSignInClient?.signInIntent
-////            childForResult.launch(signInIntent)
-////            Log.d("asd", "${gso.serverClientId}")
-////            Log.d("asd2", "${gso.isIdTokenRequested}")
-//        }
-
-
 
         binding.loginButtonFL.setOnClickListener { // real login button
             googleSignInClient!!.revokeAccess()
@@ -129,7 +108,6 @@ class LoginActivity : AppCompatActivity() {
                 }
                 //StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             }
-            //finish()
         }
 
 
@@ -154,9 +132,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         } catch (e: ApiException) {
 
-            //App.prefs.setValue(BuildConfig.EMAIL, Math.random().toString())
-            //StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
-            //finish()
 
             Log.w("google_login", "handleSignInResult:error", e)
         }
