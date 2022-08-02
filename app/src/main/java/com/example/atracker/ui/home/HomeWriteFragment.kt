@@ -750,9 +750,10 @@ class HomeWriteFragment : Fragment() {
             )
             params.setMargins(0,20,0,10)
             addLayout.layoutParams = params
-            addLayout.id = View.generateViewId()
-            addLayout.tag = 123456789
 
+            addLayout.id = View.generateViewId()
+
+            addLayout.tag = 123456789
             linearLayout.addView(addLayout)
 
             when (layoutInt) {

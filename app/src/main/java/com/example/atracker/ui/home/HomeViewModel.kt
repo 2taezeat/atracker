@@ -799,7 +799,24 @@ class HomeViewModel : ViewModel() {
 
 
     fun setStageProgressRequest() {
+        //_stageProgressRequest.value!!.stage_progresses = _arrayListStageProgresse.value!!
+
+        _arrayListStageProgresse.value!!.forEach {
+            it.new_contents.sortBy {
+                var order = 0
+                when (it.content_type) {
+                    ProgressItemBodyType.OVERALL.toString() -> order = ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.QNA.toString() -> order = ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.FREE_FORM.toString() -> order = ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.NOT_DEFINED.toString() -> order = ProgressItemBodyType.OVERALL.ordinal
+                }
+                order
+            }
+        }
+
         _stageProgressRequest.value!!.stage_progresses = _arrayListStageProgresse.value!!
+
+
         Log.d("qwe_final_stageProgressRequest", "${_stageProgressRequest.value}")
     }
 
