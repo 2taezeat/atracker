@@ -65,7 +65,7 @@ class MyPageViewModel : ViewModel() {
                 }
             } else {
                 _userNickName.value = " "
-                testSignInMyPage()
+                //testSignInMyPage()
             }
 
         }

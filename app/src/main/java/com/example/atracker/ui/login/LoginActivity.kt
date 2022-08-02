@@ -63,13 +63,9 @@ class LoginActivity : AppCompatActivity() {
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            //.requestIdToken("937085987148-2gkapehmitc9fsl7seha2dduugg380jl.apps.googleusercontent.com")
-            //.requestIdToken("937085987148-atb62pmmmb8o68rkcdfhroof5t5la4uf.apps.googleusercontent.com")
-            //.requestIdToken("937085987148-aap5uf6v0g5e68nmdck4paalhle1h1ha.apps.googleusercontent.com")
-            //.requestIdToken("1078541661137-85s6qfa3ik8l30poccpuf3qr38jidtij.apps.googleusercontent.com")
             //.requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
-            //.requestServerAuthCode("937085987148-atb62pmmmb8o68rkcdfhroof5t5la4uf.apps.googleusercontent.com")
-            //.requestServerAuthCode("937085987148-aap5uf6v0g5e68nmdck4paalhle1h1ha.apps.googleusercontent.com")
+            .requestIdToken("937085987148-hg9583kh92l47rjlia9vng2v5eg7b54b.apps.googleusercontent.com")
+            //.requestServerAuthCode("937085987148-hg9583kh92l47rjlia9vng2v5eg7b54b.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
@@ -105,22 +101,28 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             } else {
                 if (App.prefs.getValue(BuildConfig.EMAIL) != "") { // 토큰은 없는데 이메일은 있음, 로그아웃, case2 => testLogin 호출 후, Main
-                    loginViewModel.testSignInLogin(App.prefs.getValue(BuildConfig.EMAIL)!!)
+//                    loginViewModel.testSignInLogin(App.prefs.getValue(BuildConfig.EMAIL)!!)
+//
+//                    loginViewModel.testSignLoginFail.observe(this, Observer {
+//                        it.getContentIfNotHandled()?.let { boolean ->
+//                            Log.d("google_testSignLoginFail", "${boolean}")
+//                            if (!boolean) { // postApply 실패
+//                                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+//                                finish()
+//                            }
+//                        }
+//                    })
 
-                    loginViewModel.testSignLoginFail.observe(this, Observer {
-                        it.getContentIfNotHandled()?.let { boolean ->
-                            Log.d("google_testSignLoginFail", "${boolean}")
-                            if (!boolean) { // postApply 실패
-                                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
-                                finish()
-                            }
-                        }
-                    })
+                    val signInIntent = googleSignInClient?.signInIntent
+                    startActivityForResult(signInIntent, RC_SIGN_IN)
+                    Log.d("google_serverClientId", "${gso.serverClientId}")
+                    Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
+                    Log.d("google_account", "${gso.account}")
+
 
                 } else { // 토큰은 없는데, 이메일도 없음, case3 => 구글 찍고, => SignUp 호출
                     val signInIntent = googleSignInClient?.signInIntent
                     startActivityForResult(signInIntent, RC_SIGN_IN)
-                    //gso.account
                     Log.d("google_serverClientId", "${gso.serverClientId}")
                     Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
                     Log.d("google_account", "${gso.account}")
@@ -130,22 +132,6 @@ class LoginActivity : AppCompatActivity() {
             //finish()
         }
 
-//        binding.loginTmpButton.setOnClickListener {
-//            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
-//            finish()
-//        }
-
-///////////////////////////////////////////////////////////////////////////////////
-//        binding.testSignApiButton.setOnClickListener {
-//            loginViewModel.testSign()
-//        }
-
-
-        ///////////
-//        GoogleSignIn.silentSignIn()
-//            .addOnCompleteListener(
-//                this,
-//                OnCompleteListener<GoogleSignInAccount?> { task -> handleSignInResult(task) })
 
 
     }
@@ -154,21 +140,23 @@ class LoginActivity : AppCompatActivity() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            val authCode = account.serverAuthCode
             val idToken = account.idToken
+            val authCode = account.serverAuthCode
+
             Log.d("google_login_idToken","${idToken}")
             Log.d("google_login_authCode","${authCode}")
-            Log.d("google_login_authCode","${account.email}")
+            Log.d("google_login_email","${account.email}")
 
             App.prefs.setValue(BuildConfig.EMAIL, account.email)
+            App.prefs.setValue(BuildConfig.FROM_GOOGLE_ACCESS_TOKEN, idToken)
 
             StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             finish()
         } catch (e: ApiException) {
 
-            App.prefs.setValue(BuildConfig.EMAIL, Math.random().toString())
-            StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
-            finish()
+            //App.prefs.setValue(BuildConfig.EMAIL, Math.random().toString())
+            //StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
+            //finish()
 
             Log.w("google_login", "handleSignInResult:error", e)
         }
