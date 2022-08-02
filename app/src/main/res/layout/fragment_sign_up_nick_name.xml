@@ -24,14 +24,15 @@
             >
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:src="@drawable/ic_back_icon_raw"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:id="@+id/signUpNickNameBackIV"
+                android:padding="10dp"
                 >
             </ImageView>
 
@@ -44,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="20dp"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="60dp"
                 android:textColor="@color/atracker_white"
                 >
 
@@ -96,8 +97,8 @@
                 android:id="@+id/signUpNickNameCancelIV"
                 android:src="@drawable/ic_cancel_text_icon_raw"
                 app:layout_constraintBottom_toTopOf="@+id/signUpNickNameView1"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
                 android:visibility="invisible"
                 >
 

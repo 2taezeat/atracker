@@ -18,14 +18,15 @@
             >
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:src="@drawable/ic_back_icon_raw"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:id="@+id/signUpTermsBackIV"
+                android:padding="10dp"
                 >
             </ImageView>
 
@@ -38,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="20dp"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="60dp"
                 android:textColor="@color/atracker_white"
                 >
 
@@ -117,14 +118,15 @@
 
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/signUpTermsView1"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_left_icon_raw"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginTop="12dp"
                 android:id="@+id/signUpTermsServiceIV"
+                android:padding="10dp"
                 >
             </ImageView>
 
@@ -175,13 +177,14 @@
 
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/signUpTermsView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_left_icon_raw"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginTop="12dp"
                 android:id="@+id/signUpTermsPrivacyIV"
                 >
             </ImageView>

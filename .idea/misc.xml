@@ -104,8 +104,8 @@
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notification_display.xml" value="0.33205128205128204" />
         <entry key="app/src/main/res/layout/fragment_sign_up_complete.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_sign_up_nick_name.xml" value="0.36140350877192984" />
-        <entry key="app/src/main/res/layout/fragment_sign_up_position.xml" value="0.37456140350877193" />
+        <entry key="app/src/main/res/layout/fragment_sign_up_nick_name.xml" value="0.41164021164021164" />
+        <entry key="app/src/main/res/layout/fragment_sign_up_position.xml" value="0.625" />
         <entry key="app/src/main/res/layout/fragment_sign_up_terms.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_add_calendar_event_item_view.xml" value="0.55" />
         <entry key="app/src/main/res/layout/home_company_search_item.xml" value="0.2995614035087719" />
