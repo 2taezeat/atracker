@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmc.atracker.BuildConfig
+import com.cmc.atracker.model.dto.LoginGoogleRequest
 import com.cmc.atracker.model.local.App
+import com.cmc.atracker.model.repository.RepositoryGoogleLogin
 import com.cmc.atracker.model.repository.RepositorySign
 import com.cmc.atracker.utils.Event
 import kotlinx.coroutines.launch
@@ -14,41 +16,34 @@ import kotlinx.coroutines.launch
 class LoginViewModel : ViewModel() {
 
     val repositorySign = RepositorySign()
+    val repositoryGoogleLogin = RepositoryGoogleLogin()
 
     private val _testSignLoginFail = MutableLiveData<Event<Boolean>>()
     val testSignLoginFail : LiveData<Event<Boolean>> = _testSignLoginFail
 
-    fun testSignInLogin(email : String) {
-        Log.d("test_sign", "Login")
 
+    fun getAccessTokenFromGoogleByAuthCode(authCode : String) {
         viewModelScope.launch {
-            val apiResult = repositorySign.testSignCall(
-                email = email,
-                experience_type = "NOT_EXPERIENCED",
-                job_position = "개발자",
-                nick_name = "닉네임1"
-
-            )
+            val apiResult = repositoryGoogleLogin.googleSignCall(
+                loginGoogleRequest = LoginGoogleRequest(
+                grant_type = "authorization_code",
+                client_id = "937085987148-n29vmraidvro4qd0nq5hfsvo4rn7jo9k.apps.googleusercontent.com",
+                client_secret = "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",
+                redirect_uri = "",
+                code = authCode))
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
-                val at = getResult.access_token
-                val rt = getResult.refresh_token
+                Log.d("google_sign_login_call", "${getResult} 1111")
+                App.prefs.setValue(BuildConfig.FROM_GOOGLE_ACCESS_TOKEN, getResult.access_token)
 
-                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
-                App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt") // * drop 과 bearer 해야되는지 확인해야됨
-
-                _testSignLoginFail.value = Event(false)
             } else {
-                _testSignLoginFail.value = Event(true)
+                Log.d("google_sign_login_call", "${apiResult.code()}, ${apiResult.body()}, ${apiResult.headers()} 222")
             }
 
         }
 
     }
-
-
-
 
 
 

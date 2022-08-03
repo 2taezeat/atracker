@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient {
+object RetrofitClientGoogleOauth {
 
     private lateinit var retrofit: Retrofit
     val gson = GsonBuilder()
@@ -14,7 +14,8 @@ object RetrofitClient {
         .create()
 
 
-    fun getClient(baseUrl : String) : Retrofit {
+
+    fun getClientGoogleOauth(baseUrl : String) : Retrofit {
         if ( !this::retrofit.isInitialized) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY

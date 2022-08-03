@@ -11,6 +11,7 @@ import android.webkit.WebViewClient
 import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.cmc.atracker.BuildConfig
 import com.cmc.atracker.R
 import com.cmc.atracker.databinding.FragmentSignUpTermsBinding

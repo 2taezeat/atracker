@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-//    id 'com.google.gms.google-services'
+    //id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -12,7 +12,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.atracker"
+        applicationId "com.cmc.atracker"
         minSdk 26
         targetSdk 31
         versionCode 1
@@ -32,8 +32,7 @@ android {
         buildConfigField "String", "TERSMS_PRIVACY_WEB_URL",localProperties['termsPrivacyWebUrl']
 
         buildConfigField "String", "EMAIL",localProperties['email']
-
-
+        buildConfigField "String", "GOOGLE_OAUTH_BASE_URL",localProperties['googleOauthBaseUrl']
     }
 
     buildTypes {

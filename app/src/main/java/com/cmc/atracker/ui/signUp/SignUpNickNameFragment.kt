@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.cmc.atracker.R
 import com.cmc.atracker.databinding.FragmentSignUpNickNameBinding
 import com.cmc.atracker.utils.ChangeUIState

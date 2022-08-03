@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -255,6 +256,8 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                 // Setup each header day text if we have not done that already.
                 if (container.legendLayout.tag == null) {
                     container.legendLayout.tag = month.yearMonth
+
+
                     container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
                         var dayNameKorean = ""
                         when (daysOfWeek[index].name) {
@@ -270,6 +273,9 @@ class CalendarDisplayFragment : Fragment(), CalendarEventOnclickListener {
                         tv.text = dayNameKorean
                         tv.setTextColorRes(R.color.atracker_white)
                     }
+
+
+
                 }
             }
         }

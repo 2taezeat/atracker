@@ -456,7 +456,6 @@ class HomeViewModel : ViewModel() {
                 val newCompanyResponse : CompanySearchResponse = getResult
                 _companyResponse.value = newCompanyResponse
             } else {
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -477,7 +476,6 @@ class HomeViewModel : ViewModel() {
                 _addCompanyFail.value = Event(false)
             } else {
                 _addCompanyFail.value = Event(true)
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -496,7 +494,6 @@ class HomeViewModel : ViewModel() {
 
             } else {
                 _homeAddStagesContent.value = listOf()
-                //testSignInHome()
                 refreshTokenHome()
             }
 
@@ -522,7 +519,6 @@ class HomeViewModel : ViewModel() {
                 _updateApplyFail.value = Event(false)
             } else {
                 _updateApplyFail.value = Event(true)
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -545,7 +541,6 @@ class HomeViewModel : ViewModel() {
                 _updateApplyFail.value = Event(false)
             } else {
                 _updateApplyFail.value = Event(true)
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -562,7 +557,6 @@ class HomeViewModel : ViewModel() {
             } else {
                 //switch(_deleteApplyFail)
                 _deleteApplyFail.value = Event(true)
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -614,7 +608,6 @@ class HomeViewModel : ViewModel() {
                 _homeDisplayArrayList.value = newArrayList
                 _homeDetailArrayList.value = detailArrayList
             } else {
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -732,7 +725,6 @@ class HomeViewModel : ViewModel() {
                 _getApplyDetailFail.value = Event(false)
             } else {
                 _getApplyDetailFail.value = Event(true)
-                //testSignInHome()
                 refreshTokenHome()
             }
         }
@@ -750,7 +742,7 @@ class HomeViewModel : ViewModel() {
                 _portfolioNum3.value = getResult.pf3
                 _portfolioNumTotal.value = getResult.pf_total
             } else {
-                //testSignInHome()
+                refreshTokenHome()
             }
         }
     }

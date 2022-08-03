@@ -54,8 +54,8 @@ class LoginActivity : AppCompatActivity() {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             //.requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
-            .requestIdToken("937085987148-hg9583kh92l47rjlia9vng2v5eg7b54b.apps.googleusercontent.com")
-            //.requestServerAuthCode("937085987148-hg9583kh92l47rjlia9vng2v5eg7b54b.apps.googleusercontent.com")
+            //.requestIdToken("937085987148-n29vmraidvro4qd0nq5hfsvo4rn7jo9k.apps.googleusercontent.com")
+            .requestServerAuthCode("937085987148-n29vmraidvro4qd0nq5hfsvo4rn7jo9k.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
@@ -68,34 +68,40 @@ class LoginActivity : AppCompatActivity() {
             if (at != "") { // 토큰이 있으면, case1 => 바로 Main
                 StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
                 finish()
-            } else {
-                if (App.prefs.getValue(BuildConfig.EMAIL) != "") { // 토큰은 없는데 이메일은 있음, 로그아웃, case2 => testLogin 호출 후, Main
-//                    loginViewModel.testSignInLogin(App.prefs.getValue(BuildConfig.EMAIL)!!)
+            } else { // just case 4
+                val signInIntent = googleSignInClient?.signInIntent
+                startActivityForResult(signInIntent, RC_SIGN_IN)
+                Log.d("google_serverClientId", "${gso.serverClientId}")
+                Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
+                Log.d("google_account", "${gso.account}")
+
+//                if (App.prefs.getValue(BuildConfig.EMAIL) != "") { // 토큰은 없는데 이메일은 있음, 로그아웃, case2 => testLogin 호출 후, Main
+////                    loginViewModel.testSignInLogin(App.prefs.getValue(BuildConfig.EMAIL)!!)
+////
+////                    loginViewModel.testSignLoginFail.observe(this, Observer {
+////                        it.getContentIfNotHandled()?.let { boolean ->
+////                            Log.d("google_testSignLoginFail", "${boolean}")
+////                            if (!boolean) { // postApply 실패
+////                                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
+////                                finish()
+////                            }
+////                        }
+////                    })
 //
-//                    loginViewModel.testSignLoginFail.observe(this, Observer {
-//                        it.getContentIfNotHandled()?.let { boolean ->
-//                            Log.d("google_testSignLoginFail", "${boolean}")
-//                            if (!boolean) { // postApply 실패
-//                                StartActivityUtil.callActivity(this@LoginActivity, MainActivity())
-//                                finish()
-//                            }
-//                        }
-//                    })
-
-                    val signInIntent = googleSignInClient?.signInIntent
-                    startActivityForResult(signInIntent, RC_SIGN_IN)
-                    Log.d("google_serverClientId", "${gso.serverClientId}")
-                    Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
-                    Log.d("google_account", "${gso.account}")
-
-
-                } else { // 토큰은 없는데, 이메일도 없음, case3 => 구글 찍고, => SignUp 호출
-                    val signInIntent = googleSignInClient?.signInIntent
-                    startActivityForResult(signInIntent, RC_SIGN_IN)
-                    Log.d("google_serverClientId", "${gso.serverClientId}")
-                    Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
-                    Log.d("google_account", "${gso.account}")
-                }
+//                    val signInIntent = googleSignInClient?.signInIntent
+//                    startActivityForResult(signInIntent, RC_SIGN_IN)
+//                    Log.d("google_serverClientId", "${gso.serverClientId}")
+//                    Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
+//                    Log.d("google_account", "${gso.account}")
+//
+//
+//                } else { // 토큰은 없는데, 이메일도 없음, case3 => 구글 찍고, => SignUp 호출
+//                    val signInIntent = googleSignInClient?.signInIntent
+//                    startActivityForResult(signInIntent, RC_SIGN_IN)
+//                    Log.d("google_serverClientId", "${gso.serverClientId}")
+//                    Log.d("google_isIdTokenRequested", "${gso.isIdTokenRequested}")
+//                    Log.d("google_account", "${gso.account}")
+//                }
                 //StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             }
         }
@@ -111,13 +117,13 @@ class LoginActivity : AppCompatActivity() {
             val idToken = account.idToken
             val authCode = account.serverAuthCode
 
-
             Log.d("google_login_idToken","${idToken}")
             Log.d("google_login_authCode","${authCode}")
             Log.d("google_login_email","${account.email}")
 
             App.prefs.setValue(BuildConfig.EMAIL, account.email)
-            App.prefs.setValue(BuildConfig.FROM_GOOGLE_ACCESS_TOKEN, idToken)
+
+            loginViewModel.getAccessTokenFromGoogleByAuthCode(authCode!!)
 
             StartActivityUtil.callActivity(this@LoginActivity, SignUpActivity())
             finish()
