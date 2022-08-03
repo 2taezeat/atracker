@@ -4,7 +4,7 @@
     <data>
         <variable
             name="signUpVM"
-            type="com.example.atracker.ui.signUp.SignUpViewModel" />
+            type="com.cmc.atracker.ui.signUp.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -174,7 +174,7 @@
                 >
 
 
-                <com.example.atracker.utils.MyProgress
+                <com.cmc.atracker.utils.MyProgress
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:id="@+id/homeMyCurrentStateTotalCircleView"
@@ -186,7 +186,7 @@
                     >
 
 
-                </com.example.atracker.utils.MyProgress>
+                </com.cmc.atracker.utils.MyProgress>
 
 
 

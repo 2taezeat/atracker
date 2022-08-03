@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/navigation_sign_up_terms"
-        android:name="com.example.atracker.ui.signUp.SignUpTermsFragment"
+        android:name="com.cmc.atracker.ui.signUp.SignUpTermsFragment"
         tools:layout="@layout/fragment_sign_up_terms">
 
 
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_sign_up_nick_name"
-        android:name="com.example.atracker.ui.signUp.SignUpNickNameFragment"
+        android:name="com.cmc.atracker.ui.signUp.SignUpNickNameFragment"
         tools:layout="@layout/fragment_sign_up_nick_name">
 
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/navigation_sign_up_position"
-        android:name="com.example.atracker.ui.signUp.SignUpPositionFragment"
+        android:name="com.cmc.atracker.ui.signUp.SignUpPositionFragment"
         tools:layout="@layout/fragment_sign_up_position">
 
         <action
@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/navigation_sign_up_complete"
-        android:name="com.example.atracker.ui.signUp.SignUpCompleteFragment"
+        android:name="com.cmc.atracker.ui.signUp.SignUpCompleteFragment"
         tools:layout="@layout/fragment_sign_up_complete">
 
     </fragment>

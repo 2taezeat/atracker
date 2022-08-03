@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_blog"
-        android:name="com.example.atracker.ui.blog.BlogDisplayFragment"
+        android:name="com.cmc.atracker.ui.blog.BlogDisplayFragment"
         android:label="@string/title_blog"
         tools:layout="@layout/fragment_blog_display" />
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.atracker.ui.home.HomeDisplayFragment"
+        android:name="com.cmc.atracker.ui.home.HomeDisplayFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home_display">
 
@@ -70,14 +70,14 @@
 
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="com.example.atracker.ui.calendar.CalendarDisplayFragment"
+        android:name="com.cmc.atracker.ui.calendar.CalendarDisplayFragment"
         android:label="@string/title_calendar"
         tools:layout="@layout/fragment_calendar_display" />
 
 
     <fragment
         android:id="@+id/navigation_notification_display"
-        android:name="com.example.atracker.ui.NotificationDisplayFragment"
+        android:name="com.cmc.atracker.ui.NotificationDisplayFragment"
         android:label="@string/title_notification"
         tools:layout="@layout/fragment_notification_display">
     </fragment>
@@ -85,7 +85,7 @@
 
     <fragment
         android:id="@+id/navigation_my_page_display"
-        android:name="com.example.atracker.ui.MyPageDisplayFragment"
+        android:name="com.cmc.atracker.ui.MyPageDisplayFragment"
         android:label="@string/title_my_page"
         tools:layout="@layout/fragment_my_page_display">
     </fragment>
@@ -93,7 +93,7 @@
 
     <fragment
         android:id="@+id/navigation_home_detail"
-        android:name="com.example.atracker.ui.home.HomeDetailFragment"
+        android:name="com.cmc.atracker.ui.home.HomeDetailFragment"
         android:label="@string/title_home_detail"
         tools:layout="@layout/fragment_home_detail">
 
@@ -145,7 +145,7 @@
 <!--    지원 현황 추가-->
     <fragment
         android:id="@+id/navigation_home_add"
-        android:name="com.example.atracker.ui.home.HomeAddFragment"
+        android:name="com.cmc.atracker.ui.home.HomeAddFragment"
         android:label="@string/title_home_add"
         tools:layout="@layout/fragment_home_add">
 
@@ -177,7 +177,7 @@
 
     <fragment
         android:id="@+id/navigation_home_write"
-        android:name="com.example.atracker.ui.home.HomeWriteFragment"
+        android:name="com.cmc.atracker.ui.home.HomeWriteFragment"
         android:label="@string/title_home_write"
         tools:layout="@layout/fragment_home_write">
 
@@ -200,7 +200,7 @@
 
     <fragment
         android:id="@+id/navigation_home_add_calendar"
-        android:name="com.example.atracker.ui.home.HomeAddCalendarFragment"
+        android:name="com.cmc.atracker.ui.home.HomeAddCalendarFragment"
         tools:layout="@layout/fragment_home_add_calendar">
 
         <action
@@ -224,7 +224,7 @@
 
     <fragment
         android:id="@+id/navigation_home_bottom_sheet"
-        android:name="com.example.atracker.ui.home.HomeBottomSheetFragment"
+        android:name="com.cmc.atracker.ui.home.HomeBottomSheetFragment"
         tools:layout="@layout/fragment_home_bottom_sheet">
 
 

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="homeVM"
-            type="com.example.atracker.ui.home.HomeViewModel" />
+            type="com.cmc.atracker.ui.home.HomeViewModel" />
     </data>
     
     <androidx.constraintlayout.widget.ConstraintLayout
