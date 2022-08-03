@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     // 220802 14:30
+    // 220803 18:03 배포 후 최종 커밋
     private lateinit var binding: ActivityLoginBinding
 
     private val RC_SIGN_IN = 0
