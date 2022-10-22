@@ -1,10 +1,10 @@
 package com.cmc.atracker.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.cmc.atracker.BuildConfig
@@ -40,7 +40,6 @@ class SplashActivity : AppCompatActivity() {
 //            }, 1000)
 //        }
 
-
 //
 
 //        CoroutineScope(Dispatchers.IO).launch {
@@ -74,7 +73,6 @@ class SplashActivity : AppCompatActivity() {
 
 
     }
-
 
 
     override fun onDestroy() {

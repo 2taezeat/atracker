@@ -6,36 +6,36 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.CompoundButton
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.cmc.atracker.R
 import com.cmc.atracker.R.id.itemSpinnerTV
 import com.cmc.atracker.databinding.FragmentHomeAddBinding
+import com.cmc.atracker.model.dto.HomeAddProgress
+import com.cmc.atracker.model.dto.Stage
 import com.cmc.atracker.ui.AlertDialogFragment
 import com.cmc.atracker.ui.AlertDialogListener
 import com.cmc.atracker.ui.MainActivity
+import com.cmc.atracker.utils.AlertApiObject
 import com.cmc.atracker.utils.AlertType
 import com.google.android.material.chip.Chip
-
-import android.widget.*
-import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.fragment.navArgs
-import com.cmc.atracker.model.dto.HomeAddProgress
-import com.cmc.atracker.model.dto.Stage
-import com.cmc.atracker.utils.AlertApiObject
 import java.time.ZonedDateTime
-
-import kotlin.collections.ArrayList
 
 
 class HomeAddFragment : Fragment() {
-    private var _binding: FragmentHomeAddBinding? = null
+    private var _binding : FragmentHomeAddBinding? = null
     private val parentActivity by lazy {
         activity as MainActivity
     }
@@ -45,14 +45,14 @@ class HomeAddFragment : Fragment() {
     }
 
     private val binding get() = _binding!!
-    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val homeViewModel : HomeViewModel by activityViewModels()
 
-    lateinit var numberDrawableList: ArrayList<Drawable?>
+    lateinit var numberDrawableList : ArrayList<Drawable?>
 
     private val args : HomeAddFragmentArgs by navArgs()
 
 
-    lateinit var homeCompanySearchFragment: HomeCompanySearchFragment
+    lateinit var homeCompanySearchFragment : HomeCompanySearchFragment
 
 
     lateinit var chipsMap : MutableMap<Int, Chip>
@@ -60,11 +60,10 @@ class HomeAddFragment : Fragment() {
 
     var firstCreate = true
 
-    lateinit var navDisplayController: NavController
+    lateinit var navDisplayController : NavController
 
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
 
         val numberDrawable1 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_1_raw)
@@ -76,27 +75,18 @@ class HomeAddFragment : Fragment() {
         val numberDrawable7 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_7_raw)
         val numberDrawable8 = ContextCompat.getDrawable(lazyContext, R.drawable.ic_icon_1_raw)
 
-        numberDrawableList = arrayListOf(
-            numberDrawable1,
-            numberDrawable2,
-            numberDrawable3,
-            numberDrawable4,
-            numberDrawable5,
-            numberDrawable6,
-            numberDrawable7,
-            numberDrawable8
-            )
+        numberDrawableList = arrayListOf(numberDrawable1, numberDrawable2, numberDrawable3, numberDrawable4, numberDrawable5, numberDrawable6, numberDrawable7, numberDrawable8)
 
         chipsMap = mutableMapOf()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
+        inflater : LayoutInflater, container : ViewGroup?,
+        savedInstanceState : Bundle?,
+    ) : View {
 
         _binding = FragmentHomeAddBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val root : View = binding.root
         binding.homeVM = homeViewModel
         var spinnerSelectedPosition : Int = -1
         homeCompanySearchFragment = HomeCompanySearchFragment()
@@ -131,16 +121,15 @@ class HomeAddFragment : Fragment() {
             }
         }
 
-        binding.homeAddBackButton.setOnClickListener { view ->
-//            parentActivity.mainBottomNavigationAppear()
-//            val navController = view.findNavController()
-//            navController.popBackStack()
-//            homeViewModel.clearHomeAddText()
+        binding.homeAddBackButton.setOnClickListener { view -> //            parentActivity.mainBottomNavigationAppear()
+            //            val navController = view.findNavController()
+            //            navController.popBackStack()
+            //            homeViewModel.clearHomeAddText()
 
             showAlert(AlertType.TYPE17, null, navDisplayController)
         }
 
-        if (homeViewModel.homeAddStagesContent.value!!.isEmpty()){ // api 예외 처리
+        if (homeViewModel.homeAddStagesContent.value!!.isEmpty()) { // api 예외 처리
             parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
             parentActivity.onBackPressed()
         }
@@ -177,7 +166,7 @@ class HomeAddFragment : Fragment() {
                     val checkedChip = binding.homeAddTypeSelectChipGroup.findViewById<Chip>(posList[idx])
                     var zonedDateTime : ZonedDateTime? = null
 
-                    homeViewModel.homeAddSelectedStage.value?.let{ value ->
+                    homeViewModel.homeAddSelectedStage.value?.let { value ->
                         var eventDateString : String? = null
                         value.find { it.stage_id == checkedChip.tag }?.let { it -> eventDateString = it.event_at }
                         eventDateString?.let { it -> zonedDateTime = ZonedDateTime.parse(it) }
@@ -186,7 +175,7 @@ class HomeAddFragment : Fragment() {
                     }
 
                     checkedChipAddProgress.add(HomeAddProgress(checkedChip.text.toString(), zonedDateTime))
-                    val stageId = homeViewModel.homeAddStagesContent.value!!.find{ it.title == checkedChip.text.toString() }!!.id
+                    val stageId = homeViewModel.homeAddStagesContent.value!!.find { it.title == checkedChip.text.toString() }!!.id
                     if (zonedDateTime == null) {
                         checkedChipStage.add(Stage(event_at = null, order = idx, stage_id = stageId))
                     } else {
@@ -196,9 +185,9 @@ class HomeAddFragment : Fragment() {
 
                 Log.d("checkedChipStage", "${checkedChipStage}, ${checkedChipAddProgress}")
 
-//                if (args.progressIndex != 0) { // edit 일때, mvp 이후 한번 살펴 볼 필요가 있음.
-//
-//                }
+                //                if (args.progressIndex != 0) { // edit 일때, mvp 이후 한번 살펴 볼 필요가 있음.
+                //
+                //                }
                 homeViewModel.setSelectedChipStage(checkedChipStage) //// not fix!
                 homeViewModel.setSelectedChipName(checkedChipAddProgress)
             }
@@ -220,7 +209,7 @@ class HomeAddFragment : Fragment() {
         Log.d("homeAddCalendar_back", "${homeViewModel.addCalendarToAddFlag.value}")
 
 
-        if (args.progressIndex != 0 ) { // 편집인 경우, mvp 이후 fix 필요
+        if (args.progressIndex != 0) { // 편집인 경우, mvp 이후 fix 필요
             Log.d("homeAddSelectedStage", "${homeViewModel.homeAddSelectedStage.value} , ${spinnerSelectedPosition}")
 
             binding.homeAddHeaderTitle.text = "지원 현황 편집"
@@ -231,7 +220,7 @@ class HomeAddFragment : Fragment() {
                 c.visibility = View.GONE
             }
 
-            for ( editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
+            for (editSelectedStage in homeViewModel.homeAddSelectedStage.value!!) {
                 val stageId = editSelectedStage.stage_id
                 val selectedChip = chipsMap[stageId]!!
                 selectedChip.visibility = View.VISIBLE
@@ -244,10 +233,10 @@ class HomeAddFragment : Fragment() {
         }
 
 
-        val workTypeItems: List<String> = listOf("정규직", "계약직", "인턴")
+        val workTypeItems : List<String> = listOf("정규직", "계약직", "인턴")
         val workTypeAdapter = object : ArrayAdapter<String>(lazyContext, R.layout.item_spinner_text_view) {
 
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            override fun getView(position : Int, convertView : View?, parent : ViewGroup) : View {
                 val v = super.getView(position, convertView, parent)
                 if (position == count) {
                     val hintTextView = v.findViewById<TextView>(itemSpinnerTV)
@@ -258,19 +247,18 @@ class HomeAddFragment : Fragment() {
                 return v
             }
 
-            override fun getCount(): Int {
-                //마지막 아이템은 힌트용으로만 사용하기 때문에 getCount에 1을 빼줍니다.
+            override fun getCount() : Int { //마지막 아이템은 힌트용으로만 사용하기 때문에 getCount에 1을 빼줍니다.
                 return super.getCount() - 1
             }
 
             override fun getDropDownView(
-                position: Int,
-                convertView: View?,
-                parent: ViewGroup,
-            ): View {
+                position : Int,
+                convertView : View?,
+                parent : ViewGroup,
+            ) : View {
                 val view = super.getDropDownView(position, convertView, parent)
                 val dropDownTextView = view as TextView
-                dropDownTextView.setPadding(40,20,40,20)
+                dropDownTextView.setPadding(40, 20, 40, 20)
                 if (position == spinnerSelectedPosition) {
                     dropDownTextView.setTextColor(Color.parseColor("#7EFBDC"))
                 }
@@ -292,65 +280,59 @@ class HomeAddFragment : Fragment() {
 
 
         binding.homeAddWorkTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
+            override fun onItemSelected(parent : AdapterView<*>, view : View?, position : Int, id : Long) { //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
 
                 when (position) {
-                    0 -> {
+                    0    -> {
                         spinnerSelectedPosition = position
                         homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
-                    1 -> {
+                    1    -> {
                         spinnerSelectedPosition = position
                         homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
-                    2 -> {
+                    2    -> {
                         spinnerSelectedPosition = position
                         homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
-                    else -> {
-//                        spinnerSelectedPosition = -1
-//                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
+                    else -> { //                        spinnerSelectedPosition = -1
+                        //                        homeViewModel.setWorkTypePosition(spinnerSelectedPosition)
                     }
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
+            override fun onNothingSelected(parent : AdapterView<*>) {
                 Log.d("MyTag", "onNothingSelected")
             }
         }
 
 
-//        binding.homeAddACTV.setOnFocusChangeListener { view, isFocuse ->
-//            if (isFocuse) {
-//                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
-//                homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
-//            } else {
-//                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
-//                homeCompanySearchFragment.dialog!!.dismiss()
-//            }
-//        }
+        //        binding.homeAddACTV.setOnFocusChangeListener { view, isFocuse ->
+        //            if (isFocuse) {
+        //                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
+        //                homeCompanySearchFragment.show(parentFragmentManager, homeCompanySearchFragment.tag)
+        //            } else {
+        //                binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
+        //                homeCompanySearchFragment.dialog!!.dismiss()
+        //            }
+        //        }
 
 
         binding.homeAddApplyFieldET.setOnFocusChangeListener { view, isFocuse ->
-            if (isFocuse)
-                binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
-            else
-                binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
+            if (isFocuse) binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.progress_color_7)
+            else binding.homeAddView2.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
         }
 
         binding.homeAddApplyFieldET.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(charSequence : CharSequence?, p1 : Int, p2 : Int, p3 : Int) {
             }
 
-            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (charSequence.toString().isNotBlank())
-                    binding.homeAddApplyFieldCancelIV.visibility = View.VISIBLE
-                else
-                    binding.homeAddApplyFieldCancelIV.visibility = View.INVISIBLE
+            override fun onTextChanged(charSequence : CharSequence?, p1 : Int, p2 : Int, p3 : Int) {
+                if (charSequence.toString().isNotBlank()) binding.homeAddApplyFieldCancelIV.visibility = View.VISIBLE
+                else binding.homeAddApplyFieldCancelIV.visibility = View.INVISIBLE
             }
 
-            override fun afterTextChanged(p0: Editable?) {
+            override fun afterTextChanged(p0 : Editable?) {
             }
         })
 
@@ -400,12 +382,11 @@ class HomeAddFragment : Fragment() {
     }
 
 
-
     private fun setOnCheckedChip(compoundButton : CompoundButton, checked : Boolean, chip : Chip) { // edit 시 fix 필요, mvp 이후, 로직 변경 필요
         Log.d("setOnCheckedChip", "${firstCreate}, ${homeViewModel.trueChipSet.value!!.size}")
 
         if (firstCreate) {
-            if (homeViewModel.trueChipSet.value!!.size >= 7 && checked ) {
+            if (homeViewModel.trueChipSet.value!!.size >= 7 && checked) {
                 showAlert(AlertType.TYPE8, compoundButton.id, navDisplayController)
                 binding.homeAddRefreshIV.callOnClick()
             } else {
@@ -423,51 +404,47 @@ class HomeAddFragment : Fragment() {
     }
 
 
-    private fun showAlert(alertType: AlertType, chipId: Int?, navController : NavController ){
-        val alertDialogFragment = AlertDialogFragment.instance(
-            object : AlertDialogListener {
-                override fun onLeftClick() {
+    private fun showAlert(alertType : AlertType, chipId : Int?, navController : NavController) {
+        val alertDialogFragment = AlertDialogFragment.instance(object : AlertDialogListener {
+            override fun onLeftClick() {
 
-                }
+            }
 
-                override fun onCenterClick() {
-                    when (alertType) {
-                        AlertType.TYPE8 -> {
-                            homeViewModel.setChipSet(false, chipId!!)
-                        }
+            override fun onCenterClick() {
+                when (alertType) {
+                    AlertType.TYPE8 -> {
+                        homeViewModel.setChipSet(false, chipId!!)
                     }
                 }
+            }
 
-                override fun onRightClick() {
-                    when (alertType) {
-                        AlertType.TYPE17 -> {
-                            parentActivity.mainBottomNavigationAppear()
-                            navController.popBackStack()
-                            homeViewModel.clearHomeAddText()
-                        }
+            override fun onRightClick() {
+                when (alertType) {
+                    AlertType.TYPE17 -> {
+                        parentActivity.mainBottomNavigationAppear()
+                        navController.popBackStack()
+                        homeViewModel.clearHomeAddText()
                     }
                 }
-            },
-            alertType,
-            null
-        )
+            }
+        }, alertType, null)
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 
 
-    fun setViewGray(){
+    fun setViewGray() {
         binding.homeAddView1.background = ContextCompat.getDrawable(lazyContext, R.color.atracker_gray_4)
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("homeadd_onStop","onStop")
+        Log.d("homeadd_onStop", "onStop")
         firstCreate = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("homeadd_onDestory","onDestory")
+        Log.d("homeadd_onDestory", "onDestory")
     }
 
 

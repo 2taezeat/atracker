@@ -55,14 +55,7 @@ class SignUpViewModel : ViewModel() {
     fun postSignUp() { // 처음 회원 가입시
         viewModelScope.launch {
             val googleAccessToken = App.prefs.getValue(BuildConfig.FROM_GOOGLE_ACCESS_TOKEN)!!
-            val apiResult = repositorySign.signPostCall(signRequest = SignRequest(
-                access_token = googleAccessToken,
-                experience_type = _signUpCareer.value!!,
-                job_position = _signUpPosition.value!!,
-                nick_name = _signUpNickName.value!!,
-                sso = "GOOGLE"
-                )
-            )
+            val apiResult = repositorySign.signPostCall(signRequest = SignRequest(access_token = googleAccessToken, experience_type = _signUpCareer.value!!, job_position = _signUpPosition.value!!, nick_name = _signUpNickName.value!!, sso = "GOOGLE"))
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -85,9 +78,7 @@ class SignUpViewModel : ViewModel() {
 
     fun refreshToken() { // refresh token 호출
         viewModelScope.launch {
-            val apiResult = repositorySign.refreshTokenCall(
-                tokenRefreshRequest = TokenRefreshRequest( App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!! )
-            )
+            val apiResult = repositorySign.refreshTokenCall(tokenRefreshRequest = TokenRefreshRequest(App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!!))
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -103,6 +94,6 @@ class SignUpViewModel : ViewModel() {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
 
 }

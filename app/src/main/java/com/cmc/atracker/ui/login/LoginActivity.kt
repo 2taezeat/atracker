@@ -1,26 +1,25 @@
 package com.cmc.atracker.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.cmc.atracker.BuildConfig
 import com.cmc.atracker.R
 import com.cmc.atracker.databinding.ActivityLoginBinding
+import com.cmc.atracker.model.local.App
 import com.cmc.atracker.ui.MainActivity
 import com.cmc.atracker.ui.signUp.SignUpActivity
+import com.cmc.atracker.utils.StartActivityUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.ViewModelProvider
-import com.cmc.atracker.BuildConfig
-import com.cmc.atracker.model.local.App
-import com.cmc.atracker.utils.StartActivityUtil
 
 
 class LoginActivity : AppCompatActivity() {
@@ -31,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val RC_SIGN_IN = 0
-    private var googleSignInClient : GoogleSignInClient? = null
+    private var googleSignInClient: GoogleSignInClient? = null
 
     val loginViewModel: LoginViewModel by lazy { ViewModelProvider(this).get(LoginViewModel::class.java) }
 
@@ -42,7 +41,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        window.statusBarColor = ContextCompat.getColor(this,R.color.background_gray)
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background_gray)
 
         val at = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)
         val rt = App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)
@@ -108,7 +108,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
     }
 
 
@@ -118,9 +117,9 @@ class LoginActivity : AppCompatActivity() {
             val idToken = account.idToken
             val authCode = account.serverAuthCode
 
-            Log.d("google_login_idToken","${idToken}")
-            Log.d("google_login_authCode","${authCode}")
-            Log.d("google_login_email","${account.email}")
+            Log.d("google_login_idToken", "${idToken}")
+            Log.d("google_login_authCode", "${authCode}")
+            Log.d("google_login_email", "${account.email}")
 
             App.prefs.setValue(BuildConfig.EMAIL, account.email)
 
@@ -143,13 +142,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
     override fun onDestroy() {
         Log.d("test_onDestory", "LoginActivity")
         super.onDestroy()
     }
-
-
 
 
 }

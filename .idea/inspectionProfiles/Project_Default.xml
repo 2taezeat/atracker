@@ -1,0 +1,39 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="474d4991-2e0d-391f-b3b6-0510186b39ae" enabled="false" level="layout" enabled_by_default="false" />
+    <inspection_tool class="Annotator" enabled="true" level="layout" enabled_by_default="true" />
+    <inspection_tool class="CheckTagEmptyBody" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DefaultFileTemplate" enabled="true" level="layout" enabled_by_default="true">
+      <option name="CHECK_FILE_HEADER" value="true" />
+      <option name="CHECK_TRY_CATCH_SECTION" value="true" />
+      <option name="CHECK_METHOD_BODY" value="true" />
+    </inspection_tool>
+    <inspection_tool class="InconsistentLineSeparators" enabled="false" level="layout" enabled_by_default="false" />
+    <inspection_tool class="InjectedReferences" enabled="true" level="layout" enabled_by_default="true" />
+    <inspection_tool class="LongLine" enabled="false" level="layout" enabled_by_default="false" />
+    <inspection_tool class="PackageDirectoryMismatch" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ProblematicWhitespace" enabled="false" level="layout" enabled_by_default="false" />
+    <inspection_tool class="RedundantSuppression" enabled="true" level="layout" enabled_by_default="true" />
+    <inspection_tool class="Reformat" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <searchConfiguration name="layout_width" text="layout_width" recursive="false" caseInsensitive="false" type="Kotlin" pattern_context="default">
+        <constraint name="__context__" within="" contains="" />
+      </searchConfiguration>
+      <searchConfiguration name="layout_width" text="layout_width" recursive="false" caseInsensitive="false" type="XML">
+        <constraint name="__context__" within="" contains="" />
+      </searchConfiguration>
+      <searchConfiguration name="layout_width" text="layout_width" recursive="false" caseInsensitive="true" type="XML">
+        <constraint name="__context__" within="" contains="" />
+      </searchConfiguration>
+      <searchConfiguration name="layout_width" text="android:layout_width=&quot;0dp&quot;" recursive="false" caseInsensitive="true" type="XML">
+        <constraint name="__context__" within="" contains="" />
+      </searchConfiguration>
+      <searchConfiguration name="layout_width" text="&lt;android:id&gt;&#10;    &#10;&lt;/android:id&gt;&#10;" recursive="false" caseInsensitive="true" type="XML">
+        <constraint name="__context__" within="" contains="" />
+      </searchConfiguration>
+    </inspection_tool>
+    <inspection_tool class="SyntaxError" enabled="true" level="layout" enabled_by_default="true" />
+    <inspection_tool class="TodoComment" enabled="false" level="layout" enabled_by_default="false" />
+  </profile>
+</component>

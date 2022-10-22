@@ -26,9 +26,6 @@
     <string name="please_write_answer">대답을 작성하세요</string>
     <string name="please_write_review">후기 및 반성</string>
     <string name="scroll_top">맨 위로 ⌃</string>
-
-
-    <!--    -->
     <string name="example_3_input_dialog_title">Enter calendarEvent title</string>
     <string name="example_3_empty_input_text">Text is empty</string>
     <string name="example_3_dialog_delete_confirmation">Delete this calendarEvent?</string>
@@ -46,11 +43,6 @@
     <string name="review_and_reflect_hint">후기를 입력하세요.</string>
 
 
-    <string name="plus_free"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">자유 양식</font></string>
-    <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">Q&amp;A 양식</font></string>
-    <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">종합 후기</font></string>
-
-
     <string name="percent">%</string>
     <string name="waiting">대기중</string>
     <string name="not_passing">불합격</string>
@@ -64,18 +56,6 @@
     <string name="location_hint">장소나 화상면접 추가하기</string>
     <string name="note_title">노트</string>
     <string name="note_hint">노트 추가하기</string>
-
-    <!--    <string name="chip_title_1">서류</string>-->
-    <!--    <string name="chip_title_2">사전 과제</string>-->
-    <!--    <string name="chip_title_3">1차 면접</string>-->
-    <!--    <string name="chip_title_4">2차 면접</string>-->
-    <!--    <string name="chip_title_5">3차 면접</string>-->
-    <!--    <string name="chip_title_6">인적성</string>-->
-    <!--    <string name="chip_title_7">과제</string>-->
-    <!--    <string name="chip_title_8">코딩 테스트</string>-->
-    <!--    <string name="chip_title_9">AI 면접</string>-->
-    <!--    <string name="chip_title_10">최종 면접</string>-->
-
     <string name="chip_title_1">서류</string>
     <string name="chip_title_2">사전 과제</string>
     <string name="chip_title_3">포트폴리오</string>
@@ -93,7 +73,6 @@
     <string name="save_title">저장</string>
     <string name="time_title">시간</string>
 
-    <string name="alert_type_1_text_1_message"><font color="#7EFCDD">개의 후기</font><font color="#F5F5F5">를 정말 삭제하시겠습니까?</font></string>
     <string name="add_company_hint">회사명을 입력해주세요.</string>
     <string name="add_apply_hint">포지션명을 입력해주세요.</string>
     <string name="login_text_1">취업 프로세스를 기록을</string>
@@ -136,11 +115,15 @@
     <string name="selection_title">선택</string>
 
 
-
-
     <string name="portfolio_1_title">서류전형</string>
     <string name="portfolio_2_title">면접전형</string>
     <string name="portfolio_3_title">최종전형</string>
+
+
+    <string name="plus_free"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">자유 양식</font></string>
+    <string name="plus_qna"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">Q&amp;A 양식</font></string>
+    <string name="plus_review"><font color="#7EFCDD">+ </font> <font color="#F5F5F5">종합 후기</font></string>
+    <string name="alert_type_1_text_1_message"><font color="#7EFCDD">개의 후기</font><font color="#F5F5F5">를 정말 삭제하시겠습니까?</font></string>
 
 
 </resources>
