@@ -108,7 +108,11 @@ class HomeAddFragment : Fragment() {
 
         val homeAddStagesName = homeViewModel.homeAddStagesContent.value!!
 
-        for (idx in homeAddStagesName.indices) {
+        for (idx in homeAddStagesName.indices) { ////
+            if (idx == 8) {
+                break
+            } /// tmp
+
             val h = homeAddStagesName[idx]
             val c = chipsList[idx]
             c.text = h.title

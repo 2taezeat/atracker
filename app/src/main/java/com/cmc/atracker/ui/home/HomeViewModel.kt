@@ -513,6 +513,7 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
+    
 
     fun updateApply(applyId : Int) {
         val updateApplyRequest = UpdateApplyRequest(apply_id = applyId, company = Company(id = _companyId.value!!, name = _companyWord.value!!), job_position = _positionWord.value!!, job_type = _workTypeWord.value!!, stages = _homeAddSelectedStage.value!!)
