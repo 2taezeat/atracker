@@ -36,17 +36,22 @@ class MyPageDisplayFragment : Fragment() {
         activity as MainActivity
     }
 
-    private val myPageViewModel : MyPageViewModel by activityViewModels()
-    private lateinit var binding : FragmentMyPageDisplayBinding
-    private lateinit var googleSignInClient : GoogleSignInClient
+    private val myPageViewModel: MyPageViewModel by activityViewModels()
+    private lateinit var binding: FragmentMyPageDisplayBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
 
 
     override fun onCreateView(
-        inflater : LayoutInflater, container : ViewGroup?,
-        savedInstanceState : Bundle?,
-    ) : View? { // Inflate the layout for this fragment
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? { // Inflate the layout for this fragment
 
-        val binding = DataBindingUtil.inflate<FragmentMyPageDisplayBinding>(inflater, com.cmc.atracker.R.layout.fragment_my_page_display, container, false)
+        val binding = DataBindingUtil.inflate<FragmentMyPageDisplayBinding>(
+            inflater,
+            com.cmc.atracker.R.layout.fragment_my_page_display,
+            container,
+            false
+        )
 
         if (myPageViewModel.userNickName.value == " ") {
             parentActivity.showAlertInstance(AlertApiObject.alertDialogFragment)
@@ -55,8 +60,9 @@ class MyPageDisplayFragment : Fragment() {
             navController.navigate(R.id.navigation_home)
         }
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) //.requestIdToken(getString(com.example.atracker.R.string.default_web_client_id))
-            .requestEmail().build()
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) //.requestIdToken(getString(com.example.atracker.R.string.default_web_client_id))
+                .requestEmail().build()
 
         googleSignInClient = GoogleSignIn.getClient(lazyContext, gso)
 
@@ -91,18 +97,38 @@ class MyPageDisplayFragment : Fragment() {
         //            navController.popBackStack()
         //        }
 
-        val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_1), ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_2), ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_3), ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_4), ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_5), ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_6), ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_7)))
+        val gradientDrawable = GradientDrawable(
+            GradientDrawable.Orientation.LEFT_RIGHT,
+            intArrayOf(
+                ContextCompat.getColor(
+                    lazyContext,
+                    com.cmc.atracker.R.color.progress_color_1
+                ),
+                ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_2),
+                ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_3),
+                ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_4),
+                ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_5),
+                ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_6),
+                ContextCompat.getColor(lazyContext, com.cmc.atracker.R.color.progress_color_7)
+            )
+        )
 
         //findViewById(com.example.atracker.R.id.background).setBackground(gradientDrawable)
         binding.myPageView1.background = gradientDrawable
 
 
         binding.myPageTermsServiceTV.setOnClickListener {
-            showWebViewDialog(BuildConfig.TERSMS_SERVICE_WEB_URL, getString(R.string.terms_service_confirm_title_ori))
+            showWebViewDialog(
+                BuildConfig.TERSMS_SERVICE_WEB_URL,
+                getString(R.string.terms_service_confirm_title_ori)
+            )
         }
 
         binding.myPageTermsPrivacyTV.setOnClickListener {
-            showWebViewDialog(BuildConfig.TERSMS_PRIVACY_WEB_URL, getString(R.string.terms_privacy_title_ori))
+            showWebViewDialog(
+                BuildConfig.TERSMS_PRIVACY_WEB_URL,
+                getString(R.string.terms_privacy_title_ori)
+            )
         }
 
 
@@ -116,7 +142,7 @@ class MyPageDisplayFragment : Fragment() {
     }
 
 
-    private fun showAlert(alertType : AlertType) {
+    private fun showAlert(alertType: AlertType) {
         val alertDialogFragment = AlertDialogFragment.instance(object : AlertDialogListener {
             override fun onLeftClick() {
             }
@@ -131,6 +157,7 @@ class MyPageDisplayFragment : Fragment() {
 
                         //App.prefs.removeValue(BuildConfig.ACCESS_LOCAL_TOKEN) // 220809
                         //App.prefs.removeValue(BuildConfig.REFRESH_LOCAL_TOKEN) // 220809
+                        //App.prefs.removeValue(BuildConfig.EMAIL)
 
                         startLogin()
                     }
@@ -152,11 +179,11 @@ class MyPageDisplayFragment : Fragment() {
         alertDialogFragment.show(childFragmentManager, AlertDialogFragment.TAG)
     }
 
-    private fun showWebViewDialog(url : String?, headTitle : String) {
+    private fun showWebViewDialog(url: String?, headTitle: String) {
         val webView = WebView(lazyContext).apply {
             loadUrl(url!!)
             webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view : WebView?, url : String?) : Boolean {
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                     view!!.loadUrl(url!!)
                     return true
                 }
@@ -165,7 +192,8 @@ class MyPageDisplayFragment : Fragment() {
                 settings.cacheMode = WebSettings.LOAD_DEFAULT
             }
         }
-        val alertDialogBuilder : AlertDialog.Builder = AlertDialog.Builder(lazyContext, R.style.AppCompatAlertDialog)
+        val alertDialogBuilder: AlertDialog.Builder =
+            AlertDialog.Builder(lazyContext, R.style.AppCompatAlertDialog)
         alertDialogBuilder.apply {
             setTitle(headTitle)
             setView(webView)

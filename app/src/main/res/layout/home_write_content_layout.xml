@@ -1,294 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/homeWriteTest"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-            <androidx.core.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/homeWriteNestedSV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeWriteMainCL"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:id="@+id/homeWriteNestedSV"
-                >
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
+                    android:id="@+id/homeWriteLL"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/homeWriteMainCL"
-                    >
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="70dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homeWriteReviewWholeCL"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/homeWriteTypeSelectChipGroup"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:id="@+id/homeWriteLL"
-                        android:orientation="vertical"
-                        android:paddingBottom="70dp"
-                        >
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="2dp">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="2dp"
-                            android:id="@+id/homeWriteReviewWholeCL"
-                            >
-<!--                            <CheckBox-->
-<!--                                android:layout_width="24dp"-->
-<!--                                android:layout_height="24dp"-->
-<!--                                android:id="@+id/homeWriteReviewCheckBox"-->
-<!--                                app:layout_constraintTop_toTopOf="parent"-->
-<!--                                app:layout_constraintStart_toStartOf="parent"-->
-<!--                                android:layout_marginTop="10dp"-->
-<!--                                android:visibility="invisible"-->
-<!--                                android:button="@drawable/custom_checkbox"-->
-<!--                                app:buttonTint="@drawable/checkbox_color_state_list"-->
-<!--                                >-->
-<!--                            </CheckBox>-->
+                        <!--                        <include-->
+                        <!--                            android:id="@+id/homeWriteReviewMainCL"-->
+                        <!--                            layout="@layout/home_write_review_layout" />-->
 
+                        <!--                        <CheckBox-->
+                        <!--                            android:id="@+id/homeWriteReviewCheckBox"-->
+                        <!--                            android:layout_width="24dp"-->
+                        <!--                            android:layout_height="24dp"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:button="@drawable/custom_checkbox"-->
+                        <!--                            android:visibility="invisible"-->
+                        <!--                            app:buttonTint="@drawable/checkbox_color_state_list"-->
+                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                            app:layout_constraintTop_toTopOf="parent"></CheckBox>-->
 
+                        <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+                        <!--                            android:id="@+id/homeWriteReviewMainCLInContentLayout"-->
+                        <!--                            android:layout_width="0dp"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:background="@drawable/button_round"-->
+                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                            app:layout_constraintTop_toTopOf="parent">-->
 
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/homeWriteReviewInContentLayout"-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_marginStart="12dp"-->
+                        <!--                                android:layout_marginTop="10dp"-->
+                        <!--                                android:text="@string/review_title"-->
+                        <!--                                android:textColor="@color/atracker_gray_3"-->
+                        <!--                                android:textSize="16dp"-->
+                        <!--                                app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                                app:layout_constraintTop_toTopOf="parent"></TextView>-->
 
-<!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:background="@drawable/button_round"-->
-<!--                                app:layout_constraintTop_toTopOf="parent"-->
-<!--                                app:layout_constraintStart_toStartOf="parent"-->
-<!--                                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                                android:id="@+id/homeWriteReviewMainCL"-->
-<!--                                >-->
+                        <!--                            <EditText-->
+                        <!--                                android:id="@+id/homeWriteReviewETInContentLayout"-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:background="@null"-->
+                        <!--                                android:fontFamily="@font/roboto_font"-->
+                        <!--                                android:hint="@string/review_title_hint"-->
+                        <!--                                android:padding="12dp"-->
+                        <!--                                android:textColor="@color/atracker_white"-->
+                        <!--                                android:textColorHint="@color/atracker_white"-->
+                        <!--                                android:textSize="16dp"-->
+                        <!--                                app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                                app:layout_constraintTop_toBottomOf="@+id/homeWriteReviewInContentLayout"-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:id="@+id/homeWriteReview"-->
-<!--                                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                                    android:text="@string/review_title"-->
-<!--                                    android:textColor="@color/atracker_gray_3"-->
-<!--                                    android:layout_marginStart="12dp"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    android:textSize="16dp"-->
-<!--                                    >-->
-<!--                                </TextView>-->
-
-<!--                                <EditText-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:id="@+id/homeWriteReviewET"-->
-<!--                                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                                    app:layout_constraintTop_toBottomOf="@+id/homeWriteReview"-->
-<!--                                    android:hint="@string/review_title_hint"-->
-<!--                                    android:padding="12dp"-->
-<!--                                    android:background="@null"-->
-<!--                                    android:textColor="@color/atracker_white"-->
-<!--                                    android:textSize="16dp"-->
-<!--                                    android:textColorHint="@color/atracker_white"-->
-<!--                                    android:fontFamily="@font/roboto_font"-->
-
-<!--                                    >-->
-<!--                                </EditText>-->
+                        <!--                                ></EditText>-->
 
 
-<!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
+                        <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                </LinearLayout>
 
-                    </LinearLayout>
 
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/homeWriteDeleteChip"
+                    style="@style/CustomChipChoice1"
+                    android:layout_width="50dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="10dp"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/delete"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/CustomChipChoiceText"
+                    android:textColor="@color/atracker_white"
+                    android:textSize="14dp"
+                    android:visibility="invisible"
+                    app:chipStrokeWidth="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    >
+
+
+                </com.google.android.material.chip.Chip>
+
+
+                <TextView
+                    android:id="@+id/homeWriteEditButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:text="@string/delete"
+                    android:textColor="@color/atracker_white"
+                    android:textSize="14dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                <TextView
+                    android:id="@+id/homeWriteEditCompleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:text="@string/complete_title"
+                    android:textColor="@color/atracker_white"
+                    android:textSize="14dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                <TextView
+                    android:id="@+id/homeWritePlusButton1"
+                    android:layout_width="170dp"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round"
+                    android:gravity="center"
+                    android:text="@string/plus_qna"
+                    android:textColor="@color/atracker_white"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
+
+
+                <TextView
+                    android:id="@+id/homeWritePlusButton2"
+                    android:layout_width="170dp"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round"
+                    android:gravity="center"
+                    android:text="@string/plus_free"
+                    android:textColor="@color/atracker_white"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/homeWritePlusButton3"
+                    android:layout_width="115dp"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_round"
+                    android:gravity="center"
+                    android:text="@string/plus_review"
+                    android:textColor="@color/atracker_white"
+                    android:textSize="16dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+
+                </TextView>
+
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/homeWriteTypeSelectChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="10dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/homeWriteDeleteChip"
-                        android:layout_width="50dp"
-                        android:layout_height="42dp"
+                        android:id="@+id/homeWriteTypeSelect1"
                         style="@style/CustomChipChoice1"
-                        android:text="@string/delete"
-                        android:textAlignment="center"
-                        android:textColor="@color/atracker_white"
-                        app:chipStrokeWidth="0dp"
-                        android:textSize="14dp"
+                        android:layout_width="66dp"
+                        android:layout_height="42dp"
                         android:checkable="true"
                         android:clickable="true"
                         android:focusable="true"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginTop="10dp"
-                        android:visibility="invisible"
+                        android:text="@string/waiting"
+                        android:textAlignment="center"
                         android:textAppearance="@style/CustomChipChoiceText"
-
-                        >
-
-
-
-                    </com.google.android.material.chip.Chip>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/homeWriteEditButton"
-                        android:text="@string/delete"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:textSize="14dp"
-                        android:textColor="@color/atracker_white"
-                        android:layout_marginTop="10dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:visibility="visible"
-                        android:padding="10dp"
-                        >
-                    </TextView>
+                        app:chipStrokeWidth="0dp"
 
+                        ></com.google.android.material.chip.Chip>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/homeWriteEditCompleteButton"
-                        android:text="@string/complete_title"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/homeWriteTypeSelect2"
+                        style="@style/CustomChipChoice1"
+                        android:layout_width="66dp"
+                        android:layout_height="42dp"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/not_passing"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/CustomChipChoiceText"
                         android:textSize="14dp"
-                        android:textColor="@color/atracker_white"
-                        android:layout_marginTop="10dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:visibility="invisible"
-                        android:padding="10dp"
-                        >
-                    </TextView>
+                        app:chipStrokeWidth="0dp"></com.google.android.material.chip.Chip>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/homeWriteTypeSelect3"
+                        style="@style/CustomChipChoice2"
+                        android:layout_width="66dp"
+                        android:layout_height="42dp"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/passing"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/CustomChipChoiceText"
+                        android:textSize="14dp"
+                        app:chipStrokeWidth="0dp"
+
+                        ></com.google.android.material.chip.Chip>
+
+                </com.google.android.material.chip.ChipGroup>
 
 
-                    <TextView
-                        android:layout_width="115dp"
-                        android:layout_height="46dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:id="@+id/homeWritePlusButton1"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="@string/plus_qna"
-                        android:background="@drawable/button_round"
-                        android:textSize="16dp"
-                        android:gravity="center"
-                        android:textColor="@color/atracker_white"
-                        android:layout_marginBottom="10dp"
-                        >
-                    </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                    <TextView
-                        android:layout_width="115dp"
-                        android:layout_height="46dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:id="@+id/homeWritePlusButton2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="@string/plus_free"
-                        android:background="@drawable/button_round"
-                        android:textSize="16dp"
-                        android:gravity="center"
-                        android:textColor="@color/atracker_white"
-                        android:layout_marginBottom="10dp"
-                        >
-                    </TextView>
-
-                    <TextView
-                        android:layout_width="115dp"
-                        android:layout_height="46dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:id="@+id/homeWritePlusButton3"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="@string/plus_review"
-                        android:background="@drawable/button_round"
-                        android:textSize="16dp"
-                        android:gravity="center"
-                        android:textColor="@color/atracker_white"
-                        android:layout_marginBottom="10dp"
-                        >
-                    </TextView>
-
-
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/homeWriteTypeSelectChipGroup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:singleSelection="true"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginTop="10dp"
-                        app:chipSpacingHorizontal="8dp"
-                        >
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="66dp"
-                            android:layout_height="42dp"
-                            style="@style/CustomChipChoice1"
-                            android:id="@+id/homeWriteTypeSelect1"
-                            android:text="@string/waiting"
-                            android:textAlignment="center"
-                            app:chipStrokeWidth="0dp"
-                            android:textSize="14dp"
-                            android:checkable="true"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:textAppearance="@style/CustomChipChoiceText"
-
-                            >
-                        </com.google.android.material.chip.Chip>
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="66dp"
-                            android:layout_height="42dp"
-                            style="@style/CustomChipChoice1"
-                            android:id="@+id/homeWriteTypeSelect2"
-                            android:text="@string/not_passing"
-                            android:textAlignment="center"
-                            app:chipStrokeWidth="0dp"
-                            android:textSize="14dp"
-                            android:checkable="true"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:textAppearance="@style/CustomChipChoiceText"
-                            >
-                        </com.google.android.material.chip.Chip>
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="66dp"
-                            android:layout_height="42dp"
-                            style="@style/CustomChipChoice2"
-                            android:id="@+id/homeWriteTypeSelect3"
-                            android:text="@string/passing"
-                            android:textAlignment="center"
-                            app:chipStrokeWidth="0dp"
-                            android:textSize="14dp"
-                            android:checkable="true"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:textAppearance="@style/CustomChipChoiceText"
-
-                            >
-                        </com.google.android.material.chip.Chip>
-
-                    </com.google.android.material.chip.ChipGroup>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

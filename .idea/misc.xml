@@ -87,7 +87,7 @@
         <entry key="app/src/main/res/layout/bottom_sheet_persistent.xml" value="0.31798245614035087" />
         <entry key="app/src/main/res/layout/calendar_day_legend.xml" value="0.45" />
         <entry key="app/src/main/res/layout/example_3_calendar_day.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/example_3_calendar_header.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/example_3_calendar_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/example_3_event_item_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_alert_dialog.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_blog_display.xml" value="0.16538461538461538" />
@@ -102,7 +102,7 @@
         <entry key="app/src/main/res/layout/fragment_home_bottom_sheet.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home_company_search.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home_company_search_sheet.xml" value="0.2956140350877193" />
-        <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.5202821869488536" />
+        <entry key="app/src/main/res/layout/fragment_home_detail.xml" value="0.4804270462633452" />
         <entry key="app/src/main/res/layout/fragment_home_display.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home_write.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my_page_display.xml" value="0.25" />
@@ -119,7 +119,7 @@
         <entry key="app/src/main/res/layout/home_detail_qna_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_detail_review_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/home_progress_item.xml" value="0.5151116951379764" />
-        <entry key="app/src/main/res/layout/home_write_content_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/home_write_content_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/home_write_free_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_write_qna_layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/home_write_review_layout.xml" value="0.335" />
