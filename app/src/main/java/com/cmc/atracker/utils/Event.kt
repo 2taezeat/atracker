@@ -1,10 +1,10 @@
 package com.cmc.atracker.utils
 
-open class Event<out T>(private val content: T) {
+open class Event<out T>(private val content : T) {
     var hasBeenHandled = false
         private set
 
-    fun getContentIfNotHandled(): T? {
+    fun getContentIfNotHandled() : T? {
         return if (hasBeenHandled) {
             null
         } else {
@@ -13,5 +13,7 @@ open class Event<out T>(private val content: T) {
         }
     }
 
-    fun peekContent(): T = content
+    fun peekContent() : T = content
+    
+
 }

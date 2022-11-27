@@ -20,30 +20,30 @@ class SignUpViewModel : ViewModel() {
     val _signUpNickName = MutableLiveData<String>().apply {
         value = ""
     }
-    val signUpNickName : LiveData<String> = _signUpNickName
+    val signUpNickName: LiveData<String> = _signUpNickName
 
 
     val _signUpPosition = MutableLiveData<String>().apply {
         value = ""
     }
-    val signUpPosition : LiveData<String> = _signUpPosition
+    val signUpPosition: LiveData<String> = _signUpPosition
 
     val _signUpCareer = MutableLiveData<String>().apply {
         value = ""
     }
-    val signUpCareer : LiveData<String> = _signUpCareer
+    val signUpCareer: LiveData<String> = _signUpCareer
 
     val careerAgeItems = MutableLiveData<List<String>>()
 
     private val _postSignUpFail = MutableLiveData<Event<Boolean>>()
-    val postSignUpFail : LiveData<Event<Boolean>> = _postSignUpFail
+    val postSignUpFail: LiveData<Event<Boolean>> = _postSignUpFail
 
     init {
         careerAgeItems.value = listOf("신입", "경력")
     }
 
 
-    fun setUserCareerPosition(position : Int) {
+    fun setUserCareerPosition(position: Int) {
         _signUpCareer.value = careerAgeItems.value!![position]
         when (_signUpCareer.value) {
             "경력" -> _signUpCareer.value = "EXPERIENCED"
@@ -55,7 +55,16 @@ class SignUpViewModel : ViewModel() {
     fun postSignUp() { // 처음 회원 가입시
         viewModelScope.launch {
             val googleAccessToken = App.prefs.getValue(BuildConfig.FROM_GOOGLE_ACCESS_TOKEN)!!
-            val apiResult = repositorySign.signPostCall(signRequest = SignRequest(access_token = googleAccessToken, experience_type = _signUpCareer.value!!, job_position = _signUpPosition.value!!, nick_name = _signUpNickName.value!!, sso = "GOOGLE"))
+            val apiResult = repositorySign.signPostCall(
+                signRequest = SignRequest(
+                    access_token = googleAccessToken,
+                    experience_type = _signUpCareer.value!!,
+                    job_position = _signUpPosition.value!!,
+                    nick_name = _signUpNickName.value!!,
+                    primary_email = App.prefs.getValue(BuildConfig.EMAIL)!!,
+                    sso = "GOOGLE"
+                )
+            )
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
@@ -66,7 +75,10 @@ class SignUpViewModel : ViewModel() {
                 Log.d("postSign_at", "${at}")
                 Log.d("postSign_rt", "${rt}")
 
-                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
+                App.prefs.setValue(
+                    BuildConfig.ACCESS_LOCAL_TOKEN,
+                    "Bearer $at"
+                ) // * drop 과 bearer 해야되는지 확인해야됨
                 App.prefs.setValue(BuildConfig.REFRESH_LOCAL_TOKEN, "Bearer $rt")
                 _postSignUpFail.value = Event(false)
             } else {
@@ -78,13 +90,20 @@ class SignUpViewModel : ViewModel() {
 
     fun refreshToken() { // refresh token 호출
         viewModelScope.launch {
-            val apiResult = repositorySign.refreshTokenCall(tokenRefreshRequest = TokenRefreshRequest(App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!!))
+            val apiResult = repositorySign.refreshTokenCall(
+                tokenRefreshRequest = TokenRefreshRequest(
+                    App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!!
+                )
+            )
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 val at = getResult.access_token
 
-                App.prefs.setValue(BuildConfig.ACCESS_LOCAL_TOKEN, "Bearer $at") // * drop 과 bearer 해야되는지 확인해야됨
+                App.prefs.setValue(
+                    BuildConfig.ACCESS_LOCAL_TOKEN,
+                    "Bearer $at"
+                ) // * drop 과 bearer 해야되는지 확인해야됨
 
             } else {
 
@@ -94,6 +113,6 @@ class SignUpViewModel : ViewModel() {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
 
 }

@@ -8,14 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private lateinit var retrofit: Retrofit
+    private lateinit var retrofit : Retrofit
     val gson = GsonBuilder()
         .setLenient()
         .create()
 
 
     fun getClient(baseUrl : String) : Retrofit {
-        if ( !this::retrofit.isInitialized) {
+        if (!this::retrofit.isInitialized) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -24,7 +24,7 @@ object RetrofitClient {
                 .addNetworkInterceptor { chain ->
                     val requestBuilder = chain.request().newBuilder()
                         .removeHeader("User-Agent")
-                        .addHeader("User-Agent","Android")
+                        .addHeader("User-Agent", "Android")
                     chain.proceed(requestBuilder.build())
                 }.build()
 
@@ -37,7 +37,6 @@ object RetrofitClient {
 
         return retrofit
     }
-
 
 
 }

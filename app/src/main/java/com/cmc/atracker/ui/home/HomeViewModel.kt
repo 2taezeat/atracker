@@ -76,7 +76,8 @@ class HomeViewModel : ViewModel() {
     val homeAddSelectedStage : LiveData<ArrayList<Stage>> = _homeAddSelectedStage
 
     private val _homeAddSelectedProgress = MutableLiveData<ArrayList<HomeAddProgress>>().apply {}
-    val homeAddSelectedProgress : LiveData<ArrayList<HomeAddProgress>> = _homeAddSelectedProgress // HomeAddCalendarEventsAdapter 에 사용
+    val homeAddSelectedProgress : LiveData<ArrayList<HomeAddProgress>> =
+        _homeAddSelectedProgress // HomeAddCalendarEventsAdapter 에 사용
 
     private val _homeAddDateSelectFlag = MutableLiveData<Boolean?>().apply {
         null
@@ -114,9 +115,10 @@ class HomeViewModel : ViewModel() {
     }
     val homeDisplayArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeDisplayArrayList
 
-    private val _homeDetailArrayList = MutableLiveData<ArrayList<HomeProgressItem>>().apply { // home Detail progress bar drawable 용
-        value = arrayListOf()
-    }
+    private val _homeDetailArrayList =
+        MutableLiveData<ArrayList<HomeProgressItem>>().apply { // home Detail progress bar drawable 용
+            value = arrayListOf()
+        }
     val homeDetailArrayList : LiveData<ArrayList<HomeProgressItem>> = _homeDetailArrayList
 
     private val _homeProgressNameDetail = MutableLiveData<Event<ArrayList<String>>>()
@@ -134,10 +136,12 @@ class HomeViewModel : ViewModel() {
     private val _oriChipSet = MutableLiveData<MutableSet<Int>>()
     val oriChipSet : LiveData<MutableSet<Int>> = _oriChipSet
 
-    private val _homeDetailContentForDisplay = MutableLiveData<ArrayList<HomeDetailItem>>().apply { // map 아님 주의
-        arrayListOf<HomeDetailItem>()
-    }
-    val homeDetailContentForDisplay : LiveData<ArrayList<HomeDetailItem>> = _homeDetailContentForDisplay
+    private val _homeDetailContentForDisplay =
+        MutableLiveData<ArrayList<HomeDetailItem>>().apply { // map 아님 주의
+            arrayListOf<HomeDetailItem>()
+        }
+    val homeDetailContentForDisplay : LiveData<ArrayList<HomeDetailItem>> =
+        _homeDetailContentForDisplay
 
 
     private val _stageProgressRequest = MutableLiveData<StageProgressRequest>()
@@ -157,7 +161,14 @@ class HomeViewModel : ViewModel() {
 
 
     private val _homeApplyIdContent = MutableLiveData<Apply>().apply {
-        value = Apply(apply_id = -1, company_id = 0, company_name = "", job_position = "", job_type = "", stage_progress = listOf())
+        value = Apply(
+            apply_id = -1,
+            company_id = 0,
+            company_name = "",
+            job_position = "",
+            job_type = "",
+            stage_progress = listOf()
+        )
     }
     val homeApplyIdContent : LiveData<Apply> = _homeApplyIdContent
 
@@ -239,7 +250,8 @@ class HomeViewModel : ViewModel() {
 
     fun setZonedHomeAddProgress(position : Int?) {
         val zoneToLocal = _zonedDateTime.value!!.toLocalDateTime()
-        _homeAddSelectedStage.value!![position!!].event_at = zoneToLocal.toString() + 'Z' // time 값을 정확히 맞추기 위함.
+        _homeAddSelectedStage.value!![position!!].event_at =
+            zoneToLocal.toString() + 'Z' // time 값을 정확히 맞추기 위함.
         _homeAddSelectedProgress.value!![position!!].zonedDateTime = _zonedDateTime.value
 
         switch(_homeAddDateSelectFlag)
@@ -247,7 +259,8 @@ class HomeViewModel : ViewModel() {
     }
 
     fun switch(mutableLiveData : MutableLiveData<Boolean?>) {
-        mutableLiveData.value = if (mutableLiveData.value == null) true else !mutableLiveData.value!!
+        mutableLiveData.value =
+            if (mutableLiveData.value == null) true else !mutableLiveData.value!!
     }
 
     fun setHomeAddDateSelectTime(position : Int?) {
@@ -286,7 +299,8 @@ class HomeViewModel : ViewModel() {
 
     fun setHomeEdit() {
         _companyWord.value = _homeApplyIdContent.value!!.company_name
-        _companyId.value = _homeApplyIdContent.value!!.company_id //_positionWord.value = _homeApplyIdContent.value!!.job_position
+        _companyId.value =
+            _homeApplyIdContent.value!!.company_id //_positionWord.value = _homeApplyIdContent.value!!.job_position
         _workTypeWord.value = _homeApplyIdContent.value!!.job_type
         _homeAddSelectedStage.value = arrayListOf()
 
@@ -353,21 +367,21 @@ class HomeViewModel : ViewModel() {
 
     fun decideIsPassing(stageStatusString : String?) : IsPassing {
         when (stageStatusString) {
-            IsPassing.PASS.toString()        -> return IsPassing.PASS
-            IsPassing.FAIL.toString()        -> return IsPassing.FAIL
+            IsPassing.PASS.toString() -> return IsPassing.PASS
+            IsPassing.FAIL.toString() -> return IsPassing.FAIL
             IsPassing.NOT_STARTED.toString() -> return IsPassing.NOT_STARTED
             IsPassing.IN_PROGRESS.toString() -> return IsPassing.IN_PROGRESS
-            else                             -> return IsPassing.NOT_STARTED
+            else -> return IsPassing.NOT_STARTED
         }
     }
 
     fun decideProgressItemBodyType(contentContentTypeString : String?) : ProgressItemBodyType {
         when (contentContentTypeString) {
             ProgressItemBodyType.NOT_DEFINED.toString() -> return ProgressItemBodyType.NOT_DEFINED
-            ProgressItemBodyType.FREE_FORM.toString()   -> return ProgressItemBodyType.FREE_FORM
-            ProgressItemBodyType.QNA.toString()         -> return ProgressItemBodyType.QNA
-            ProgressItemBodyType.OVERALL.toString()     -> return ProgressItemBodyType.OVERALL
-            else                                        -> return ProgressItemBodyType.NOT_DEFINED
+            ProgressItemBodyType.FREE_FORM.toString() -> return ProgressItemBodyType.FREE_FORM
+            ProgressItemBodyType.QNA.toString() -> return ProgressItemBodyType.QNA
+            ProgressItemBodyType.OVERALL.toString() -> return ProgressItemBodyType.OVERALL
+            else -> return ProgressItemBodyType.NOT_DEFINED
         }
     }
 
@@ -381,7 +395,8 @@ class HomeViewModel : ViewModel() {
         //        var answerBody : String? = null // QNA
         //        var qnaReviewBody : String? = null // QNA
 
-        val allParsedContentStringList = arrayListOf<String?>(null, null, null, null, null, null, null)
+        val allParsedContentStringList =
+            arrayListOf<String?>(null, null, null, null, null, null, null)
 
         val dropString = contentContentString?.let { it.drop(1).dropLast(1) } // "{,}" 날리기 및 null 처리
         val splitList = dropString?.let { it.split(',') } // ',' 제거 및 null 처리
@@ -391,7 +406,7 @@ class HomeViewModel : ViewModel() {
             ProgressItemBodyType.NOT_DEFINED -> {
 
             }
-            ProgressItemBodyType.FREE_FORM   -> {
+            ProgressItemBodyType.FREE_FORM -> {
                 splitList?.let { spList ->
                     for (s in spList) {
                         val standard = s[1]
@@ -403,7 +418,7 @@ class HomeViewModel : ViewModel() {
                     }
                 }
             }
-            ProgressItemBodyType.QNA         -> {
+            ProgressItemBodyType.QNA -> {
                 splitList?.let { spList ->
                     for (s in spList) {
                         val standard = s[1]
@@ -416,7 +431,7 @@ class HomeViewModel : ViewModel() {
                     }
                 }
             }
-            ProgressItemBodyType.OVERALL     -> {
+            ProgressItemBodyType.OVERALL -> {
                 allParsedContentStringList[2] = contentContentString
             }
         }
@@ -434,7 +449,12 @@ class HomeViewModel : ViewModel() {
         isScroll : Boolean,
     ) { // 예외 처리 보류 (220726)
         viewModelScope.launch {
-            val apiResult = repositoryHome.companySearchPostCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, companySearchRequest = CompanySearchRequest(title = searchWord, userDefined = true), page = page, size = size)
+            val apiResult = repositoryHome.companySearchPostCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                companySearchRequest = CompanySearchRequest(title = searchWord, userDefined = true),
+                page = page,
+                size = size
+            )
             Log.d("getCompanyInfo", "${isScroll}")
 
 
@@ -462,7 +482,10 @@ class HomeViewModel : ViewModel() {
 
     fun addCompanyInfo() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.companyAddPostCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, createCompanyRequest = listOf(CreateCompanyRequestItem(name = _companyWord.value!!)))
+            val apiResult = repositoryHome.companyAddPostCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                createCompanyRequest = listOf(CreateCompanyRequestItem(name = _companyWord.value!!))
+            )
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!.companies
@@ -480,12 +503,14 @@ class HomeViewModel : ViewModel() {
 
     fun getStage() {
         viewModelScope.launch {
-            val apiResult = repositoryHome.stageGetCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!)
+            val apiResult =
+                repositoryHome.stageGetCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!)
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 Log.d("getResult", "${getResult}")
-                _homeAddStagesContent.value = getResult //ApiExceptionUtil._apiExceptionFlag.value = Event(true)
+                _homeAddStagesContent.value =
+                    getResult //ApiExceptionUtil._apiExceptionFlag.value = Event(true)
 
             } else {
                 _homeAddStagesContent.value = listOf()
@@ -497,12 +522,23 @@ class HomeViewModel : ViewModel() {
 
 
     fun postApply() {
-        val createApplyRequest = CreateApplyRequest(company = Company(id = _companyId.value!!, name = _companyWord.value!!), job_position = _positionWord.value!!, job_type = _workTypeWord.value!!, stages = _homeAddSelectedStage.value!!)
+        val createApplyRequest = CreateApplyRequest(
+            company = Company(
+                id = _companyId.value!!,
+                name = _companyWord.value!!
+            ),
+            job_position = _positionWord.value!!,
+            job_type = _workTypeWord.value!!,
+            stages = _homeAddSelectedStage.value!!
+        )
 
         Log.d("createApplyRequest", "${createApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.createApplyPostCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, createApplyRequest = createApplyRequest)
+            val apiResult = repositoryHome.createApplyPostCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                createApplyRequest = createApplyRequest
+            )
             Log.d("getResult_1", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -513,15 +549,24 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
-    
+
 
     fun updateApply(applyId : Int) {
-        val updateApplyRequest = UpdateApplyRequest(apply_id = applyId, company = Company(id = _companyId.value!!, name = _companyWord.value!!), job_position = _positionWord.value!!, job_type = _workTypeWord.value!!, stages = _homeAddSelectedStage.value!!)
+        val updateApplyRequest = UpdateApplyRequest(
+            apply_id = applyId,
+            company = Company(id = _companyId.value!!, name = _companyWord.value!!),
+            job_position = _positionWord.value!!,
+            job_type = _workTypeWord.value!!,
+            stages = _homeAddSelectedStage.value!!
+        )
 
         Log.d("updateApplyRequest", "${updateApplyRequest}")
 
         viewModelScope.launch {
-            val apiResult = repositoryHome.updateApplyPutCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, updateApplyRequest = updateApplyRequest)
+            val apiResult = repositoryHome.updateApplyPutCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                updateApplyRequest = updateApplyRequest
+            )
             Log.d("getResult_33", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -536,7 +581,10 @@ class HomeViewModel : ViewModel() {
 
     fun deleteApply(deleteIds : Array<Int>) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.deleteApplyCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, ids = deleteIds)
+            val apiResult = repositoryHome.deleteApplyCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                ids = deleteIds
+            )
             Log.d("deleteApply", "${apiResult}")
             if (apiResult.code() == 200) {
                 switch(_postApplyFlag)
@@ -554,7 +602,11 @@ class HomeViewModel : ViewModel() {
         includeContent : Boolean? = false,
     ) { // 예외 처리 보류 (220725)
         viewModelScope.launch {
-            val apiResult = repositoryHome.applyGetCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, applyIds = applyIds, includeContent = includeContent)
+            val apiResult = repositoryHome.applyGetCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                applyIds = applyIds,
+                includeContent = includeContent
+            )
 
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!.applies
@@ -577,7 +629,8 @@ class HomeViewModel : ViewModel() {
 
 
                     for (stage in stageProgress) {
-                        val stageStatus = stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        val stageStatus =
+                            stage.status // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         if (stageStatus == IsPassing.FAIL.toString() && success) // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지
                             success = false
 
@@ -586,8 +639,26 @@ class HomeViewModel : ViewModel() {
                         detailMyProgress += 1
                     }
 
-                    newArrayList.add(HomeProgressItem(companyTitle = companyTitle, jobType = jobType, myProgress = myProgress, totalProgress = totalProgress, success = success, applyId = applyId))
-                    detailArrayList.add(HomeProgressItem(companyTitle = companyTitle, jobType = jobType, myProgress = detailMyProgress, totalProgress = totalProgress, success = detailSuccess, applyId = applyId))
+                    newArrayList.add(
+                        HomeProgressItem(
+                            companyTitle = companyTitle,
+                            jobType = jobType,
+                            myProgress = myProgress,
+                            totalProgress = totalProgress,
+                            success = success,
+                            applyId = applyId
+                        )
+                    )
+                    detailArrayList.add(
+                        HomeProgressItem(
+                            companyTitle = companyTitle,
+                            jobType = jobType,
+                            myProgress = detailMyProgress,
+                            totalProgress = totalProgress,
+                            success = detailSuccess,
+                            applyId = applyId
+                        )
+                    )
                 }
                 _homeDisplayArrayList.value = newArrayList
                 _homeDetailArrayList.value = detailArrayList
@@ -600,7 +671,11 @@ class HomeViewModel : ViewModel() {
 
     fun getApplyDetail(applyIds : Array<Int>? = null, includeContent : Boolean? = true) {
         viewModelScope.launch {
-            val apiResult = repositoryHome.applyGetCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!, applyIds = applyIds, includeContent = includeContent)
+            val apiResult = repositoryHome.applyGetCall(
+                accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!,
+                applyIds = applyIds,
+                includeContent = includeContent
+            )
 
 
             if (apiResult.code() == 200) {
@@ -614,7 +689,8 @@ class HomeViewModel : ViewModel() {
                 for (stage in stageProgress) { // 단위는 stage 당 (서류 당, 1차 면접 당...)
                     //val stageEventAt = stage.event_at // mvp 안쓰임
                     val stageOrder = stage.order
-                    val stageStatus = stage.status // String 상태 // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지, 서버에서 받아 올때는 String 임.
+                    val stageStatus =
+                        stage.status // String 상태 // status type => FAIL, IN_PROGRESS, NOT_STARTED, PASS 4가지, 서버에서 받아 올때는 String 임.
                     val stageTitle = stage.stage_title
                     val stageContents = stage.stage_contents
                     val stageRealId = stage.id // 그 stage 의 실질 살아있는 id
@@ -622,16 +698,28 @@ class HomeViewModel : ViewModel() {
 
                     val decidedStageStatus = decideIsPassing(stageStatus)
 
-                    _arrayListStageProgresse.value!!.add(StageProgresse(deleted_contents = arrayListOf(), id = stageRealId, new_contents = arrayListOf(), status = stageStatus, updated_contents = arrayListOf()))
+                    _arrayListStageProgresse.value!!.add(
+                        StageProgresse(
+                            deleted_contents = arrayListOf(),
+                            id = stageRealId,
+                            new_contents = arrayListOf(),
+                            status = stageStatus,
+                            updated_contents = arrayListOf()
+                        )
+                    )
 
                     for (sContent in stageContents) {
                         val contentOrder = sContent.order
                         val contentId = sContent.id
-                        val contentContentType = sContent.content_type // FREE_FORM, NOT_DEFINED, OVERALL, QNA, 서버로 받아 올때는 string 임
-                        val contentContent = sContent.content // * contentContentType 에 따른 문자열 처리 해주어야함, // QNA = "{ \"q\": \"질문1\", \"a\": \"답변1\", \"f\": \"피드백\",}" /// FREE_FORM => "{ \"t\": \"자유 예시 타이틀\", \b\": \"자유 예시 컨텐츠\"}", OVERALL => "종합후기 예시 텍스트1"
+                        val contentContentType =
+                            sContent.content_type // FREE_FORM, NOT_DEFINED, OVERALL, QNA, 서버로 받아 올때는 string 임
+                        val contentContent =
+                            sContent.content // * contentContentType 에 따른 문자열 처리 해주어야함, // QNA = "{ \"q\": \"질문1\", \"a\": \"답변1\", \"f\": \"피드백\",}" /// FREE_FORM => "{ \"t\": \"자유 예시 타이틀\", \b\": \"자유 예시 컨텐츠\"}", OVERALL => "종합후기 예시 텍스트1"
 
-                        val decidedContentContentType = decideProgressItemBodyType(contentContentType)
-                        val allParsedContentStringList = stageContentParsing(contentContent, decidedContentContentType)
+                        val decidedContentContentType =
+                            decideProgressItemBodyType(contentContentType)
+                        val allParsedContentStringList =
+                            stageContentParsing(contentContent, decidedContentContentType)
 
                         //                        _arrayListStageProgresse.value!!.add(StageProgresse(
                         //                            deleted_contents = arrayListOf(),
@@ -643,17 +731,81 @@ class HomeViewModel : ViewModel() {
                         //                        )
 
                         when (contentContentType) {
-                            ProgressItemBodyType.OVERALL.toString()     -> {
-                                forDetailDisplayArrayList.add(HomeDetailItem(progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.OVERALL, freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1], totalReviewBody = allParsedContentStringList[2], questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5], progressIsPassing = decidedStageStatus, contentOrder = contentOrder, contentId = contentId, stageRealId = stageRealId))
+                            ProgressItemBodyType.OVERALL.toString() -> {
+                                forDetailDisplayArrayList.add(
+                                    HomeDetailItem(
+                                        progressType = stageOrder,
+                                        progressName = stageTitle,
+                                        itemType = ProgressItemBodyType.OVERALL,
+                                        freeTitle = allParsedContentStringList[0],
+                                        freeBody = allParsedContentStringList[1],
+                                        totalReviewBody = allParsedContentStringList[2],
+                                        questionBody = allParsedContentStringList[3],
+                                        answerBody = allParsedContentStringList[4],
+                                        qnaReviewBody = allParsedContentStringList[5],
+                                        progressIsPassing = decidedStageStatus,
+                                        contentOrder = contentOrder,
+                                        contentId = contentId,
+                                        stageRealId = stageRealId
+                                    )
+                                )
                             }
-                            ProgressItemBodyType.QNA.toString()         -> {
-                                forDetailDisplayArrayList.add(HomeDetailItem(progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.QNA, freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1], totalReviewBody = allParsedContentStringList[2], questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5], progressIsPassing = decidedStageStatus, contentOrder = contentOrder, contentId = contentId, stageRealId = stageRealId))
+                            ProgressItemBodyType.QNA.toString() -> {
+                                forDetailDisplayArrayList.add(
+                                    HomeDetailItem(
+                                        progressType = stageOrder,
+                                        progressName = stageTitle,
+                                        itemType = ProgressItemBodyType.QNA,
+                                        freeTitle = allParsedContentStringList[0],
+                                        freeBody = allParsedContentStringList[1],
+                                        totalReviewBody = allParsedContentStringList[2],
+                                        questionBody = allParsedContentStringList[3],
+                                        answerBody = allParsedContentStringList[4],
+                                        qnaReviewBody = allParsedContentStringList[5],
+                                        progressIsPassing = decidedStageStatus,
+                                        contentOrder = contentOrder,
+                                        contentId = contentId,
+                                        stageRealId = stageRealId
+                                    )
+                                )
                             }
-                            ProgressItemBodyType.FREE_FORM.toString()   -> {
-                                forDetailDisplayArrayList.add(HomeDetailItem(progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.FREE_FORM, freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1], totalReviewBody = allParsedContentStringList[2], questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5], progressIsPassing = decidedStageStatus, contentOrder = contentOrder, contentId = contentId, stageRealId = stageRealId))
+                            ProgressItemBodyType.FREE_FORM.toString() -> {
+                                forDetailDisplayArrayList.add(
+                                    HomeDetailItem(
+                                        progressType = stageOrder,
+                                        progressName = stageTitle,
+                                        itemType = ProgressItemBodyType.FREE_FORM,
+                                        freeTitle = allParsedContentStringList[0],
+                                        freeBody = allParsedContentStringList[1],
+                                        totalReviewBody = allParsedContentStringList[2],
+                                        questionBody = allParsedContentStringList[3],
+                                        answerBody = allParsedContentStringList[4],
+                                        qnaReviewBody = allParsedContentStringList[5],
+                                        progressIsPassing = decidedStageStatus,
+                                        contentOrder = contentOrder,
+                                        contentId = contentId,
+                                        stageRealId = stageRealId
+                                    )
+                                )
                             }
                             ProgressItemBodyType.NOT_DEFINED.toString() -> {
-                                forDetailDisplayArrayList.add(HomeDetailItem(progressType = stageOrder, progressName = stageTitle, itemType = ProgressItemBodyType.NOT_DEFINED, freeTitle = allParsedContentStringList[0], freeBody = allParsedContentStringList[1], totalReviewBody = allParsedContentStringList[2], questionBody = allParsedContentStringList[3], answerBody = allParsedContentStringList[4], qnaReviewBody = allParsedContentStringList[5], progressIsPassing = decidedStageStatus, contentOrder = contentOrder, contentId = contentId, stageRealId = stageRealId))
+                                forDetailDisplayArrayList.add(
+                                    HomeDetailItem(
+                                        progressType = stageOrder,
+                                        progressName = stageTitle,
+                                        itemType = ProgressItemBodyType.NOT_DEFINED,
+                                        freeTitle = allParsedContentStringList[0],
+                                        freeBody = allParsedContentStringList[1],
+                                        totalReviewBody = allParsedContentStringList[2],
+                                        questionBody = allParsedContentStringList[3],
+                                        answerBody = allParsedContentStringList[4],
+                                        qnaReviewBody = allParsedContentStringList[5],
+                                        progressIsPassing = decidedStageStatus,
+                                        contentOrder = contentOrder,
+                                        contentId = contentId,
+                                        stageRealId = stageRealId
+                                    )
+                                )
                             }
                         }
                     }
@@ -674,7 +826,8 @@ class HomeViewModel : ViewModel() {
 
     fun getMyApplyPfratio() { // getApplyDisplay 와 같은 이유로 일단 예외 처리 보류
         viewModelScope.launch {
-            val apiResult = repositoryMyPage.myApplyPfratioGetCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!)
+            val apiResult =
+                repositoryMyPage.myApplyPfratioGetCall(accessToken = App.prefs.getValue(BuildConfig.ACCESS_LOCAL_TOKEN)!!)
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 Log.d("getMyApplyPfratio", "${getResult}")
@@ -722,13 +875,18 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun isPassingUpdate(progressName : String, inProgressIsChecked : Boolean, failIsChecked : Boolean, passIsChecked : Boolean) {
+    fun isPassingUpdate(
+        progressName : String,
+        inProgressIsChecked : Boolean,
+        failIsChecked : Boolean,
+        passIsChecked : Boolean
+    ) {
         val finalStatus : String
         when {
             inProgressIsChecked -> finalStatus = "IN_PROGRESS"
-            failIsChecked       -> finalStatus = "FAIL"
-            passIsChecked       -> finalStatus = "PASS"
-            else                -> finalStatus = "NOT_STARTED"
+            failIsChecked -> finalStatus = "FAIL"
+            passIsChecked -> finalStatus = "PASS"
+            else -> finalStatus = "NOT_STARTED"
         }
 
         for (sp in _arrayListStageProgresse.value!!) {
@@ -746,10 +904,14 @@ class HomeViewModel : ViewModel() {
             it.new_contents.sortBy {
                 var order = 0
                 when (it.content_type) {
-                    ProgressItemBodyType.OVERALL.toString()     -> order = ProgressItemBodyType.OVERALL.ordinal
-                    ProgressItemBodyType.QNA.toString()         -> order = ProgressItemBodyType.OVERALL.ordinal
-                    ProgressItemBodyType.FREE_FORM.toString()   -> order = ProgressItemBodyType.OVERALL.ordinal
-                    ProgressItemBodyType.NOT_DEFINED.toString() -> order = ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.OVERALL.toString() -> order =
+                        ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.QNA.toString() -> order =
+                        ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.FREE_FORM.toString() -> order =
+                        ProgressItemBodyType.OVERALL.ordinal
+                    ProgressItemBodyType.NOT_DEFINED.toString() -> order =
+                        ProgressItemBodyType.OVERALL.ordinal
                 }
                 order
             }
@@ -787,7 +949,11 @@ class HomeViewModel : ViewModel() {
 
     fun refreshTokenHome() { // refresh token 호출
         viewModelScope.launch {
-            val apiResult = repositorySign.refreshTokenCall(tokenRefreshRequest = TokenRefreshRequest(App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!!))
+            val apiResult = repositorySign.refreshTokenCall(
+                tokenRefreshRequest = TokenRefreshRequest(
+                    App.prefs.getValue(BuildConfig.REFRESH_LOCAL_TOKEN)!!
+                )
+            )
             if (apiResult.code() == 200) {
                 val getResult = apiResult.body()!!
                 val at = getResult.access_token

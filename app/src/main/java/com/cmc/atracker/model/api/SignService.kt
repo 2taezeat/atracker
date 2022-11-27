@@ -16,7 +16,7 @@ interface SignService {
 
     @POST("/api/v1/auth/refresh/")
     suspend fun refreshTokenPostApi(
-        @Body tokenRefreshRequest: TokenRefreshRequest
+        @Body tokenRefreshRequest : TokenRefreshRequest
 
     ) : retrofit2.Response<TokenRefreshResponse>
 
@@ -30,7 +30,7 @@ interface SignService {
 
     @POST("/api/v1/auth/test/sign")
     suspend fun testSignApi(
-        @Body testSignApiRequest: TestSignApiRequest
+        @Body testSignApiRequest : TestSignApiRequest
     ) : retrofit2.Response<TestSignApiResponse>
 
 

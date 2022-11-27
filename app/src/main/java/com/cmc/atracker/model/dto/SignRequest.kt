@@ -5,5 +5,6 @@ data class SignRequest(
     val experience_type: String,
     val job_position: String,
     val nick_name: String,
+    val primary_email: String,
     val sso: String
 )
